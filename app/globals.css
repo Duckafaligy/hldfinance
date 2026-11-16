@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Every colour, font, radius and spacing value lives here.
+ * These are neutral placeholders: the Designer's "Theme UI" tokens replace
+ * the values in :root, and nothing else in the app should need to change.
+ */
+:root {
+  /* Primaries */
+  --hld-bg: #ffffff; /* page background */
+  --hld-surface: #f4f4f5; /* alternate light section */
+  --hld-ink: #18181b; /* main text, borders on cards */
+  --hld-ink-muted: #52525b; /* secondary text (7:1 on bg) */
+  --hld-line: #d4d4d8; /* hairlines, dividers */
+  --hld-brand: #18181b; /* buttons, links */
+  --hld-brand-hover: #3f3f46; /* button hover (solid, no gradient) */
+  --hld-on-brand: #ffffff; /* text on brand */
+
+  /* Dark sections + footer */
+  --hld-dark: #18181b;
+  --hld-dark-raised: #27272a;
+  --hld-on-dark: #fafafa;
+  --hld-on-dark-muted: #a1a1aa;
+
+  /* Accents: one job each */
+  --hld-accent-practice: #71717a; /* HLD Practice features */
+  --hld-accent-leagues: #52525b; /* leagues + leaderboards */
+  --hld-accent-coach: #a1a1aa; /* the coach */
+  --hld-accent-focus: #2563eb; /* keyboard focus ring */
+  --hld-success: #15803d; /* form success */
+  --hld-danger: #b91c1c; /* form errors */
+
+  /* Type */
+  --hld-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --hld-font-display: var(--hld-font-sans);
+
+  /* Radius */
+  --hld-radius-sm: 0.5rem;
+  --hld-radius-md: 0.875rem;
+  --hld-radius-lg: 1.5rem;
+  --hld-radius-pill: 999px;
+
+  /* Spacing */
+  --hld-space-unit: 0.25rem; /* Tailwind's spacing scale: p-4 = 4 units */
+  --hld-section-y: 6rem; /* vertical padding of each section */
+  --hld-container: 72rem; /* max content width */
+  --hld-nav-rest: 80%; /* island nav width at the top */
+  --hld-nav-scrolled: 64%; /* island nav width once scrolled */
+}
+
+@theme inline {
+  /* Drop Tailwind's default palette so only the tokens above can be used. */
+  --color-*: initial;
+  --color-bg: var(--hld-bg);
+  --color-surface: var(--hld-surface);
+  --color-ink: var(--hld-ink);
+  --color-ink-muted: var(--hld-ink-muted);
+  --color-line: var(--hld-line);
+  --color-brand: var(--hld-brand);
+  --color-brand-hover: var(--hld-brand-hover);
+  --color-on-brand: var(--hld-on-brand);
+  --color-dark: var(--hld-dark);
+  --color-dark-raised: var(--hld-dark-raised);
+  --color-on-dark: var(--hld-on-dark);
+  --color-on-dark-muted: var(--hld-on-dark-muted);
+  --color-accent-practice: var(--hld-accent-practice);
+  --color-accent-leagues: var(--hld-accent-leagues);
+  --color-accent-coach: var(--hld-accent-coach);
+  --color-focus: var(--hld-accent-focus);
+  --color-success: var(--hld-success);
+  --color-danger: var(--hld-danger);
+
+  --font-sans: var(--hld-font-sans);
+  --font-display: var(--hld-font-display);
+
+  --radius-sm: var(--hld-radius-sm);
+  --radius-md: var(--hld-radius-md);
+  --radius-lg: var(--hld-radius-lg);
+  --radius-pill: var(--hld-radius-pill);
+
+  --spacing: var(--hld-space-unit);
+  --spacing-section: var(--hld-section-y);
+  --container-page: var(--hld-container);
+}
+
+html {
+  scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--hld-bg);
+  color: var(--hld-ink);
+  font-family: var(--hld-font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--hld-accent-focus);
+  outline-offset: 3px;
+}
+
+/* Hero: straight grid lines + a soft glow under the cursor (set by HeroGlow). */
+.hero-grid {
+  background-color: var(--hld-surface);
+  background-image:
+    linear-gradient(var(--hld-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hld-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.hero-glow {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 30%),
+    color-mix(in srgb, var(--hld-bg) 85%, transparent),
+    transparent 70%
+  );
+  opacity: var(--glow, 0);
+  transition: opacity 300ms ease;
+}

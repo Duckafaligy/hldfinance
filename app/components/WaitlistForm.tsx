@@ -9,7 +9,8 @@ const PILL = "relative flex h-15 w-full items-center rounded-pill border-2";
 
 // Waitlist pill (tokens.md "Waitlist field" + Motion moment 4). On success the pill itself becomes
 // the confirmation at the same size: the button widens across, the tint fades in, the tick draws, the text rises.
-export function WaitlistForm() {
+// onBrand: helper/error/notice text colours for the Indigo mesh panel (the pill itself stays white).
+export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
   const [state, formAction, pending] = useActionState(joinWaitlist, initial);
   const [clientError, setClientError] = useState<string | null>(null);
   const id = useId();
@@ -75,13 +76,13 @@ export function WaitlistForm() {
       </div>
       <p id={`${id}-msg`} aria-live="polite" className="mt-3 min-h-[18px] px-1 text-caption">
         {error ? (
-          <span key={error} className="msg-rise block font-medium text-loss">
+          <span key={error} className={`msg-rise block font-medium ${onBrand ? "font-semibold text-paper" : "text-loss"}`}>
             ✕ {error}
           </span>
         ) : notice ? (
-          <span className="msg-rise block font-medium text-ink">{notice}</span>
+          <span className={`msg-rise block font-medium ${onBrand ? "text-paper" : "text-ink"}`}>{notice}</span>
         ) : (
-          <span className="text-slate">Free. No card. We only email when HLD Practice opens. No ads, and we never sell your data.</span>
+          <span className={onBrand ? "text-indigo-tint" : "text-slate"}>Free. No card. We only email when HLD Practice opens. No ads, and we never sell your data.</span>
         )}
       </p>
     </form>

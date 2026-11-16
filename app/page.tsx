@@ -44,12 +44,19 @@ const faqs = [
   },
 ];
 
-// Sparkline: 3px gain stroke, 8% area fill, dashed start-value line.
+// Sparkline: 3px gain stroke, gradient area fill, dashed start-value line.
 const spark = "M0 62 L40 60 L80 64 L120 52 L160 50 L200 42 L240 40 L280 34 L320 30 L360 22 L400 18 L440 10 L480 6";
-function Sparkline({ className = "" }: { className?: string }) {
+// Area = --fill-gain (line colour 24% -> 0, top to bottom, rgba stops).
+function Sparkline({ id, className = "" }: { id: string; className?: string }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 480 72" preserveAspectRatio="none" className={className}>
-      <path d={`${spark} L480 72 L0 72 Z`} fill="#0A8A4A" fillOpacity="0.08" />
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="rgba(10,138,74,0.24)" />
+          <stop offset="1" stopColor="rgba(10,138,74,0)" />
+        </linearGradient>
+      </defs>
+      <path d={`${spark} L480 72 L0 72 Z`} fill={`url(#${id})`} />
       <line x1="0" y1="60" x2="480" y2="60" stroke="#CFD1DA" strokeWidth="1.5" strokeDasharray="4 6" vectorEffect="non-scaling-stroke" />
       <path d={spark} fill="none" stroke="#0A8A4A" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
     </svg>
@@ -84,7 +91,7 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={`py-section ${className}`}>
+    <section id={id} aria-labelledby={`${id}-title`} className={`overflow-clip py-section ${className}`}>
       <div className="mx-auto max-w-page px-gutter">
         <h2 id={`${id}-title`} className="max-w-2xl font-display text-[34px] leading-[38px] font-extrabold tracking-[-0.025em] md:text-h1">
           {title}
@@ -105,7 +112,7 @@ function PhoneMockup() {
   ];
   const tabs: [IconName, string][] = [["portfolio", "Portfolio"], ["trade", "Trade"], ["league", "League"], ["journal", "Journal"], ["profile", "Profile"]];
   return (
-    <figure className="mx-auto w-[236px] shrink-0">
+    <figure className="halo mx-auto w-[236px] shrink-0">
       <figcaption className="sr-only">Example of the HLD Practice portfolio screen</figcaption>
       <div aria-hidden="true" className="h-[500px] rounded-phone border-[7px] border-ink bg-ink shadow-device">
         <div className="flex h-full flex-col overflow-hidden rounded-phone-screen bg-paper">
@@ -120,7 +127,7 @@ function PhoneMockup() {
             <p className="mt-3 text-[9px] font-semibold text-slate">Practice portfolio</p>
             <p className="num text-[24px] leading-8 font-extrabold tracking-[-0.03em]">$10,482.16</p>
             <GainChip small>▲ +$482.16 · +4.82%</GainChip>
-            <Sparkline className="mt-3 h-12 w-full" />
+            <Sparkline id="fill-gain-phone" className="mt-3 h-12 w-full" />
             <div className="mt-2 flex justify-between rounded-pill bg-mist p-0.5 text-[8px] font-bold text-slate">
               {["1D", "1W", "1M", "1Y", "All"].map((r) => (
                 <span key={r} className={`rounded-pill px-2 py-0.5 ${r === "1M" ? "bg-ink text-paper" : ""}`}>
@@ -159,12 +166,13 @@ function PhoneMockup() {
   );
 }
 
-// Coach card (Theme UI "Coach card"). Reveals on scroll; the primary button waits 600ms. Illustration only.
+// Coach card (Theme UI "Coach card"): the page's one featured card, so it gets the Edge ring + a night Halo.
+// Reveals on scroll; the primary button waits 600ms. Illustration only.
 function CoachCard() {
   const answers = ["Under a month", "1 to 5 years", "5+ years"];
   return (
-    <Reveal className="w-full max-w-[480px]">
-      <figure className="card card-night p-6 text-left sm:p-8">
+    <Reveal className="halo-night w-full max-w-[480px]">
+      <figure className="card edge p-6 text-left sm:p-8">
         <figcaption className="sr-only">Example of a coach check-in before a practice trade</figcaption>
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-pill bg-coach font-display text-[20px] font-extrabold text-paper">
@@ -224,7 +232,7 @@ export default function Home() {
             </span>
             <span className="line-mask">
               <span className="rise-line" style={v({ "--i": 2 })}>
-                <i className="pr-[0.08em] text-indigo">you buy.</i>
+                <i className="text-tide pr-[0.08em]">you buy.</i>
               </span>
             </span>
           </h1>
@@ -236,18 +244,17 @@ export default function Home() {
             <WaitlistForm />
           </div>
 
-          <figure
-            className="glass rise-late mt-10 w-full max-w-[560px] p-6 text-left sm:p-7"
-            style={v({ "--delay": "600ms" })}
-          >
-            <figcaption className="sr-only">Example practice portfolio</figcaption>
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-nav font-semibold text-slate">Practice portfolio</span>
-              <GainChip>▲ +4.82%</GainChip>
-            </div>
-            <CountUp from={10000} to={10482.16} delay={1000} className="num mt-2 block text-[36px] leading-10 font-extrabold tracking-[-0.03em] sm:text-money-glass" />
-            <Sparkline className="mt-5 h-24 w-full" />
-          </figure>
+          <div className="halo rise-late mt-10 w-full max-w-[560px]" style={v({ "--delay": "600ms" })}>
+            <figure className="glass p-6 text-left sm:p-7">
+              <figcaption className="sr-only">Example practice portfolio</figcaption>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-nav font-semibold text-slate">Practice portfolio</span>
+                <GainChip>▲ +4.82%</GainChip>
+              </div>
+              <CountUp from={10000} to={10482.16} delay={1000} className="num mt-2 block text-[36px] leading-10 font-extrabold tracking-[-0.03em] sm:text-money-glass" />
+              <Sparkline id="fill-gain-hero" className="mt-5 h-24 w-full" />
+            </figure>
+          </div>
         </div>
       </HeroGlow>
 
@@ -337,7 +344,7 @@ export default function Home() {
 
       <Section
         id="coach"
-        className="night-bg text-paper"
+        className="bg-aurora text-paper"
         dark
         title={
           <>
@@ -391,16 +398,16 @@ export default function Home() {
         </div>
       </Section>
 
-      <section id="waitlist" aria-labelledby="waitlist-title" className="bg-mist py-section">
+      <section id="waitlist" aria-labelledby="waitlist-title" className="bg-indigo-mesh py-section text-paper">
         <div className="mx-auto flex max-w-page flex-col items-center px-gutter text-center">
           <h2 id="waitlist-title" className="font-display text-[34px] leading-[38px] font-extrabold tracking-[-0.025em] md:text-h1">
-            Get in <i className="text-indigo">early.</i>
+            Get in <i className="text-indigo-tint-2">early.</i>
           </h2>
-          <p className="mt-4 max-w-xl text-body-l text-slate">
+          <p className="mt-4 max-w-xl text-body-l text-indigo-tint">
             Join the waitlist and we&apos;ll email you when HLD Practice opens. Free, with fake money only.
           </p>
           <div className="mt-8 flex w-full justify-center">
-            <WaitlistForm />
+            <WaitlistForm onBrand />
           </div>
         </div>
       </section>

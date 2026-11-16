@@ -49,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
 
-        <footer className="night-bg text-paper">
+        <footer className="bg-aurora text-paper">
           <div className="mx-auto grid max-w-page gap-12 px-gutter py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
               <Lockup fontSize={26} />

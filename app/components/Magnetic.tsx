@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export function Magnetic() {
   useEffect(() => {
     if (!matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
-    const RANGE = 12;
+    const RANGE = 12; // pull starts within 12px; eases home via .btn translate transition (settle)
     const MAX = 8;
     function onMove(e: PointerEvent) {
       for (const el of document.querySelectorAll<HTMLElement>(".btn")) {

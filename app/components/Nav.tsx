@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
-import { Mark } from "./Brand";
+import { Lockup } from "./Brand";
 
 const links = [
   { href: "/#practice", label: "Practice" },
@@ -11,44 +11,54 @@ const links = [
   { href: "/#faq", label: "FAQ" },
 ];
 
+// Shrinks after 24px of scroll; returns only at scrollY = 0 (hysteresis kept in module state).
+let shrunk = false;
+function getShrunk() {
+  const y = window.scrollY;
+  if (y > 24) shrunk = true;
+  else if (y <= 0) shrunk = false;
+  return shrunk;
+}
 function subscribe(cb: () => void) {
   window.addEventListener("scroll", cb, { passive: true });
   return () => window.removeEventListener("scroll", cb);
 }
 
-// Island nav. At rest: white, 80% wide, links showing. Scrolled: Ink, 64% wide, links fold into the menu.
-// Back to 80% only at scrollY = 0.
+// Island nav. Rest: glass, 80%, 64 tall, links showing. Scrolled: Ink, 64%, 56 tall, links fold into the menu.
+// 400ms on the move ease; links fade out over the first 150ms.
 export function Nav() {
-  const scrolled = useSyncExternalStore(subscribe, () => window.scrollY > 0, () => false);
+  const scrolled = useSyncExternalStore(subscribe, getShrunk, () => false);
   const [open, setOpen] = useState(false);
-  const menuOnlyPhone = scrolled ? "" : "md:hidden"; // at rest, tablets+ show links instead of the menu
+  const menuOnlyPhone = scrolled ? "" : "md:hidden";
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-5">
       <nav
         aria-label="Main"
         style={{ width: `max(${scrolled ? "var(--nav-scrolled)" : "var(--nav-rest)"}, min(100%, 22rem))` }}
-        className={`relative rounded-pill shadow-floating transition-[width,background-color,height] duration-240 ease-enter ${
-          scrolled ? "bg-ink text-paper" : "bg-paper text-ink"
+        className={`relative rounded-pill shadow-float transition-[width,background-color] duration-400 ease-move ${
+          scrolled ? "bg-ink text-paper" : "bg-paper/70 text-ink backdrop-blur-xl"
         }`}
         onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
       >
         <div
-          className={`flex items-center justify-between gap-3 transition-[height,padding] duration-240 ease-enter ${
+          className={`relative flex items-center justify-between gap-3 transition-[height,padding] duration-400 ease-move ${
             scrolled ? "h-14 pl-4.5 pr-1.5" : "h-16 pl-5 pr-2"
           }`}
         >
-          <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-pill">
-            <Mark size={scrolled ? 24 : 28} tone={scrolled ? "white" : "indigo"} />
-            <span className={`font-display font-extrabold tracking-[-0.03em] ${scrolled ? "text-[18px] leading-[22px]" : "text-h3"}`}>
-              HLD
-            </span>
+          <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)} className="rounded-pill">
+            <Lockup fontSize={scrolled ? 20 : 22} tone={scrolled ? "white" : "indigo"} />
           </Link>
 
-          <ul className={scrolled ? "hidden" : "hidden items-center gap-7 md:flex"}>
+          <ul
+            aria-hidden={scrolled || undefined}
+            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 transition-[opacity,visibility] duration-150 md:flex ${
+              scrolled ? "invisible opacity-0" : "opacity-100"
+            }`}
+          >
             {links.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-nav font-medium text-slate hover:text-ink">
+                <Link href={l.href} tabIndex={scrolled ? -1 : undefined} className="text-nav font-medium text-slate hover:text-ink">
                   {l.label}
                 </Link>
               </li>
@@ -56,13 +66,13 @@ export function Nav() {
           </ul>
 
           <div className="flex items-center gap-1.5">
-            <Link href="/#waitlist" className={`btn btn-primary ${scrolled ? "h-11 px-4.5" : "px-5"}`}>
+            <Link href="/#waitlist" className={`btn btn-primary ${scrolled ? "h-11 px-4.5" : "h-12 px-5"}`}>
               {scrolled ? (
                 "Join"
               ) : (
                 <>
-                  <span className="sm:hidden">Join</span>
-                  <span className="hidden sm:inline">Join the waitlist</span>
+                  <span className="lg:hidden">Join</span>
+                  <span className="hidden lg:inline">Join the waitlist</span>
                 </>
               )}
             </Link>
@@ -86,7 +96,7 @@ export function Nav() {
         {open && (
           <ul
             id="nav-menu"
-            className={`absolute right-0 top-full mt-2 w-56 rounded-row bg-paper p-2 text-ink shadow-floating ${menuOnlyPhone}`}
+            className={`msg-rise absolute right-0 top-full mt-2 w-56 rounded-row bg-paper p-2 text-ink shadow-float ${menuOnlyPhone}`}
           >
             {links.map((l) => (
               <li key={l.href}>

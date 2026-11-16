@@ -19,7 +19,7 @@ export function HeroGlow({ children }: { children: ReactNode }) {
       aria-labelledby="hero-title"
       onPointerMove={move}
       onPointerLeave={leave}
-      className="hero-grid relative overflow-hidden"
+      className="hero-bg relative overflow-hidden"
     >
       <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-0" />
       <div className="relative">{children}</div>

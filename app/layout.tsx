@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Wordmark } from "./components/Brand";
+import { Lockup } from "./components/Brand";
 import { Magnetic } from "./components/Magnetic";
 import { Nav } from "./components/Nav";
 import { fontVariables } from "./fonts";
@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   title: "HLD Finance: Think before you buy.",
   description:
     "HLD Practice: trade TSX and US stocks with $10,000 in fake money, join free leagues, and meet a coach that asks questions before every trade. Join the waitlist.",
+  openGraph: { siteName: "HLD Finance", type: "website", locale: "en_CA" },
+  twitter: { card: "summary_large_image" },
 };
 
 const footerCols = [
@@ -47,10 +49,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
 
-        <footer className="bg-night text-paper">
+        <footer className="night-bg text-paper">
           <div className="mx-auto grid max-w-page gap-12 px-gutter py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
-              <Wordmark onDark />
+              <Lockup fontSize={26} />
               <p className="mt-4 max-w-xs text-on-night-muted">
                 Think before you buy. A Canadian money app that starts with free practice trading.
               </p>

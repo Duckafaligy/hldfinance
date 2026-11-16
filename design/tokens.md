@@ -220,3 +220,51 @@ White, radius 20, padding 14 14 14 16, `--shadow-float`. 32 px Indigo tick circl
 
 ### Phone mockup
 236×500, Ink bezel 7 px, radius 44/37, `--shadow-device`. Status bar 30. Tab bar 52 with 18 px icons; the active tab is Indigo.
+
+
+## Gradients (round 3)
+Values come from get_computed_styles on the "Gradients" board. Paper interpolates in oklab (`in oklab`); browsers that support CSS Color 4 can keep that, and for older ones, drop `in oklab`. Hex alpha: 8C=55%, 99=60%, 73=45%, 52=32%, 4D=30%, 40=25%, 38=22%.
+No yellow stops, no grain or noise, no animated gradients or pulsing glows.
+
+### Brand gradients (one job each)
+| Token | CSS | Job |
+|---|---|---|
+| --grad-hold | linear-gradient(in oklab 150deg, #6A5BFF 0%, #4B3BF5 45%, #3424D6 100%) | Brand surfaces: app icon, Pro card, splash, the single hero CTA |
+| --grad-tide | linear-gradient(in oklab 120deg, #4B3BF5 0%, #3B6BFF 50%, #1F8FFF 100%) | The one gradient-text word, featured accents |
+| --grad-ember | linear-gradient(in oklab 135deg, #FF8A4C 0%, #F2601F 100%) | Your league rank card only |
+| --grad-orchid | linear-gradient(in oklab 140deg, #C65BE6 0%, #7C5CFF 100%) | Journal streak / reflection cards only |
+
+### Backgrounds
+- **--bg-dawn** (light hero): `background-color:#FFFFFF; background-image: radial-gradient(ellipse 60% 70% at 82% 18% in oklab, #CBC3FF 0%, #CBC3FF00 100%), radial-gradient(ellipse 50% 60% at 96% 92% in oklab, #CDE5FF 0%, #CDE5FF00 100%), radial-gradient(ellipse 60% 60% at 50% 115% in oklab, #E9E5FF 0%, #E9E5FF00 100%)`
+- **--bg-aurora** (dark / Night sections; now used on the Theme UI dark section): `background-color:#151826; background-image: radial-gradient(ellipse 55% 70% at 75% 15% in oklab, #6A5BFF8C 0%, #6A5BFF00 100%), radial-gradient(ellipse 45% 60% at 15% 95% in oklab, #1F8FFF52 0%, #1F8FFF00 100%), radial-gradient(ellipse 40% 50% at 95% 90% in oklab, #C65BE638 0%, #C65BE600 100%)`
+- **--bg-indigo-mesh** (brand panels, social, Pro hero): `background-color:#3B2BE0; background-image: radial-gradient(ellipse 50% 60% at 85% 15% in oklab, #8E80FF 0%, #8E80FF00 100%), radial-gradient(ellipse 45% 55% at 100% 100% in oklab, #2F8FFF 0%, #2F8FFF00 100%), radial-gradient(ellipse 55% 60% at 0% 100% in oklab, #2A1FA8 0%, #2A1FA800 100%)`
+- **Grid overlay** (hero only, straight lines): `background-image: linear-gradient(rgba(75,59,245,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(75,59,245,.06) 1px, transparent 1px); background-size: 48px 48px` (56px on desktop).
+
+### Glows (behind, never on top; static)
+- **--glow-halo** (light): an element sized about 1.3× the card, `border-radius:999px; background-image: radial-gradient(ellipse 50% 50% at 50% 50% in oklab, #4B3BF573 0%, #4B3BF500 100%); filter: blur(48px)`. Place it behind the card, offset about 40% down.
+- **--glow-halo-night** (on Night, behind phones): `radial-gradient(ellipse 50% 50% at 50% 50% in oklab, #6A5BFF99 0%, #6A5BFF00 100%); filter: blur(48px)`.
+
+### Gradient stroke (featured card, one per page)
+- **--grad-edge**: `linear-gradient(in oklab 135deg, #8E80FF 0%, #4B3BF5 40%, #1F8FFF 100%)`.
+- Build it as a wrapper with `padding:2px; border-radius:30px` (card radius + 2) and the card inside on #FFFFFF with radius 28. Pair it with `box-shadow: 0 24px 60px rgba(52,36,214,.18)`.
+- Alternatively, use `border:2px solid transparent; background: linear-gradient(#fff,#fff) padding-box, var(--grad-edge) border-box`.
+
+### Gradient button (optional; solid Indigo stays the default everywhere else)
+| State | background-image | box-shadow |
+|---|---|---|
+| Rest | linear-gradient(in oklab 180deg, #5A4BFF 0%, #4B3BF5 100%) | inset 0 1px 0 #FFFFFF40, 0 4px 12px #3424D64D |
+| Hover | linear-gradient(in oklab 180deg, #4B3BF5 0%, #3A2BD9 100%) | inset 0 1px 0 #FFFFFF40, 0 6px 18px #3424D64D |
+| Pressed | linear-gradient(in oklab 180deg, #2D20B5 0%, #3A2BD9 100%) | inset 0 1px 0 #FFFFFF40, 0 1px 3px #3424D64D |
+Use it only for the single hero CTA and the Pro button. Transitions use --dur-press (120ms), crossfading two layers.
+
+### Chart area fills
+- **--fill-gain**: SVG `<linearGradient x1=0 y1=0 x2=0 y2=1>` with stops `rgba(10,138,74,0.24)` at 0 and `rgba(10,138,74,0)` at 1. In CSS: `linear-gradient(180deg, rgba(10,138,74,.24) 0%, rgba(10,138,74,0) 100%)`.
+- **--fill-loss**: the same with `rgba(217,58,63,0.22)` → `rgba(217,58,63,0)`.
+- The line is a 3px stroke in #0A8A4A / #D93A3F with round caps. Note: use rgba stop-colors; Paper (and some renderers) handle `stop-opacity` poorly.
+
+### App icon gradient
+`linearGradient 135deg: #6A5BFF 0% → #3424D6 100%`, plus a top-light overlay `linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 50%)`, with corner radius 22.4%.
+
+### Gradient text rule
+- **Allowed:** one italic word in a headline of 40px or more, using --grad-tide: `background-image: var(--grad-tide); -webkit-background-clip: text; background-clip: text; color: transparent`.
+- **Never:** numbers, prices, percentages, body text, buttons, nav, the logo, gain/loss.

@@ -1,113 +1,216 @@
 @import "tailwindcss";
 
 /*
- * HLD design tokens, round 2. Source of truth: design/tokens.md (Paper boards
- * Theme UI, Logo, Motion, SaaS Assets). Every colour, font, radius, spacing,
- * shadow and motion value lives here; names match tokens.md.
+ * HLD design tokens. Source of truth: design/tokens.md (Paper "Theme UI", final).
+ * Names match tokens.md exactly. Layers:
+ *   1. ramps + brand colours (fixed),
+ *   2. semantic + state tokens (what components use) with light values, remapped to the
+ *      --color-dark-* values under prefers-color-scheme: dark and inside .scheme-dark (Night sections).
+ * Gain/loss TEXT uses the 600 step (state tokens); the 500 step is for chart lines, fills and icons only.
  */
 @theme static {
   --color-*: initial;
 
-  /* Primaries */
+  /* 1.3 Brand */
   --color-ink: #0e1016;
   --color-paper: #ffffff;
-  --color-indigo: #4b3bf5;
-  --color-indigo-hover: #3a2bd9;
-  --color-indigo-pressed: #2d20b5;
-  --color-indigo-tint: #eeecff;
-  --color-indigo-tint-2: #ddd9ff;
-  --color-indigo-light: #6a5bff;
-  --color-indigo-deep: #3424d6;
-  --color-indigo-on-dark: #a99fff;
-
-  /* Accents: one job each */
-  --color-gain: #0a8a4a; /* money up, always with ▲ and + */
-  --color-gain-tint: #e3f5ea;
-  --color-loss: #d93a3f; /* money down + errors, always with ▼ and − */
-  --color-loss-tint: #fde8e8;
-  --color-coach: #1f8fff;
-  --color-coach-tint: #e4f1ff;
-  --color-league: #f2601f;
-  --color-league-tint: #feebe1;
-  --color-league-text: #c2410c;
-  --color-journal: #b03fd1;
-  --color-journal-tint: #f6e6fb;
-  --color-journal-text: #8a2ba6;
-
-  /* Neutrals */
-  --color-mist: #f5f5f8;
-  --color-line: #e3e4ea;
-  --color-field-border: #cfd1da;
-  --color-placeholder: #8b8e9c;
-  --color-slate: #5b5f6e;
   --color-night: #151826;
-  --color-night-card: #1f2334;
-  --color-night-raised: #262a3a;
-  --color-ink-pressed: #2a2d3a;
-  --color-on-night-muted: #b4b7c5;
+  --color-indigo: #4b3bf5;
 
-  /* Type scale */
+  /* 1.4 Ramps: --color-{ramp}-{step} */
+  --color-indigo-50: #eeecff;
+  --color-indigo-100: #ddd9ff;
+  --color-indigo-200: #bdb5ff;
+  --color-indigo-300: #9a8eff;
+  --color-indigo-400: #7466fa;
+  --color-indigo-500: #4b3bf5;
+  --color-indigo-600: #3a2bd9;
+  --color-indigo-700: #2d20b5;
+  --color-indigo-800: #221889;
+  --color-indigo-900: #171060;
+  --color-neutral-50: #f5f5f8;
+  --color-neutral-100: #ecedf2;
+  --color-neutral-200: #e3e4ea;
+  --color-neutral-300: #cfd1da;
+  --color-neutral-400: #8b8e9c;
+  --color-neutral-500: #6b6f7e;
+  --color-neutral-600: #5b5f6e;
+  --color-neutral-700: #2a2d3a;
+  --color-neutral-800: #151826;
+  --color-neutral-900: #0e1016;
+  --color-gain-50: #e3f5ea;
+  --color-gain-100: #c6ebd4;
+  --color-gain-200: #94d8b0;
+  --color-gain-300: #5cc289;
+  --color-gain-400: #2fa868;
+  --color-gain-500: #0a8a4a;
+  --color-gain-600: #087540;
+  --color-gain-700: #065f34;
+  --color-gain-800: #054a29;
+  --color-gain-900: #03341d;
+  --color-loss-50: #fde8e8;
+  --color-loss-100: #fad0d1;
+  --color-loss-200: #f4a3a5;
+  --color-loss-300: #ec7276;
+  --color-loss-400: #e24c51;
+  --color-loss-500: #d93a3f;
+  --color-loss-600: #b92f34;
+  --color-loss-700: #96252a;
+  --color-loss-800: #721c20;
+  --color-loss-900: #4e1316;
+  --color-coach-50: #e4f1ff;
+  --color-coach-100: #c9e3ff;
+  --color-coach-200: #94c7ff;
+  --color-coach-300: #5faaff;
+  --color-coach-400: #3a9aff;
+  --color-coach-500: #1f8fff;
+  --color-coach-600: #0f74d9;
+  --color-coach-700: #0b5bad;
+  --color-coach-800: #08437f;
+  --color-coach-900: #052c54;
+  --color-league-50: #feebe1;
+  --color-league-100: #fdd4bf;
+  --color-league-200: #fbae86;
+  --color-league-300: #f8894f;
+  --color-league-400: #f5732e;
+  --color-league-500: #f2601f;
+  --color-league-600: #d14a10;
+  --color-league-700: #b03c0b;
+  --color-league-800: #8a2e09;
+  --color-league-900: #5c1f06;
+  --color-journal-50: #f6e6fb;
+  --color-journal-100: #edccf6;
+  --color-journal-200: #dc9bec;
+  --color-journal-300: #cc6be2;
+  --color-journal-400: #be52d9;
+  --color-journal-500: #b03fd1;
+  --color-journal-600: #9a33b4;
+  --color-journal-700: #7f2894;
+  --color-journal-800: #5f1e73;
+  --color-journal-900: #3f144d;
+
+  /* 1.1 + 1.2 Semantic and state tokens (light values; dark mapping below) */
+  --color-text-primary: #0e1016;
+  --color-text-secondary: #5b5f6e;
+  --color-text-muted: #8b8e9c;
+  --color-text-inverse: #ffffff;
+  --color-text-link: #4b3bf5;
+  --color-surface-page: #ffffff;
+  --color-surface-sunken: #f5f5f8;
+  --color-surface-raised: #ffffff;
+  --color-surface-overlay: #ffffff;
+  --color-surface-modal: #ffffff;
+  --color-border-subtle: #e3e4ea;
+  --color-border-strong: #cfd1da;
+  --color-accent-primary: #4b3bf5;
+  --color-accent-primary-hover: #3a2bd9;
+  --color-accent-primary-subtle: #eeecff;
+  --color-focus-ring: #4b3bf5;
+  --color-state-gain-text: #087540;
+  --color-state-gain-bg: #e3f5ea;
+  --color-state-loss-text: #b92f34;
+  --color-state-loss-bg: #fde8e8;
+  --color-state-neutral-text: #5b5f6e;
+  --color-state-neutral-bg: #f5f5f8;
+  --color-state-pending-text: #4b3bf5;
+  --color-state-pending-bg: #eeecff;
+  --color-state-delayed-text: #5b5f6e;
+  --color-state-delayed-bg: #ecedf2;
+
+  /* 1.7-1.10 Type: sizes carry their line height, tracking and weight */
   --text-*: initial;
-  --text-display-xl: 84px; /* site hero */
-  --text-display-xl--line-height: 84px;
-  --text-display-xl--letter-spacing: -0.04em;
-  --text-display-xl--font-weight: 800;
-  --text-display: 64px;
-  --text-display--line-height: 68px;
-  --text-display--letter-spacing: -0.035em;
-  --text-display--font-weight: 800;
-  --text-h1: 44px;
-  --text-h1--line-height: 48px;
-  --text-h1--letter-spacing: -0.025em;
-  --text-h1--font-weight: 800;
-  --text-h2: 28px;
-  --text-h2--line-height: 34px;
-  --text-h2--letter-spacing: -0.015em;
-  --text-h2--font-weight: 700;
-  --text-h3: 22px;
-  --text-h3--line-height: 28px;
-  --text-h3--letter-spacing: -0.01em;
-  --text-h3--font-weight: 800;
-  --text-body-l: 18px;
-  --text-body-l--line-height: 28px;
-  --text-body: 16px;
-  --text-body--line-height: 24px;
-  --text-nav: 15px;
-  --text-nav--line-height: 20px;
-  --text-label: 14px;
-  --text-label--line-height: 20px;
+  --leading-number-s: 16px;
+  --leading-caption: 18px;
+  --leading-label: 20px;
+  --leading-body: 24px;
+  --leading-h4: 24px;
+  --leading-body-l: 28px;
+  --leading-h3: 28px;
+  --leading-h2: 34px;
+  --leading-h1: 48px;
+  --leading-number-xl: 52px;
+  --leading-display: 68px;
+  --tracking-display: -0.035em;
+  --tracking-number: -0.03em;
+  --tracking-h1: -0.025em;
+  --tracking-h2: -0.015em;
+  --tracking-h3: -0.01em;
+  --tracking-normal: 0em;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
   --text-caption: 13px;
-  --text-caption--line-height: 18px;
-  --text-money-xl: 56px;
-  --text-money-xl--line-height: 60px;
-  --text-money-xl--letter-spacing: -0.03em;
-  --text-money-glass: 44px;
-  --text-money-glass--line-height: 48px;
-  --text-money-glass--letter-spacing: -0.03em;
+  --text-caption--line-height: var(--leading-caption);
+  --text-number-s: 13px;
+  --text-number-s--line-height: var(--leading-number-s);
+  --text-label: 14px;
+  --text-label--line-height: var(--leading-label);
+  --text-body: 16px;
+  --text-body--line-height: var(--leading-body);
+  --text-number: 16px;
+  --text-number--line-height: var(--leading-body);
+  --text-body-l: 18px;
+  --text-body-l--line-height: var(--leading-body-l);
+  --text-h4: 18px;
+  --text-h4--line-height: var(--leading-h4);
+  --text-h4--font-weight: 700;
+  --text-h3: 22px;
+  --text-h3--line-height: var(--leading-h3);
+  --text-h3--letter-spacing: var(--tracking-h3);
+  --text-h3--font-weight: 700;
+  --text-h2: 28px;
+  --text-h2--line-height: var(--leading-h2);
+  --text-h2--letter-spacing: var(--tracking-h2);
+  --text-h2--font-weight: 700;
+  --text-h1: 44px;
+  --text-h1--line-height: var(--leading-h1);
+  --text-h1--letter-spacing: var(--tracking-h1);
+  --text-h1--font-weight: 800;
+  --text-number-xl: 48px;
+  --text-number-xl--line-height: var(--leading-number-xl);
+  --text-number-xl--letter-spacing: var(--tracking-number);
+  --text-number-xl--font-weight: 800;
+  --text-display: 64px;
+  --text-display--line-height: var(--leading-display);
+  --text-display--letter-spacing: var(--tracking-display);
+  --text-display--font-weight: 800;
 
-  /* Radii */
+  /* 1.12 Radii (+ tile / phone from the component specs) */
   --radius-*: initial;
   --radius-chip: 8px;
   --radius-input: 14px;
   --radius-row: 16px;
   --radius-tile: 18px;
-  --radius-card-accent: 24px;
-  --radius-card: 28px;
+  --radius-toast: 20px;
+  --radius-card: 24px;
+  --radius-card-lg: 28px;
   --radius-panel: 32px;
   --radius-phone: 44px;
   --radius-phone-screen: 37px;
   --radius-pill: 999px;
 
-  /* Spacing: 4px base (4, 8, 12, 16, 24, 32, 48, 64, 96 = 1, 2, 3, 4, 6, 8, 12, 16, 24) */
+  /* 1.11 Spacing: Tailwind's scale stays 4px x n (p-6 = 24px). The named --spacing-4..96 tokens live in
+     :root, because inside @theme they would redefine p-4 etc. */
   --spacing: 4px;
-  --container-page: 1440px; /* content = 1440 minus the side gutters */
 
-  /* Shadows: soft and layered, no hard offsets */
+  /* 1.13-1.15 */
+  --opacity-disabled: 45%;
+  --breakpoint-tablet: 600px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1440px;
+  --container-ticket: 420px;
+  --container-sheet: 480px;
+  --container-text: 680px;
+  --container-content: 1248px;
+
+  /* 1.16 Shadows (light). Dark mode swaps them for 1px hairlines below. */
   --shadow-*: initial;
   --shadow-card: 0 1px 2px rgba(14, 16, 22, 0.06), 0 8px 24px rgba(14, 16, 22, 0.08);
   --shadow-hover: 0 2px 4px rgba(14, 16, 22, 0.08), 0 18px 40px rgba(14, 16, 22, 0.14);
   --shadow-float: 0 12px 32px rgba(14, 16, 22, 0.16), 0 0 0 1px rgba(14, 16, 22, 0.08);
-  --shadow-on-night: 0 1px 2px rgba(0, 0, 0, 0.2), 0 16px 40px rgba(0, 0, 0, 0.28);
+  --shadow-modal: 0 24px 64px rgba(14, 16, 22, 0.24), 0 0 0 1px rgba(14, 16, 22, 0.06);
   --shadow-brand: 0 2px 4px rgba(52, 36, 214, 0.2), 0 24px 60px rgba(52, 36, 214, 0.35);
   --shadow-device: 0 2px 4px rgba(14, 16, 22, 0.12), 0 24px 48px rgba(14, 16, 22, 0.22);
   --shadow-glass: 0 1px 2px rgba(52, 36, 214, 0.08), 0 24px 60px rgba(52, 36, 214, 0.18);
@@ -120,7 +223,60 @@
 }
 
 :root {
-  /* Motion durations (tokens.md, Motion tokens) */
+  /* 1.1 + 1.2 Dark values */
+  --color-dark-text-primary: #f5f5f8;
+  --color-dark-text-secondary: #b4b7c5;
+  --color-dark-text-muted: #8b8e9c;
+  --color-dark-text-inverse: #0e1016;
+  --color-dark-text-link: #a99fff;
+  --color-dark-surface-page: #0e1016;
+  --color-dark-surface-sunken: #0a0b10;
+  --color-dark-surface-raised: #151826;
+  --color-dark-surface-overlay: #1f2334;
+  --color-dark-surface-modal: #262a3a;
+  --color-dark-border-subtle: #262a3a;
+  --color-dark-border-strong: #3a3f55;
+  --color-dark-accent-primary: #6a5bff;
+  --color-dark-accent-primary-hover: #7d70ff;
+  --color-dark-accent-primary-subtle: #24215a;
+  --color-dark-focus-ring: #a99fff;
+  --color-dark-state-gain-text: #4ed38e;
+  --color-dark-state-gain-bg: #0f3324;
+  --color-dark-state-loss-text: #ff7a7e;
+  --color-dark-state-loss-bg: #3a1719;
+  --color-dark-state-neutral-text: #b4b7c5;
+  --color-dark-state-neutral-bg: #1f2334;
+  --color-dark-state-pending-text: #a99fff;
+  --color-dark-state-pending-bg: #24215a;
+  --color-dark-state-delayed-text: #b4b7c5;
+  --color-dark-state-delayed-bg: #262a3a;
+
+  /* 1.5 Gradient stops */
+  --color-gradient-hold-start: #6a5bff;
+  --color-gradient-hold-end: #3424d6;
+  --color-gradient-tide-start: #4b3bf5;
+  --color-gradient-tide-end: #1f8fff;
+  --color-gradient-ember-start: #ff8a4c;
+  --color-gradient-ember-end: #f2601f;
+  --color-gradient-orchid-start: #c65be6;
+  --color-gradient-orchid-end: #7c5cff;
+  --color-gradient-icon-start: #262a40;
+  --color-gradient-icon-end: #0e1016;
+  --color-gradient-dawn-violet: #cbc3ff;
+  --color-gradient-dawn-sky: #cde5ff;
+
+  /* 1.11 Spacing tokens */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+
+  /* Motion durations */
   --dur-press: 120ms;
   --dur-quick: 240ms;
   --dur-base: 400ms;
@@ -158,19 +314,20 @@
   --fill-gain: linear-gradient(180deg, rgba(10, 138, 74, 0.24) 0%, rgba(10, 138, 74, 0) 100%);
   --fill-loss: linear-gradient(180deg, rgba(217, 58, 63, 0.22) 0%, rgba(217, 58, 63, 0) 100%);
 
-  /* Layout: section padding + side gutter, 48/20 phone, 64/40 tablet, 96/96 desktop */
+  /* Layout (tokens.md 4): margin 20 / 40 / 96, section padding 48 / 64 / 96 */
   --section-y: 48px;
   --gutter: 20px;
   --nav-rest: 80%;
   --nav-scrolled: 64%;
+  color-scheme: light dark;
 }
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   :root {
     --section-y: 64px;
     --gutter: 40px;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   :root {
     --grid-size: 56px;
     --section-y: 96px;
@@ -178,18 +335,129 @@
   }
 }
 
-@theme inline {
-  /* next/font (app/fonts.ts) sets the three *-face variables on <html>. */
-  --font-display: var(--font-display-face), system-ui, sans-serif;
-  --font-sans: var(--font-sans-face), system-ui, sans-serif;
-  --font-num: var(--font-num-face), system-ui, sans-serif;
-  --spacing-section: var(--section-y);
-  --spacing-gutter: var(--gutter);
+/* Dark mapping. .scheme-dark forces it (Night sections, footer). .scheme-page puts a white-island card
+   on Night back to the page scheme: white in light mode, a raised dark surface in dark mode.
+   .scheme-light always stays light (tinted rows like "your" league row). */
+.scheme-dark {
+  --color-text-primary: var(--color-dark-text-primary);
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-text-inverse: var(--color-dark-text-inverse);
+  --color-text-link: var(--color-dark-text-link);
+  --color-surface-page: var(--color-dark-surface-page);
+  --color-surface-sunken: var(--color-dark-surface-sunken);
+  --color-surface-raised: var(--color-dark-surface-raised);
+  --color-surface-overlay: var(--color-dark-surface-overlay);
+  --color-surface-modal: var(--color-dark-surface-modal);
+  --color-border-subtle: var(--color-dark-border-subtle);
+  --color-border-strong: var(--color-dark-border-strong);
+  --color-accent-primary: var(--color-dark-accent-primary);
+  --color-accent-primary-hover: var(--color-dark-accent-primary-hover);
+  --color-accent-primary-subtle: var(--color-dark-accent-primary-subtle);
+  --color-focus-ring: var(--color-dark-focus-ring);
+  --color-state-gain-text: var(--color-dark-state-gain-text);
+  --color-state-gain-bg: var(--color-dark-state-gain-bg);
+  --color-state-loss-text: var(--color-dark-state-loss-text);
+  --color-state-loss-bg: var(--color-dark-state-loss-bg);
+  --color-state-neutral-text: var(--color-dark-state-neutral-text);
+  --color-state-neutral-bg: var(--color-dark-state-neutral-bg);
+  --color-state-pending-text: var(--color-dark-state-pending-text);
+  --color-state-pending-bg: var(--color-dark-state-pending-bg);
+  --color-state-delayed-text: var(--color-dark-state-delayed-text);
+  --color-state-delayed-bg: var(--color-dark-state-delayed-bg);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 16px 40px rgba(0, 0, 0, 0.28);
+  color: var(--color-text-primary);
+}
+.scheme-page,
+.scheme-light {
+  --color-text-primary: #0e1016;
+  --color-text-secondary: #5b5f6e;
+  --color-text-muted: #8b8e9c;
+  --color-text-inverse: #ffffff;
+  --color-text-link: #4b3bf5;
+  --color-surface-page: #ffffff;
+  --color-surface-sunken: #f5f5f8;
+  --color-surface-raised: #ffffff;
+  --color-surface-overlay: #ffffff;
+  --color-surface-modal: #ffffff;
+  --color-border-subtle: #e3e4ea;
+  --color-border-strong: #cfd1da;
+  --color-accent-primary: #4b3bf5;
+  --color-accent-primary-hover: #3a2bd9;
+  --color-accent-primary-subtle: #eeecff;
+  --color-focus-ring: #4b3bf5;
+  --color-state-gain-text: #087540;
+  --color-state-gain-bg: #e3f5ea;
+  --color-state-loss-text: #b92f34;
+  --color-state-loss-bg: #fde8e8;
+  --color-state-neutral-text: #5b5f6e;
+  --color-state-neutral-bg: #f5f5f8;
+  --color-state-pending-text: #4b3bf5;
+  --color-state-pending-bg: #eeecff;
+  --color-state-delayed-text: #5b5f6e;
+  --color-state-delayed-bg: #ecedf2;
+  color: var(--color-text-primary);
+}
+@media (prefers-color-scheme: dark) {
+  :root,
+  .scheme-page {
+    --color-text-primary: var(--color-dark-text-primary);
+    --color-text-secondary: var(--color-dark-text-secondary);
+    --color-text-muted: var(--color-dark-text-muted);
+    --color-text-inverse: var(--color-dark-text-inverse);
+    --color-text-link: var(--color-dark-text-link);
+    --color-surface-page: var(--color-dark-surface-page);
+    --color-surface-sunken: var(--color-dark-surface-sunken);
+    --color-surface-raised: var(--color-dark-surface-raised);
+    --color-surface-overlay: var(--color-dark-surface-overlay);
+    --color-surface-modal: var(--color-dark-surface-modal);
+    --color-border-subtle: var(--color-dark-border-subtle);
+    --color-border-strong: var(--color-dark-border-strong);
+    --color-accent-primary: var(--color-dark-accent-primary);
+    --color-accent-primary-hover: var(--color-dark-accent-primary-hover);
+    --color-accent-primary-subtle: var(--color-dark-accent-primary-subtle);
+    --color-focus-ring: var(--color-dark-focus-ring);
+    --color-state-gain-text: var(--color-dark-state-gain-text);
+    --color-state-gain-bg: var(--color-dark-state-gain-bg);
+    --color-state-loss-text: var(--color-dark-state-loss-text);
+    --color-state-loss-bg: var(--color-dark-state-loss-bg);
+    --color-state-neutral-text: var(--color-dark-state-neutral-text);
+    --color-state-neutral-bg: var(--color-dark-state-neutral-bg);
+    --color-state-pending-text: var(--color-dark-state-pending-text);
+    --color-state-pending-bg: var(--color-dark-state-pending-bg);
+    --color-state-delayed-text: var(--color-dark-state-delayed-text);
+    --color-state-delayed-bg: var(--color-dark-state-delayed-bg);
+    /* No shadows in dark: elevation = surface colour + a 1px hairline. */
+    --shadow-card: 0 0 0 1px #1f2334;
+    --shadow-hover: 0 0 0 1px #262a3a;
+    --shadow-float: 0 0 0 1px #2e3346;
+    --shadow-modal: 0 0 0 1px #3a3f55;
+    --shadow-glass: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-device: 0 0 0 1px #262a3a;
+  }
+  :root {
+    /* The light hero becomes Aurora under the same grid; glass goes dark. */
+    --bg-dawn: var(--bg-aurora);
+    --grid-line: rgba(169, 159, 255, 0.07);
+    --glass-fill: rgba(21, 24, 38, 0.62);
+    --glass-line: rgba(255, 255, 255, 0.08);
+  }
 }
 
-/* Every number: Manrope with tabular figures. */
+@theme inline {
+  /* 1.6 Font families. next/font (app/fonts.ts) sets the three *-face variables on <html>. */
+  --font-display: var(--font-display-face), system-ui, sans-serif;
+  --font-body: var(--font-sans-face), system-ui, sans-serif;
+  --font-number: var(--font-num-face), system-ui, sans-serif;
+  --font-sans: var(--font-body);
+  --spacing-section: var(--section-y);
+  --spacing-gutter: var(--gutter);
+  --container-page: calc(var(--container-content) + 2 * var(--gutter));
+}
+
+/* Every number: Manrope with tabular figures (tokens.md 3). */
 @utility num {
-  font-family: var(--font-num);
+  font-family: var(--font-number);
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
@@ -204,9 +472,9 @@ html {
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 24px;
 }
@@ -216,22 +484,25 @@ main {
   overflow-x: clip;
 }
 
+/* Focus ring: 2px with a 2px gap on everything focusable, light and dark. */
 :focus-visible {
-  outline: 2px solid var(--color-indigo);
-  outline-offset: 3px;
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
 }
 
 @layer components {
-  /* Buttons: pill, 48 tall, Figtree 600 16/20. States: default, hover, pressed, focus, disabled. */
+  /* Buttons (Components 09.1): solid fills only. Pill, 48 tall (nav 44), Figtree 600 16/20, 44px minimum.
+     States: default, hover, pressed, focus (global ring), disabled. */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    min-height: 44px;
     height: 48px;
     padding: 0 22px;
     border-radius: var(--radius-pill);
-    font: 600 16px/20px var(--font-sans);
+    font: 600 16px/20px var(--font-body);
     white-space: nowrap;
     transition:
       background-color var(--dur-press) var(--ease-settle),
@@ -240,86 +511,63 @@ main {
       scale var(--dur-press) var(--ease-settle),
       translate var(--dur-quick) var(--ease-settle);
   }
-  .btn:focus-visible {
-    outline: none;
-  }
   .btn:active:not(:disabled) {
     scale: 0.98;
   }
   .btn-primary {
-    background: var(--color-indigo);
+    background: var(--color-accent-primary);
     color: var(--color-paper);
   }
   .btn-primary:hover {
-    background: var(--color-indigo-hover);
+    background: var(--color-accent-primary-hover);
   }
   .btn-primary:active {
-    background: var(--color-indigo-pressed);
-  }
-  .btn-primary:focus-visible,
-  .btn-secondary:focus-visible {
-    box-shadow:
-      0 0 0 3px var(--color-paper),
-      0 0 0 5px var(--color-indigo);
-  }
-  .btn-primary:disabled {
-    background: var(--color-line);
-    color: var(--color-placeholder);
+    background: var(--color-indigo-700);
   }
   .btn-secondary {
-    background: var(--color-paper);
-    color: var(--color-ink);
-    border: 2px solid var(--color-ink);
+    background: var(--color-surface-raised);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-text-primary);
   }
   .btn-secondary:hover {
-    background: var(--color-ink);
-    color: var(--color-paper);
+    background: var(--color-text-primary);
+    color: var(--color-text-inverse);
   }
   .btn-secondary:active {
-    background: var(--color-ink-pressed);
-    border-color: var(--color-ink-pressed);
+    background: var(--color-neutral-700);
+    border-color: var(--color-neutral-700);
     color: var(--color-paper);
-  }
-  .btn-secondary:disabled {
-    background: var(--color-paper);
-    border-color: var(--color-line);
-    color: var(--color-placeholder);
   }
   .btn-ghost {
     padding: 0 18px;
-    color: var(--color-indigo);
+    color: var(--color-text-link);
   }
   .btn-ghost:hover {
-    background: var(--color-indigo-tint);
-    color: var(--color-indigo-hover);
+    background: var(--color-accent-primary-subtle);
   }
   .btn-ghost:active {
-    background: var(--color-indigo-tint-2);
-    color: var(--color-indigo-pressed);
-  }
-  .btn-ghost:focus-visible {
-    box-shadow: 0 0 0 2px var(--color-indigo);
-  }
-  .btn-ghost:disabled {
-    background: none;
-    color: var(--color-placeholder);
+    background: var(--color-indigo-100);
+    color: var(--color-indigo-700);
   }
   .btn:disabled {
     cursor: not-allowed;
+    background: var(--color-border-subtle);
+    border-color: var(--color-border-subtle);
+    color: var(--color-text-muted);
+  }
+  .btn-ghost:disabled {
+    background: none;
   }
 
-  /* Cards: white, radius 28, soft shadow. Hover lifts 2px with a deeper shadow. */
+  /* Cards: raised surface, radius 28, soft shadow (a hairline in dark). Hover lifts 2px with a deeper shadow. */
   .card {
-    background: var(--color-paper);
-    color: var(--color-ink);
-    border-radius: var(--radius-card);
+    background: var(--color-surface-raised);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-card-lg);
     box-shadow: var(--shadow-card);
     transition:
       box-shadow var(--dur-quick) var(--ease-settle),
       translate var(--dur-quick) var(--ease-settle);
-  }
-  .card-night {
-    box-shadow: var(--shadow-on-night);
   }
   .card-hover:hover {
     box-shadow: var(--shadow-hover);
@@ -328,18 +576,18 @@ main {
 
   /* Glass: hero surfaces only (nav at rest, hero product card). */
   .glass {
-    background: rgba(255, 255, 255, 0.58);
+    background: var(--glass-fill, rgba(255, 255, 255, 0.58));
     -webkit-backdrop-filter: blur(24px);
     backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    border-radius: var(--radius-card);
+    border: 1px solid var(--glass-line, rgba(255, 255, 255, 0.85));
+    border-radius: var(--radius-card-lg);
     box-shadow: var(--shadow-glass);
   }
 
   /* Backgrounds. Dawn = light hero (+ straight grid; HeroGlow adds a cursor glow), Aurora = Night
      sections, Indigo mesh = brand panels. All static. */
   .hero-bg {
-    background-color: var(--color-paper);
+    background-color: var(--color-surface-page);
     background-image:
       linear-gradient(var(--grid-line) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
@@ -390,7 +638,7 @@ main {
   .edge {
     border: 2px solid transparent;
     background:
-      linear-gradient(var(--color-paper), var(--color-paper)) padding-box,
+      linear-gradient(var(--color-surface-raised), var(--color-surface-raised)) padding-box,
       var(--grad-edge) border-box;
     box-shadow: 0 24px 60px rgba(52, 36, 214, 0.18);
   }
@@ -460,15 +708,15 @@ main {
   animation-delay: calc(240ms + var(--i, 0) * var(--stagger));
 }
 [data-reveal] .coach-wait {
-  background: var(--color-line);
-  color: var(--color-placeholder);
+  background: var(--color-border-subtle);
+  color: var(--color-text-muted);
 }
 [data-reveal="in"] .coach-wait {
   animation: coach-ready var(--dur-quick) var(--ease-settle) 600ms both;
 }
 @keyframes coach-ready {
   to {
-    background: var(--color-indigo);
+    background: var(--color-accent-primary);
     color: var(--color-paper);
   }
 }
@@ -515,19 +763,28 @@ main {
   --rise: 8px;
 }
 
-/* Logo reveal in the nav on first load: tile fades in from 94%, the wordmark rises 12px after it. Settles, no bounce. */
-.logo-tile-in {
-  animation: logo-tile 600ms var(--ease-settle) both;
+/* Logo reveal in the nav on first load: each letter rises from below its baseline inside the SVG's own
+   clip (700ms, 60ms stagger), then the coin sets into the H's cut. 1300ms total, settle ease, no bounce. */
+.logo-letter {
+  transform-box: fill-box;
+  animation: logo-rise var(--dur-text) var(--ease-settle) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger));
 }
-@keyframes logo-tile {
+@keyframes logo-rise {
   from {
-    opacity: 0;
-    scale: 0.94;
+    transform: translateY(115%);
   }
 }
-.logo-word-in {
-  --rise: 12px;
-  animation: rise var(--dur-text) var(--ease-settle) 200ms both;
+.logo-coin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: logo-coin 600ms var(--ease-settle) 700ms both;
+}
+@keyframes logo-coin {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
 }
 
 /* Reduced motion: everything becomes a 120ms opacity fade. No rises, no count-up, no magnet. */
@@ -545,8 +802,8 @@ main {
   [data-reveal="in"] .reveal-chip,
   .wl-tint,
   .wl-msg,
-  .logo-tile-in,
-  .logo-word-in,
+  .logo-letter,
+  .logo-coin,
   .msg-rise {
     animation: fade 120ms linear both !important;
   }

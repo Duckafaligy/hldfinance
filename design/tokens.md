@@ -1,133 +1,315 @@
-# HLD Finance design tokens (round 2)
+# HLD Finance design tokens
 
-Source: Paper file "hldfinance.ca". Boards: Theme UI, Logo, Motion, SaaS Assets.
-Board PNGs: C:\Users\brend\OneDrive\Videos\Media\Testing\HLD Finance\ (Theme UI.png, Logo.png, Motion.png, SaaS Assets.png)
-Assets: hld-design\assets\ (hld-mark.svg, hld-mark-glyph.svg, hld-app-icon.svg, hld-app-icon-1024.png, hld-lockup-horizontal@4x.png, hld-lockup-stacked@4x.png, hld-social-share-1200x630.png, hld-social-avatar-400.png, icons\icon-*.svg ×16)
+**Source of truth:** the Paper file "hldfinance.ca", page **"Theme UI"**.
+- Boards, left to right: 00 Contents · Foundations (01–08) · Motion (08) · Components (09) · Patterns (10–12) · Logo (13) · Gradients (14).
+- Every token below is registered as a Paper file token with exactly this name and value: 200 tokens (138 color, 3 fontFamily, 5 fontWeight, 12 fontSize, 6 letterSpacing, 11 lineHeight, 9 spacing, 8 radius, 1 opacity, 3 breakpoint, 4 container).
+- Board colours and fonts are bound to these tokens, except where text has mixed inline spans or the value lives in gradients, shadows or SVG paint.
+- Paper can't store gradients or shadows as tokens. Gradient stop colours are tokens (`--color-gradient-*`); the full CSS is listed below.
 
-Mode: light, plus "Night" dark sections. On Night, cards stay white and float on soft shadows.
+## 1. Paper file tokens (exact)
+### 1.1 Semantic colours, light and dark
+| Light token | Value | Dark token | Value | Use |
+|---|---|---|---|---|
+| `--color-text-primary` | `#0E1016` | `--color-dark-text-primary` | `#F5F5F8` | Headings, body, numbers |
+| `--color-text-secondary` | `#5B5F6E` | `--color-dark-text-secondary` | `#B4B7C5` | Supporting text, labels |
+| `--color-text-muted` | `#8B8E9C` | `--color-dark-text-muted` | `#8B8E9C` | Placeholders, disabled text |
+| `--color-text-inverse` | `#FFFFFF` | `--color-dark-text-inverse` | `#0E1016` | Text on the opposite surface |
+| `--color-text-link` | `#4B3BF5` | `--color-dark-text-link` | `#A99FFF` | Links, ghost buttons |
+| `--color-surface-page` | `#FFFFFF` | `--color-dark-surface-page` | `#0E1016` | App and page ground |
+| `--color-surface-sunken` | `#F5F5F8` | `--color-dark-surface-sunken` | `#0A0B10` | Sections, inner panels |
+| `--color-surface-raised` | `#FFFFFF` | `--color-dark-surface-raised` | `#151826` | Cards (level 1) |
+| `--color-surface-overlay` | `#FFFFFF` | `--color-dark-surface-overlay` | `#1F2334` | Menus, sheets, toasts (level 3) |
+| `--color-surface-modal` | `#FFFFFF` | `--color-dark-surface-modal` | `#262A3A` | Modals (level 4) |
+| `--color-border-subtle` | `#E3E4EA` | `--color-dark-border-subtle` | `#262A3A` | Dividers, row lines |
+| `--color-border-strong` | `#CFD1DA` | `--color-dark-border-strong` | `#3A3F55` | Inputs, outline chips |
+| `--color-accent-primary` | `#4B3BF5` | `--color-dark-accent-primary` | `#6A5BFF` | Primary actions |
+| `--color-accent-primary-hover` | `#3A2BD9` | `--color-dark-accent-primary-hover` | `#7D70FF` | Hover on primary |
+| `--color-accent-primary-subtle` | `#EEECFF` | `--color-dark-accent-primary-subtle` | `#24215A` | Selected rows, ghost hover |
+| `--color-focus-ring` | `#4B3BF5` | `--color-dark-focus-ring` | `#A99FFF` | 2 px ring + 2 px gap |
 
-## Logo (final: Bridge H + drawn HLD)
+In dark mode, elevation comes from surface colour (page #0E1016 → raised #151826 → overlay #1F2334 → modal #262A3A) plus a 1 px hairline. No shadows.
+
+### 1.2 State colours
+| Token | Value | Use |
+|---|---|---|
+| `--color-state-gain-text` | `#087540` | gain: text/icon on light. Always with ▲ + |
+| `--color-state-gain-bg` | `#E3F5EA` | gain: chip background on light |
+| `--color-dark-state-gain-text` | `#4ED38E` | gain: text/icon on dark |
+| `--color-dark-state-gain-bg` | `#0F3324` | gain: chip background on dark |
+| `--color-state-loss-text` | `#B92F34` | loss: text/icon on light. Always with ▼ − |
+| `--color-state-loss-bg` | `#FDE8E8` | loss: chip background on light |
+| `--color-dark-state-loss-text` | `#FF7A7E` | loss: text/icon on dark |
+| `--color-dark-state-loss-bg` | `#3A1719` | loss: chip background on dark |
+| `--color-state-neutral-text` | `#5B5F6E` | neutral: text/icon on light. Always with – |
+| `--color-state-neutral-bg` | `#F5F5F8` | neutral: chip background on light |
+| `--color-dark-state-neutral-text` | `#B4B7C5` | neutral: text/icon on dark |
+| `--color-dark-state-neutral-bg` | `#1F2334` | neutral: chip background on dark |
+| `--color-state-pending-text` | `#4B3BF5` | pending: text/icon on light. Always with hourglass |
+| `--color-state-pending-bg` | `#EEECFF` | pending: chip background on light |
+| `--color-dark-state-pending-text` | `#A99FFF` | pending: text/icon on dark |
+| `--color-dark-state-pending-bg` | `#24215A` | pending: chip background on dark |
+| `--color-state-delayed-text` | `#5B5F6E` | delayed: text/icon on light. Always with clock |
+| `--color-state-delayed-bg` | `#ECEDF2` | delayed: chip background on light |
+| `--color-dark-state-delayed-text` | `#B4B7C5` | delayed: text/icon on dark |
+| `--color-dark-state-delayed-bg` | `#262A3A` | delayed: chip background on dark |
+
+Gain and loss **text** uses the 600 step (#087540 / #B92F34) so it passes AA on white and on tints. The 500 step (#0A8A4A / #D93A3F) is for chart lines, fills and icons only.
+
+### 1.3 Brand colours
+| Token | Value | Use |
+|---|---|---|
+| `--color-ink` | `#0E1016` | Primary text, wordmark on light |
+| `--color-paper` | `#FFFFFF` | Page and card fill |
+| `--color-night` | `#151826` | Dark sections, signature badge, icon tile |
+| `--color-indigo` | `#4B3BF5` | Brand, primary actions |
+
+### 1.4 Ramps (`--color-{ramp}-{step}`)
+| Ramp | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| indigo | `#EEECFF` | `#DDD9FF` | `#BDB5FF` | `#9A8EFF` | `#7466FA` | `#4B3BF5` | `#3A2BD9` | `#2D20B5` | `#221889` | `#171060` |
+| neutral | `#F5F5F8` | `#ECEDF2` | `#E3E4EA` | `#CFD1DA` | `#8B8E9C` | `#6B6F7E` | `#5B5F6E` | `#2A2D3A` | `#151826` | `#0E1016` |
+| gain | `#E3F5EA` | `#C6EBD4` | `#94D8B0` | `#5CC289` | `#2FA868` | `#0A8A4A` | `#087540` | `#065F34` | `#054A29` | `#03341D` |
+| loss | `#FDE8E8` | `#FAD0D1` | `#F4A3A5` | `#EC7276` | `#E24C51` | `#D93A3F` | `#B92F34` | `#96252A` | `#721C20` | `#4E1316` |
+| coach | `#E4F1FF` | `#C9E3FF` | `#94C7FF` | `#5FAAFF` | `#3A9AFF` | `#1F8FFF` | `#0F74D9` | `#0B5BAD` | `#08437F` | `#052C54` |
+| league | `#FEEBE1` | `#FDD4BF` | `#FBAE86` | `#F8894F` | `#F5732E` | `#F2601F` | `#D14A10` | `#B03C0B` | `#8A2E09` | `#5C1F06` |
+| journal | `#F6E6FB` | `#EDCCF6` | `#DC9BEC` | `#CC6BE2` | `#BE52D9` | `#B03FD1` | `#9A33B4` | `#7F2894` | `#5F1E73` | `#3F144D` |
+
+### 1.5 Gradient stops
+| Token | Value | Use |
+|---|---|---|
+| `--color-gradient-hold-start` | `#6A5BFF` | Hold gradient stop 0% |
+| `--color-gradient-hold-end` | `#3424D6` | Hold gradient stop 100% |
+| `--color-gradient-tide-start` | `#4B3BF5` | Tide 0% |
+| `--color-gradient-tide-end` | `#1F8FFF` | Tide 100% |
+| `--color-gradient-ember-start` | `#FF8A4C` | Ember 0% |
+| `--color-gradient-ember-end` | `#F2601F` | Ember 100% |
+| `--color-gradient-orchid-start` | `#C65BE6` | Orchid 0% |
+| `--color-gradient-orchid-end` | `#7C5CFF` | Orchid 100% |
+| `--color-gradient-icon-start` | `#262A40` | Night app icon 0% |
+| `--color-gradient-icon-end` | `#0E1016` | Night app icon 100% |
+| `--color-gradient-dawn-violet` | `#CBC3FF` | Dawn mesh glow |
+| `--color-gradient-dawn-sky` | `#CDE5FF` | Dawn mesh glow 2 |
+
+### 1.6 Font families
+| Token | Value | Note |
+|---|---|---|
+| `--font-display` | `Urbanist` | Headings, display |
+| `--font-body` | `Figtree` | Body, UI, labels |
+| `--font-number` | `Manrope` | All numbers, with tnum |
+
+### 1.7 Font sizes
+| Token | Value | Note |
+|---|---|---|
+| `--text-caption` | `13px` |  |
+| `--text-number-s` | `13px` |  |
+| `--text-label` | `14px` |  |
+| `--text-body` | `16px` |  |
+| `--text-number` | `16px` |  |
+| `--text-body-l` | `18px` |  |
+| `--text-h4` | `18px` |  |
+| `--text-h3` | `22px` |  |
+| `--text-h2` | `28px` |  |
+| `--text-h1` | `44px` |  |
+| `--text-number-xl` | `48px` |  |
+| `--text-display` | `64px` |  |
+
+### 1.8 Line heights
+| Token | Value | Note |
+|---|---|---|
+| `--leading-number-s` | `16px` |  |
+| `--leading-caption` | `18px` |  |
+| `--leading-label` | `20px` |  |
+| `--leading-body` | `24px` |  |
+| `--leading-h4` | `24px` |  |
+| `--leading-body-l` | `28px` |  |
+| `--leading-h3` | `28px` |  |
+| `--leading-h2` | `34px` |  |
+| `--leading-h1` | `48px` |  |
+| `--leading-number-xl` | `52px` |  |
+| `--leading-display` | `68px` |  |
+
+### 1.9 Letter spacing
+| Token | Value | Note |
+|---|---|---|
+| `--tracking-display` | `-0.035em` |  |
+| `--tracking-number` | `-0.03em` |  |
+| `--tracking-h1` | `-0.025em` |  |
+| `--tracking-h2` | `-0.015em` |  |
+| `--tracking-h3` | `-0.01em` |  |
+| `--tracking-normal` | `0em` |  |
+
+### 1.10 Font weights
+| Token | Value | Note |
+|---|---|---|
+| `--font-weight-regular` | `400` |  |
+| `--font-weight-medium` | `500` |  |
+| `--font-weight-semibold` | `600` |  |
+| `--font-weight-bold` | `700` |  |
+| `--font-weight-extrabold` | `800` |  |
+
+### 1.11 Spacing
+| Token | Value | Note |
+|---|---|---|
+| `--spacing-4` | `4px` |  |
+| `--spacing-8` | `8px` |  |
+| `--spacing-12` | `12px` |  |
+| `--spacing-16` | `16px` |  |
+| `--spacing-24` | `24px` |  |
+| `--spacing-32` | `32px` |  |
+| `--spacing-48` | `48px` |  |
+| `--spacing-64` | `64px` |  |
+| `--spacing-96` | `96px` |  |
+
+### 1.12 Radii
+| Token | Value | Note |
+|---|---|---|
+| `--radius-chip` | `8px` |  |
+| `--radius-input` | `14px` |  |
+| `--radius-row` | `16px` |  |
+| `--radius-toast` | `20px` |  |
+| `--radius-card` | `24px` |  |
+| `--radius-card-lg` | `28px` |  |
+| `--radius-panel` | `32px` |  |
+| `--radius-pill` | `999px` |  |
+
+### 1.13 Opacity
+| Token | Value | Note |
+|---|---|---|
+| `--opacity-disabled` | `45%` |  |
+
+### 1.14 Breakpoints
+| Token | Value | Note |
+|---|---|---|
+| `--breakpoint-tablet` | `600px` |  |
+| `--breakpoint-desktop` | `1024px` |  |
+| `--breakpoint-wide` | `1440px` |  |
+
+### 1.15 Containers
+| Token | Value | Note |
+|---|---|---|
+| `--container-ticket` | `420px` |  |
+| `--container-sheet` | `480px` |  |
+| `--container-text` | `680px` |  |
+| `--container-content` | `1248px` |  |
+
+### 1.16 Shadows (not storable as Paper tokens)
+| Name | Light (box-shadow) | Dark |
+|---|---|---|
+| elevation-0 | none | surface #0E1016 |
+| elevation-1 (card) | 0 1px 2px rgba(14,16,22,.06), 0 8px 24px rgba(14,16,22,.08) | #151826 + 1px #1F2334 |
+| elevation-2 (hover) | 0 2px 4px rgba(14,16,22,.08), 0 18px 40px rgba(14,16,22,.14) | #1B1F2E + 1px #262A3A |
+| elevation-3 (overlay) | 0 12px 32px rgba(14,16,22,.16), 0 0 0 1px rgba(14,16,22,.08) | #1F2334 + 1px #2E3346 |
+| elevation-4 (modal) | 0 24px 64px rgba(14,16,22,.24), 0 0 0 1px rgba(14,16,22,.06) | #262A3A + 1px #3A3F55 |
+| focus | 0 0 0 2px #FFFFFF, 0 0 0 4px #4B3BF5 (dark ring #A99FFF) | |
+
+## 2. Type styles
+| Style | Family | Size / line-height | Weight | Tracking | Use |
+|---|---|---|---|---|---|
+| Display | Urbanist | 64/68 | 800 | -0.035em | Hero, one per page |
+| H1 | Urbanist | 44/48 | 800 | -0.025em | Page and section titles |
+| H2 | Urbanist | 28/34 | 700 | -0.015em | Card groups, sheet titles |
+| H3 | Urbanist | 22/28 | 700 | -0.01em | Card titles |
+| H4 | Urbanist | 18/24 | 700 | 0 | Small headings |
+| Body L | Figtree | 18/28 | 400 | 0 | Lead paragraphs |
+| Body | Figtree | 16/24 | 400 | 0 | Reading text |
+| Label | Figtree | 14/20 | 600 | 0 | Labels, row titles (buttons 15–16/20 at 700) |
+| Caption | Figtree | 13/18 | 500 | 0 | Helper text, disclaimers |
+| Number XL | Manrope + tnum | 48/52 | 800 | -0.03em | Portfolio value |
+| Number | Manrope + tnum | 16/24 | 700 | 0 | Prices, rows |
+| Number S | Manrope + tnum | 13/16 | 800 | 0 | Chips, ranks, axes |
+
+## 3. Numbers and money
+- Locale **en-CA**. Money `$1,234.56`, always 2 decimals. Negative `−$45.10` with a real minus (U+2212).
+- Changes: `▲ +2.40%` / `▼ −1.08%`. Arrow + sign + colour, always together. Flat is `0.00%`, grey, no arrow.
+- Abbreviations (tight spaces only): `$1.2K`, `$3.4M`, `$1.1B`, one decimal, full value in a tooltip.
+- Currency: CAD by default. US-listed prices show `US$231.52` + a `USD` tag. Portfolio totals are in CAD.
+- Missing value: `—` in muted #8B8E9C, tooltip "No price yet". Never `$0.00`.
+- Shares: whole numbers ("12 shares"). Market times in ET ("3:59 p.m. ET").
+- All numbers: Manrope with `font-feature-settings: "tnum"`, right-aligned in columns.
+
+## 4. Layout
+| Breakpoint | Range | Columns | Gutter | Margin |
+|---|---|---|---|---|
+| Phone | 0–599 | 4 | 16 | 20 |
+| Tablet | 600–1023 | 8 | 20 | 40 |
+| Desktop | 1024+ | 12 | 24 | 96 (content max 1248) |
+
+Spacing use:
+- 4: icon to text;
+- 8: inside chips;
+- 12: row gaps, label to field;
+- 16: phone margins, small card padding;
+- 24: card padding and gaps;
+- 32: between groups;
+- 48 / 64 / 96: section padding (phone / tablet / desktop).
+
+## 5. Icons
+24 grid with a 2 px live-area padding. Round caps and joins, no fills.
+- Sizes and strokes: 16 (stroke 1.5) for rows and chips, 20 (1.75) for buttons and tabs, 24 (2) for navigation and empty states.
+- Icon-only buttons have an aria-label and a 44 px target.
+
+## 6. Accessibility
+- WCAG 2.2 AA minimum.
+- Focus ring: 2 px with a 2 px gap.
+- Touch targets at least 44×44.
+- Never colour alone: an arrow and sign on every change, plus weight or a bar on selection.
+- Every chart has a text summary and a table.
+- prefers-reduced-motion: 120 ms fade only.
+
+## 7. Voice
+- A friend, not a nag. Plain Canadian English. Say "practice money" or "fake money".
+- Never: advisor, guaranteed, "buy this", get rich, can't lose, to the moon, hot tip, risk-free.
+- Errors: what happened → why → what to do. No blame, no codes, no exclamation marks.
+
+## Components naming
+Layer names follow `Component/Variant/State`. For example: `Button/Primary/Hover`, `Field/Text/Error`, `Checkbox/Indeterminate`, `Chip/Change/Gain/M`, `TickerRow/Hover`, `TradeTicket/Coach`, `PracticeIndicator/Pill`, `MarketStatus/Delayed`.
+
+## 8. Detailed specs
+
+## Logo (master: drawn HLD wordmark, from node 4YK-0)
+**Primary logo:** the drawn "HLD" wordmark on its own, with no tile. Ink #0E1016 on light grounds, white on dark (Ink, Night, Aurora, Indigo).
+**Signature badge:** a Night #151826 rounded panel with white HLD centred. Proportions from 4YK-0: 458×150 panel, corner 24, HLD cap 56. That is width 8.18×, height 2.68× and corner 0.43× the cap height.
+**Icons:** a Night tile with the white coin H.
+- App icon: squircle (rx 22.4%) with `linear-gradient(135deg, #262A40, #0E1016)` and a top light `rgba(255,255,255,.10) → 0` by half height.
+- Favicon: flat Night tile, corner 25%.
+- Avatar: Night circle with the coin H (or HLD from 120 px up).
+- The full HLD appears inside an icon only at 120 px and up.
+**Secondary (comparison only):** the Indigo tile versions on the Logo board.
+
 **Files** (assets folder):
 | File | What it is |
 |---|---|
-| hld-mark.svg | Indigo tile with a white coin H, 64 grid |
-| hld-mark-glyph.svg | The coin H alone, `currentColor`, viewBox 0 0 90 100 |
-| hld-wordmark.svg | Drawn "HLD", `currentColor`, viewBox 0 0 258 100. Recolour with CSS `color` |
-| hld-app-icon.svg / hld-app-icon-1024.png | App icon on the Hold gradient |
-| hld-lockup-horizontal.svg / @4x.png | Horizontal lockup |
-| hld-lockup-stacked.svg / @4x.png | Stacked lockup |
-| hld-social-share-1200x630.png | Social share image |
-| hld-social-avatar-400.png | Social avatar |
+| hld-wordmark.svg | Master. `currentColor`, viewBox 0 0 258 100. Set CSS `color` to Ink or white |
+| hld-badge.svg / hld-badge@4x.png | Signature badge (Night panel + white HLD) |
+| hld-mark.svg | Night tile + white coin H (64 grid): favicon and small icon |
+| hld-mark-glyph.svg | Coin H alone, `currentColor`, viewBox 0 0 90 100 |
+| hld-app-icon.svg / hld-app-icon-1024.png | Night app icon |
+| hld-lockup-horizontal.svg / @4x.png, hld-lockup-stacked.svg / @4x.png | Night tile + Ink HLD, for app-store and listing use only |
+| hld-social-share-1200x630.png, hld-social-avatar-400.png | Social |
 
-**Construction** (cap height = 100 units):
-- The H: two stems, 28 wide, 100 tall, with round ends (radius 14), 34 apart, so the H is 90 wide.
-- The coin: radius 20 (1.43× the stem), at the centre (45, 50).
-- The cut: radius 25, concentric with the coin. It is cut into the inner edge of each stem, from y 31.67 to 68.33, leaving a 5-unit ring of clear space round the coin. It is real geometry (no background-coloured circle), so the logo works on any background and in one colour.
-- L and D: drawn with the same 28 stroke, round caps and joins.
-  - L: 60 wide.
-  - D: 76 wide.
-  - Gaps: H→L 16, L→D 14.
-- Mark tile: 64 grid, corner 18 (28%), with the H at 38/64 of the tile height, centred. The favicon (16/32) uses corner 16 (25%).
-- App icon: rx 14.3 (22.4%). Fill `linear-gradient(135deg, #6A5BFF → #3424D6)` with a top light `rgba(255,255,255,.22) → 0` by half height.
+**Construction** (cap height = 100):
+- H: stems 28 wide with round ends, 34 apart (H is 90 wide). Coin r 20 at (45, 50). A cut of r 25 is taken out of the inner stem edges (y 31.67–68.33), leaving a 5-unit ring. It is real geometry, so the logo is single-colour.
+- L (60 wide) and D (78 box, 76 drawn): the same 28 stroke, round caps and joins.
+- Gaps: H→L 16, L→D 14.
 
-**Colour:**
-- The coin is always the same colour as the stems: white on Indigo, Ink on light, white on dark. Mint or any accent coin is not used.
-- Approved colourways:
-  - light: Indigo tile + Ink wordmark;
-  - Ink or Aurora: Indigo tile + white wordmark;
-  - Indigo: white tile with an Indigo H + white wordmark;
-  - wordmark alone in Ink, Indigo or white.
-
-**Lockups:**
-- Horizontal: tile = 1.5× the wordmark cap height, gap = 0.36× cap height, centred vertically.
-- Stacked: tile = 2.2× cap height, gap 0.5× cap height, centred.
-
-**Clear space:** half the tile height on every side (for the wordmark alone, half its cap height).
+**Clear space:** half the cap height on every side of the wordmark. For the badge, the panel is the clear space. For icons, half the tile.
 
 **Minimum sizes:**
-- tile 16 px;
 - wordmark 10 px cap height (≈26 px wide);
-- horizontal lockup 72 px wide;
-- stacked lockup 40 px wide.
+- badge 12 px cap (98 px wide);
+- icon tile 16 px.
 
 **Usage:**
-- **Nav:** horizontal lockup, cap 14–20 px.
-- **Footer:** wordmark alone.
-- **Favicon:** the tile.
-- **Social avatar:** the H without a tile, on Indigo mesh, about 44% of the circle.
-- **App icon:** the gradient tile.
+- **Nav:** wordmark, cap 17–20 px.
+- **Footer:** wordmark.
+- **Stickers / social posts / app splash:** badge.
+- **Favicon:** Night tile.
+- **App icon:** Night squircle.
 
 **Don'ts:**
-- Don't stretch it, outline it, colour the coin, or set "HLD" in a font (the H must be the drawn coin H).
-- No animated bounce: the reveal settles (see Motion: logo reveal, 1200 ms, settle ease).
-
-## Colour
-### Primaries
-| Token | Hex | Job |
-|---|---|---|
-| --color-ink | #0E1016 | Text, secondary-button border and hover, active tab, scrolled nav |
-| --color-paper | #FFFFFF | Page ground, card fill |
-| --color-indigo | #4B3BF5 | Brand, primary button, links, focus, success/confirm |
-| --color-indigo-hover | #3A2BD9 | Primary hover |
-| --color-indigo-pressed | #2D20B5 | Primary pressed, success text |
-| --color-indigo-tint | #EEECFF | Ghost hover, success field, progress track |
-| --color-indigo-tint-2 | #DDD9FF | Ghost pressed, input focus halo |
-| --color-indigo-light | #6A5BFF / #5B4BFF | Gradient start (app icon, Pro card) |
-| --color-indigo-deep | #3424D6 | Gradient end |
-| --color-indigo-on-dark | #A99FFF / #CFC8FF | Italic accent words on Night / Indigo |
-
-### Accents (one job each)
-| Token | Hex | Tint | Job |
-|---|---|---|---|
-| --color-gain | #0A8A4A | #E3F5EA | Money up. Always with ▲ and + |
-| --color-loss | #D93A3F | #FDE8E8 | Money down and errors. Always with ▼ and − (U+2212) |
-| --color-coach | #1F8FFF | #E4F1FF | The coach |
-| --color-league | #F2601F | #FEEBE1 | Leagues, ranks, streaks, your row (text on tint #C2410C; gradient #FF8A4C to #F2601F) |
-| --color-journal | #B03FD1 | #F6E6FB | Journal (tag text #8A2BA6) |
-
-No yellow anywhere.
-
-### Neutrals
-- Mist #F5F5F8
-- Line #E3E4EA
-- Field border #CFD1DA
-- Placeholder / disabled #8B8E9C
-- Slate #5B5F6E (secondary text)
-- Night #151826
-- Night card #1F2334
-- Night raised #262A3A
-- Ink pressed #2A2D3A
-- Muted on Night #B4B7C5
-
-### Gradients and glass
-- Hero mesh (light): `radial-gradient(circle at 82% 18%, #CBC3FF 0%, rgba(203,195,255,0) 42%), radial-gradient(circle at 96% 92%, #CDE5FF 0%, rgba(205,229,255,0) 40%), radial-gradient(circle at 55% 110%, #E9E5FF 0%, rgba(233,229,255,0) 45%), #FFFFFF`
-- Indigo mesh (social, Pro): `radial-gradient(circle at 85% 15%, #8E80FF 0%, transparent 45%), radial-gradient(circle at 100% 100%, #2F8FFF 0%, transparent 40%), radial-gradient(circle at 0% 100%, #2A1FA8 0%, transparent 50%), #3B2BE0`
-- Night mesh: `radial-gradient(circle at 70% 20%, rgba(91,75,255,.55) 0%, transparent 45%), radial-gradient(circle at 20% 90%, rgba(31,143,255,.35) 0%, transparent 45%), #151826`
-- Hero grid: 1 px lines in rgba(75,59,245,0.06) every 56 px. They stay straight; only a soft glow follows the cursor.
-- Glass surface: background rgba(255,255,255,0.58), backdrop-filter blur(24px), border 1px rgba(255,255,255,0.85), radius 28, shadow `0 1px 2px rgba(52,36,214,.08), 0 24px 60px rgba(52,36,214,.18)`.
-- Use glass only on hero surfaces (nav at rest, hero product card).
-
-## Type (Google Fonts)
-- **Urbanist** 700–800 + italic: display, headings, wordmark.
-- **Figtree** 400–700 + italic: body, UI, labels, buttons.
-- **Manrope** 600–800: every number (money, %, ranks, dates in tables). Always `font-feature-settings: "tnum"`, right-aligned.
-- Emphasis is a true italic (Urbanist Italic). Never script or mono.
-
-| Style | Font | Size / line-height | Weight | Tracking |
-|---|---|---|---|---|
-| Display XL | Urbanist | 96/96 (site hero 84/84) | 800 | −0.035 / −0.04em |
-| Display | Urbanist | 64/68 | 800 | −0.035em |
-| H1 / section | Urbanist | 44/48 | 800 | −0.025em |
-| H2 | Urbanist | 28/34 | 700 | −0.015em |
-| H3 / card title | Urbanist | 20–24/26–30 | 700–800 | −0.01em |
-| Body L | Figtree | 18–19/28 | 400 | 0 |
-| Body | Figtree | 16/24 | 400 | 0 |
-| Label | Figtree | 14–15/20 | 500–600 | 0 |
-| Caption | Figtree | 13/18 | 500 | 0 |
-| Button | Figtree | 16/20 (nav 15) | 600–700 | 0 |
-| Money XL | Manrope tnum | 56/60 card, 44/48 glass, 26 phone | 800 | −0.03em |
-| Money row | Manrope tnum | 15–16/20–24 | 700–800 | 0 |
-| Chip | Manrope tnum | 13–14/16–20 | 800 | 0 |
+- Don't set HLD in a font, colour the coin, or stretch it.
+- Don't put Ink on dark grounds.
+- Don't bounce it. The reveal is letters rising 24 px in a mask (60 ms stagger), then the coin setting into the cut: 1300 ms total, settle ease, no tile.
 
 ## Spacing
 - 4 px base: 4, 8, 12, 16, 24, 32, 48, 64, 96.
@@ -273,7 +455,7 @@ No yellow stops, no grain or noise, no animated gradients or pulsing glows.
 ### Brand gradients (one job each)
 | Token | CSS | Job |
 |---|---|---|
-| --grad-hold | linear-gradient(in oklab 150deg, #6A5BFF 0%, #4B3BF5 45%, #3424D6 100%) | Brand surfaces: app icon, Pro card fill, splash (never buttons) |
+| --grad-hold | linear-gradient(in oklab 150deg, #6A5BFF 0%, #4B3BF5 45%, #3424D6 100%) | Brand surfaces: Pro card fill, splash backgrounds (never buttons) |
 | --grad-tide | linear-gradient(in oklab 120deg, #4B3BF5 0%, #3B6BFF 50%, #1F8FFF 100%) | The one gradient-text word, featured accents |
 | --grad-ember | linear-gradient(in oklab 135deg, #FF8A4C 0%, #F2601F 100%) | Your league rank card only |
 | --grad-orchid | linear-gradient(in oklab 140deg, #C65BE6 0%, #7C5CFF 100%) | Journal streak / reflection cards only |
@@ -302,7 +484,7 @@ Buttons never use gradients: rest #4B3BF5, hover #3A2BD9, pressed #2D20B5 (see C
 - The line is a 3px stroke in #0A8A4A / #D93A3F with round caps. Note: use rgba stop-colors; Paper (and some renderers) handle `stop-opacity` poorly.
 
 ### App icon gradient
-`linearGradient 135deg: #6A5BFF 0% → #3424D6 100%`, plus a top-light overlay `linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 50%)`, with corner radius 22.4%.
+Night: `linear-gradient(135deg, #262A40 0%, #0E1016 100%)` plus a top-light overlay `linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 50%)`, corner radius 22.4%. The Indigo version (#6A5BFF → #3424D6) is secondary.
 
 ### Gradient text rule
 - **Allowed:** one italic word in a headline of 40px or more, using --grad-tide: `background-image: var(--grad-tide); -webkit-background-clip: text; background-clip: text; color: transparent`.

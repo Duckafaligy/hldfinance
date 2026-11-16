@@ -1,164 +1,222 @@
-# HLD Finance design tokens
+# HLD Finance design tokens (round 2)
 
-Source: Paper file "hldfinance.ca", board "Theme UI". Values were read from Paper with get_computed_styles.
-Board image: C:\Users\brend\OneDrive\Videos\Media\Testing\HLD Finance\Theme UI.png
+Source: Paper file "hldfinance.ca". Boards: Theme UI, Logo, Motion, SaaS Assets.
+Board PNGs: C:\Users\brend\OneDrive\Videos\Media\Testing\HLD Finance\ (Theme UI.png, Logo.png, Motion.png, SaaS Assets.png)
+Assets: hld-design\assets\ (hld-mark.svg, hld-mark-glyph.svg, hld-app-icon.svg, hld-app-icon-1024.png, hld-lockup-horizontal@4x.png, hld-lockup-stacked@4x.png, hld-social-share-1200x630.png, hld-social-avatar-400.png, icons\icon-*.svg ×16)
 
-Mode: light, plus one dark section style ("Night"). There is no full dark theme yet. On Night, cards stay white with a 2px Ink border.
+Mode: light, plus "Night" dark sections. On Night, cards stay white and float on soft shadows.
+
+## Logo
+- Mark ("Pause, then grow"): 64-unit grid. Tile `rect 64×64 rx 18` (#4B3BF5). Bars in #FFFFFF: `x16 y27 w12 h22 rx6` and `x36 y15 w12 h34 rx6`. Both sit on a baseline at y 49.
+- Favicon: same mark with a tile corner of 25% (rx 16 at 64), at 16 and 32 px.
+- App icon: iOS squircle with rx 14.3/64 (22.4%). Fill is a linear gradient from #6A5BFF to #3424D6, top-left to bottom-right. Overlay: white at 22% fading to 0% by the middle (top light).
+- Wordmark: "hld", lowercase, Urbanist 800, letter-spacing −0.045em.
+  - Horizontal lockup: mark = 1.05× the font size, gap = 0.2× the font size.
+  - Stacked lockup: mark 88 above the word at 56, gap 14.
+- On Indigo: the tile is white and the bars are Indigo. On Ink: an Indigo tile with white bars, or a white tile with Ink bars.
+- Clear space: half the mark width. Minimum sizes: mark 16 px, horizontal lockup 72 px wide, stacked lockup 48 px wide.
+- Avatar: bars only (no tile) on the indigo mesh, because platforms crop to a circle.
 
 ## Colour
-
 ### Primaries
 | Token | Hex | Job |
 |---|---|---|
-| --color-ink | #0E1016 | Text, card borders (2px), secondary-button hover, active tab |
+| --color-ink | #0E1016 | Text, secondary-button border and hover, active tab, scrolled nav |
 | --color-paper | #FFFFFF | Page ground, card fill |
-| --color-indigo | #4B3BF5 | Brand, primary button, links, ghost text, focus ring, success/confirm |
-| --color-indigo-hover | #3A2BD9 | Primary hover, ghost hover text |
-| --color-indigo-pressed | #2D20B5 | Primary pressed, ghost pressed text, success text |
-| --color-indigo-tint | #EEECFF | Ghost hover bg, success field bg, progress track |
-| --color-indigo-tint-2 | #DDD9FF | Ghost pressed bg, input focus halo |
-| --color-indigo-on-dark | #A99FFF | Italic accent words on Night |
+| --color-indigo | #4B3BF5 | Brand, primary button, links, focus, success/confirm |
+| --color-indigo-hover | #3A2BD9 | Primary hover |
+| --color-indigo-pressed | #2D20B5 | Primary pressed, success text |
+| --color-indigo-tint | #EEECFF | Ghost hover, success field, progress track |
+| --color-indigo-tint-2 | #DDD9FF | Ghost pressed, input focus halo |
+| --color-indigo-light | #6A5BFF / #5B4BFF | Gradient start (app icon, Pro card) |
+| --color-indigo-deep | #3424D6 | Gradient end |
+| --color-indigo-on-dark | #A99FFF / #CFC8FF | Italic accent words on Night / Indigo |
 
-### Accents (one job each, never decoration)
+### Accents (one job each)
 | Token | Hex | Tint | Job |
 |---|---|---|---|
-| --color-gain | #0A8A4A | #E3F5EA | Money up. ALWAYS with "▲" and "+" |
-| --color-loss | #D93A3F | #FDE8E8 | Money down, field errors. ALWAYS with "▼" and "−" (U+2212) |
-| --color-coach | #1F8FFF | #E4F1FF | The coach: avatar, question accent, selected answer chip |
-| --color-league | #F2601F | #FEEBE1 | Leagues: ranks, streaks, the user's own row (rank text #C2410C on tint) |
-| --color-journal | #B03FD1 | #F6E6FB | Trade journal: left bar, tag (tag text #8A2BA6) |
+| --color-gain | #0A8A4A | #E3F5EA | Money up. Always with ▲ and + |
+| --color-loss | #D93A3F | #FDE8E8 | Money down and errors. Always with ▼ and − (U+2212) |
+| --color-coach | #1F8FFF | #E4F1FF | The coach |
+| --color-league | #F2601F | #FEEBE1 | Leagues, ranks, streaks, your row (text on tint #C2410C; gradient #FF8A4C to #F2601F) |
+| --color-journal | #B03FD1 | #F6E6FB | Journal (tag text #8A2BA6) |
 
-The success state uses Indigo, not Gain. Gain only means money up. No yellow or amber anywhere.
+No yellow anywhere.
 
 ### Neutrals
-| Token | Hex | Job |
-|---|---|---|
-| --color-mist | #F5F5F8 | Quiet section ground, inner panels, range-tab track, chip bg |
-| --color-line | #E3E4EA | Dividers, 1px row borders, disabled bg and border |
-| --color-field-border | #CFD1DA | Input border, outline chips, chart baseline |
-| --color-placeholder | #8B8E9C | Placeholder and disabled text |
-| --color-slate | #5B5F6E | Secondary text (6.3:1 on white) |
-| --color-night | #151826 | Dark section ground |
-| --color-night-card | #1F2334 | Card on dark, if not white |
-| --color-night-raised | #262A3A | Menu button on the scrolled nav |
-| --color-ink-pressed | #2A2D3A | Secondary pressed bg/border |
-| --color-on-night-muted | #B4B7C5 | Body text on Night |
+- Mist #F5F5F8
+- Line #E3E4EA
+- Field border #CFD1DA
+- Placeholder / disabled #8B8E9C
+- Slate #5B5F6E (secondary text)
+- Night #151826
+- Night card #1F2334
+- Night raised #262A3A
+- Ink pressed #2A2D3A
+- Muted on Night #B4B7C5
 
-## Type
+### Gradients and glass
+- Hero mesh (light): `radial-gradient(circle at 82% 18%, #CBC3FF 0%, rgba(203,195,255,0) 42%), radial-gradient(circle at 96% 92%, #CDE5FF 0%, rgba(205,229,255,0) 40%), radial-gradient(circle at 55% 110%, #E9E5FF 0%, rgba(233,229,255,0) 45%), #FFFFFF`
+- Indigo mesh (social, Pro): `radial-gradient(circle at 85% 15%, #8E80FF 0%, transparent 45%), radial-gradient(circle at 100% 100%, #2F8FFF 0%, transparent 40%), radial-gradient(circle at 0% 100%, #2A1FA8 0%, transparent 50%), #3B2BE0`
+- Night mesh: `radial-gradient(circle at 70% 20%, rgba(91,75,255,.55) 0%, transparent 45%), radial-gradient(circle at 20% 90%, rgba(31,143,255,.35) 0%, transparent 45%), #151826`
+- Hero grid: 1 px lines in rgba(75,59,245,0.06) every 56 px. They stay straight; only a soft glow follows the cursor.
+- Glass surface: background rgba(255,255,255,0.58), backdrop-filter blur(24px), border 1px rgba(255,255,255,0.85), radius 28, shadow `0 1px 2px rgba(52,36,214,.08), 0 24px 60px rgba(52,36,214,.18)`.
+- Use glass only on hero surfaces (nav at rest, hero product card).
 
-Google Fonts: **Hanken Grotesk** (400–900 + italics) for display and headings, **Inter** (400–700 + italics) for UI, body and all numbers.
-Emphasis uses a true italic (font-style: italic) of the same family. Never a script font. No mono fonts.
-All money, percentages, ranks and dates use `font-feature-settings: "tnum"` (font-variant-numeric: tabular-nums), right-aligned in columns.
+## Type (Google Fonts)
+- **Urbanist** 700–800 + italic: display, headings, wordmark.
+- **Figtree** 400–700 + italic: body, UI, labels, buttons.
+- **Manrope** 600–800: every number (money, %, ranks, dates in tables). Always `font-feature-settings: "tnum"`, right-aligned.
+- Emphasis is a true italic (Urbanist Italic). Never script or mono.
 
-| Style | Family | Size / line-height (px) | Weight | Tracking |
+| Style | Font | Size / line-height | Weight | Tracking |
 |---|---|---|---|---|
-| Display XL (board hero) | Hanken Grotesk | 96 / 96 | 800 | -0.035em |
-| Display | Hanken Grotesk | 64 / 68 | 800 | -0.03em |
-| H1 / section title | Hanken Grotesk | 44 / 48 | 800 | -0.025em |
-| H2 | Hanken Grotesk | 28 / 34 | 700 | -0.015em |
-| H3 / card title | Hanken Grotesk | 20 / 26 | 700 | -0.01em |
-| Body L | Inter | 18 / 28 | 400 | 0 |
-| Body | Inter | 16 / 24 | 400 | 0 |
-| Label | Inter | 14 / 20 | 500 | 0 |
-| Caption | Inter | 13 / 18 | 500 | 0 |
-| Money XL | Inter + tnum | 56 / 60 (card), 48 / 52 (scale) | 700 | -0.025em / -0.02em |
-| Money row | Inter + tnum | 16 / 24 (price 500, change 600) | | 0 |
-| Button | Inter | 16 / 20 (nav 15 / 20) | 600 | 0 |
-| Wordmark "HLD" | Hanken Grotesk | any | 800 | -0.03em; "finance" = 500 italic in Indigo |
+| Display XL | Urbanist | 96/96 (site hero 84/84) | 800 | −0.035 / −0.04em |
+| Display | Urbanist | 64/68 | 800 | −0.035em |
+| H1 / section | Urbanist | 44/48 | 800 | −0.025em |
+| H2 | Urbanist | 28/34 | 700 | −0.015em |
+| H3 / card title | Urbanist | 20–24/26–30 | 700–800 | −0.01em |
+| Body L | Figtree | 18–19/28 | 400 | 0 |
+| Body | Figtree | 16/24 | 400 | 0 |
+| Label | Figtree | 14–15/20 | 500–600 | 0 |
+| Caption | Figtree | 13/18 | 500 | 0 |
+| Button | Figtree | 16/20 (nav 15) | 600–700 | 0 |
+| Money XL | Manrope tnum | 56/60 card, 44/48 glass, 26 phone | 800 | −0.03em |
+| Money row | Manrope tnum | 15–16/20–24 | 700–800 | 0 |
+| Chip | Manrope tnum | 13–14/16–20 | 800 | 0 |
 
-## Spacing (4px base)
-4, 8, 12, 16, 24, 32, 48, 64, 96.
-Section padding: 80–96 desktop / 64 tablet / 48 phone. Side gutter: 96 / 40 / 20. Card padding: 32 (large), 28, 24 (small).
+## Spacing
+- 4 px base: 4, 8, 12, 16, 24, 32, 48, 64, 96.
+- Section padding 72–96 desktop / 64 tablet / 48 phone. Side gutter 96 / 40 / 20.
+- Card padding: 36 (pricing), 32, 28, 24.
 
 ## Radii
 | Token | Value | Use |
 |---|---|---|
-| --radius-chip | 8px | Tags ("Practice money", "Journal") |
-| --radius-input | 12px | Text inputs, textarea |
-| --radius-row | 16px | Leaderboard rows, inner panels |
-| --radius-toast | 20px | Toast |
-| --radius-card | 28px | Product cards, panels |
-| --radius-pill | 999px | Buttons, waitlist field, nav, range tabs, answer chips |
+| --radius-chip | 8px | Small tags |
+| --radius-input | 14px | Inputs, textarea |
+| --radius-row | 16px | List rows, inner panels |
+| --radius-tile | 18–20px | Icon tiles (56 px → 18), toasts, motion frames |
+| --radius-card | 24–28px | Cards (accent cards 24, product cards 28) |
+| --radius-panel | 32px | Pricing cards, hero showcase |
+| --radius-phone | 44px | Phone mockup bezel (screen 37) |
+| --radius-pill | 999px | Buttons, nav, chips, waitlist field, tabs |
 
-## Elevation
-| Level | Spec | Use |
+## Shadows (soft, layered; no hard offsets, no grey glow halos)
+| Token | Value | Use |
 |---|---|---|
-| 0 Flat | 1px solid #E3E4EA | Rows, inputs |
-| 1 Card | 2px solid #0E1016, no shadow | All product cards |
-| 2 Lifted | 2px Ink border + box-shadow 4px 4px 0 #0E1016 | Card hover |
-| 3 Floating | box-shadow 0 12px 32px rgba(14,16,22,0.16), 0 0 0 1px rgba(14,16,22,0.08) | Island nav, menus. Toast on Night: 0 12px 32px rgba(0,0,0,0.32), 0 0 0 1px rgba(14,16,22,0.08) |
+| --shadow-card | 0 1px 2px rgba(14,16,22,.06), 0 8px 24px rgba(14,16,22,.08) | Cards on light |
+| --shadow-hover | 0 2px 4px rgba(14,16,22,.08), 0 18px 40px rgba(14,16,22,.14) | Card hover (+2 px lift) |
+| --shadow-float | 0 12px 32px rgba(14,16,22,.16), 0 0 0 1px rgba(14,16,22,.08) | Nav, menus, toast |
+| --shadow-on-night | 0 1px 2px rgba(0,0,0,.20), 0 16px 40px rgba(0,0,0,.28) | White cards on Night |
+| --shadow-brand | 0 2px 4px rgba(52,36,214,.2), 0 24px 60px rgba(52,36,214,.35) | Pro card, app icon |
+| --shadow-device | 0 2px 4px rgba(14,16,22,.12), 0 24px 48px rgba(14,16,22,.22) | Phone mockups |
 
-No grey glow shadows on cards. No gradients on buttons or surfaces.
+## Motion tokens
+| Token | Value |
+|---|---|
+| --ease-settle | cubic-bezier(0.16, 1, 0.3, 1). Entering and settling; no overshoot |
+| --ease-move | cubic-bezier(0.65, 0, 0.35, 1). State changes, position swaps, nav shrink |
+| --ease-exit | cubic-bezier(0.4, 0, 1, 1). Leaving |
+| --dur-press | 120ms |
+| --dur-quick | 240ms (chips, toasts, card lift, button widen) |
+| --dur-base | 400ms (cards, sheets, nav shrink, rank swap) |
+| --dur-text | 700ms (text rise, 24 px inside a mask) |
+| --dur-count | 900ms (number count-up) |
+| --dur-reveal | 1200ms (logo reveal) |
+| --stagger | 60ms between lines and list items |
+| --rise | 24px (text), 12px (wordmark), 2px (card hover) |
+
+### Moments (see the Motion board)
+1. **Logo reveal (1200 ms, settle):**
+   - The bars grow from the baseline: left 0–450 ms; right overlapping, 200–1000 ms.
+   - At about 450 ms the bars are equal, so the mark reads as a pause.
+   - The tile fades in at 94% → 100%. The word rises 12 px from 800 ms.
+   - No bounce.
+2. **Hero:** each line rises 24 px in a 700 ms mask, 60 ms stagger. Sub-copy and CTA follow at 600 ms. The glass card settles by 1000 ms. No zoom.
+3. **Nav:** after 24 px of scroll, 400 ms on the move ease:
+   - width 80% → 64%, height 64 → 56, white → Ink;
+   - links fade out over the first 150 ms.
+   - It reverses only at scrollY = 0.
+4. **Waitlist submit:**
+   - Press: 120 ms, Indigo-pressed, scale 0.98.
+   - The button widens across the pill: 240 ms, move ease.
+   - The pill turns Indigo-tint and the tick draws once: 280 ms.
+   - The message rises: 360 ms, settle ease.
+   - The pill never changes size. No spinner loop.
+5. **Count-up:** 900 ms, settle ease, from the start value. Tabular digits; runs once when the card enters view.
+6. **Gain/loss chip:** 240 ms cross-fade of the background, colour, arrow and sign together, on the move ease.
+7. **Card hover:** lifts 2 px in 240 ms with the deeper shadow. Magnetic button (desktop only):
+   - follows the cursor within 12 px, up to 8 px of pull, on the settle ease;
+   - eases home on leave with no spring.
+8. **Rank change:** only the two swapping rows move, 400 ms on the move ease. The rank digit rolls up. Your row keeps the League tint.
+9. **Coach sheet:**
+   - The backdrop fades to Ink 25%.
+   - The sheet rises 24 px in 400 ms (settle). The question rises in 700 ms, starting at 120 ms.
+   - Answer chips stagger 60 ms.
+   - **Buy stays disabled until 600 ms.**
+- **prefers-reduced-motion:** everything becomes a 120 ms opacity fade. No count-up, no magnet, no rises.
 
 ## Components
+### Buttons
+- All: pill, height 48 (nav 44, small 40), Figtree 16/20 600–700.
+- Primary (padding 0 22): Indigo → hover #3A2BD9 → pressed #2D20B5. Focus ring `0 0 0 3px #FFF, 0 0 0 5px #4B3BF5`. Disabled: #E3E4EA background, #8B8E9C text.
+- Secondary: white, 2px Ink border → hover Ink fill with white text → pressed #2A2D3A.
+- Ghost (padding 0 18): Indigo text → hover #EEECFF → pressed #DDD9FF. Focus is a 2px Indigo ring.
 
-### Buttons (all: height 48, radius 999, Inter 600 16/20, centred)
-| Variant | Default | Hover | Pressed | Focus | Disabled |
-|---|---|---|---|---|---|
-| Primary (pad 0 22) | bg #4B3BF5, text #FFF | bg #3A2BD9 | bg #2D20B5 | box-shadow 0 0 0 3px #FFF, 0 0 0 5px #4B3BF5 | bg #E3E4EA, text #8B8E9C |
-| Secondary (pad 0 22, 2px border) | bg #FFF, border/text #0E1016 | bg #0E1016, text #FFF | bg/border #2A2D3A, text #FFF | default + same ring | border #E3E4EA, text #8B8E9C |
-| Ghost (pad 0 18) | no bg, text #4B3BF5 | bg #EEECFF, text #3A2BD9 | bg #DDD9FF, text #2D20B5 | box-shadow 0 0 0 2px #4B3BF5 | text #8B8E9C |
+### Inputs
+- Height 52, radius 14, padding 0 16, 1px #CFD1DA. Figtree 16/24; placeholder #8B8E9C.
+- Focus: border #4B3BF5 + `0 0 0 3px #DDD9FF`. The ring wraps the whole rounded box.
+- Error: border #D93A3F + `0 0 0 3px #FDE8E8`, with a "✕" message in Figtree 13/18 500 #D93A3F.
 
-Desktop: magnetic. Within about 10–12px the button eases toward the cursor, up to 8px max. Hover and press take 120ms.
-
-### Text input
-- Label: Inter 500 14/20 Ink, 8px gap above the field.
-- Field: height 52, padding 0 16, radius 12, bg #FFF, 1px #CFD1DA. Text: Inter 400 16/24; placeholder #8B8E9C.
-- Focus: border #4B3BF5 + box-shadow 0 0 0 3px #DDD9FF. The ring wraps the whole rounded box; never an inner square outline.
-- Error: border #D93A3F + box-shadow 0 0 0 3px #FDE8E8. The message is Inter 500 13/18 #D93A3F and starts with "✕".
-- Helper: Inter 400 13/18 Slate.
-
-### Email waitlist field
-- Pill: height 60, radius 999, bg #FFF, 2px #0E1016, padding 0 6 0 22, space-between. Placeholder "you@email.com".
-- Inner button: height 44, padding 0 20, radius 999, Indigo, Inter 600 16 white ("Get early access").
-- Success: the same pill turns into bg #EEECFF, 2px #4B3BF5, padding 0 22, a 20px Indigo check circle + Inter 600 16 #2D20B5 ("You're on the list. Check your inbox."). The pill stays the same size, so nothing jumps.
+### Waitlist field
+- Pill: height 60, 2px Ink border, padding 0 6 0 22. Inner button: 44 tall, padding 0 20.
+- Success: #EEECFF background, 2px #4B3BF5 border, Indigo tick, Figtree 16/700 text in #2D20B5. Same size as before.
 
 ### Island nav
-- At rest: width 80% of the page, height 64, radius 999, bg #FFF, Floating shadow, padding 0 8 0 20. Mark 28 + "HLD" (Hanken 800 20/24). Links: Inter 15/20, active 600 Ink, others 500 Slate, gap 28. CTA 48 tall, padding 0 20.
-- Scrolled: width 64%, height 56, bg #0E1016, padding 0 6 0 18. White mark 24 + "HLD" 18/22. Buttons: "Join" (44 tall, padding 0 18) and a 44x44 menu button (bg #262A3A, two-bar icon). The links fold into the menu card. It returns to 80% only at scrollY = 0. Transition 240ms.
+- At rest: 80% wide, height 60–64, glass or white, `--shadow-float`, padding 0 8 0 20. Lockup at 22. Links: Figtree 15 (active 600 Ink, others 500 Slate), gap 28.
+- Scrolled: 64% wide, height 56, Ink. The menu button is 44 round in #262A3A.
 
-### Card (basic)
-- bg #FFF, 2px #0E1016, radius 28, padding 24–32, gap 14–24. Title H3. Hover = Lifted.
-- Example (Practice TFSA): "Room left" label + Inter 700 22/28 tnum value; progress track 8px #EEECFF with an Indigo fill, radius 999.
+### Cards
+White, radius 28, padding 24–32, `--shadow-card` (or `--shadow-on-night` on Night). Hover = `--shadow-hover` + 2 px lift.
 
-### Portfolio value card
-- Card padding 32, gap 24.
-- Top row: "Practice portfolio" (Inter 500 15/20 Slate) + "Practice money" chip (h28, padding 0 10, r8, bg Mist, Inter 600 13 Slate).
-- Value: Inter 700 56/60 tnum, -0.025em.
-- Gain/loss chip: h32, padding 0 12, r999, gap 6, bg #E3F5EA (loss #FDE8E8), Inter 700 14/20 tnum, colour #0A8A4A (loss #D93A3F), e.g. "▲ +$482.16 · +4.82%".
-- Sparkline: 140 tall, 3px stroke in the gain/loss colour, round joins, area fill of the same colour at 8% opacity. Start-value baseline: 1.5px #CFD1DA dashed 4/6.
-- Range tabs: track padding 4, gap 4, r999, Mist. Tab h32, padding 0 14, Inter 600 13 Slate; active bg Ink, text white.
+### Portfolio card
+- Label: Figtree 15 600 Slate. Value: Manrope 800 56/60 tnum.
+- Chip: height 32, padding 0 12, pill, tint background, Manrope 800 14.
+- Sparkline: 3 px stroke in the gain/loss colour, area fill at 8%. Dashed start-value line: #CFD1DA 4/6.
+- Range tabs: track #F5F5F8 with padding 4; active tab Ink with white text.
 
 ### Leaderboard row
-- Height 60, padding 0 14, radius 16, gap 12.
-- Rank: 28px fixed slot, Inter 700 16 tnum. Avatar: 36 circle, initials Inter 700 13. Name: flex 1, Inter 600 15, nowrap. Change: 96px fixed slot, right-aligned, Inter 700 15 tnum with ▲/▼.
-- The user's row: bg #FEEBE1, 1.5px #F2601F, rank text #C2410C, avatar bg #F2601F with white "You".
+- Height 60 (phone 40), radius 16, gap 12.
+- Rank slot 28 px; avatar 36 (phone 24); change slot 96 px, right-aligned.
+- Your row: #FEEBE1 background, 1.5 px #F2601F border.
 
-### Coach question card
-- Card width 480 (desktop), padding 32, gap 20.
-- Header: 40 circle in #1F8FFF with "?" (Hanken 800 20 white) + "Coach" (Inter 600 15) and context (Inter 13 Slate).
-- Question: Hanken 700 28/34 -0.015em; the second sentence is italic in #1F8FFF.
-- Answer chips: h40, padding 0 16, r999, 1.5px #CFD1DA, Inter 600 14. Selected chip: bg and border #1F8FFF, white text.
-- Reason textarea: min-height 72, r12, 1px #CFD1DA, padding 12 16.
-- Actions: Primary "Save plan and buy" + Ghost "Wait a day". The primary button only enables 600ms after the card opens.
+### Coach card / sheet
+- Radius 28 (sheet 30). Avatar 40 (phone 28) in #1F8FFF.
+- Question: Urbanist 800, with the second sentence italic in #1F8FFF.
+- Answer chips: height 40 (phone 24), 1px #CFD1DA; selected = #1F8FFF background.
+- Buttons: Primary "Save plan and buy" + Ghost "Wait a day".
 
-### Trade-journal entry
-- Card padding 28, gap 20, row layout. Left bar: 4px wide, radius 4, #B03FD1.
-- Meta: Inter 500 13/18 Slate tnum ("Nov 12 · Bought 5 SHOP.TO at $212.40"). Tag: h24, padding 0 8, r8, #F6E6FB, Inter 600 12 #8A2BA6.
-- Body: Hanken 700 20/26 with "Why I bought:" in italic.
-- Follow-up panel: Mist, r16, padding 14 16, with a gain/loss figure. Link: "Add a note" in Inter 600 14 Indigo.
+### Journal entry
+- Card radius 28 (phone 18). Left bar 3–4 px in #B03FD1.
+- "Why I bought:" in italic. Follow-up line "Still on plan?" in Indigo, with a gain/loss figure.
 
 ### Toast
-bg #FFF, radius 20, padding 14 14 14 16, gap 12, Floating shadow. Icon: 32 Indigo circle with a white check. Title Inter 600 14/20, detail Inter 13/18 Slate tnum, action Inter 600 14 Indigo ("Undo"). Enters in 240ms.
+White, radius 20, padding 14 14 14 16, `--shadow-float`. 32 px Indigo tick circle. Action text in Indigo.
 
-## Motion
-- Enter: cubic-bezier(0.22, 1, 0.36, 1). Exit: cubic-bezier(0.4, 0, 1, 1).
-- Durations: 120ms hover/press; 240ms cards, toasts, nav shrink; 480ms text rising into place.
-- Numbers roll digit by digit (tabular). Gain/loss chips cross-fade the colour and the arrow together.
-- Nothing bounces, pulses or loops on its own. The hero background only glows softly under the cursor; grid lines stay straight.
-- prefers-reduced-motion: everything becomes a 120ms fade. No digit roll, no magnet.
+### Icon set
+- 24 grid, stroke 2, round caps and joins, no fill.
+- Tiles: 96 (radius 28) on the showcase; 56 (radius 18, icon 26) as accent tiles in the job colour.
+- 16 icons: Portfolio, Trade, Coach, League, Journal, Practice TFSA, Watchlist, Search, Alerts, Settings, Learn, Hold timer, Gain, Loss, Wallet, Profile.
 
-## Logo
-- Mark: rounded square (radius = 28% of its size), Indigo, with a white H drawn as a pause button. In a 32-unit box: bars at x 9 and x 18.5, each 4.5x16 with radius 2.25, starting at y 8; bridge 8x2.5 at (12, 14.75), radius 1.25.
-- Versions: on white = Indigo tile; on Indigo = white bars without a tile; on Ink = white tile with Ink bars.
-- Minimum size 20px. Clear space = one bar width on every side.
+### Pricing (draft)
+- Free $0 CAD.
+- Pro $11.99 CAD / month, labelled "Planned".
+- Cards: radius 32, padding 36. The Pro card uses the gradient #5B4BFF → #3424D6 and `--shadow-brand`.
+
+### Badges
+- Store badges are our own design: Ink, height 60, radius 16. Text: "Coming soon to iPhone / Android" and "Join the waitlist at hldfinance.ca". No Apple or Google logos until the apps are live.
+- Feature pills: height 40, pill, tint background with the job colour: Free, Fake money real skills, No ads, TSX + US stocks, Free leagues, Made for Canada.
+
+### Phone mockup
+236×500, Ink bezel 7 px, radius 44/37, `--shadow-device`. Status bar 30. Tab bar 52 with 18 px icons; the active tab is Indigo.

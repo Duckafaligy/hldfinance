@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /*
- * HLD design tokens. Source of truth: design/tokens.md (Paper board "Theme UI").
- * Every colour, font, radius, spacing, shadow and easing value lives here.
- * Variable names match tokens.md (--color-ink, --radius-card, ...).
+ * HLD design tokens, round 2. Source of truth: design/tokens.md (Paper boards
+ * Theme UI, Logo, Motion, SaaS Assets). Every colour, font, radius, spacing,
+ * shadow and motion value lives here; names match tokens.md.
  */
 @theme static {
   --color-*: initial;
@@ -16,12 +16,14 @@
   --color-indigo-pressed: #2d20b5;
   --color-indigo-tint: #eeecff;
   --color-indigo-tint-2: #ddd9ff;
+  --color-indigo-light: #6a5bff;
+  --color-indigo-deep: #3424d6;
   --color-indigo-on-dark: #a99fff;
 
   /* Accents: one job each */
   --color-gain: #0a8a4a; /* money up, always with ▲ and + */
   --color-gain-tint: #e3f5ea;
-  --color-loss: #d93a3f; /* money down + field errors, always with ▼ and − */
+  --color-loss: #d93a3f; /* money down + errors, always with ▼ and − */
   --color-loss-tint: #fde8e8;
   --color-coach: #1f8fff;
   --color-coach-tint: #e4f1ff;
@@ -44,15 +46,15 @@
   --color-ink-pressed: #2a2d3a;
   --color-on-night-muted: #b4b7c5;
 
-  /* Type scale (size / line-height / tracking / weight) */
+  /* Type scale */
   --text-*: initial;
-  --text-display-xl: 96px;
-  --text-display-xl--line-height: 96px;
-  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-xl: 84px; /* site hero */
+  --text-display-xl--line-height: 84px;
+  --text-display-xl--letter-spacing: -0.04em;
   --text-display-xl--font-weight: 800;
   --text-display: 64px;
   --text-display--line-height: 68px;
-  --text-display--letter-spacing: -0.03em;
+  --text-display--letter-spacing: -0.035em;
   --text-display--font-weight: 800;
   --text-h1: 44px;
   --text-h1--line-height: 48px;
@@ -62,10 +64,10 @@
   --text-h2--line-height: 34px;
   --text-h2--letter-spacing: -0.015em;
   --text-h2--font-weight: 700;
-  --text-h3: 20px;
-  --text-h3--line-height: 26px;
+  --text-h3: 22px;
+  --text-h3--line-height: 28px;
   --text-h3--letter-spacing: -0.01em;
-  --text-h3--font-weight: 700;
+  --text-h3--font-weight: 800;
   --text-body-l: 18px;
   --text-body-l--line-height: 28px;
   --text-body: 16px;
@@ -78,34 +80,65 @@
   --text-caption--line-height: 18px;
   --text-money-xl: 56px;
   --text-money-xl--line-height: 60px;
-  --text-money-xl--letter-spacing: -0.025em;
+  --text-money-xl--letter-spacing: -0.03em;
+  --text-money-glass: 44px;
+  --text-money-glass--line-height: 48px;
+  --text-money-glass--letter-spacing: -0.03em;
 
   /* Radii */
   --radius-*: initial;
   --radius-chip: 8px;
-  --radius-input: 12px;
+  --radius-input: 14px;
   --radius-row: 16px;
-  --radius-toast: 20px;
+  --radius-tile: 18px;
+  --radius-card-accent: 24px;
   --radius-card: 28px;
+  --radius-panel: 32px;
+  --radius-phone: 44px;
+  --radius-phone-screen: 37px;
   --radius-pill: 999px;
 
   /* Spacing: 4px base (4, 8, 12, 16, 24, 32, 48, 64, 96 = 1, 2, 3, 4, 6, 8, 12, 16, 24) */
   --spacing: 4px;
   --container-page: 1440px; /* content = 1440 minus the side gutters */
 
-  /* Elevation */
+  /* Shadows: soft and layered, no hard offsets */
   --shadow-*: initial;
-  --shadow-lifted: 4px 4px 0 #0e1016;
-  --shadow-floating: 0 12px 32px rgba(14, 16, 22, 0.16), 0 0 0 1px rgba(14, 16, 22, 0.08);
-  --shadow-floating-night: 0 12px 32px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(14, 16, 22, 0.08);
+  --shadow-card: 0 1px 2px rgba(14, 16, 22, 0.06), 0 8px 24px rgba(14, 16, 22, 0.08);
+  --shadow-hover: 0 2px 4px rgba(14, 16, 22, 0.08), 0 18px 40px rgba(14, 16, 22, 0.14);
+  --shadow-float: 0 12px 32px rgba(14, 16, 22, 0.16), 0 0 0 1px rgba(14, 16, 22, 0.08);
+  --shadow-on-night: 0 1px 2px rgba(0, 0, 0, 0.2), 0 16px 40px rgba(0, 0, 0, 0.28);
+  --shadow-brand: 0 2px 4px rgba(52, 36, 214, 0.2), 0 24px 60px rgba(52, 36, 214, 0.35);
+  --shadow-device: 0 2px 4px rgba(14, 16, 22, 0.12), 0 24px 48px rgba(14, 16, 22, 0.22);
+  --shadow-glass: 0 1px 2px rgba(52, 36, 214, 0.08), 0 24px 60px rgba(52, 36, 214, 0.18);
 
   /* Motion */
-  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-*: initial;
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
 }
 
-/* Responsive section padding + side gutter: 48/20 phone, 64/40 tablet, 96/96 desktop. */
 :root {
+  /* Motion durations (tokens.md, Motion tokens) */
+  --dur-press: 120ms;
+  --dur-quick: 240ms;
+  --dur-base: 400ms;
+  --dur-text: 700ms;
+  --dur-count: 900ms;
+  --stagger: 60ms;
+  --rise: 24px;
+
+  /* Backgrounds */
+  --mesh-hero:
+    radial-gradient(circle at 82% 18%, #cbc3ff 0%, rgba(203, 195, 255, 0) 42%),
+    radial-gradient(circle at 96% 92%, #cde5ff 0%, rgba(205, 229, 255, 0) 40%),
+    radial-gradient(circle at 55% 110%, #e9e5ff 0%, rgba(233, 229, 255, 0) 45%), #ffffff;
+  --mesh-night:
+    radial-gradient(circle at 70% 20%, rgba(91, 75, 255, 0.55) 0%, transparent 45%),
+    radial-gradient(circle at 20% 90%, rgba(31, 143, 255, 0.35) 0%, transparent 45%), #151826;
+
+  /* Layout: section padding + side gutter, 48/20 phone, 64/40 tablet, 96/96 desktop */
   --section-y: 48px;
   --gutter: 20px;
   --nav-rest: 80%;
@@ -125,11 +158,19 @@
 }
 
 @theme inline {
-  /* next/font (app/fonts.ts) sets --font-display-face and --font-sans-face on <html>. */
+  /* next/font (app/fonts.ts) sets the three *-face variables on <html>. */
   --font-display: var(--font-display-face), system-ui, sans-serif;
   --font-sans: var(--font-sans-face), system-ui, sans-serif;
+  --font-num: var(--font-num-face), system-ui, sans-serif;
   --spacing-section: var(--section-y);
   --spacing-gutter: var(--gutter);
+}
+
+/* Every number: Manrope with tabular figures. */
+@utility num {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
 html {
@@ -138,15 +179,6 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
-  }
-}
-/* Reduced motion: everything becomes a 120ms fade-length change, no movement. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 120ms !important;
-    animation: none !important;
   }
 }
 
@@ -164,7 +196,7 @@ body {
 }
 
 @layer components {
-  /* Buttons: 48 tall pill, Inter 600 16/20. Five states: default, hover, pressed, focus, disabled. */
+  /* Buttons: pill, 48 tall, Figtree 600 16/20. States: default, hover, pressed, focus, disabled. */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -176,13 +208,17 @@ body {
     font: 600 16px/20px var(--font-sans);
     white-space: nowrap;
     transition:
-      background-color 120ms var(--ease-enter),
-      color 120ms var(--ease-enter),
-      border-color 120ms var(--ease-enter),
-      translate 240ms var(--ease-enter);
+      background-color var(--dur-press) var(--ease-settle),
+      color var(--dur-press) var(--ease-settle),
+      border-color var(--dur-press) var(--ease-settle),
+      scale var(--dur-press) var(--ease-settle),
+      translate var(--dur-quick) var(--ease-settle);
   }
   .btn:focus-visible {
     outline: none;
+  }
+  .btn:active:not(:disabled) {
+    scale: 0.98;
   }
   .btn-primary {
     background: var(--color-indigo);
@@ -246,33 +282,187 @@ body {
     cursor: not-allowed;
   }
 
-  /* Card: white island, 2px Ink border, no shadow; hover = Lifted. */
+  /* Cards: white, radius 28, soft shadow. Hover lifts 2px with a deeper shadow. */
   .card {
     background: var(--color-paper);
     color: var(--color-ink);
-    border: 2px solid var(--color-ink);
     border-radius: var(--radius-card);
-    transition: box-shadow 240ms var(--ease-enter);
+    box-shadow: var(--shadow-card);
+    transition:
+      box-shadow var(--dur-quick) var(--ease-settle),
+      translate var(--dur-quick) var(--ease-settle);
+  }
+  .card-night {
+    box-shadow: var(--shadow-on-night);
   }
   .card-hover:hover {
-    box-shadow: var(--shadow-lifted);
+    box-shadow: var(--shadow-hover);
+    translate: 0 -2px;
   }
 
-  /* Hero: straight grid lines + a soft glow under the cursor (set by HeroGlow). */
-  .hero-grid {
-    background-color: var(--color-paper);
-    background-image:
-      linear-gradient(var(--color-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
-    background-size: 48px 48px;
+  /* Glass: hero surfaces only (nav at rest, hero product card). */
+  .glass {
+    background: rgba(255, 255, 255, 0.58);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Hero: soft mesh + straight 56px grid; HeroGlow moves a soft glow under the cursor. */
+  .hero-bg {
+    background:
+      linear-gradient(rgba(75, 59, 245, 0.06) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(90deg, rgba(75, 59, 245, 0.06) 1px, transparent 1px) 0 0 / 56px 56px,
+      var(--mesh-hero);
   }
   .hero-glow {
-    background: radial-gradient(
-      480px circle at var(--mx, 50%) var(--my, 30%),
-      color-mix(in srgb, var(--color-indigo-tint) 90%, transparent),
-      transparent 70%
-    );
+    background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 30%), rgba(203, 195, 255, 0.45), transparent 70%);
     opacity: var(--glow, 0);
-    transition: opacity 240ms var(--ease-enter);
+    transition: opacity var(--dur-quick) var(--ease-settle);
+  }
+  .night-bg {
+    background: var(--mesh-night);
+  }
+
+  /* Accent icon tile: 56, radius 18, icon 26, in the job colour. Icons are masks so they take currentColor. */
+  .icon {
+    display: inline-block;
+    flex-shrink: 0;
+    background: currentColor;
+    mask: var(--icon) center / contain no-repeat;
+  }
+}
+
+/* ---------- Motion (tokens.md "Moments"). CSS only; JS just flips data attributes. ---------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--rise);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* 2. Hero: each line rises 24px inside a mask (700ms), 60ms stagger; sub-copy, CTA and glass card
+   follow from 600ms (400ms each), so the card has settled by 1000ms. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.22em; /* room for italic descenders */
+  margin-bottom: -0.16em; /* net +0.06em: opens the 1.0 leading a touch */
+}
+.rise-line {
+  display: block;
+  animation: rise var(--dur-text) var(--ease-settle) both;
+  animation-delay: calc(150ms + var(--i, 0) * var(--stagger));
+}
+.rise-late {
+  animation: rise var(--dur-base) var(--ease-settle) both;
+  animation-delay: var(--delay, 600ms);
+}
+
+/* 9. Coach card: rises when it enters view; question from 120ms; chips stagger 60ms; primary waits 600ms. */
+[data-reveal="out"] {
+  opacity: 0;
+}
+[data-reveal="in"] {
+  opacity: 1;
+  animation: rise var(--dur-base) var(--ease-settle) both;
+}
+[data-reveal="in"] .reveal-question {
+  animation: rise var(--dur-text) var(--ease-settle) 120ms both;
+}
+[data-reveal="in"] .reveal-chip {
+  animation: rise var(--dur-base) var(--ease-settle) both;
+  animation-delay: calc(240ms + var(--i, 0) * var(--stagger));
+}
+[data-reveal] .coach-wait {
+  background: var(--color-line);
+  color: var(--color-placeholder);
+}
+[data-reveal="in"] .coach-wait {
+  animation: coach-ready var(--dur-quick) var(--ease-settle) 600ms both;
+}
+@keyframes coach-ready {
+  to {
+    background: var(--color-indigo);
+    color: var(--color-paper);
+  }
+}
+
+/* 4. Waitlist success: the button widens across the pill (240ms, move), the pill tints and the tick
+   draws (280ms), the message rises (360ms, settle). The pill keeps its size. */
+.wl-widen {
+  animation: wl-widen var(--dur-quick) var(--ease-move) both;
+}
+@keyframes wl-widen {
+  from {
+    clip-path: inset(6px 6px 6px calc(100% - 176px) round 999px);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 999px);
+    opacity: 0;
+  }
+}
+.wl-tint {
+  animation: fade 280ms var(--ease-settle) 200ms both;
+}
+.wl-tick {
+  stroke-dasharray: 14;
+  animation: wl-tick 280ms var(--ease-settle) 240ms both;
+}
+@keyframes wl-tick {
+  from {
+    stroke-dashoffset: 14;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.wl-msg {
+  animation: rise 360ms var(--ease-settle) 320ms both;
+  --rise: 8px;
+}
+.msg-rise {
+  animation: rise 360ms var(--ease-settle) both;
+  --rise: 8px;
+}
+
+/* Reduced motion: everything becomes a 120ms opacity fade. No rises, no count-up, no magnet. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 120ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rise-line,
+  .rise-late,
+  [data-reveal="in"],
+  [data-reveal="in"] .reveal-question,
+  [data-reveal="in"] .reveal-chip,
+  .wl-tint,
+  .wl-msg,
+  .msg-rise {
+    animation: fade 120ms linear both !important;
+  }
+  .wl-widen {
+    display: none;
+  }
+  .wl-tick {
+    animation: none;
+  }
+  .card-hover:hover {
+    translate: none;
   }
 }

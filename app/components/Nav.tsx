@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
+import { Mark } from "./Brand";
 
 const links = [
   { href: "/#practice", label: "Practice" },
@@ -15,49 +16,55 @@ function subscribe(cb: () => void) {
   return () => window.removeEventListener("scroll", cb);
 }
 
-export function Wordmark() {
-  return (
-    <span className="font-display text-lg font-extrabold tracking-tight">
-      HLD <i className="font-semibold">Finance</i>
-    </span>
-  );
-}
-
-// Island nav: 80% wide at the top, 64% once scrolled; links fold into a menu on scroll.
+// Island nav. At rest: white, 80% wide, links showing. Scrolled: Ink, 64% wide, links fold into the menu.
+// Back to 80% only at scrollY = 0.
 export function Nav() {
   const scrolled = useSyncExternalStore(subscribe, () => window.scrollY > 0, () => false);
   const [open, setOpen] = useState(false);
-  const atTopWide = scrolled ? "" : "md:hidden"; // menu only needed on phones while at the top
+  const menuOnlyPhone = scrolled ? "" : "md:hidden"; // at rest, tablets+ show links instead of the menu
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-5">
       <nav
         aria-label="Main"
-        style={{ width: `max(${scrolled ? "var(--hld-nav-scrolled)" : "var(--hld-nav-rest)"}, min(100%, 22rem))` }}
-        className="relative rounded-pill border-2 border-ink bg-bg transition-[width] duration-300 ease-out"
+        style={{ width: `max(${scrolled ? "var(--nav-scrolled)" : "var(--nav-rest)"}, min(100%, 22rem))` }}
+        className={`relative rounded-pill shadow-floating transition-[width,background-color,height] duration-240 ease-enter ${
+          scrolled ? "bg-ink text-paper" : "bg-paper text-ink"
+        }`}
         onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
       >
-        <div className="flex h-14 items-center justify-between gap-3 pl-5 pr-2">
-          <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)}>
-            <Wordmark />
+        <div
+          className={`flex items-center justify-between gap-3 transition-[height,padding] duration-240 ease-enter ${
+            scrolled ? "h-14 pl-4.5 pr-1.5" : "h-16 pl-5 pr-2"
+          }`}
+        >
+          <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-pill">
+            <Mark size={scrolled ? 24 : 28} tone={scrolled ? "white" : "indigo"} />
+            <span className={`font-display font-extrabold tracking-[-0.03em] ${scrolled ? "text-[18px] leading-[22px]" : "text-h3"}`}>
+              HLD
+            </span>
           </Link>
 
-          <ul className={scrolled ? "hidden" : "hidden items-center gap-6 md:flex"}>
+          <ul className={scrolled ? "hidden" : "hidden items-center gap-7 md:flex"}>
             {links.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="font-medium text-ink-muted hover:text-ink">
+                <Link href={l.href} className="text-nav font-medium text-slate hover:text-ink">
                   {l.label}
                 </Link>
               </li>
             ))}
           </ul>
 
-          <div className="flex items-center gap-2">
-            <Link
-              href="/#waitlist"
-              className="rounded-pill bg-brand px-4 py-2 text-sm font-semibold text-on-brand transition-colors hover:bg-brand-hover"
-            >
-              Join waitlist
+          <div className="flex items-center gap-1.5">
+            <Link href="/#waitlist" className={`btn btn-primary ${scrolled ? "h-11 px-4.5" : "px-5"}`}>
+              {scrolled ? (
+                "Join"
+              ) : (
+                <>
+                  <span className="sm:hidden">Join</span>
+                  <span className="hidden sm:inline">Join the waitlist</span>
+                </>
+              )}
             </Link>
             <button
               type="button"
@@ -65,10 +72,12 @@ export function Nav() {
               aria-controls="nav-menu"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen(!open)}
-              className={`grid size-10 place-items-center rounded-pill hover:bg-surface ${atTopWide}`}
+              className={`grid size-11 place-items-center rounded-pill transition-colors duration-120 ${
+                scrolled ? "bg-night-raised text-paper hover:bg-ink-pressed" : "bg-mist text-ink hover:bg-line"
+              } ${menuOnlyPhone}`}
             >
-              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round">
+                {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M6 9h12M6 15h12" />}
               </svg>
             </button>
           </div>
@@ -77,14 +86,14 @@ export function Nav() {
         {open && (
           <ul
             id="nav-menu"
-            className={`absolute right-0 top-full mt-2 w-56 rounded-md border-2 border-ink bg-bg p-2 ${atTopWide}`}
+            className={`absolute right-0 top-full mt-2 w-56 rounded-row bg-paper p-2 text-ink shadow-floating ${menuOnlyPhone}`}
           >
             {links.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-sm px-3 py-2 font-medium hover:bg-surface"
+                  className="block rounded-chip px-3 py-2.5 text-nav font-medium hover:bg-mist"
                 >
                   {l.label}
                 </Link>

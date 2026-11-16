@@ -8,6 +8,7 @@ const links = [
   { href: "/#practice", label: "Practice" },
   { href: "/#leagues", label: "Leagues" },
   { href: "/#coach", label: "Coach" },
+  { href: "/#pricing", label: "Pricing" },
   { href: "/#faq", label: "FAQ" },
 ];
 
@@ -29,7 +30,7 @@ function subscribe(cb: () => void) {
 export function Nav() {
   const scrolled = useSyncExternalStore(subscribe, getShrunk, () => false);
   const [open, setOpen] = useState(false);
-  const menuOnlyPhone = scrolled ? "" : "md:hidden";
+  const menuOnlyPhone = scrolled ? "" : "desktop:hidden"; // links show inline from 1024px
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-5">
@@ -52,7 +53,7 @@ export function Nav() {
 
           <ul
             aria-hidden={scrolled || undefined}
-            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 transition-[opacity,visibility] duration-150 md:flex ${
+            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 transition-[opacity,visibility] duration-150 desktop:flex ${
               scrolled ? "invisible opacity-0" : "opacity-100"
             }`}
           >
@@ -71,8 +72,8 @@ export function Nav() {
                 "Join"
               ) : (
                 <>
-                  <span className="lg:hidden">Join</span>
-                  <span className="hidden lg:inline">Join the waitlist</span>
+                  <span className="xl:hidden">Join</span>
+                  <span className="hidden xl:inline">Join the waitlist</span>
                 </>
               )}
             </Link>

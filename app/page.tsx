@@ -1,9 +1,11 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Mark } from "./components/Brand";
+import { Wordmark } from "./components/Brand";
 import { change, money, tone, type Tone } from "./lib/money";
 import { CountUp } from "./components/CountUp";
 import { HeroGlow } from "./components/HeroGlow";
 import { Icon, type IconName } from "./components/Icon";
+import { Parallax } from "./components/Parallax";
+import { Pricing } from "./components/Pricing";
 import { Reveal } from "./components/Reveal";
 import { WaitlistForm } from "./components/WaitlistForm";
 
@@ -86,19 +88,17 @@ function ChangeChip({ pct, amount, small = false }: { pct: number; amount?: numb
   );
 }
 
-function Pill({ children, className }: { children: ReactNode; className: string }) {
-  return <span className={`inline-flex h-8 items-center rounded-pill px-3.5 text-label font-semibold ${className}`}>{children}</span>;
-}
-
 function Section({
   id,
   className = "",
+  center = false,
   title,
   lead,
   children,
 }: {
   id: string;
   className?: string;
+  center?: boolean;
   title: ReactNode;
   lead: string;
   children: ReactNode;
@@ -106,10 +106,10 @@ function Section({
   return (
     <section id={id} aria-labelledby={`${id}-title`} className={`overflow-clip py-section ${className}`}>
       <div className="mx-auto max-w-page px-gutter">
-        <h2 id={`${id}-title`} className="max-w-2xl font-display text-[34px] leading-[38px] font-extrabold tracking-[-0.025em] md:text-h1">
+        <h2 id={`${id}-title`} className={`max-w-2xl font-display text-[34px] leading-[38px] font-extrabold tracking-[-0.025em] md:text-h1 ${center ? "mx-auto text-center" : ""}`}>
           {title}
         </h2>
-        <p className={`mt-4 max-w-2xl text-body-l text-text-secondary`}>{lead}</p>
+        <p className={`mt-4 max-w-2xl text-body-l text-text-secondary ${center ? "mx-auto text-center" : ""}`}>{lead}</p>
         <div className="mt-12">{children}</div>
       </div>
     </section>
@@ -117,7 +117,7 @@ function Section({
 }
 
 // Phone mockup of the HLD Practice portfolio screen (SaaS Assets board). Illustration only.
-function PhoneMockup() {
+function PhoneMockup({ className = "" }: { className?: string }) {
   const holdings = [
     { t: "SHOP.TO", n: "Shopify", value: 1062, pct: 2.93 },
     { t: "RY.TO", n: "Royal Bank", value: 884.25, pct: -0.71 },
@@ -125,7 +125,7 @@ function PhoneMockup() {
   ];
   const tabs: [IconName, string][] = [["portfolio", "Portfolio"], ["trade", "Trade"], ["league", "League"], ["journal", "Journal"], ["profile", "Profile"]];
   return (
-    <figure className="halo mx-auto w-[236px] shrink-0">
+    <figure className={`w-[236px] shrink-0 ${className}`}>
       <figcaption className="sr-only">Example of the HLD Practice portfolio screen</figcaption>
       <div aria-hidden="true" className="h-[500px] rounded-phone border-[7px] border-ink bg-ink shadow-device">
         <div className="flex h-full flex-col overflow-hidden rounded-phone-screen bg-surface-raised">
@@ -139,11 +139,11 @@ function PhoneMockup() {
           </div>
           <div className="flex-1 px-4 pt-2">
             <div className="flex items-center justify-between">
-              <Mark size={22} />
+              <Wordmark cap={12} />
               <Icon name="alerts" size={14} />
             </div>
             <p className="mt-2 text-[9px] font-semibold text-text-secondary">Practice portfolio</p>
-            <p className="num text-[24px] leading-8 font-extrabold tracking-[-0.03em]">{money(10482.16)}</p>
+            <CountUp from={10000} to={10482.16} delay={1000} className="num block text-[24px] leading-8 font-extrabold tracking-[-0.03em]" />
             <ChangeChip small pct={4.82} amount={482.16} />
             <Sparkline id="fill-gain-phone" className="mt-2 h-12 w-full" />
             <div className="mt-2 flex justify-between rounded-pill bg-surface-sunken p-0.5 text-[8px] font-bold text-text-secondary">
@@ -184,13 +184,124 @@ function PhoneMockup() {
   );
 }
 
-// Coach card (Theme UI "Coach card"): the page's one featured card, so it gets the Edge ring + a night Halo.
+// Hero floating cards (SaaS Assets "Landing hero"): small, illustrative, at depth around the phone.
+function TrustRow() {
+  const items: [IconName, string][] = [["wallet", "Free"], ["gain", "Fake money, real skills"], ["practice-tfsa", "No ads"], ["profile", "Made for Canada"]];
+  return (
+    <ul className="flex flex-wrap justify-center gap-2 tablet:gap-x-6 tablet:gap-y-2">
+      {items.map(([icon, label]) => (
+        <li
+          key={label}
+          className="inline-flex h-9 items-center gap-2 rounded-pill bg-surface-raised/70 px-3 text-label font-semibold tablet:h-auto tablet:bg-transparent tablet:px-0"
+        >
+          <Icon name={icon} size={16} className="text-text-link" />
+          {label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function LeagueChip() {
+  return (
+    <div className="card flex items-center gap-3 rounded-card py-3 pl-3 pr-5 text-left">
+      <span className="grid size-12 place-items-center rounded-tile bg-[image:var(--grad-ember)] text-paper">
+        <Icon name="league" size={24} />
+      </span>
+      <span>
+        <span className="num block text-[22px] leading-6 font-extrabold">#2</span>
+        <span className="block text-caption text-text-secondary">Friday league</span>
+      </span>
+    </div>
+  );
+}
+
+function HeroStage() {
+  return (
+    <>
+      {/* Phone width: the portfolio card with the league chip tucked under its corner (board "phone width"). */}
+      <div className="relative mx-auto w-full max-w-[400px] pb-10 tablet:hidden">
+        <figure className="halo">
+          <div className="glass p-5 text-left">
+            <figcaption className="flex items-center gap-2 text-label font-semibold text-text-secondary">
+              <span className="size-1.5 rounded-pill bg-indigo-300" />
+              Practice portfolio
+            </figcaption>
+            <CountUp from={10000} to={10482.16} delay={1000} className="num mt-1 block text-[34px] leading-10 font-extrabold tracking-[-0.03em]" />
+            <span className="mt-2 inline-block">
+              <ChangeChip pct={4.82} />
+            </span>
+          </div>
+        </figure>
+        <div className="absolute bottom-0 right-0">
+          <LeagueChip />
+        </div>
+      </div>
+
+      {/* From 600px: the phone is the centre object; cards float at depth on Halo glows (Parallax). */}
+      <Parallax className="relative mx-auto hidden h-[400px] w-full max-w-[1080px] tablet:block desktop:h-[480px]">
+        <div className="depth absolute inset-x-0 top-0 flex justify-center" style={v({ "--d": 0.3 })}>
+          <PhoneMockup className="halo text-left desktop:[zoom:1.3]" />
+        </div>
+        <div className="depth halo absolute left-0 top-4 desktop:left-[4%] desktop:top-10" style={v({ "--d": 1 })}>
+          <figure className="card w-[230px] p-4 text-left desktop:w-[340px] desktop:p-6">
+            <figcaption className="flex items-center gap-2.5 text-caption font-semibold desktop:text-label">
+              <span className="grid size-8 place-items-center rounded-pill bg-coach-500 text-paper">
+                <Icon name="coach" size={16} />
+              </span>
+              Coach · before you buy
+            </figcaption>
+            <p className="mt-3 font-display text-[18px] leading-6 font-extrabold tracking-[-0.015em] desktop:text-[22px] desktop:leading-7">
+              What&apos;s your plan? <i className="text-coach-500">How long will you hold?</i>
+            </p>
+            <div aria-hidden="true" className="mt-3 flex flex-wrap gap-1.5">
+              {["< 1 month", "1–5 years", "5+ years"].map((a, i) => (
+                <span
+                  key={a}
+                  className={`inline-flex h-7 items-center rounded-pill border px-2.5 text-caption font-semibold desktop:h-8 desktop:px-3 ${
+                    i === 1 ? "border-coach-500 bg-coach-500 text-paper" : "border-border-strong"
+                  }`}
+                >
+                  {a}
+                </span>
+              ))}
+            </div>
+          </figure>
+        </div>
+        <div className="depth halo absolute left-6 top-[236px] desktop:left-[13%] desktop:top-[290px]" style={v({ "--d": 1.4 })}>
+          <figure className="card flex w-[200px] gap-3 rounded-card p-4 text-left desktop:w-[290px] desktop:p-5">
+            <span aria-hidden="true" className="w-1 shrink-0 rounded-[4px] bg-journal-500" />
+            <span>
+              <figcaption className="text-caption text-text-secondary">Journal · Nov 12</figcaption>
+              <span className="mt-1 block font-display text-[16px] leading-[22px] font-bold desktop:text-[19px] desktop:leading-6">
+                <i>Why I bought:</i> holding 2 years.
+              </span>
+            </span>
+          </figure>
+        </div>
+        <div className="depth halo absolute right-0 top-6 desktop:right-[6%] desktop:top-12" style={v({ "--d": 1.2 })}>
+          <LeagueChip />
+        </div>
+        <div className="depth halo absolute right-4 top-[150px] desktop:right-[13%] desktop:top-[200px]" style={v({ "--d": 0.8 })}>
+          <figure className="card rounded-card p-4 text-left">
+            <figcaption className="text-caption text-text-secondary">SHOP.TO · held 30 days</figcaption>
+            <span className="mt-2 block">
+              <ChangeChip pct={2.93} />
+            </span>
+          </figure>
+        </div>
+      </Parallax>
+    </>
+  );
+}
+
+// Coach card (Theme UI "Coach card") on a night Halo. (The page's one Edge ring is the Pro pricing card.)
 // Reveals on scroll; the primary button waits 600ms. Illustration only.
 function CoachCard() {
   const answers = ["Under a month", "1 to 5 years", "5+ years"];
   return (
     <Reveal className="halo-night w-full max-w-[480px]">
-      <figure className="scheme-page card edge p-6 text-left sm:p-8">
+      <figure className="scheme-page card p-6 text-left sm:p-8">
         <figcaption className="sr-only">Example of a coach check-in before a practice trade</figcaption>
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-pill bg-coach-500 font-display text-[20px] font-extrabold text-paper">
@@ -233,15 +344,10 @@ export default function Home() {
   return (
     <>
       <HeroGlow>
-        <div className="mx-auto flex max-w-page flex-col items-center px-gutter pb-20 pt-32 text-center sm:pt-40">
-          <div className="rise-line flex flex-wrap justify-center gap-2" style={v({ "--i": 0 })}>
-            <Pill className="bg-accent-primary-subtle text-text-link">Free</Pill>
-            <Pill className="bg-state-gain-bg text-state-gain-text">Fake money, real skills</Pill>
-            <Pill className="bg-surface-raised text-text-primary shadow-card">No ads</Pill>
-          </div>
+        <div className="mx-auto flex max-w-page flex-col items-center px-gutter pb-12 pt-32 text-center tablet:pb-0 tablet:pt-40">
           <h1
             id="hero-title"
-            className="mt-6 font-display text-[54px] leading-[56px] font-extrabold tracking-[-0.04em] sm:text-display lg:text-display"
+            className="font-display text-[54px] leading-[56px] font-extrabold tracking-[-0.04em] tablet:text-display"
           >
             <span className="line-mask">
               <span className="rise-line" style={v({ "--i": 1 })}>
@@ -255,23 +361,17 @@ export default function Home() {
             </span>
           </h1>
           <p className="rise-late mt-6 max-w-xl text-body-l text-text-secondary" style={v({ "--delay": "600ms" })}>
-            Practise investing with {START} of fake money. Real TSX and US stocks, free leagues with friends, and a coach
-            that asks before every trade.
+            Practise investing with {START} of fake money. Real TSX and US stocks, free leagues, and a coach that asks
+            before every trade.
           </p>
           <div className="rise-late mt-8 flex w-full justify-center" style={v({ "--delay": "640ms" })}>
             <WaitlistForm />
           </div>
-
-          <div className="halo rise-late mt-10 w-full max-w-[560px]" style={v({ "--delay": "600ms" })}>
-            <figure className="glass p-6 text-left sm:p-7">
-              <figcaption className="sr-only">Example practice portfolio</figcaption>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-label font-semibold text-text-secondary">Practice portfolio</span>
-                <ChangeChip pct={4.82} />
-              </div>
-              <CountUp from={10000} to={10482.16} delay={1000} className="num mt-2 block text-[36px] leading-10 font-extrabold tracking-[-0.03em] sm:text-number-xl" />
-              <Sparkline id="fill-gain-hero" className="mt-5 h-24 w-full" />
-            </figure>
+          <div className="rise-late mt-4" style={v({ "--delay": "680ms" })}>
+            <TrustRow />
+          </div>
+          <div className="rise-late mt-12 w-full" style={v({ "--delay": "600ms" })}>
+            <HeroStage />
           </div>
         </div>
       </HeroGlow>
@@ -286,22 +386,19 @@ export default function Home() {
         }
         lead="A free paper-trading app for learning how investing works, with fake money and real (delayed) market prices."
       >
-        <div className="grid gap-10 lg:grid-cols-[236px_minmax(0,1fr)] lg:items-start xl:gap-16">
-          <PhoneMockup />
-          <ul className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
-            {features.map((f) => (
-              <li key={f.title} className="card card-hover flex flex-col gap-5 p-7">
-                <span className={`grid size-14 place-items-center rounded-tile ${f.tile}`}>
-                  <Icon name={f.icon} size={26} />
-                </span>
-                <div>
-                  <h3 className="font-display text-h3">{f.title}</h3>
-                  <p className="mt-2 text-text-secondary">{f.body}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="grid grid-cols-1 gap-4 tablet:grid-cols-2 desktop:grid-cols-3">
+          {features.map((f) => (
+            <li key={f.title} className="card card-hover flex flex-col gap-5 p-7">
+              <span className={`grid size-14 place-items-center rounded-tile ${f.tile}`}>
+                <Icon name={f.icon} size={26} />
+              </span>
+              <div>
+                <h3 className="font-display text-h3">{f.title}</h3>
+                <p className="mt-2 text-text-secondary">{f.body}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </Section>
 
       <Section
@@ -394,6 +491,16 @@ export default function Home() {
             <CoachCard />
           </div>
         </div>
+      </Section>
+
+      <Section
+        id="pricing"
+        className="bg-surface-sunken"
+        center
+        title="Free, and Pro later"
+        lead="Practice is free for good. Pro is a planned add-on for people who make it a habit."
+      >
+        <Pricing />
       </Section>
 
       <Section id="faq" className="bg-surface-page" title="Questions" lead="The short answers.">

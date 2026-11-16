@@ -50,11 +50,13 @@ export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
       <label htmlFor={`${id}-email`} className="sr-only">
         Email address
       </label>
+      {/* Phone: field and button stack (board "phone width"). From 600px: one pill with the button inside.
+          Either way the focus / error ring wraps the whole rounded box. */}
       <div
-        className={`${PILL} gap-2 bg-surface-raised pl-5.5 pr-1.5 transition-[border-color,box-shadow] duration-120 ${
+        className={`flex flex-col gap-3 tablet:h-15 tablet:flex-row tablet:items-center tablet:gap-2 tablet:rounded-pill tablet:border-2 tablet:bg-surface-raised tablet:pl-5.5 tablet:pr-1.5 tablet:transition-[border-color,box-shadow] tablet:duration-120 ${
           error
-            ? "border-loss-500 shadow-[0_0_0_3px_var(--color-state-loss-bg)]"
-            : "border-text-primary focus-within:border-accent-primary focus-within:shadow-[0_0_0_3px_var(--color-indigo-100)]"
+            ? "tablet:border-loss-500 tablet:shadow-[0_0_0_3px_var(--color-state-loss-bg)]"
+            : "tablet:border-text-primary tablet:focus-within:border-accent-primary tablet:focus-within:shadow-[0_0_0_3px_var(--color-indigo-100)]"
         }`}
       >
         <input
@@ -68,9 +70,13 @@ export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
           aria-invalid={error ? true : undefined}
           aria-describedby={`${id}-msg`}
           onChange={() => clientError && setClientError(null)}
-          className="h-full min-w-0 flex-1 bg-transparent text-body text-text-primary outline-none placeholder:text-text-muted"
+          className={`h-15 min-w-0 rounded-pill border-2 bg-surface-raised px-5.5 text-body text-text-primary outline-none transition-[border-color,box-shadow] duration-120 placeholder:text-text-muted tablet:h-full tablet:flex-1 tablet:rounded-none tablet:border-0 tablet:bg-transparent tablet:px-0 tablet:shadow-none ${
+            error
+              ? "border-loss-500 shadow-[0_0_0_3px_var(--color-state-loss-bg)]"
+              : "border-text-primary focus:border-accent-primary focus:shadow-[0_0_0_3px_var(--color-indigo-100)]"
+          }`}
         />
-        <button type="submit" disabled={pending} className="btn btn-primary h-11 px-5">
+        <button type="submit" disabled={pending} className="btn btn-primary h-14 w-full tablet:h-11 tablet:w-auto tablet:px-5">
           {pending ? "Joining…" : "Get early access"}
         </button>
       </div>

@@ -538,6 +538,14 @@ main {
     border-color: var(--color-neutral-700);
     color: var(--color-paper);
   }
+  /* Ink: the Free plan's solid CTA (Patterns 10.7). Ink on light, near-white on dark. */
+  .btn-ink {
+    background: var(--color-text-primary);
+    color: var(--color-text-inverse);
+  }
+  .btn-ink:hover {
+    background: color-mix(in srgb, var(--color-text-primary) 84%, var(--color-surface-page));
+  }
   .btn-ghost {
     padding: 0 18px;
     color: var(--color-text-link);
@@ -787,6 +795,13 @@ main {
   }
 }
 
+/* Hero parallax (Parallax.tsx): each floating layer moves by its --d weight. Never more than ~14px
+   sideways; scroll lifts the near layers a little faster than the phone. */
+.depth {
+  translate: calc(var(--px, 0) * var(--d, 1) * 14px) calc(var(--py, 0) * var(--d, 1) * 10px - var(--sy, 0) * var(--d, 1) * 0.06px);
+  transition: translate var(--dur-base) var(--ease-settle);
+}
+
 /* Reduced motion: everything becomes a 120ms opacity fade. No rises, no count-up, no magnet. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -814,6 +829,9 @@ main {
     animation: none;
   }
   .card-hover:hover {
+    translate: none;
+  }
+  .depth {
     translate: none;
   }
 }

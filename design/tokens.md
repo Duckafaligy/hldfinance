@@ -489,3 +489,26 @@ Night: `linear-gradient(135deg, #262A40 0%, #0E1016 100%)` plus a top-light over
 ### Gradient text rule
 - **Allowed:** one italic word in a headline of 40px or more, using --grad-tide: `background-image: var(--grad-tide); -webkit-background-clip: text; background-clip: text; color: transparent`.
 - **Never:** numbers, prices, percentages, body text, buttons, nav, the logo, gain/loss.
+
+## 9. Store badges and pricing (added)
+**Official badges** are in `assets/vendor/`, unaltered:
+- `apple-app-store-black-en-us.svg`, from developer.apple.com;
+- `google-play-en-us.png`, from play.google.com/intl/en_us/badges. It has built-in padding; the visible badge is about 67% of the image height.
+
+Badge rules:
+- Show both at the same visible height (48 px on the web, 40 px minimum).
+- Clear space of at least a quarter of the badge height around each.
+- Never recolour them or change their text.
+- "Coming soon" sits as a separate caption outside the badges.
+- Before launch, use them on the live site only with "Coming soon". After launch, they must link to the real store listings.
+- Our own badge `Badge/Waitlist` ("Join the waitlist at hldfinance.ca") is the live call to action.
+
+**Pricing card master** (Theme UI · Patterns 10.7):
+- `Segmented/Billing/Monthly`: Monthly is selected; Yearly carries a "Planned" tag.
+- `PricingCard/Free`: white card, radius 28, padding 36, elevation-1. Ink CTA "Join the waitlist".
+- `PricingCard/Pro/Featured`: white inside a 2 px Edge gradient ring (radius 30) with a Halo glow behind. Indigo CTA "Get notified".
+- Shared:
+  - price: Number style (Manrope 800 56/60 tnum) + "CAD / month";
+  - 6 aligned feature rows, 30 px tall, each with a 20 px check (Pro's first row is "Everything in Free, plus…" with a plus);
+  - equal card heights.
+- Footnote: "Pro is planned; price and features may change. Practice stays free."

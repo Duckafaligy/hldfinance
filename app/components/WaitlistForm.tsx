@@ -27,10 +27,10 @@ export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
   if (state.status === "ok") {
     return (
       <div role="status" className="w-full max-w-[460px] text-left">
-        <div className={`${PILL} overflow-hidden border-indigo bg-paper`}>
-          <span aria-hidden="true" className="wl-tint absolute inset-0 bg-indigo-tint" />
-          <span aria-hidden="true" className="wl-widen absolute inset-0 bg-indigo" />
-          <p className="relative flex items-center gap-3 px-5.5 font-bold text-indigo-pressed">
+        <div className={`${PILL} overflow-hidden border-accent-primary bg-surface-raised`}>
+          <span aria-hidden="true" className="wl-tint absolute inset-0 bg-accent-primary-subtle" />
+          <span aria-hidden="true" className="wl-widen absolute inset-0 bg-accent-primary" />
+          <p className="relative flex items-center gap-3 px-5.5 font-bold text-indigo-700">
             <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5 shrink-0">
               <circle cx="10" cy="10" r="10" fill="#4B3BF5" />
               <path className="wl-tick" d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -51,10 +51,10 @@ export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
         Email address
       </label>
       <div
-        className={`${PILL} gap-2 bg-paper pl-5.5 pr-1.5 transition-[border-color,box-shadow] duration-120 ${
+        className={`${PILL} gap-2 bg-surface-raised pl-5.5 pr-1.5 transition-[border-color,box-shadow] duration-120 ${
           error
-            ? "border-loss shadow-[0_0_0_3px_var(--color-loss-tint)]"
-            : "border-ink focus-within:border-indigo focus-within:shadow-[0_0_0_3px_var(--color-indigo-tint-2)]"
+            ? "border-loss-500 shadow-[0_0_0_3px_var(--color-state-loss-bg)]"
+            : "border-text-primary focus-within:border-accent-primary focus-within:shadow-[0_0_0_3px_var(--color-indigo-100)]"
         }`}
       >
         <input
@@ -68,7 +68,7 @@ export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
           aria-invalid={error ? true : undefined}
           aria-describedby={`${id}-msg`}
           onChange={() => clientError && setClientError(null)}
-          className="h-full min-w-0 flex-1 bg-transparent text-body text-ink outline-none placeholder:text-placeholder"
+          className="h-full min-w-0 flex-1 bg-transparent text-body text-text-primary outline-none placeholder:text-text-muted"
         />
         <button type="submit" disabled={pending} className="btn btn-primary h-11 px-5">
           {pending ? "Joining…" : "Get early access"}
@@ -76,13 +76,13 @@ export function WaitlistForm({ onBrand = false }: { onBrand?: boolean }) {
       </div>
       <p id={`${id}-msg`} aria-live="polite" className="mt-3 min-h-[18px] px-1 text-caption">
         {error ? (
-          <span key={error} className={`msg-rise block font-medium ${onBrand ? "font-semibold text-paper" : "text-loss"}`}>
+          <span key={error} className={`msg-rise block font-medium ${onBrand ? "font-semibold text-paper" : "text-state-loss-text"}`}>
             ✕ {error}
           </span>
         ) : notice ? (
-          <span className={`msg-rise block font-medium ${onBrand ? "text-paper" : "text-ink"}`}>{notice}</span>
+          <span className={`msg-rise block font-medium ${onBrand ? "text-paper" : "text-text-primary"}`}>{notice}</span>
         ) : (
-          <span className={onBrand ? "text-indigo-tint" : "text-slate"}>Free. No card. We only email when HLD Practice opens. No ads, and we never sell your data.</span>
+          <span className={onBrand ? "text-indigo-100" : "text-text-secondary"}>Free. No card. We only email when HLD Practice opens. No ads, and we never sell your data.</span>
         )}
       </p>
     </form>

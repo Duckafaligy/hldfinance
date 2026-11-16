@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
-import { Lockup } from "./Brand";
+import { Wordmark } from "./Brand";
 
 const links = [
   { href: "/#practice", label: "Practice" },
@@ -37,7 +37,7 @@ export function Nav() {
         aria-label="Main"
         style={{ width: `max(${scrolled ? "var(--nav-scrolled)" : "var(--nav-rest)"}, min(100%, 22rem))` }}
         className={`relative rounded-pill shadow-float transition-[width,background-color] duration-400 ease-move ${
-          scrolled ? "bg-ink text-paper" : "bg-paper/70 text-ink backdrop-blur-xl"
+          scrolled ? "bg-ink text-paper" : "bg-surface-raised/70 text-text-primary backdrop-blur-xl"
         }`}
         onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
       >
@@ -46,8 +46,8 @@ export function Nav() {
             scrolled ? "h-14 pl-4.5 pr-1.5" : "h-16 pl-5 pr-2"
           }`}
         >
-          <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)} className="rounded-pill">
-            <Lockup cap={scrolled ? 17 : 18} reveal />
+          <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)} className="inline-flex min-h-11 items-center rounded-chip">
+            <Wordmark cap={scrolled ? 17 : 20} reveal />
           </Link>
 
           <ul
@@ -58,7 +58,7 @@ export function Nav() {
           >
             {links.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} tabIndex={scrolled ? -1 : undefined} className="text-nav font-medium text-slate hover:text-ink">
+                <Link href={l.href} tabIndex={scrolled ? -1 : undefined} className="inline-flex min-h-11 items-center text-label font-medium text-text-secondary hover:text-text-primary">
                   {l.label}
                 </Link>
               </li>
@@ -83,7 +83,7 @@ export function Nav() {
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen(!open)}
               className={`grid size-11 place-items-center rounded-pill transition-colors duration-120 ${
-                scrolled ? "bg-night-raised text-paper hover:bg-ink-pressed" : "bg-mist text-ink hover:bg-line"
+                scrolled ? "bg-neutral-700 text-paper hover:bg-neutral-600" : "bg-surface-sunken text-text-primary hover:bg-border-subtle"
               } ${menuOnlyPhone}`}
             >
               <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round">
@@ -96,14 +96,14 @@ export function Nav() {
         {open && (
           <ul
             id="nav-menu"
-            className={`msg-rise absolute right-0 top-full mt-2 w-56 rounded-row bg-paper p-2 text-ink shadow-float ${menuOnlyPhone}`}
+            className={`msg-rise absolute right-0 top-full mt-2 w-56 rounded-row bg-surface-overlay p-2 text-text-primary shadow-float ${menuOnlyPhone}`}
           >
             {links.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-chip px-3 py-2.5 text-nav font-medium hover:bg-mist"
+                  className="flex min-h-11 items-center rounded-chip px-3 text-label font-medium hover:bg-surface-sunken"
                 >
                   {l.label}
                 </Link>

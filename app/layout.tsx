@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "./components/Brand";
+import { money } from "./lib/money";
 import { Magnetic } from "./components/Magnetic";
 import { Nav } from "./components/Nav";
 import { fontVariables } from "./fonts";
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hldfinance.ca"),
   title: "HLD Finance: Think before you buy.",
   description:
-    "HLD Practice: trade TSX and US stocks with $10,000 in fake money, join free leagues, and meet a coach that asks questions before every trade. Join the waitlist.",
+    `HLD Practice: trade TSX and US stocks with ${money(10000, { whole: true })} in fake money, join free leagues, and meet a coach that asks questions before every trade. Join the waitlist.`,
   openGraph: { siteName: "HLD Finance", type: "website", locale: "en_CA" },
   twitter: { card: "summary_large_image" },
 };
@@ -49,24 +50,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
 
-        <footer className="bg-aurora text-paper">
+        <footer className="scheme-dark bg-aurora">
           <div className="mx-auto grid max-w-page gap-12 px-gutter py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
               <span role="img" aria-label="HLD Finance" className="inline-flex">
                 <Wordmark cap={24} />
               </span>
-              <p className="mt-4 max-w-xs text-on-night-muted">
+              <p className="mt-4 max-w-xs text-text-secondary">
                 Think before you buy. A Canadian money app that starts with free practice trading.
               </p>
-              <p className="mt-6 text-label text-on-night-muted">No ads. No per-trade fees. We never sell your data.</p>
+              <p className="mt-6 text-label text-text-secondary">No ads. No per-trade fees. We never sell your data.</p>
             </div>
             {footerCols.map((col) => (
               <div key={col.title}>
                 <h2 className="text-label font-semibold">{col.title}</h2>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-2">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-on-night-muted hover:text-paper">
+                      <Link href={l.href} className="inline-flex min-h-11 items-center text-text-secondary hover:text-text-primary">
                         {l.label}
                       </Link>
                     </li>
@@ -75,8 +76,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </div>
             ))}
           </div>
-          <div className="border-t border-night-raised">
-            <p className="mx-auto max-w-page px-gutter py-6 text-caption text-on-night-muted">
+          <div className="border-t border-border-subtle">
+            <p className="mx-auto max-w-page px-gutter py-6 text-caption text-text-secondary">
               © 2026 HLD Finance. HLD Practice uses fake money only. Nothing on this site is financial advice.
             </p>
           </div>

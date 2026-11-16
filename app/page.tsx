@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Mark } from "./components/Brand";
+import { change, money, tone, type Tone } from "./lib/money";
 import { CountUp } from "./components/CountUp";
 import { HeroGlow } from "./components/HeroGlow";
 import { Icon, type IconName } from "./components/Icon";
@@ -7,28 +8,41 @@ import { Reveal } from "./components/Reveal";
 import { WaitlistForm } from "./components/WaitlistForm";
 
 const v = (vars: Record<string, string | number>) => vars as CSSProperties;
+const START = money(10000, { whole: true }); // "$10,000"
+
+// Change text colour: the state tokens' 600 step (AA on white and tints), never colour alone.
+const toneText: Record<Tone, string> = {
+  gain: "text-state-gain-text",
+  loss: "text-state-loss-text",
+  flat: "text-state-neutral-text",
+};
+const toneChip: Record<Tone, string> = {
+  gain: "bg-state-gain-bg text-state-gain-text",
+  loss: "bg-state-loss-bg text-state-loss-text",
+  flat: "bg-state-neutral-bg text-state-neutral-text",
+};
 
 // Each feature gets the tile of its job colour (tokens.md, Icon set).
 const features: { title: string; body: string; icon: IconName; tile: string }[] = [
-  { title: "$10,000 in fake CAD", body: "Start with a practice balance. No deposits, no real money, nothing to lose.", icon: "wallet", tile: "bg-indigo text-paper" },
-  { title: "TSX and US stocks", body: "Search Canadian and US stocks and ETFs with delayed quotes, the same names you'd see at a real broker.", icon: "trade", tile: "bg-ink text-paper" },
-  { title: "Free leagues", body: "Make a league with friends, share an invite link, and see who manages their practice money best.", icon: "league", tile: "bg-league-tint text-league" },
-  { title: "Coach questions", body: "Before each trade, a few quick questions: what's your plan, how long will you hold, what would make you sell?", icon: "coach", tile: "bg-coach-tint text-coach" },
-  { title: "Trade journal", body: "Every answer is saved with the trade, so you can look back at what you were thinking, not just what happened.", icon: "journal", tile: "bg-journal-tint text-journal" },
-  { title: "Practice TFSA", body: "Learn how TFSA contribution room works by trading inside a practice TFSA with a real room limit.", icon: "practice-tfsa", tile: "bg-indigo-tint text-indigo" },
+  { title: `${START} in fake CAD`, body: "Start with a practice balance. No deposits, no real money, nothing to lose.", icon: "wallet", tile: "bg-accent-primary text-paper" },
+  { title: "TSX and US stocks", body: "Search Canadian and US stocks and ETFs with delayed quotes, the same names you'd see at a real broker.", icon: "trade", tile: "bg-text-primary text-text-inverse" },
+  { title: "Free leagues", body: "Make a league with friends, share an invite link, and see who manages their practice money best.", icon: "league", tile: "bg-league-50 text-league-500" },
+  { title: "Coach questions", body: "Before each trade, a few quick questions: what's your plan, how long will you hold, what would make you sell?", icon: "coach", tile: "bg-coach-50 text-coach-500" },
+  { title: "Trade journal", body: "Every answer is saved with the trade, so you can look back at what you were thinking, not just what happened.", icon: "journal", tile: "bg-journal-50 text-journal-500" },
+  { title: "Practice TFSA", body: "Learn how TFSA contribution room works by trading inside a practice TFSA with a real room limit.", icon: "practice-tfsa", tile: "bg-accent-primary-subtle text-text-link" },
 ];
 
 const leagueSteps = [
   { title: "Start or join a league", body: "Create one in a few taps, or join with an invite link from a friend." },
-  { title: "Everyone gets the same start", body: "Each player trades their own $10,000 in practice money." },
+  { title: "Everyone gets the same start", body: `Each player trades their own ${START} in practice money.` },
   { title: "Climb the leaderboard", body: "Rankings use % return over the week or the month, so a fair start stays fair." },
   { title: "Free, for bragging rights", body: "No entry fees and no cash prizes. It's practice, and it stays that way." },
 ];
 
 const leaderboard = [
-  { rank: 1, initials: "MK", name: "maya.k", change: "▲ +9.84%", up: true },
-  { rank: 2, initials: "You", name: "you · 3-wk streak", change: "▲ +4.82%", up: true, you: true },
-  { rank: 3, initials: "DR", name: "dev.r", change: "▼ −0.62%", up: false },
+  { rank: 1, initials: "MK", name: "maya.k", pct: 9.84 },
+  { rank: 2, initials: "You", name: "you · 3-wk streak", pct: 4.82, you: true },
+  { rank: 3, initials: "DR", name: "dev.r", pct: -0.62 },
 ];
 
 const faqs = [
@@ -63,10 +77,11 @@ function Sparkline({ id, className = "" }: { id: string; className?: string }) {
   );
 }
 
-function GainChip({ children, small = false }: { children: ReactNode; small?: boolean }) {
+// Change chip (Patterns 10.1): arrow + sign + colour together, from the money helper.
+function ChangeChip({ pct, amount, small = false }: { pct: number; amount?: number; small?: boolean }) {
   return (
-    <span className={`num inline-flex items-center rounded-pill bg-gain-tint font-extrabold text-gain ${small ? "h-5 px-1.5 text-[9px]" : "h-8 px-3 text-label"}`}>
-      {children}
+    <span className={`num inline-flex items-center rounded-pill font-extrabold ${toneChip[tone(pct)]} ${small ? "h-5 px-1.5 text-[9px]" : "h-8 px-3 text-label"}`}>
+      {change({ pct, amount })}
     </span>
   );
 }
@@ -78,14 +93,12 @@ function Pill({ children, className }: { children: ReactNode; className: string 
 function Section({
   id,
   className = "",
-  dark = false,
   title,
   lead,
   children,
 }: {
   id: string;
   className?: string;
-  dark?: boolean;
   title: ReactNode;
   lead: string;
   children: ReactNode;
@@ -96,7 +109,7 @@ function Section({
         <h2 id={`${id}-title`} className="max-w-2xl font-display text-[34px] leading-[38px] font-extrabold tracking-[-0.025em] md:text-h1">
           {title}
         </h2>
-        <p className={`mt-4 max-w-2xl text-body-l ${dark ? "text-on-night-muted" : "text-slate"}`}>{lead}</p>
+        <p className={`mt-4 max-w-2xl text-body-l text-text-secondary`}>{lead}</p>
         <div className="mt-12">{children}</div>
       </div>
     </section>
@@ -106,55 +119,60 @@ function Section({
 // Phone mockup of the HLD Practice portfolio screen (SaaS Assets board). Illustration only.
 function PhoneMockup() {
   const holdings = [
-    { t: "SHOP.TO", n: "Shopify", p: "$1,062.00", c: "▲ +2.93%", up: true },
-    { t: "RY.TO", n: "Royal Bank", p: "$884.25", c: "▼ −0.71%", up: false },
-    { t: "AAPL", n: "Apple", p: "$694.56", c: "▲ +1.11%", up: true },
+    { t: "SHOP.TO", n: "Shopify", value: 1062, pct: 2.93 },
+    { t: "RY.TO", n: "Royal Bank", value: 884.25, pct: -0.71 },
+    { t: "AAPL", n: "Apple", value: 694.56, pct: 1.11 },
   ];
   const tabs: [IconName, string][] = [["portfolio", "Portfolio"], ["trade", "Trade"], ["league", "League"], ["journal", "Journal"], ["profile", "Profile"]];
   return (
     <figure className="halo mx-auto w-[236px] shrink-0">
       <figcaption className="sr-only">Example of the HLD Practice portfolio screen</figcaption>
       <div aria-hidden="true" className="h-[500px] rounded-phone border-[7px] border-ink bg-ink shadow-device">
-        <div className="flex h-full flex-col overflow-hidden rounded-phone-screen bg-paper">
+        <div className="flex h-full flex-col overflow-hidden rounded-phone-screen bg-surface-raised">
           <div className="num flex h-[30px] shrink-0 items-center justify-between px-5 text-[11px] font-bold">
-            9:41 <span className="h-2.5 w-5 rounded-[3px] border-[1.5px] border-ink" />
+            9:41 <span className="h-2.5 w-5 rounded-[3px] border-[1.5px] border-text-primary" />
           </div>
-          <div className="flex-1 px-4">
+          {/* Practice indicator (Patterns 10.6): same place on every Practice screen. */}
+          <div className="flex h-5 shrink-0 items-center justify-center gap-1.5 bg-night text-[8px] font-bold text-paper">
+            <span className="size-1 rounded-pill bg-indigo-300" />
+            Practice · fake money
+          </div>
+          <div className="flex-1 px-4 pt-2">
             <div className="flex items-center justify-between">
               <Mark size={22} />
               <Icon name="alerts" size={14} />
             </div>
-            <p className="mt-3 text-[9px] font-semibold text-slate">Practice portfolio</p>
-            <p className="num text-[24px] leading-8 font-extrabold tracking-[-0.03em]">$10,482.16</p>
-            <GainChip small>▲ +$482.16 · +4.82%</GainChip>
-            <Sparkline id="fill-gain-phone" className="mt-3 h-12 w-full" />
-            <div className="mt-2 flex justify-between rounded-pill bg-mist p-0.5 text-[8px] font-bold text-slate">
+            <p className="mt-2 text-[9px] font-semibold text-text-secondary">Practice portfolio</p>
+            <p className="num text-[24px] leading-8 font-extrabold tracking-[-0.03em]">{money(10482.16)}</p>
+            <ChangeChip small pct={4.82} amount={482.16} />
+            <Sparkline id="fill-gain-phone" className="mt-2 h-12 w-full" />
+            <div className="mt-2 flex justify-between rounded-pill bg-surface-sunken p-0.5 text-[8px] font-bold text-text-secondary">
               {["1D", "1W", "1M", "1Y", "All"].map((r) => (
-                <span key={r} className={`rounded-pill px-2 py-0.5 ${r === "1M" ? "bg-ink text-paper" : ""}`}>
+                <span key={r} className={`rounded-pill px-2 py-0.5 ${r === "1M" ? "bg-text-primary text-text-inverse" : ""}`}>
                   {r}
                 </span>
               ))}
             </div>
             <p className="mt-3 text-[10px] font-bold">Holdings</p>
-            <ul className="mt-1 divide-y divide-line">
+            <ul className="mt-1 divide-y divide-border-subtle">
               {holdings.map((h) => (
                 <li key={h.t} className="flex items-center gap-2 py-1.5">
-                  <span className="grid size-5 place-items-center rounded-pill bg-mist text-[8px] font-bold">{h.t[0]}</span>
+                  <span className="grid size-5 place-items-center rounded-pill bg-surface-sunken text-[8px] font-bold">{h.t[0]}</span>
                   <span className="flex-1 leading-tight">
                     <span className="block text-[9px] font-bold">{h.t}</span>
-                    <span className="block text-[7px] text-slate">{h.n}</span>
+                    <span className="block text-[7px] text-text-secondary">{h.n}</span>
                   </span>
                   <span className="num text-right leading-tight">
-                    <span className="block text-[9px] font-bold">{h.p}</span>
-                    <span className={`block text-[7px] font-extrabold ${h.up ? "text-gain" : "text-loss"}`}>{h.c}</span>
+                    <span className="block text-[9px] font-bold">{money(h.value)}</span>
+                    <span className={`block text-[7px] font-extrabold ${toneText[tone(h.pct)]}`}>{change({ pct: h.pct })}</span>
                   </span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="flex h-[52px] shrink-0 items-center justify-around border-t border-line">
+          <div className="flex h-[52px] shrink-0 items-center justify-around border-t border-border-subtle">
             {tabs.map(([icon, label], i) => (
-              <span key={label} className={`flex flex-col items-center gap-0.5 text-[7px] font-semibold ${i === 0 ? "text-indigo" : "text-slate"}`}>
+              <span key={label} className={`flex flex-col items-center gap-0.5 text-[7px] font-semibold ${i === 0 ? "text-text-link" : "text-text-secondary"}`}>
                 <Icon name={icon} size={18} />
                 {label}
               </span>
@@ -172,19 +190,19 @@ function CoachCard() {
   const answers = ["Under a month", "1 to 5 years", "5+ years"];
   return (
     <Reveal className="halo-night w-full max-w-[480px]">
-      <figure className="card edge p-6 text-left sm:p-8">
+      <figure className="scheme-page card edge p-6 text-left sm:p-8">
         <figcaption className="sr-only">Example of a coach check-in before a practice trade</figcaption>
         <div className="flex items-center gap-3">
-          <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-pill bg-coach font-display text-[20px] font-extrabold text-paper">
+          <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-pill bg-coach-500 font-display text-[20px] font-extrabold text-paper">
             ?
           </span>
           <div>
-            <p className="text-nav font-semibold">Coach</p>
-            <p className="text-caption text-slate">Before your practice trade</p>
+            <p className="text-label font-semibold">Coach</p>
+            <p className="text-caption text-text-secondary">Before your practice trade</p>
           </div>
         </div>
         <p className="reveal-question mt-5 font-display text-[28px] leading-[34px] font-extrabold tracking-[-0.015em]">
-          What&apos;s your plan? <i className="text-coach">How long will you hold?</i>
+          What&apos;s your plan? <i className="text-coach-500">How long will you hold?</i>
         </p>
         <div aria-hidden="true" className="mt-5 flex flex-wrap gap-2">
           {answers.map((a, i) => (
@@ -192,14 +210,14 @@ function CoachCard() {
               key={a}
               style={v({ "--i": i })}
               className={`reveal-chip inline-flex h-10 items-center rounded-pill border px-4 text-label font-semibold ${
-                i === 1 ? "border-coach bg-coach text-paper" : "border-field-border"
+                i === 1 ? "border-coach-500 bg-coach-500 text-paper" : "border-border-strong"
               }`}
             >
               {a}
             </span>
           ))}
         </div>
-        <div aria-hidden="true" className="mt-5 min-h-18 rounded-input border border-field-border px-4 py-3 text-placeholder">
+        <div aria-hidden="true" className="mt-5 min-h-18 rounded-input border border-border-strong px-4 py-3 text-text-muted">
           Why this one, in one line…
         </div>
         <div aria-hidden="true" className="mt-5 flex flex-wrap items-center gap-2">
@@ -217,13 +235,13 @@ export default function Home() {
       <HeroGlow>
         <div className="mx-auto flex max-w-page flex-col items-center px-gutter pb-20 pt-32 text-center sm:pt-40">
           <div className="rise-line flex flex-wrap justify-center gap-2" style={v({ "--i": 0 })}>
-            <Pill className="bg-indigo-tint text-indigo">Free</Pill>
-            <Pill className="bg-gain-tint text-gain">Fake money, real skills</Pill>
-            <Pill className="bg-paper text-ink shadow-card">No ads</Pill>
+            <Pill className="bg-accent-primary-subtle text-text-link">Free</Pill>
+            <Pill className="bg-state-gain-bg text-state-gain-text">Fake money, real skills</Pill>
+            <Pill className="bg-surface-raised text-text-primary shadow-card">No ads</Pill>
           </div>
           <h1
             id="hero-title"
-            className="mt-6 font-display text-[54px] leading-[56px] font-extrabold tracking-[-0.04em] sm:text-display lg:text-display-xl"
+            className="mt-6 font-display text-[54px] leading-[56px] font-extrabold tracking-[-0.04em] sm:text-display lg:text-display"
           >
             <span className="line-mask">
               <span className="rise-line" style={v({ "--i": 1 })}>
@@ -236,8 +254,8 @@ export default function Home() {
               </span>
             </span>
           </h1>
-          <p className="rise-late mt-6 max-w-xl text-body-l text-slate" style={v({ "--delay": "600ms" })}>
-            Practise investing with $10,000 of fake money. Real TSX and US stocks, free leagues with friends, and a coach
+          <p className="rise-late mt-6 max-w-xl text-body-l text-text-secondary" style={v({ "--delay": "600ms" })}>
+            Practise investing with {START} of fake money. Real TSX and US stocks, free leagues with friends, and a coach
             that asks before every trade.
           </p>
           <div className="rise-late mt-8 flex w-full justify-center" style={v({ "--delay": "640ms" })}>
@@ -248,10 +266,10 @@ export default function Home() {
             <figure className="glass p-6 text-left sm:p-7">
               <figcaption className="sr-only">Example practice portfolio</figcaption>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-nav font-semibold text-slate">Practice portfolio</span>
-                <GainChip>▲ +4.82%</GainChip>
+                <span className="text-label font-semibold text-text-secondary">Practice portfolio</span>
+                <ChangeChip pct={4.82} />
               </div>
-              <CountUp from={10000} to={10482.16} delay={1000} className="num mt-2 block text-[36px] leading-10 font-extrabold tracking-[-0.03em] sm:text-money-glass" />
+              <CountUp from={10000} to={10482.16} delay={1000} className="num mt-2 block text-[36px] leading-10 font-extrabold tracking-[-0.03em] sm:text-number-xl" />
               <Sparkline id="fill-gain-hero" className="mt-5 h-24 w-full" />
             </figure>
           </div>
@@ -260,10 +278,10 @@ export default function Home() {
 
       <Section
         id="practice"
-        className="bg-paper"
+        className="bg-surface-page"
         title={
           <>
-            What is <i className="text-indigo">HLD Practice?</i>
+            What is <i className="text-text-link">HLD Practice?</i>
           </>
         }
         lead="A free paper-trading app for learning how investing works, with fake money and real (delayed) market prices."
@@ -278,7 +296,7 @@ export default function Home() {
                 </span>
                 <div>
                   <h3 className="font-display text-h3">{f.title}</h3>
-                  <p className="mt-2 text-slate">{f.body}</p>
+                  <p className="mt-2 text-text-secondary">{f.body}</p>
                 </div>
               </li>
             ))}
@@ -288,10 +306,10 @@ export default function Home() {
 
       <Section
         id="leagues"
-        className="bg-mist"
+        className="bg-surface-sunken"
         title={
           <>
-            Leagues: practice <i className="text-league">with friends.</i>
+            Leagues: practice <i className="text-league-500">with friends.</i>
           </>
         }
         lead="Investing is easier to learn when your friends are doing it too."
@@ -299,13 +317,13 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
           <ol className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
             {leagueSteps.map((s, i) => (
-              <li key={s.title} className="card card-hover flex gap-4 rounded-card-accent p-6">
-                <span aria-hidden="true" className="num grid size-9 shrink-0 place-items-center rounded-pill bg-league-tint font-extrabold text-league-text">
+              <li key={s.title} className="card card-hover flex gap-4 rounded-card p-6">
+                <span aria-hidden="true" className="num grid size-9 shrink-0 place-items-center rounded-pill bg-league-50 font-extrabold text-league-700">
                   {i + 1}
                 </span>
                 <div>
                   <h3 className="font-display text-h3">{s.title}</h3>
-                  <p className="mt-2 text-slate">{s.body}</p>
+                  <p className="mt-2 text-text-secondary">{s.body}</p>
                 </div>
               </li>
             ))}
@@ -314,26 +332,26 @@ export default function Home() {
           <figure className="card p-6">
             <figcaption className="flex items-baseline justify-between gap-3">
               <span className="font-display text-h3">Friday league</span>
-              <span className="text-caption text-slate">Example</span>
+              <span className="text-caption text-text-secondary">Example</span>
             </figcaption>
             <ol className="mt-4 space-y-2">
               {leaderboard.map((r) => (
                 <li
                   key={r.rank}
-                  className={`flex h-15 items-center gap-3 rounded-row px-3.5 ${r.you ? "border-[1.5px] border-league bg-league-tint" : ""}`}
+                  className={`flex h-15 items-center gap-3 rounded-row px-3.5 ${r.you ? "scheme-light border-[1.5px] border-league-500 bg-league-50" : ""}`}
                 >
-                  <span className={`num w-7 shrink-0 font-extrabold ${r.you ? "text-league-text" : ""}`}>{r.rank}</span>
+                  <span className={`num w-7 shrink-0 font-extrabold ${r.you ? "text-league-700" : ""}`}>{r.rank}</span>
                   <span
                     aria-hidden="true"
                     className={`grid size-9 shrink-0 place-items-center rounded-pill text-caption font-bold ${
-                      r.you ? "bg-league text-paper" : "bg-indigo-tint text-indigo"
+                      r.you ? "bg-league-500 text-paper" : "bg-accent-primary-subtle text-text-link"
                     }`}
                   >
                     {r.initials}
                   </span>
-                  <span className="min-w-0 flex-1 truncate text-nav font-semibold">{r.name}</span>
-                  <span className={`num w-24 shrink-0 text-right text-nav font-extrabold ${r.up ? "text-gain" : "text-loss"}`}>
-                    {r.change}
+                  <span className="min-w-0 flex-1 truncate text-label font-semibold">{r.name}</span>
+                  <span className={`num w-24 shrink-0 text-right text-label font-extrabold ${toneText[tone(r.pct)]}`}>
+                    {change({ pct: r.pct })}
                   </span>
                 </li>
               ))}
@@ -344,11 +362,10 @@ export default function Home() {
 
       <Section
         id="coach"
-        className="bg-aurora text-paper"
-        dark
+        className="scheme-dark bg-aurora"
         title={
           <>
-            A coach that asks, <i className="text-indigo-on-dark">never tells.</i>
+            A coach that asks, <i className="text-indigo-300">never tells.</i>
           </>
         }
         lead="Before each practice trade, the coach asks a few quick questions, like a friend who wants you to think it through."
@@ -357,8 +374,8 @@ export default function Home() {
           <ul className="space-y-8">
             {(
               [
-                ["coach", "bg-coach-tint text-coach", "Questions, not advice", "It never says what to buy or sell. It asks about your plan and shows you the facts."],
-                ["journal", "bg-journal-tint text-journal", "Your answers, saved", "Each answer goes into your trade journal, next to the trade it belongs to."],
+                ["coach", "bg-coach-50 text-coach-500", "Questions, not advice", "It never says what to buy or sell. It asks about your plan and shows you the facts."],
+                ["journal", "bg-journal-50 text-journal-500", "Your answers, saved", "Each answer goes into your trade journal, next to the trade it belongs to."],
                 ["hold-timer", "bg-paper text-ink", "Never a nag", "One follow-up at most, and you can turn check-ins off."],
               ] as [IconName, string, string, string][]
             ).map(([icon, tile, title, body]) => (
@@ -368,7 +385,7 @@ export default function Home() {
                 </span>
                 <div>
                   <h3 className="font-display text-h3">{title}</h3>
-                  <p className="mt-2 text-on-night-muted">{body}</p>
+                  <p className="mt-2 text-text-secondary">{body}</p>
                 </div>
               </li>
             ))}
@@ -379,20 +396,20 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="faq" className="bg-paper" title="Questions" lead="The short answers.">
-        <div className="max-w-3xl divide-y divide-line border-y border-line">
+      <Section id="faq" className="bg-surface-page" title="Questions" lead="The short answers.">
+        <div className="max-w-3xl divide-y divide-border-subtle border-y border-border-subtle">
           {faqs.map((f) => (
             <details key={f.q} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-chip font-display text-h3 [&::-webkit-details-marker]:hidden">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-chip font-display text-h3 [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <span
                   aria-hidden="true"
-                  className="grid size-9 shrink-0 place-items-center rounded-pill bg-indigo-tint text-[22px] text-indigo transition-transform duration-240 ease-move group-open:rotate-45"
+                  className="grid size-9 shrink-0 place-items-center rounded-pill bg-accent-primary-subtle text-[22px] text-text-link transition-transform duration-240 ease-move group-open:rotate-45"
                 >
                   +
                 </span>
               </summary>
-              <p className="mt-3 max-w-2xl text-slate">{f.a}</p>
+              <p className="mt-3 max-w-2xl text-text-secondary">{f.a}</p>
             </details>
           ))}
         </div>
@@ -401,9 +418,9 @@ export default function Home() {
       <section id="waitlist" aria-labelledby="waitlist-title" className="bg-indigo-mesh py-section text-paper">
         <div className="mx-auto flex max-w-page flex-col items-center px-gutter text-center">
           <h2 id="waitlist-title" className="font-display text-[34px] leading-[38px] font-extrabold tracking-[-0.025em] md:text-h1">
-            Get in <i className="text-indigo-tint-2">early.</i>
+            Get in <i className="text-indigo-100">early.</i>
           </h2>
-          <p className="mt-4 max-w-xl text-body-l text-indigo-tint">
+          <p className="mt-4 max-w-xl text-body-l text-indigo-100">
             Join the waitlist and we&apos;ll email you when HLD Practice opens. Free, with fake money only.
           </p>
           <div className="mt-8 flex w-full justify-center">

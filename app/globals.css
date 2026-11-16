@@ -1,132 +1,278 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Every colour, font, radius and spacing value lives here.
- * These are neutral placeholders: the Designer's "Theme UI" tokens replace
- * the values in :root, and nothing else in the app should need to change.
+ * HLD design tokens. Source of truth: design/tokens.md (Paper board "Theme UI").
+ * Every colour, font, radius, spacing, shadow and easing value lives here.
+ * Variable names match tokens.md (--color-ink, --radius-card, ...).
  */
-:root {
-  /* Primaries */
-  --hld-bg: #ffffff; /* page background */
-  --hld-surface: #f4f4f5; /* alternate light section */
-  --hld-ink: #18181b; /* main text, borders on cards */
-  --hld-ink-muted: #52525b; /* secondary text (7:1 on bg) */
-  --hld-line: #d4d4d8; /* hairlines, dividers */
-  --hld-brand: #18181b; /* buttons, links */
-  --hld-brand-hover: #3f3f46; /* button hover (solid, no gradient) */
-  --hld-on-brand: #ffffff; /* text on brand */
+@theme static {
+  --color-*: initial;
 
-  /* Dark sections + footer */
-  --hld-dark: #18181b;
-  --hld-dark-raised: #27272a;
-  --hld-on-dark: #fafafa;
-  --hld-on-dark-muted: #a1a1aa;
+  /* Primaries */
+  --color-ink: #0e1016;
+  --color-paper: #ffffff;
+  --color-indigo: #4b3bf5;
+  --color-indigo-hover: #3a2bd9;
+  --color-indigo-pressed: #2d20b5;
+  --color-indigo-tint: #eeecff;
+  --color-indigo-tint-2: #ddd9ff;
+  --color-indigo-on-dark: #a99fff;
 
   /* Accents: one job each */
-  --hld-accent-practice: #71717a; /* HLD Practice features */
-  --hld-accent-leagues: #52525b; /* leagues + leaderboards */
-  --hld-accent-coach: #a1a1aa; /* the coach */
-  --hld-accent-focus: #2563eb; /* keyboard focus ring */
-  --hld-success: #15803d; /* form success */
-  --hld-danger: #b91c1c; /* form errors */
+  --color-gain: #0a8a4a; /* money up, always with ▲ and + */
+  --color-gain-tint: #e3f5ea;
+  --color-loss: #d93a3f; /* money down + field errors, always with ▼ and − */
+  --color-loss-tint: #fde8e8;
+  --color-coach: #1f8fff;
+  --color-coach-tint: #e4f1ff;
+  --color-league: #f2601f;
+  --color-league-tint: #feebe1;
+  --color-league-text: #c2410c;
+  --color-journal: #b03fd1;
+  --color-journal-tint: #f6e6fb;
+  --color-journal-text: #8a2ba6;
 
-  /* Type */
-  --hld-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --hld-font-display: var(--hld-font-sans);
+  /* Neutrals */
+  --color-mist: #f5f5f8;
+  --color-line: #e3e4ea;
+  --color-field-border: #cfd1da;
+  --color-placeholder: #8b8e9c;
+  --color-slate: #5b5f6e;
+  --color-night: #151826;
+  --color-night-card: #1f2334;
+  --color-night-raised: #262a3a;
+  --color-ink-pressed: #2a2d3a;
+  --color-on-night-muted: #b4b7c5;
 
-  /* Radius */
-  --hld-radius-sm: 0.5rem;
-  --hld-radius-md: 0.875rem;
-  --hld-radius-lg: 1.5rem;
-  --hld-radius-pill: 999px;
+  /* Type scale (size / line-height / tracking / weight) */
+  --text-*: initial;
+  --text-display-xl: 96px;
+  --text-display-xl--line-height: 96px;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-xl--font-weight: 800;
+  --text-display: 64px;
+  --text-display--line-height: 68px;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 800;
+  --text-h1: 44px;
+  --text-h1--line-height: 48px;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h1--font-weight: 800;
+  --text-h2: 28px;
+  --text-h2--line-height: 34px;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h2--font-weight: 700;
+  --text-h3: 20px;
+  --text-h3--line-height: 26px;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 700;
+  --text-body-l: 18px;
+  --text-body-l--line-height: 28px;
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-nav: 15px;
+  --text-nav--line-height: 20px;
+  --text-label: 14px;
+  --text-label--line-height: 20px;
+  --text-caption: 13px;
+  --text-caption--line-height: 18px;
+  --text-money-xl: 56px;
+  --text-money-xl--line-height: 60px;
+  --text-money-xl--letter-spacing: -0.025em;
 
-  /* Spacing */
-  --hld-space-unit: 0.25rem; /* Tailwind's spacing scale: p-4 = 4 units */
-  --hld-section-y: 6rem; /* vertical padding of each section */
-  --hld-container: 72rem; /* max content width */
-  --hld-nav-rest: 80%; /* island nav width at the top */
-  --hld-nav-scrolled: 64%; /* island nav width once scrolled */
+  /* Radii */
+  --radius-*: initial;
+  --radius-chip: 8px;
+  --radius-input: 12px;
+  --radius-row: 16px;
+  --radius-toast: 20px;
+  --radius-card: 28px;
+  --radius-pill: 999px;
+
+  /* Spacing: 4px base (4, 8, 12, 16, 24, 32, 48, 64, 96 = 1, 2, 3, 4, 6, 8, 12, 16, 24) */
+  --spacing: 4px;
+  --container-page: 1440px; /* content = 1440 minus the side gutters */
+
+  /* Elevation */
+  --shadow-*: initial;
+  --shadow-lifted: 4px 4px 0 #0e1016;
+  --shadow-floating: 0 12px 32px rgba(14, 16, 22, 0.16), 0 0 0 1px rgba(14, 16, 22, 0.08);
+  --shadow-floating-night: 0 12px 32px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(14, 16, 22, 0.08);
+
+  /* Motion */
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Responsive section padding + side gutter: 48/20 phone, 64/40 tablet, 96/96 desktop. */
+:root {
+  --section-y: 48px;
+  --gutter: 20px;
+  --nav-rest: 80%;
+  --nav-scrolled: 64%;
+}
+@media (min-width: 768px) {
+  :root {
+    --section-y: 64px;
+    --gutter: 40px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --section-y: 96px;
+    --gutter: 96px;
+  }
 }
 
 @theme inline {
-  /* Drop Tailwind's default palette so only the tokens above can be used. */
-  --color-*: initial;
-  --color-bg: var(--hld-bg);
-  --color-surface: var(--hld-surface);
-  --color-ink: var(--hld-ink);
-  --color-ink-muted: var(--hld-ink-muted);
-  --color-line: var(--hld-line);
-  --color-brand: var(--hld-brand);
-  --color-brand-hover: var(--hld-brand-hover);
-  --color-on-brand: var(--hld-on-brand);
-  --color-dark: var(--hld-dark);
-  --color-dark-raised: var(--hld-dark-raised);
-  --color-on-dark: var(--hld-on-dark);
-  --color-on-dark-muted: var(--hld-on-dark-muted);
-  --color-accent-practice: var(--hld-accent-practice);
-  --color-accent-leagues: var(--hld-accent-leagues);
-  --color-accent-coach: var(--hld-accent-coach);
-  --color-focus: var(--hld-accent-focus);
-  --color-success: var(--hld-success);
-  --color-danger: var(--hld-danger);
-
-  --font-sans: var(--hld-font-sans);
-  --font-display: var(--hld-font-display);
-
-  --radius-sm: var(--hld-radius-sm);
-  --radius-md: var(--hld-radius-md);
-  --radius-lg: var(--hld-radius-lg);
-  --radius-pill: var(--hld-radius-pill);
-
-  --spacing: var(--hld-space-unit);
-  --spacing-section: var(--hld-section-y);
-  --container-page: var(--hld-container);
+  /* next/font (app/fonts.ts) sets --font-display-face and --font-sans-face on <html>. */
+  --font-display: var(--font-display-face), system-ui, sans-serif;
+  --font-sans: var(--font-sans-face), system-ui, sans-serif;
+  --spacing-section: var(--section-y);
+  --spacing-gutter: var(--gutter);
 }
 
 html {
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 96px;
 }
-
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
-
+/* Reduced motion: everything becomes a 120ms fade-length change, no movement. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
+    transition-duration: 120ms !important;
+    animation: none !important;
   }
 }
 
 body {
-  background: var(--hld-bg);
-  color: var(--hld-ink);
-  font-family: var(--hld-font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
 }
 
 :focus-visible {
-  outline: 3px solid var(--hld-accent-focus);
+  outline: 2px solid var(--color-indigo);
   outline-offset: 3px;
 }
 
-/* Hero: straight grid lines + a soft glow under the cursor (set by HeroGlow). */
-.hero-grid {
-  background-color: var(--hld-surface);
-  background-image:
-    linear-gradient(var(--hld-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--hld-line) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-.hero-glow {
-  background: radial-gradient(
-    420px circle at var(--mx, 50%) var(--my, 30%),
-    color-mix(in srgb, var(--hld-bg) 85%, transparent),
-    transparent 70%
-  );
-  opacity: var(--glow, 0);
-  transition: opacity 300ms ease;
+@layer components {
+  /* Buttons: 48 tall pill, Inter 600 16/20. Five states: default, hover, pressed, focus, disabled. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 22px;
+    border-radius: var(--radius-pill);
+    font: 600 16px/20px var(--font-sans);
+    white-space: nowrap;
+    transition:
+      background-color 120ms var(--ease-enter),
+      color 120ms var(--ease-enter),
+      border-color 120ms var(--ease-enter),
+      translate 240ms var(--ease-enter);
+  }
+  .btn:focus-visible {
+    outline: none;
+  }
+  .btn-primary {
+    background: var(--color-indigo);
+    color: var(--color-paper);
+  }
+  .btn-primary:hover {
+    background: var(--color-indigo-hover);
+  }
+  .btn-primary:active {
+    background: var(--color-indigo-pressed);
+  }
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible {
+    box-shadow:
+      0 0 0 3px var(--color-paper),
+      0 0 0 5px var(--color-indigo);
+  }
+  .btn-primary:disabled {
+    background: var(--color-line);
+    color: var(--color-placeholder);
+  }
+  .btn-secondary {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+  }
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-secondary:active {
+    background: var(--color-ink-pressed);
+    border-color: var(--color-ink-pressed);
+    color: var(--color-paper);
+  }
+  .btn-secondary:disabled {
+    background: var(--color-paper);
+    border-color: var(--color-line);
+    color: var(--color-placeholder);
+  }
+  .btn-ghost {
+    padding: 0 18px;
+    color: var(--color-indigo);
+  }
+  .btn-ghost:hover {
+    background: var(--color-indigo-tint);
+    color: var(--color-indigo-hover);
+  }
+  .btn-ghost:active {
+    background: var(--color-indigo-tint-2);
+    color: var(--color-indigo-pressed);
+  }
+  .btn-ghost:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-indigo);
+  }
+  .btn-ghost:disabled {
+    background: none;
+    color: var(--color-placeholder);
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+  }
+
+  /* Card: white island, 2px Ink border, no shadow; hover = Lifted. */
+  .card {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-card);
+    transition: box-shadow 240ms var(--ease-enter);
+  }
+  .card-hover:hover {
+    box-shadow: var(--shadow-lifted);
+  }
+
+  /* Hero: straight grid lines + a soft glow under the cursor (set by HeroGlow). */
+  .hero-grid {
+    background-color: var(--color-paper);
+    background-image:
+      linear-gradient(var(--color-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero-glow {
+    background: radial-gradient(
+      480px circle at var(--mx, 50%) var(--my, 30%),
+      color-mix(in srgb, var(--color-indigo-tint) 90%, transparent),
+      transparent 70%
+    );
+    opacity: var(--glow, 0);
+    transition: opacity 240ms var(--ease-enter);
+  }
 }

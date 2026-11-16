@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav, Wordmark } from "./components/Nav";
+import { Wordmark } from "./components/Brand";
+import { Magnetic } from "./components/Magnetic";
+import { Nav } from "./components/Nav";
+import { fontVariables } from "./fonts";
 import "./globals.css";
+
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hldfinance.ca"),
@@ -32,35 +36,33 @@ const footerCols = [
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-CA" className="h-full antialiased">
+    <html lang="en-CA" className={`${fontVariables} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        <a
-          href="#main"
-          className="sr-only z-[60] rounded-pill bg-brand px-4 py-2 text-on-brand focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
-        >
+        <a href="#main" className="btn btn-primary sr-only z-[60] focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>
         <Nav />
+        <Magnetic />
         <main id="main" className="flex-1">
           {children}
         </main>
 
-        <footer className="bg-dark text-on-dark">
-          <div className="mx-auto grid max-w-page gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <footer className="bg-night text-paper">
+          <div className="mx-auto grid max-w-page gap-12 px-gutter py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
-              <Wordmark />
-              <p className="mt-3 max-w-xs text-on-dark-muted">
+              <Wordmark onDark />
+              <p className="mt-4 max-w-xs text-on-night-muted">
                 Think before you buy. A Canadian money app that starts with free practice trading.
               </p>
-              <p className="mt-6 text-sm text-on-dark-muted">No ads. No per-trade fees. We never sell your data.</p>
+              <p className="mt-6 text-label text-on-night-muted">No ads. No per-trade fees. We never sell your data.</p>
             </div>
             {footerCols.map((col) => (
               <div key={col.title}>
-                <h2 className="font-semibold">{col.title}</h2>
+                <h2 className="text-label font-semibold">{col.title}</h2>
                 <ul className="mt-4 space-y-3">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-on-dark-muted hover:text-on-dark">
+                      <Link href={l.href} className="text-on-night-muted hover:text-paper">
                         {l.label}
                       </Link>
                     </li>
@@ -69,10 +71,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </div>
             ))}
           </div>
-          <div className="border-t border-dark-raised">
-            <p className="mx-auto max-w-page px-4 py-6 text-sm text-on-dark-muted sm:px-6">
-              © 2026 HLD Finance. HLD Practice uses fake money only. Nothing on this site is
-              financial advice.
+          <div className="border-t border-night-raised">
+            <p className="mx-auto max-w-page px-gutter py-6 text-caption text-on-night-muted">
+              © 2026 HLD Finance. HLD Practice uses fake money only. Nothing on this site is financial advice.
             </p>
           </div>
         </footer>

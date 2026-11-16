@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Lockup } from "./components/Brand";
+import { Mark } from "./components/Brand";
 import { CountUp } from "./components/CountUp";
 import { HeroGlow } from "./components/HeroGlow";
 import { Icon, type IconName } from "./components/Icon";
@@ -121,7 +121,7 @@ function PhoneMockup() {
           </div>
           <div className="flex-1 px-4">
             <div className="flex items-center justify-between">
-              <Lockup fontSize={15} />
+              <Mark size={22} />
               <Icon name="alerts" size={14} />
             </div>
             <p className="mt-3 text-[9px] font-semibold text-slate">Practice portfolio</p>

@@ -47,7 +47,7 @@ export function Nav() {
           }`}
         >
           <Link href="/" aria-label="HLD Finance home" onClick={() => setOpen(false)} className="rounded-pill">
-            <Lockup fontSize={scrolled ? 20 : 22} tone={scrolled ? "white" : "indigo"} />
+            <Lockup cap={scrolled ? 17 : 18} reveal />
           </Link>
 
           <ul

@@ -6,16 +6,60 @@ Assets: hld-design\assets\ (hld-mark.svg, hld-mark-glyph.svg, hld-app-icon.svg, 
 
 Mode: light, plus "Night" dark sections. On Night, cards stay white and float on soft shadows.
 
-## Logo
-- Mark ("Pause, then grow"): 64-unit grid. Tile `rect 64×64 rx 18` (#4B3BF5). Bars in #FFFFFF: `x16 y27 w12 h22 rx6` and `x36 y15 w12 h34 rx6`. Both sit on a baseline at y 49.
-- Favicon: same mark with a tile corner of 25% (rx 16 at 64), at 16 and 32 px.
-- App icon: iOS squircle with rx 14.3/64 (22.4%). Fill is a linear gradient from #6A5BFF to #3424D6, top-left to bottom-right. Overlay: white at 22% fading to 0% by the middle (top light).
-- Wordmark: "hld", lowercase, Urbanist 800, letter-spacing −0.045em.
-  - Horizontal lockup: mark = 1.05× the font size, gap = 0.2× the font size.
-  - Stacked lockup: mark 88 above the word at 56, gap 14.
-- On Indigo: the tile is white and the bars are Indigo. On Ink: an Indigo tile with white bars, or a white tile with Ink bars.
-- Clear space: half the mark width. Minimum sizes: mark 16 px, horizontal lockup 72 px wide, stacked lockup 48 px wide.
-- Avatar: bars only (no tile) on the indigo mesh, because platforms crop to a circle.
+## Logo (final: Bridge H + drawn HLD)
+**Files** (assets folder):
+| File | What it is |
+|---|---|
+| hld-mark.svg | Indigo tile with a white coin H, 64 grid |
+| hld-mark-glyph.svg | The coin H alone, `currentColor`, viewBox 0 0 90 100 |
+| hld-wordmark.svg | Drawn "HLD", `currentColor`, viewBox 0 0 258 100. Recolour with CSS `color` |
+| hld-app-icon.svg / hld-app-icon-1024.png | App icon on the Hold gradient |
+| hld-lockup-horizontal.svg / @4x.png | Horizontal lockup |
+| hld-lockup-stacked.svg / @4x.png | Stacked lockup |
+| hld-social-share-1200x630.png | Social share image |
+| hld-social-avatar-400.png | Social avatar |
+
+**Construction** (cap height = 100 units):
+- The H: two stems, 28 wide, 100 tall, with round ends (radius 14), 34 apart, so the H is 90 wide.
+- The coin: radius 20 (1.43× the stem), at the centre (45, 50).
+- The cut: radius 25, concentric with the coin. It is cut into the inner edge of each stem, from y 31.67 to 68.33, leaving a 5-unit ring of clear space round the coin. It is real geometry (no background-coloured circle), so the logo works on any background and in one colour.
+- L and D: drawn with the same 28 stroke, round caps and joins.
+  - L: 60 wide.
+  - D: 76 wide.
+  - Gaps: H→L 16, L→D 14.
+- Mark tile: 64 grid, corner 18 (28%), with the H at 38/64 of the tile height, centred. The favicon (16/32) uses corner 16 (25%).
+- App icon: rx 14.3 (22.4%). Fill `linear-gradient(135deg, #6A5BFF → #3424D6)` with a top light `rgba(255,255,255,.22) → 0` by half height.
+
+**Colour:**
+- The coin is always the same colour as the stems: white on Indigo, Ink on light, white on dark. Mint or any accent coin is not used.
+- Approved colourways:
+  - light: Indigo tile + Ink wordmark;
+  - Ink or Aurora: Indigo tile + white wordmark;
+  - Indigo: white tile with an Indigo H + white wordmark;
+  - wordmark alone in Ink, Indigo or white.
+
+**Lockups:**
+- Horizontal: tile = 1.5× the wordmark cap height, gap = 0.36× cap height, centred vertically.
+- Stacked: tile = 2.2× cap height, gap 0.5× cap height, centred.
+
+**Clear space:** half the tile height on every side (for the wordmark alone, half its cap height).
+
+**Minimum sizes:**
+- tile 16 px;
+- wordmark 10 px cap height (≈26 px wide);
+- horizontal lockup 72 px wide;
+- stacked lockup 40 px wide.
+
+**Usage:**
+- **Nav:** horizontal lockup, cap 14–20 px.
+- **Footer:** wordmark alone.
+- **Favicon:** the tile.
+- **Social avatar:** the H without a tile, on Indigo mesh, about 44% of the circle.
+- **App icon:** the gradient tile.
+
+**Don'ts:**
+- Don't stretch it, outline it, colour the coin, or set "HLD" in a font (the H must be the drawn coin H).
+- No animated bounce: the reveal settles (see Motion: logo reveal, 1200 ms, settle ease).
 
 ## Colour
 ### Primaries
@@ -229,7 +273,7 @@ No yellow stops, no grain or noise, no animated gradients or pulsing glows.
 ### Brand gradients (one job each)
 | Token | CSS | Job |
 |---|---|---|
-| --grad-hold | linear-gradient(in oklab 150deg, #6A5BFF 0%, #4B3BF5 45%, #3424D6 100%) | Brand surfaces: app icon, Pro card, splash, the single hero CTA |
+| --grad-hold | linear-gradient(in oklab 150deg, #6A5BFF 0%, #4B3BF5 45%, #3424D6 100%) | Brand surfaces: app icon, Pro card fill, splash (never buttons) |
 | --grad-tide | linear-gradient(in oklab 120deg, #4B3BF5 0%, #3B6BFF 50%, #1F8FFF 100%) | The one gradient-text word, featured accents |
 | --grad-ember | linear-gradient(in oklab 135deg, #FF8A4C 0%, #F2601F 100%) | Your league rank card only |
 | --grad-orchid | linear-gradient(in oklab 140deg, #C65BE6 0%, #7C5CFF 100%) | Journal streak / reflection cards only |
@@ -249,13 +293,8 @@ No yellow stops, no grain or noise, no animated gradients or pulsing glows.
 - Build it as a wrapper with `padding:2px; border-radius:30px` (card radius + 2) and the card inside on #FFFFFF with radius 28. Pair it with `box-shadow: 0 24px 60px rgba(52,36,214,.18)`.
 - Alternatively, use `border:2px solid transparent; background: linear-gradient(#fff,#fff) padding-box, var(--grad-edge) border-box`.
 
-### Gradient button (optional; solid Indigo stays the default everywhere else)
-| State | background-image | box-shadow |
-|---|---|---|
-| Rest | linear-gradient(in oklab 180deg, #5A4BFF 0%, #4B3BF5 100%) | inset 0 1px 0 #FFFFFF40, 0 4px 12px #3424D64D |
-| Hover | linear-gradient(in oklab 180deg, #4B3BF5 0%, #3A2BD9 100%) | inset 0 1px 0 #FFFFFF40, 0 6px 18px #3424D64D |
-| Pressed | linear-gradient(in oklab 180deg, #2D20B5 0%, #3A2BD9 100%) | inset 0 1px 0 #FFFFFF40, 0 1px 3px #3424D64D |
-Use it only for the single hero CTA and the Pro button. Transitions use --dur-press (120ms), crossfading two layers.
+### Buttons: solid only
+Buttons never use gradients: rest #4B3BF5, hover #3A2BD9, pressed #2D20B5 (see Components > Buttons). Gradients are only for backgrounds, glows, the featured-card Edge stroke, chart fills, the app icon and the one gradient-text word.
 
 ### Chart area fills
 - **--fill-gain**: SVG `<linearGradient x1=0 y1=0 x2=0 y2=1>` with stops `rgba(10,138,74,0.24)` at 0 and `rgba(10,138,74,0)` at 1. In CSS: `linear-gradient(180deg, rgba(10,138,74,.24) 0%, rgba(10,138,74,0) 100%)`.

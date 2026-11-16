@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Lockup } from "./components/Brand";
+import { Wordmark } from "./components/Brand";
 import { Magnetic } from "./components/Magnetic";
 import { Nav } from "./components/Nav";
 import { fontVariables } from "./fonts";
@@ -52,7 +52,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <footer className="bg-aurora text-paper">
           <div className="mx-auto grid max-w-page gap-12 px-gutter py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
-              <Lockup fontSize={26} />
+              <span role="img" aria-label="HLD Finance" className="inline-flex">
+                <Wordmark cap={24} />
+              </span>
               <p className="mt-4 max-w-xs text-on-night-muted">
                 Think before you buy. A Canadian money app that starts with free practice trading.
               </p>

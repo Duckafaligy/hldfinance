@@ -515,6 +515,21 @@ main {
   --rise: 8px;
 }
 
+/* Logo reveal in the nav on first load: tile fades in from 94%, the wordmark rises 12px after it. Settles, no bounce. */
+.logo-tile-in {
+  animation: logo-tile 600ms var(--ease-settle) both;
+}
+@keyframes logo-tile {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+.logo-word-in {
+  --rise: 12px;
+  animation: rise var(--dur-text) var(--ease-settle) 200ms both;
+}
+
 /* Reduced motion: everything becomes a 120ms opacity fade. No rises, no count-up, no magnet. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -530,6 +545,8 @@ main {
   [data-reveal="in"] .reveal-chip,
   .wl-tint,
   .wl-msg,
+  .logo-tile-in,
+  .logo-word-in,
   .msg-rise {
     animation: fade 120ms linear both !important;
   }

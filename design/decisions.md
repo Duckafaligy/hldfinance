@@ -203,3 +203,93 @@
 - Why: Checked against the Intent anti-pattern catalogue. Buy anyway meets the four misdirection rules on both surfaces. Consent rows are all off and separate. The leaderboard has no trophies, medals or dollar balances, and its copy says bragging rights and free to join. Empty states name a single step with no pressure. Deletion lists what goes and keeping the account is one plain tap. The category picker preselects nothing, and the reminder sheet opens on the option the person already tapped. Not covered: real screen flows, which come in the next run.
 - Rejected: Nothing.
 - Rests on: Principles, Components & states and Components: product boards in Paper, Bright olive / Theme
+
+## 2026-11-17 · Screens batch 1 lives on two pages, Start and Coach, with flows left to right and Motion beside the Coach flow
+- Decided by: design subagent, default
+- Why: One page per pillar keeps the Theme page free for review. Artboards sit 470 apart in flow order, so the left-to-right path is the user's path.
+- Rejected: Putting screens on the Theme page (a reviewer may be reading it). One artboard per state with no order.
+- Rests on: coordinator brief, "Pages and screens"
+
+## 2026-11-17 · The check-in entry asks which budget the item would come from
+- Decided by: design subagent, default; coordinator accepted
+- Why: Question 2 has to show a real Tracker fact ($142.00 left for Fun until payday). Without a category there's no budget to compare against. Nothing is preselected, and "Not sure" is a choice; then question 2 shows no fact.
+- Rejected: Guessing the category from the item name (opaque personalization). Comparing against the whole pay period (less useful, and still a guess).
+- Rests on: design-brief.md, "Before-you-buy check-in"; Category picker on Components: product
+
+## 2026-11-17 · An item counts toward the Skipped total only when it's let go, never while it's held
+- Decided by: design subagent, default; coordinator accepted
+- Why: A held item may still be bought, so counting it would inflate the total. That would break "money not spent, not money saved" and the honest-numbers principle.
+- Rejected: Adding the price when Remind me is tapped, then subtracting it if the item is bought (a number that goes backwards).
+- Rests on: PRODUCT.md, Product Principle 3
+
+## 2026-11-17 · The coach fine print appears once per screen
+- Decided by: design subagent, default; coordinator accepted
+- Why: Coach home has the Coach card and the daily tip, and the line twice reads as legal noise. It stays on the Coach card, which is the larger coach surface; the tip card leaves it off on that screen.
+- Rejected: Repeating it on every coach surface on the same screen.
+- Rests on: design-brief.md, "Fine print goes on coach screens only"
+
+## 2026-11-17 · Payday is Friday, Nov 27, and dark-card dividers use Brown 700 until an inverse divider role exists
+- Decided by: coordinator, on the design subagent's flag
+- Why: Nov 28, 2026 is a Saturday. The pay-date picker already says every other Friday. The Theme has no divider role for the Coach card, so `--color-brown-700` stands in until `--color-border-inverse-subtle` exists.
+- Rejected: Copying the Theme example's Nov 28. Using a light-surface border token on the dark card.
+- Rests on: Components: product, pay-date picker; coordinator message, resume 2
+
+## 2026-11-17 · The decision screen reads "Your call." with the three answers, and the coach adds nothing after them
+- Decided by: design subagent, default
+- Why: The coach asks and shows facts; the person decides. Restating the answers is a fact. A summary sentence like "Sounds like a want" would be a verdict.
+- Rejected: A recommendation line. A score or "2 of 3 say wait" tally (grades the purchase).
+- Rests on: PRODUCT.md, Principle 1; Intent anti-pattern catalogue, opaque personalization
+
+## 2026-11-17 · After a check-in, Coach returns to Home scrolled to Recent check-ins, with the new line tinted and a toast
+- Decided by: design subagent, default
+- Why: The record changes state in place, so the person has to see the line itself, not only a confirmation. The toast carries the one reversible action (Change for a reminder, Undo for a bought item).
+- Rejected: A separate success screen (adds a step and a place where outcomes could be styled as wins). Toast only (the record never shows).
+- Rests on: DESIGN.md, Check-in record; Motion row "Held item resolves"
+
+## 2026-11-17 · Buy anyway logs the purchase in Tracker under the category picked at entry, with Undo
+- Decided by: design subagent, default
+- Why: Tracker is manual, so a purchase decided inside HLD shouldn't have to be typed twice. Undo in the toast keeps it reversible. The toast states the fact and nothing else ("Logged in Tracker under Fun.").
+- Rejected: Asking "Add to Tracker?" (a second question after the decision). Not logging it (a Tracker that disagrees with Coach).
+- Rests on: design-brief.md, Tracker "Log a purchase"
+
+## 2026-11-17 · The 3-day follow-up offers three equal outlined buttons: I'm getting it, Let it go, Keep holding
+- Decided by: design subagent, default
+- Why: This is the one follow-up, and no outcome may look better than another, so none gets the primary fill. Each label is in the person's own voice; the app never says "buy it". The card says it is the only time it will ask.
+- Rejected: Let it go as primary (grades the outcome). A second reminder from Keep holding (breaks one follow-up max).
+- Rests on: design-brief.md, "One follow-up max"; coordinator note 4 on "buy" wording; Check-in record rule
+
+## 2026-11-17 · The budget check-in answers, Worth it and Not really, are equal outlined buttons with Skip, and change nothing in the budget
+- Decided by: design subagent, default
+- Why: They are answers, not actions, so neither leads. Saying the budget won't change removes the fear that "Not really" triggers a penalty.
+- Rejected: Worth it as primary (nudges toward a comforting answer). Following Not really with a suggestion (advice).
+- Rests on: design-brief.md, "Budget check-in"
+
+## 2026-11-17 · An offline save keeps both doors live, keeps answers on the phone, and retries by itself
+- Decided by: design subagent, default
+- Why: The coach never blocks. Try again sits in the error, and Remind me and Buy anyway stay where they were. The reminder is set automatically once the phone is back online.
+- Rejected: Disabling the buttons until online. A modal error.
+- Rests on: decisions.md entry "The Coach card keeps Remind me and Buy anyway live while the next question loads or fails"
+
+## 2026-11-17 · Check-in settings live in You › Check-ins: three on/off switches, a Tomorrow / In 3 days segment, and a reminder time of 6:00 p.m.
+- Decided by: design subagent, default
+- Why: Check-ins can be switched off, and the reminder timing is the person's call. The segment sets what Remind me says on the Coach card. 6:00 p.m. is after a typical work or school day. Turning check-ins off keeps every record.
+- Rejected: Settings on the Coach tab (crowds the main feature). Reminder time on by default in the morning (reads as a nag).
+- Rests on: design-brief.md, "Check-ins can be switched off"
+
+## 2026-11-17 · Sign-up shows three equal provider buttons with no single primary; the other Start screens have one primary each
+- Decided by: design subagent, default
+- Why: The auth choice is three equal doors (Apple's guidance, and email as easy as either). Create account is disabled with its reason written under it until the password reaches 10 characters.
+- Rejected: Making one provider primary.
+- Rests on: decisions.md entry on sign-in buttons
+
+## 2026-11-17 · The status bar keeps the system font
+- Decided by: design subagent, default
+- Why: The status bar is OS chrome drawn from Paper's iOS reference, not product type. Every product string is Archivo.
+- Rejected: Setting the clock in Archivo (misrepresents the device).
+- Rests on: Paper mobile-status-bar guide
+
+## 2026-11-17 · Ethical review of screens batch 1: no anti-patterns found
+- Decided by: design subagent, default
+- Why: Checked against the Intent anti-pattern catalogue. Buy anyway is the same size, full contrast, always on screen and never locked on every Coach card, including loading and error. Consent is four separate rows, all off. The follow-up and budget answers are equal. Nothing grades an outcome. There are no streaks, badges or countdowns. The coach copy only asks or states facts. Not covered: Tracker, Practice and You screens beyond Check-in settings, which come in later batches.
+- Rejected: Nothing.
+- Rests on: Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Start and Coach

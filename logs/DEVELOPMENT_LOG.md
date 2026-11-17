@@ -1,7 +1,7 @@
 # Development log
 
 ## Latest summary
-**2026-11-16 22:45 ET** · written by Aariz-Claude
+**2026-11-16 22:41 ET** · written by Aariz-Claude
 
 **Recent changes**
 - Phase 0 landing page for hldfinance.ca is built on `phase0-landing`, in [PR #1](https://github.com/Duckafaligy/hldfinance/pull/1) (open). It includes a Next.js 16 + Tailwind 4 scaffold, the landing page, the waitlist form (validation only, not connected to storage), privacy/terms placeholders, Theme UI tokens, gradients, logo, icons, dark mode, a pricing section (Free / Pro planned), and an en-CA money formatting helper with a node test.

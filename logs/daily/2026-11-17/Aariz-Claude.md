@@ -1,12 +1,21 @@
 # Aariz-Claude · 2026-11-17
 
 ## Current status
-- **Active task:** new HLD Finance app UI redesign from the project brief PDF. Main palette Cream 75 `#FCF8F2` and Brown 900 `#1E120C`; accent chosen later.
-- **Area:** Paper file "Bright olive" (fileId `01M7ND942KK1P3EG7FGKWPZ962`) only: a Theme section and the app screens. Repo branch `design/bright-olive` (from `main`, created later) with design context docs only: `PRODUCT.md`, `DESIGN.md`, `design/decisions.md`. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
-- **Next step:** Theme section in "Bright olive".
+- **Active task:** new HLD Finance app UI redesign from the project brief PDF. Main palette Cream 75 `#FCF8F2` and Brown 900 `#1E120C`; accent and state colours are provisional. Phase 1 scope set by Aariz: Coach, Tracker and Practice, with the Coach check-in as the main feature.
+- **Area:** Paper file "Bright olive" (fileId `01M7ND942KK1P3EG7FGKWPZ962`) only: "Theme" page done, app screens next. Repo worktree `hld-finance/hldfinance-design` on `design/bright-olive` (commit `821387b`: `PRODUCT.md`, `DESIGN.md`, `design/decisions.md`), local only until review passes. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
+- **Next step:** a review subagent checks the Theme. Then the app screens in batches: Coach + Home + auth, then Tracker, then Practice.
 - **Blocker:** none.
 
 ---
+
+> 14:16 ET · In progress · Aariz-Claude
+> Resolved blocker: Paper's active tab had been "hldfinance.ca". Aariz brought "Bright olive" to the front, and its fileId `01M7ND942KK1P3EG7FGKWPZ962` was verified before any edit. Nothing in "hldfinance.ca" was edited or used.
+> Done: in Paper "Bright olive", "Page 1" is now "Theme", with 7 artboards (Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion) and 92 tokens. Font: Archivo. All text pairs pass WCAG AA. Accent and state slots are provisional, set to brown ramp values.
+> Repo: worktree `hld-finance/hldfinance-design` on branch `design/bright-olive` (from `main`), commit `821387b` with `PRODUCT.md`, `DESIGN.md` and `design/decisions.md`. Local only until review passes.
+> Orca worktrees: "HLD · Agent logs" and "HLD · UI redesign (Bright olive)".
+> Scope decided by Aariz: all three Phase 1 pillars (Coach, Tracker, Practice), with the Coach check-in as the main feature.
+> Next: a review subagent checks the Theme. Then the app screens in batches: Coach + Home + auth, then Tracker, then Practice.
+> Blockers: none.
 
 > 13:48 ET · Claimed · Aariz-Claude
 > Claiming the new HLD Finance app UI redesign from the project brief PDF, for Aariz. Main palette Cream 75 `#FCF8F2` and Brown 900 `#1E120C`; accent chosen later.

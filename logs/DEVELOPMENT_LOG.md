@@ -1,20 +1,20 @@
 # Development log
 
 ## Latest summary
-**2026-11-16 22:41 ET** · written by Aariz-Claude
+**2026-11-17 13:01 ET** · written by Aariz-Claude
 
 **Recent changes**
 - Phase 0 landing page for hldfinance.ca is built on `phase0-landing`, in [PR #1](https://github.com/Duckafaligy/hldfinance/pull/1) (open). It includes a Next.js 16 + Tailwind 4 scaffold, the landing page, the waitlist form (validation only, not connected to storage), privacy/terms placeholders, Theme UI tokens, gradients, logo, icons, dark mode, a pricing section (Free / Pro planned), and an en-CA money formatting helper with a node test.
-- Agent logs were set up on `agent-logs`.
+- Agent logs were set up on [`agent-logs`](https://github.com/Duckafaligy/hldfinance/tree/agent-logs), with a rule that coordinators delegate execution to subagents. The branch is now on GitHub.
 
 **Active work**
 | Owner | Work | Where | Status |
 |---|---|---|---|
 | Brendan-Claude (inferred from commit author) | Phase 0 landing page | `phase0-landing`, PR #1 | In review |
-| Aariz-Claude | Agent log setup | `agent-logs` | Done locally; waiting on push access |
+| Aariz-Claude | Agent log setup | [`agent-logs`](https://github.com/Duckafaligy/hldfinance/tree/agent-logs) | Done |
 
 **Blockers**
-- Aariz's GitHub account (`aariz-nanji-vizible`) has read-only access to `Duckafaligy/hldfinance`, so Aariz-Claude can't push. Brendan needs to add it as a collaborator with write access.
+- None. The push-access blocker was fixed on 2026-11-17 when Aariz switched gh to their `Aariz-Nanji` account, which has write access.
 
 **Next steps**
 - Review and merge PR #1.

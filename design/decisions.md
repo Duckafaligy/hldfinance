@@ -113,3 +113,93 @@
 - Why: Checked against the Intent anti-pattern catalogue. Buy anyway is equal size and AA-contrast. There are no streaks, badges, red dots, countdowns or confetti. The Skipped total is labelled "money not spent, not money saved". Check-in outcomes are styled neutrally. Disabled states carry a written reason. Not covered: real copy flows, onboarding screens and league screens, which come in the next run.
 - Rejected: Nothing.
 - Rests on: Principles and Components & states boards in Paper, Bright olive / Theme
+
+## 2026-11-17 · Button labels get their own type token, 16/20/600, and Label stays 14/500 for chips and field labels
+- Decided by: design subagent, default, applying theme review 1, fix 6
+- Why: Buttons already computed at 16/600 while the Label token and DESIGN.md said 14/500. A separate `--text-button` makes the drawn size and the documented size the same thing.
+- Rejected: Shrinking buttons to 14/500 (weakens the primary action on a phone). Overloading Label with two weights.
+- Rests on: theme-review-1.md, fix 6; get_computed_styles on the Buttons rows
+
+## 2026-11-17 · Every 15px text moves to Table (14/20) and every 12px tab label moves to Caption (13/18); no size sits off the scale
+- Decided by: design subagent, default, applying theme review 1, fix 6
+- Why: 15 and 12 were outside the scale. Board notes and ledes moved with the product text so one sweep leaves zero off-scale nodes. `--text-table` and `--leading-table` were added so Table is a token, not a remembered number.
+- Rejected: A separate `--text-tab` at 12 (below the 13 floor for small text). Keeping 15 for board notes only (a second exception to remember).
+- Rests on: find_nodes fontSize 15px and 12px on the Theme page, 0 after the change
+
+## 2026-11-17 · The Coach card's actions use an inverse accent pair, and Buy anyway's outline there is Cream 300
+- Decided by: design subagent, default, applying theme review 1, fix 7 and the visual misdirection ruling
+- Why: The card's buttons were bound to raw ramp tokens, so an accent swap would miss them. `--color-accent-inverse`, `--color-accent-inverse-pressed`, `--color-on-accent-inverse`, `--color-accent-inverse-subtle` and `--color-border-control-inverse` follow the swap. Cream 300 is 9.74:1 on Brown 900; Brown 500 was 4.23:1, which read as a fainter door.
+- Rejected: Reusing the light-surface accent tokens on the dark card (wrong contrast direction). Brown 500 outline (visual misdirection).
+- Rests on: theme-review-1.md, fix 7 and "Visual Misdirection ruling"; Colour roles board, new Controls rows
+
+## 2026-11-17 · Primary emphasis on Remind me is kept, bounded by four written rules as Principle 4
+- Decided by: theme review 1 (ruling), written into the system by the design subagent
+- Why: Remind me is the pause, so it leads; the four rules (same 16/600 full-strength label, fixed order with both always shown, no confirmation or lock on Buy anyway, Cream 300 outline on the Coach card) keep that emphasis from becoming visual misdirection.
+- Rejected: Equal-weight buttons (no primary on the main screen). A text-link Buy anyway (suppressed opt-out).
+- Rests on: theme-review-1.md, "Visual Misdirection ruling"; Intent anti-pattern catalogue, visual misdirection and low-contrast opt-out
+
+## 2026-11-17 · Track and row-group edges are inset shadows, so the 4 inset is measured from the outer edge
+- Decided by: design subagent, default, applying theme review 1, fix 8
+- Why: A 1px border plus 4px padding made a 5px inset, so inner = outer − padding gave 7 and 11 while 8 and 12 were drawn. An inset shadow keeps the edge without taking space. The dashed disabled track keeps its border with 3px padding, which is also 4 from the outer edge.
+- Rejected: Documenting the border as excluded from the rule (a second rule to remember). Redrawing segments at 7 and rows at 11 (off the radius scale).
+- Rests on: theme-review-1.md, fix 8; get_computed_styles on the segmented tracks and row groups
+
+## 2026-11-17 · Elevation colours are written as color-mix of Brown 900, never as hex
+- Decided by: design subagent, default
+- Why: The selected segment computed as one 10% layer in hex; it now carries the documented two 6% layers, and all level 1 and level 2 shadows reference `--color-brown-900` so no raw hex remains in a node.
+- Rejected: Hex with alpha (breaks the no-raw-value rule and won't follow a palette change).
+- Rests on: theme-review-1.md, fix 8; find_nodes boxShadow on the Theme page
+
+## 2026-11-17 · In check-in records only Held keeps an icon; Bought and Let go are text only
+- Decided by: design subagent, default, applying theme review 1, fix 5
+- Why: A ✓ on Bought and a ✕ on Let go graded the outcome. The clock on Held marks waiting, not a verdict. An empty 16 lane keeps the status column aligned.
+- Rejected: Matching neutral icons for both (adds glyphs that say nothing the words don't).
+- Rests on: theme-review-1.md, fix 5
+
+## 2026-11-17 · Consent has four separate purposes, all off: usage counts, coach uses past check-ins, weekly tip by email, research invitations
+- Decided by: design subagent, default
+- Why: One purpose per row, each saying exactly what is used, matches "consent is separate for each purpose" and "privacy defaults to the highest level". Nothing that is required to run the app is presented as a choice.
+- Rejected: A single "help improve HLD" toggle (bundled consent). Any purpose drawn on by default.
+- Rests on: design-brief.md, "Privacy"; CLAUDE.md, "Hard rules" (PIPEDA)
+
+## 2026-11-17 · The Coach card keeps Remind me and Buy anyway live while the next question loads or fails
+- Decided by: design subagent, default
+- Why: The coach never blocks. A slow or failed question must not hold the purchase decision hostage; the error says the earlier answer is saved and offers Try again beside both doors.
+- Rejected: Disabling the actions until the question loads (a block disguised as loading).
+- Rests on: design-brief.md, "Before-you-buy check-in"; Principle 4, rule 3
+
+## 2026-11-17 · Chart scales are fixed at $2,000 either side of zero for net worth and 10% for practice returns, widening only when a value passes them
+- Decided by: design subagent, default
+- Why: Auto-fitted axes make a $40 move look like a cliff. The practice chart plots % return so its zero is the $10,000 start, and the band below zero is tinted so a negative month reads without colour.
+- Rejected: Auto-scaled axes. Plotting the practice dollar value with a $10,000 baseline that isn't zero.
+- Rests on: impeccable concept-seed catalogue challenger "botanical folio" (fixed scale across comparisons); design-brief.md, net worth "can go below zero"
+
+## 2026-11-17 · Practice applies a 1.5% FX fee on US listings, shown as its own row in CAD before the order
+- Decided by: design subagent, default
+- Why: The brief asks for the cost in CAD including any FX fee. 1.5% is in the range Canadian brokers charge, so the lesson carries over to real investing, and it is shown, never folded into the price.
+- Rejected: No FX fee in Practice (teaches that US stocks cost the same as Canadian ones). A hidden spread in the rate.
+- Rests on: design-brief.md, "Plain-English trade screen"
+
+## 2026-11-17 · Sign-in buttons are three equal outlined buttons, Apple first, with drawn placeholder marks; the build uses each company's official mark unaltered
+- Decided by: design subagent, default
+- Why: Equal treatment keeps email as easy as either company. Apple's guidance asks that Sign in with Apple be no less prominent than other providers, so it goes first. The marks on the board are drawn simply to avoid copying assets; Google's standard G is four-colour, so whether a one-colour G is allowed in the build has to be checked against Google's branding rules before launch.
+- Rejected: Filled black Apple and white Google buttons (two brand styles fighting the cream system). Copying logo files from the web.
+- Rests on: brief for this run, "Auth buttons"; Apple Human Interface Guidelines, Sign in with Apple; Google Identity branding guidelines
+
+## 2026-11-17 · Account deletion is the only dialog; it lists what goes, says 30 days, and offers "Download my data first"
+- Decided by: design subagent, default
+- Why: Deletion is the one irreversible action, so it gets protected focus. Listing every category makes the consequence transparent; Keep my account is plain, with no guilt. Delete uses `--color-state-error`, which equals the accent until the accent arrives.
+- Rejected: Typed-word confirmation (friction beyond what an informed tap needs). Copy like "We'll miss you" (confirmshaming).
+- Rests on: design-brief.md, "Privacy"; decisions.md entry on onboarding, consent and deletion
+
+## 2026-11-17 · The daily tip is a light card that carries the fine print and hides itself if it doesn't load in 8 s
+- Decided by: design subagent, default
+- Why: The Coach card stays the only dark surface. A tip is coach content, so the fine print goes with it. A missing tip is not worth an error message.
+- Rejected: A second dark card. An error state for a tip.
+- Rests on: Principle 1, "Coach first"; design-brief.md, "Fine print goes on coach screens only"
+
+## 2026-11-17 · Ethical review of the review-1 additions: no anti-patterns found
+- Decided by: design subagent, default
+- Why: Checked against the Intent anti-pattern catalogue. Buy anyway meets the four misdirection rules on both surfaces. Consent rows are all off and separate. The leaderboard has no trophies, medals or dollar balances, and its copy says bragging rights and free to join. Empty states name a single step with no pressure. Deletion lists what goes and keeping the account is one plain tap. The category picker preselects nothing, and the reminder sheet opens on the option the person already tapped. Not covered: real screen flows, which come in the next run.
+- Rejected: Nothing.
+- Rests on: Principles, Components & states and Components: product boards in Paper, Bright olive / Theme

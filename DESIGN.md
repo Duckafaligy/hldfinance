@@ -35,6 +35,11 @@ colors:
   accent-pressed: "#453023"
   accent-subtle: "#EDE5D9"
   on-accent: "#FCF8F2"
+  accent-inverse: "#FCF8F2"
+  accent-inverse-pressed: "#EDE5D9"
+  accent-inverse-subtle: "#453023"
+  on-accent-inverse: "#1E120C"
+  border-control-inverse: "#CDBAA6"
   state-gain: "#453023"
   state-loss: "#453023"
   state-warning: "#614734"
@@ -83,6 +88,12 @@ typography:
     fontWeight: 400
     lineHeight: "24px"
     letterSpacing: "0em"
+  button:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 600
+    lineHeight: "20px"
+    letterSpacing: "0em"
   label:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "14px"
@@ -128,7 +139,7 @@ components:
   button-primary:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.on-accent}"
-    typography: "{typography.label}"
+    typography: "{typography.button}"
     rounded: "{rounded.md}"
     height: "48px"
     padding: "0 20px"
@@ -141,6 +152,7 @@ components:
   button-secondary:
     backgroundColor: "{colors.surface-page}"
     textColor: "{colors.text-primary}"
+    typography: "{typography.button}"
     rounded: "{rounded.md}"
     height: "48px"
   button-secondary-pressed:
@@ -159,6 +171,7 @@ components:
   chip:
     backgroundColor: "{colors.surface-page}"
     textColor: "{colors.text-primary}"
+    typography: "{typography.label}"
     rounded: "{rounded.pill}"
     height: "40px"
     padding: "0 16px"
@@ -174,6 +187,38 @@ components:
     textColor: "{colors.text-inverse}"
     rounded: "{rounded.2xl}"
     padding: "24px"
+  coach-button-primary:
+    backgroundColor: "{colors.accent-inverse}"
+    textColor: "{colors.on-accent-inverse}"
+    typography: "{typography.button}"
+    rounded: "{rounded.md}"
+    height: "52px"
+  coach-button-secondary:
+    textColor: "{colors.text-inverse}"
+    typography: "{typography.button}"
+    rounded: "{rounded.md}"
+    height: "52px"
+  coach-chip-selected:
+    backgroundColor: "{colors.accent-inverse-subtle}"
+    textColor: "{colors.text-inverse}"
+    rounded: "{rounded.pill}"
+    height: "40px"
+  switch-off:
+    backgroundColor: "{colors.surface-sunken}"
+    rounded: "{rounded.pill}"
+    height: "28px"
+    width: "48px"
+  switch-on:
+    backgroundColor: "{colors.accent}"
+    rounded: "{rounded.pill}"
+    height: "28px"
+    width: "48px"
+  inline-notice:
+    backgroundColor: "{colors.state-bg}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.table}"
+    rounded: "{rounded.md}"
+    padding: "12px 14px"
   list-row:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.text-primary}"
@@ -198,7 +243,7 @@ components:
 
 # Design System: HLD Finance
 
-The source of truth is the Paper file **Bright olive**, page **Theme**, with seven artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent.
+The source of truth is the Paper file **Bright olive**, page **Theme**, with eight artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent.
 
 ## Overview
 
@@ -211,10 +256,15 @@ Platform: phone-first at 390×844, scaling up to desktop web. Light mode only fo
 1. **Coach first.** The check-in gets the most room, the largest type and the only dark card on the screen.
 2. **Ask, don't advise.** Coach copy is a question or a fact. It never says buy, sell, should, or advisor. It is "financial help".
 3. **Both doors open.** The coach never blocks. Buy anyway sits beside Remind me, the same size, always visible, with no guilt in the label.
-4. **Facts in tabular figures.** Comparable numbers line up on the digit. Gain is ▲ and +, loss is ▼ and a true minus (U+2212); colour is never the only cue.
-5. **Honest labels.** The label sits next to the number: "fake money", "money not spent, not money saved", "an assumption, not a promise".
-6. **Calm by default.** No streaks, countdowns, badges or red dots. One follow-up per purchase, check-ins can be switched off, and motion only marks a change of state.
-7. **Dense to compare, roomy to decide.** Journal, leagues, holdings and subscriptions are tight tables in narrow figures. Coach screens get one question, wide type and open space.
+4. **Equal weight, both ways.** Remind me leads because it is the pause; Buy anyway is never made harder to see or reach. These four rules keep the primary emphasis from becoming visual misdirection:
+   1. Buy anyway's label is full-strength text at the same 16/600 as Remind me: Brown 900 on cream, Cream 75 on the Coach card.
+   2. The order is fixed, Remind me above Buy anyway, and both are always on screen.
+   3. Buy anyway goes straight through. There is no confirmation step, and it never locks while Remind me is saving.
+   4. On the Coach card, Buy anyway's outline is Cream 300 (`--color-border-control-inverse`, 9.74:1), never Brown 500 (4.23:1).
+5. **Facts in tabular figures.** Comparable numbers line up on the digit. Gain is ▲ and +, loss is ▼ and a true minus (U+2212); colour is never the only cue.
+6. **Honest labels.** The label sits next to the number: "fake money", "money not spent, not money saved", "an assumption, not a promise".
+7. **Calm by default.** No streaks, countdowns, badges or red dots. One follow-up per purchase, check-ins can be switched off, and motion only marks a change of state.
+8. **Dense to compare, roomy to decide.** Journal, leagues, holdings and subscriptions are tight tables in narrow figures. Coach screens get one question, wide type and open space.
 
 ## Colors
 
@@ -268,6 +318,18 @@ Two pinned colours, Cream 75 `#FCF8F2` and Brown 900 `#1E120C`, with ten steps d
 
 When the accent arrives, change these four tokens only, and recheck each pair against AA.
 
+### Primary on the Coach card (inverse accent, provisional)
+
+The Coach card's actions use their own role pair, so an accent swap reaches them without touching the ramp.
+
+| Slot | Token | Current value | Pair | Ratio |
+|---|---|---|---|---|
+| Remind me fill on the Coach card | `--color-accent-inverse` | Cream 75 | Brown 900 label on it | 17.30 |
+| Pressed | `--color-accent-inverse-pressed` | Cream 150 | Brown 900 label on it | 14.66 |
+| Label on that fill | `--color-on-accent-inverse` | Brown 900 | | |
+| Selected answer chip | `--color-accent-inverse-subtle` | Brown 800 | Cream 75 label on it | 11.67 |
+| Buy anyway and chip outline | `--color-border-control-inverse` | Cream 300 | on Brown 900 | 9.74 |
+
 ### Tertiary (state slots, provisional)
 
 | Slot | Token | Current value | Pair | Ratio |
@@ -305,9 +367,12 @@ One family: **Archivo** (Google Fonts, variable weight 100–900 and width 62–
 | Title 3 | 18 / 24 | 600 | −0.01em | Card titles |
 | Body large | 18 / 28 | 400 | 0 | Coach explanations and answers |
 | Body | 16 / 24 | 400 | 0 | Default copy |
-| Label | 14 / 20 | 500 | 0.01em | Buttons, chips, field labels |
-| Caption | 13 / 18 | 400 | 0.01em | Timestamps, "Quotes delayed 15 minutes", fine print |
-| Table | 14 / 20 at width 87.5 | 400, 600 for symbols | 0 | Dense rows |
+| Button | 16 / 20 | 600 | 0 | Every button label, including Remind me and Buy anyway |
+| Label | 14 / 20 | 500 | 0.01em | Chips, segments, field labels, toast actions |
+| Table | 14 / 20 at width 87.5 | 400, 600 for symbols | 0 | Dense rows, check-in records, notes on the Theme boards |
+| Caption | 13 / 18 | 400 | 0.01em | Timestamps, tab labels, "Quotes delayed 15 minutes", fine print |
+
+Tokens: `--text-display`, `--text-figure-xl`, `--text-title-1/2/3`, `--text-body-lg`, `--text-body`, `--text-button`, `--text-label`, `--text-table`, `--text-caption`, each with a matching `--leading-*`. There are no other sizes: nothing is set at 12 or 15.
 
 ### Named Rules
 
@@ -329,8 +394,10 @@ Most surfaces sit flat with a 1px Cream 200 edge. Shadow marks only what is lift
 | Level | Use | Shadow |
 |---|---|---|
 | 0 Flat | Cards, row groups | none; 1px `--color-border-subtle` |
-| 1 Lifted | Selected segment, dragged row | `0 1px 2px rgb(30 18 12 / 0.06), 0 4px 12px rgb(30 18 12 / 0.06)` |
-| 2 Floating | Sheets, toasts, menus | `0 2px 6px rgb(30 18 12 / 0.08), 0 12px 32px rgb(30 18 12 / 0.14)` |
+| 1 Lifted | Selected segment, dragged row | `0 1px 2px` and `0 4px 12px`, both Brown 900 at 6% |
+| 2 Floating | Sheets, toasts, menus, dialogs | `0 2px 6px` Brown 900 at 8%, `0 12px 32px` Brown 900 at 14% |
+
+In Paper and in code the shadow colour is `color-mix(in srgb, var(--color-brown-900) 6%, transparent)`, never a hex value.
 | Scrim | Behind a sheet | Brown 900 at 40% (`--opacity-scrim`) |
 
 ## Shapes
@@ -353,22 +420,24 @@ Most surfaces sit flat with a 1px Cream 200 edge. Shadow marks only what is lift
 
 If the result is 4 or less, use `--radius-xs`.
 
+The padding is measured from the outer edge. A track or row group draws its 1px edge as an inset shadow (`inset 0 0 0 1px var(--color-border-subtle)`), so the 4 inset is exactly 4. A dashed edge cannot be a shadow, so the disabled segmented track keeps a 1px dashed border with 3px padding: still 4 from the outer edge.
+
 Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes 24 (tab bar, rows), 20 (buttons, toasts), 16 (inline with 13px text). Brown 900 when active, Brown 700 at rest, Cream 75 on the Coach card. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
 
 ## Components
 
-Every component is drawn in all its states on the Paper board "Components & states". Hover applies on the web only; on a phone the pressed state carries the same change.
+Controls are drawn in all their states on the Paper board "Components & states"; the pieces specific to Coach, Tracker and Practice are on "Components: product". Hover applies on the web only; on a phone the pressed state carries the same change. Every text node is bound to a text role token; none is set to a raw colour.
 
 ### Buttons
 
-- 48 high, `--radius-md`, label 16/600. One primary per screen. Coach answer buttons are 52 high.
+- 48 high, `--radius-md`, Button type (16/20/600). One primary per screen. Coach answer buttons are 52 high.
 - **Primary:** accent fill, on-accent text. Hover and pressed use accent-pressed; pressed also scales to 0.97.
 - **Secondary:** 1.5px Brown 500 outline. Hover Cream 100, pressed Cream 150 with a Brown 700 outline.
 - **Ghost:** underlined label (offset 4). Hover Cream 100, pressed Cream 150.
 - **Focus:** 2px ring in `--color-focus-ring` with a 2px gap in the surface colour.
 - **Disabled:** Cream 150 fill or Cream 200 outline with disabled text, always with a written reason next to it (for example, "Enter an amount first").
 - **Loading:** a spinner and a short verb ("Saving") at the same width; taps are ignored until it finishes.
-- **Remind me / Buy anyway:** the same size, stacked, both always visible. Remind is primary and Buy anyway is secondary; Buy anyway is never made smaller, fainter or lower-contrast.
+- **Remind me / Buy anyway:** the same size, stacked, both always visible. Remind is primary and Buy anyway is secondary; Buy anyway is never made smaller, fainter or lower-contrast. Principle 4 holds the four rules.
 
 ### Chips (if used)
 
@@ -379,7 +448,23 @@ Coach answers and journal tags (Planned / FOMO). 40 high in a 44 target, pill. D
 - `--radius-xl`, 16 padding, Cream 50 on a Cream 200 edge. A card is tappable only when the whole card leads somewhere: pressed is Cream 150 with a Cream 300 edge, and focus uses the ring.
 - **Error** state: an alert icon, a sentence saying what failed and that nothing was lost, and a Try again secondary button.
 - **Budget ring:** 72px, 8 stroke. The track is Cream 200 and the progress is accent. It fills clockwise from 12 o'clock as money is spent, and the amount left is always shown beside it ("$142 left · of $300 · payday in 6 days").
-- **Coach card:** Brown 900, `--radius-2xl`, 24 padding, the question in Display, with answers and actions inside at `--radius-md`.
+- **Coach card:** see below.
+
+### Coach card
+
+The only dark surface. Brown 900, `--radius-2xl`, 24 padding (12 at the top, where the 44 high progress row starts). Drawn at phone width, 358. Top to bottom:
+
+| Part | Spec |
+|---|---|
+| Progress and Skip | 44 high row. "1 of 3" in Caption, Cream 300, tabular. Skip is an underlined Label in Cream 75 with a 44 target. |
+| Item and price | Caption, Cream 300, 20 below the top row: "Wireless earbuds · $129.99". |
+| Question | Display 36/42, Cream 75, 8 below the item. One question per card. |
+| Fact (optional) | Body large, Cream 300: "You have $142 left for fun until payday on November 28." |
+| Answer chips | 32 below. 40 high pills with a 1.5 Cream 300 outline. Selected: Brown 800 fill, Cream 75 outline and a check. |
+| Remind me / Buy anyway | 40 below. 52 high, 12 apart, `--radius-md`. Remind me: `--color-accent-inverse` with `--color-on-accent-inverse`. Buy anyway: 1.5 `--color-border-control-inverse` outline, Cream 75 label. |
+| Fine print | 16 below. Caption, `--color-text-inverse-tertiary` (6.30:1): "General information, not personalized advice." Every Coach card carries it. |
+
+States: **default**; **next question** (progress advances, the previous answer is recorded, the next question rises in); **loading** (question and chips become Brown 800 skeleton bars, a Cream 300 caption says "Getting the next question. Both buttons below still work.", and both buttons stay live); **error** (alert icon and "The next question didn't load. Your first answer is saved." in Body large, a 40 high Try again outline, both buttons still live). Skip moves on without an answer; after the third question or three skips, only the two buttons remain.
 
 ### Inputs / Fields
 
@@ -390,16 +475,22 @@ Coach answers and journal tags (Planned / FOMO). 40 high in a 44 target, pill. D
 
 ### Navigation
 
-- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, 12px labels. The selected tab gets a Cream 150 pill (56 × 32) behind its icon and a 600 label. Pressed shows a Cream 100 pill, and focus a 2px ring around the tab. No badges or dots.
-- **Segmented control:** Cream 100 track, `--radius-md`, 4 inset. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation. Pressed is Cream 150, focus a 2px ring on the segment, and disabled a dashed track with disabled text.
+- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). The selected tab gets a Cream 150 pill (56 × 32) behind its icon and a 600 label. Pressed shows a Cream 100 pill, and focus a 2px ring around the tab. No badges or dots.
+- **Segmented control:** Cream 100 track, `--radius-md`, 4 inset with the edge as an inset shadow. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation. Labels are Label (14). Pressed is Cream 150, focus a 2px ring on the segment, and disabled a dashed track (1 border + 3 padding) with disabled text.
+- **Top bar:** 56 high on the page colour with a Cream 200 bottom edge. Back is a 96 wide slot (chevron and the previous place's name, Body) with a 44 target; the title is Title 3, centred; the right slot is 96 wide, empty or holding one text action (Button type, for example Save). Focus puts a 2px ring around Back.
+
+### Switch and consent
+
+- **Switch:** 48 × 28 inside a 44 target, knob 22. Off (the default for anything that shares data or sends a message): Cream 100 track with a 1.5 Brown 500 inset edge and a Brown 500 knob on the left. On: accent track, Cream 75 knob on the right. Pressed: Cream 150 track with a Brown 700 edge and the knob stretched to 28. Focus: the 2px ring with a 2px gap. Disabled: dashed Cream 300 track and a Brown 400 knob, with a written reason.
+- **Consent rows:** one purpose per row in a row group, each with a Body 500 name, a Caption that says exactly what is used and why, and a switch, all off until turned on. Under the group: "No ads, and nothing is sold. Change any of these in You › Privacy."
 
 ### List row
 
-64 high inside a row group (`--radius-lg`, 4 inset). Fixed lanes, in order: name with a detail line, a right-aligned tabular amount, and a 20px chevron. Pressed is Cream 150 at `--radius-md`; focus is a 2px inset ring.
+64 high inside a row group (`--radius-lg`, 4 inset, edge as an inset shadow). Fixed lanes, in order: name with a detail line, a right-aligned tabular amount, and a 20px chevron. Pressed is Cream 150 at `--radius-md`; focus is a 2px inset ring.
 
 ### Check-in record (signature)
 
-Every check-in and every trade becomes one line, in Item | Price | Status columns at width 87.5. A held item changes state in place: "Held · ask again Nov 18" becomes "Bought Nov 18" or "Let go Nov 18". It never disappears, and no outcome is styled as the better one. Trades follow the same pattern in the journal: Date, Symbol, Side, Shares, Price CAD, Return, Tag.
+Every check-in and every trade becomes one line, in Item | Price | Status columns at width 87.5. A held item changes state in place: "Held · ask again Nov 18" becomes "Bought Nov 18" or "Let go Nov 18". It never disappears, and no outcome is styled as the better one: only Held carries an icon (the clock, because it is waiting); Bought and Let go are text only, with an empty 16 icon lane so the status column still aligns. Trades follow the same pattern in the journal: Date, Symbol, Side, Shares, Price CAD, Return, Tag.
 
 ### Toast
 
@@ -408,6 +499,30 @@ Brown 900, `--radius-lg`, level-2 elevation, 16 above the tab bar, with an optio
 ### Skeleton loader
 
 The same shapes and lanes as the content it replaces, in Cream 150 at `--radius-xs`. A Cream 100 band sweeps left to right every 1.4 s. After 8 s the skeleton is replaced by a sentence and a retry.
+
+### Product components (board "Components: product")
+
+All drawn at 358 (390 for the top bar), on the same tokens.
+
+- **Daily tip card:** a light card, never a second dark one. Title 3 tip, Body explanation in Brown 700, the fine print in Caption. Loading is a skeleton; after 8 s the card hides itself and leaves no gap or error.
+- **Skipped total:** Label "Skipped total", Figure XL amount, "+ $129.99 today" in Label when it just changed, and "Money not spent, not money saved." in Caption in every state. Empty shows $0.00 in Brown 600 with "When you hold off on something, its price shows up here."
+- **Charts:** a 44 wide Y lane (Caption at width 87.5, tabular, right-aligned, one line) and a 282 wide plot. Zero is a 1.5 Brown 700 line and its label is 600 Brown 900; the band below zero is filled with `--color-state-bg`; gridlines are Cream 200. The line is 2px accent with the latest point filled. Scales are fixed, $2,000 either side of zero for net worth and 10% for practice returns, and widen only when a value passes them. The practice chart plots % return so its zero is the starting $10,000, and carries "Quotes delayed 15 minutes. Past returns are not a forecast." States: one point so far (a sentence explains when the line starts) and couldn't load (the chart pauses at its last date, holdings unchanged, Try again).
+- **Budget ring, standalone:** 96, 10 stroke, Cream 200 track and accent fill from 12 o'clock as money is spent. Beside it: the category in Label, the amount in Title 2 ("$142 left", "$0 left", "$18 over") and "of $300 · payday in 6 days" in Caption. Over budget is a full ring with a short Cream 50 notch marking the overlap, stated in words, never in an alarm colour. Loading is a Cream 150 ring and bars.
+- **Date and pay-date picker:** month header with 44 chevron targets, Sun-first weekday row in Caption, 44 day cells in Table. Pay dates are a 36 accent circle with Cream 75 figures; today is a 1.5 Brown 900 ring; focus is the 2px ring with a gap. A legend and a sentence sit under the grid: "Every other Friday · next payday Nov 27".
+- **Category picker:** single-choice chips that wrap, plus a dashed "New category" chip. Nothing is preselected.
+- **Search:** the input pattern with a search icon and a 44 clear target. Results sit in a row group at width 87.5: symbol (600) over "Company · exchange · currency", and a 96 lane with the price in its listing currency over ▲/▼ change. "Quotes delayed 15 minutes" sits once above the list. States: default, typing with results, loading (skeleton rows), no results ('No match for "shopfy". Try the company name, or a ticker like SHOP.TO for Shopify on the TSX.'), and error ("Search isn't responding. Check your connection, then try again." with Try again).
+- **Share quantity:** the input pattern with a "shares" suffix and four decimals. Focus shows the CAD estimate including the FX fee under the field. Error: "Enter at least 0.0001 shares." Disabled while the quote loads, with that reason.
+- **Order summary:** Title 3 "Buy 0.4200 AAPL", one plain sentence on what the company does, then rows at width 87.5: price per share (15 min delayed), exchange rate, cost in CAD, FX fee with its rate, Total in CAD (600, above a Cream 300 rule), share of the portfolio after. Closes with "Fake money. No per-trade fee."
+- **Text area:** the input pattern at 112 high for the trade plan. Optional, saved with the trade, with a tabular counter to 280. At the limit typing stops and nothing is cut.
+- **TFSA room:** Label and year, the amount left in Title 3, an 8px bar (Cream 200 track, accent fill as room is used) and "$5,760 used of $7,000 · fake money". All used: "$7,000 used · new room on January 1, 2027".
+- **Inline notice:** `--color-state-bg` tint, `--radius-md`, a 20 icon and Table text in Brown 900. Information ("Practice uses fake money. Nothing here touches a real account.") has no edge; a warning adds a 1.5 `--color-state-warning` inset edge and a bold first sentence ("This order is $1,580. You have $1,240 of TFSA room left.") followed by the way out.
+- **Leaderboard rows:** 48 high at width 87.5 with fixed lanes: a 24 right-aligned rank, the display name, and a 96 right-aligned tabular % return with ▲ + / ▼ −. Your row is Cream 150 at `--radius-md` and 600. No trophies, medals, crowns or colour for first place. Footer: "Fake money · free to join · the prize is bragging rights."
+- **Invite link:** a read-only field showing the end of the link and a 104 wide Copy primary. Copied keeps the width, adds a check and returns after 2 s. Error: "Your browser blocked copying. Press and hold the link to copy it yourself."
+- **Bottom sheet:** `--radius-2xl` top corners, level-2 elevation over the scrim, a 36 × 4 Cream 300 handle, Title 2 heading, radio rows, a primary and an underlined Cancel.
+- **Dialog (deletion only):** `--radius-xl`, 24 padding, level 2 over the scrim. "Delete your account?", a list of exactly what goes, "It's gone from our servers within 30 days and can't be undone.", then Delete my account (primary, `--color-state-error`), Keep my account (secondary) and an underlined "Download my data first".
+- **Auth buttons:** three 52 high outlined buttons on Cream 50, Apple first, then Google, then email, each with a 20 mark in a fixed lane and a centred Button label "Continue with …". Pressed, focus, loading ("Opening Google", the other two stay usable) and an error line under the group. The marks on the board are drawn placeholders; the build uses each company's official mark, unaltered.
+- **Birth-year gate:** a 140 wide numeric field, "What year were you born?", "Only the year. It decides which features you see." Error: "Enter a four-digit year, like 2004." Under 18 gets an information notice listing what is open to them.
+- **Empty states:** a card with a Title 3 that names the state, one sentence on what will appear and why, and the single primary that makes it appear: "No trades yet" / Find a stock; "Just you in here" / Copy invite link; "No subscriptions logged" / Add a subscription; "$10,000.00 in cash" / Find a stock. No illustration, no mascot.
 
 ### Motion
 
@@ -450,7 +565,10 @@ Paper has no token type for shadows, durations or easing, so these values live h
 
 ### Don't:
 
-- Don't make Buy anyway smaller, fainter or further away than Remind me.
+- Don't make Buy anyway smaller, fainter or further away than Remind me, add a confirmation after it, or lock it while Remind me saves.
+- Don't draw Buy anyway's Coach-card outline in Brown 500; it is `--color-border-control-inverse`.
+- Don't mark first place in a league with a trophy, medal, crown or colour, and don't style one check-in outcome as the better one.
+- Don't set a colour as a raw value in Paper or code; bind it to a role token.
 - Don't use streaks, countdowns, badges, red dots, confetti, bounces or shakes.
 - Don't use Brown 500 for text, or put text on Cream 200 or darker light steps.
 - Don't add sports-page ornament (heavy rules, dingbats, all-caps headlines) to the dense tables. Their character comes from column rhythm alone.

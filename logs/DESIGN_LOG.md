@@ -3,7 +3,7 @@
 Paper source of truth: file **"hldfinance.ca"**, page **"Theme UI"** (boards: 00 Contents · Foundations 01–08 · Motion 08 · Components 09 · Patterns 10–12 · Logo 13 · Gradients 14). Token values are mirrored in `design/tokens.md` on `phase0-landing`.
 
 ## Latest summary
-**2026-11-17 14:16 ET** · written by Aariz-Claude
+**2026-11-17 18:33 ET** · written by Aariz-Claude
 
 **Recent changes**
 - The Theme UI design system is in Paper: 200 file tokens (colour, type, spacing, radius, breakpoints, containers), Theme v2 fonts (Urbanist / Figtree / Manrope), gradients, final logo, and a 17-icon set. All of it is applied to the landing page in PR #1.
@@ -11,7 +11,9 @@ Paper source of truth: file **"hldfinance.ca"**, page **"Theme UI"** (boards: 00
 **Active work**
 | Owner | Work | Where | Status |
 |---|---|---|---|
-| Aariz-Claude | New HLD Finance app UI redesign from the project brief PDF, covering Phase 1 Coach, Tracker and Practice (Coach check-in is the main feature). Main palette Cream 75 `#FCF8F2` / Brown 900 `#1E120C`; accent and state colours provisional. | Paper file "Bright olive" only: "Theme" page done (7 artboards, 92 tokens, Archivo, all text pairs AA), app screens next. Branch `design/bright-olive` (`821387b`, local only until review) with `PRODUCT.md`, `DESIGN.md`, `design/decisions.md`. Not touching Paper "hldfinance.ca", `phase0-landing`, or app code. | In progress. Next: Theme review, then screens (Coach + Home + auth, Tracker, Practice) |
+| Aariz-Claude | New HLD Finance app UI redesign from the project brief PDF, covering Phase 1 Coach, Tracker and Practice (Coach check-in is the main feature). Main palette Cream 75 `#FCF8F2` / Brown 900 `#1E120C`; accent and state colours provisional. | Paper file "hldfinanc redoo" (renamed from "Bright olive", fileId `01M7ND942KK1P3EG7FGKWPZ962`) only. Done: Theme page; batch 1 pages Start (7 artboards) and Coach (14 artboards + Motion board), review passed with 8 fixes. Branch `design/bright-olive` (head `f72271a`, local only) with `PRODUCT.md`, `DESIGN.md`, `design/decisions.md`. Not touching Paper "hldfinance.ca", `phase0-landing`, or app code. | Batch 2 (Tracker and You) paused, nothing drawn. Next: batch 2, then batch 3 (Practice) |
+| Aariz-Claude | Typography and shape revision: selective high-contrast italic serif, heavy tight sans headlines, readable UI text, updated type tokens; angular 2/4/6 px radii (Outer = Inner + Padding, padded cards max 6 px outer, square or 2 px inside). Plus the 8 batch-1 review fixes and queued Theme cleanup. | "hldfinanc redoo" pages Theme, Start and Coach; docs on `design/bright-olive`. | In progress |
+| Aariz-Claude (logo subagent) | About 20 logo concepts. | "hldfinanc redoo", new page "Logo concepts" only; no screen pages. | In progress (parallel) |
 
 **Blockers**
 - None.

@@ -1,16 +1,28 @@
 # Aariz-Claude · 2026-11-18
 
 ## Current status
-- **Active task:** four parallel claims in the HLD Finance app UI redesign, each subagent on its own page:
-  - (a) UI/UX Pro Max pass part 2 on pages Start, Coach and Theme: toast timing, DESIGN.md rules, leftover 6px gaps, screenshots. The only committer on `design/bright-olive`.
-  - (b) Screens batch 2: new pages Tracker and You.
-  - (c) Screens batch 3: new page Practice.
-  - (d) Logo: a hand-tuned 16px version of concept 20 "Leaning h", on the Logo concepts page only.
-- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`) only. Docs on `design/bright-olive` (head `0d4f26a`, local only). Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
-- **Next step:** review everything, resolve Brendan Lau's open Paper padding comment, and get Aariz's logo choice (drop position A or B, and a lockup).
+- **Active task:** none. All four 2026-11-18 claims (a)–(d) are done, reviewed and verified. Waiting for Aariz.
+- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`). Docs on `design/bright-olive` (head `efd587b`, local only). Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
+- **Next step:** Aariz decides the logo lockup, whether to push `design/bright-olive`, and the below-zero chart gridlines.
 - **Blocker:** none.
 
 ---
+
+> 09:15 ET · Done · Aariz-Claude
+> All four claims are finished in Paper "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`). Commits are on `design/bright-olive`, local only.
+> Done:
+> - (a) UI/UX Pro Max pass part 2 (`4eff513`).
+> - (d) Logo: Aariz chose concept 20 "Leaning h", drop position B. Hand-tuned 16/32/60px versions are on the "20 · Small sizes" board.
+> - (b) Screens batch 2: Tracker (10 artboards) and You (5).
+> - (c) Screens batch 3: Practice (21).
+> - Theme follow-ups: icon size tokens, ring and inverse text-area components, page order (`58c279d`).
+> Reviews: three parallel reviews (Start/Coach, Tracker/You, Practice) found 21 fixes, all applied by three parallel fix subagents. A verify pass followed (`17a31cc`), then a final verification found 4 misses, which were fixed (`efd587b`).
+> Key fixes: budget rings show money left; Subscriptions has monthly and yearly columns; the journal lists all 7 trades; the AAPL screen shows the FX fee and its share of the portfolio; the check-in step counter is in the top bar only; primary buttons are 48.
+> Brendan Lau's Paper comment c-tii8f0 ("standardise box padding") is resolved. Screens use 40 top / 16 sides and boxes 16, verified on all 54 phone screens. No reply was posted because Paper has no reply tool.
+> Open for Aariz: the logo lockup ("Hold" in the serif, or "hld" in the heavy sans); whether to push `design/bright-olive` to GitHub; whether chart gridlines in the below-zero band can stay nearly invisible (about 1.1:1), with the axis labels carrying the scale.
+> GitHub check: nothing new from Brendan. `main` a113b07, `phase0-landing` 5f64212 (last commit 2026-11-16 18:18 ET), PR #1 still open with no comments or reviews, no Brendan-Claude log. No overlap with the redesign.
+> Next: wait for Aariz.
+> Blockers: none.
 
 > 08:20 ET · Claimed · Aariz-Claude
 > Closed out 2026-11-17 into `DESIGN_LOG.md` and `DEVELOPMENT_LOG.md`.

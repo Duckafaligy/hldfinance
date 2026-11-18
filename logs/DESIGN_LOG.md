@@ -4,32 +4,27 @@ App redesign source of truth: Paper file **"hldfinanc redoo"** (fileId `01M7ND94
 Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Theme UI"** (boards: 00 Contents · Foundations 01–08 · Motion 08 · Components 09 · Patterns 10–12 · Logo 13 · Gradients 14). It is owned by Brendan's `phase0-landing` work, and its token values are mirrored in `design/tokens.md` on that branch.
 
 ## Latest summary
-**2026-11-18 08:20 ET** · written by Aariz-Claude
+**2026-11-18 09:15 ET** · written by Aariz-Claude
 
-**Recent changes**
-- 2026-11-17: the app redesign in Paper "hldfinanc redoo" now has a Theme page (8+ boards, tokens, components), a Start page (7 screens) and a Coach page (14 screens + Motion board). The Theme review and the batch 1 review both passed, batch 1 with 8 fixes.
-- Revision 1 (`e6a1bef`): Instrument Serif Italic used selectively, Archivo 800 at −0.04em headlines, radii 0/2/4/6, and standard paddings (screens 40 top / 16 sides, boxes 16).
-- UI/UX Pro Max pass part 1 (`0d4f26a`, paused): 44px touch targets, 8px gaps, safe area 34, 4/8 rhythm, step counters, Back/Close, and official Apple/Google sign-in marks.
-- Logo concepts page: 20 concepts. Aariz picked concept 20, "Leaning h", refined with drop positions A (recommended) and B.
+**Recent changes** (all in Paper "hldfinanc redoo", fileId `01M7ND942KK1P3EG7FGKWPZ962`; commits on `design/bright-olive`, local only)
+- UI/UX Pro Max pass part 2 done (`4eff513`).
+- Logo: Aariz chose concept 20 "Leaning h", drop position B. Hand-tuned 16/32/60px versions are on "20 · Small sizes".
+- New screens: Tracker (10 artboards), You (5), Practice (21).
+- Theme follow-ups: icon size tokens, ring and inverse text-area components, page order (`58c279d`).
+- Three parallel reviews found 21 fixes, all applied. Verify pass (`17a31cc`), then a final verification found 4 misses, fixed in `efd587b`. Key fixes: budget rings show money left, Subscriptions shows monthly and yearly columns, the journal lists all 7 trades, the AAPL screen shows the FX fee and portfolio share, the check-in step counter is in the top bar only, primary buttons are 48.
+- Brendan Lau's Paper comment c-tii8f0 ("standardise box padding") is resolved: screens 40 top / 16 sides, boxes 16, verified on all 54 phone screens. No reply was posted (Paper has no reply tool).
 - The landing page Theme UI (Paper "hldfinance.ca") is unchanged and stays with Brendan's `phase0-landing` work.
 
-**Active work** (all in Paper "hldfinanc redoo", fileId `01M7ND942KK1P3EG7FGKWPZ962`, each subagent on its own page)
-| Owner | Work | Where | Status |
-|---|---|---|---|
-| Aariz-Claude (a) | UI/UX Pro Max pass part 2: toast timing, DESIGN.md rules, leftover 6px gaps, screenshots | Pages Start, Coach and Theme; the only committer on `design/bright-olive` | Claimed 2026-11-18 |
-| Aariz-Claude (b) | Screens batch 2 | New pages Tracker and You | Claimed 2026-11-18 |
-| Aariz-Claude (c) | Screens batch 3 | New page Practice | Claimed 2026-11-18 |
-| Aariz-Claude (d) | Hand-tuned 16px version of logo concept 20 "Leaning h" | Logo concepts page only | Claimed 2026-11-18 |
-
-Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
+**Active work**
+- None. Aariz-Claude's 2026-11-18 claims are complete; waiting for Aariz's decisions.
 
 **Blockers**
 - None.
 
-**Next steps**
-- Review everything from (a)–(d).
-- Resolve Brendan Lau's open Paper comment on standard paddings.
-- Aariz chooses logo drop position A or B, and a lockup.
+**Next steps** (for Aariz)
+- Choose the logo lockup: "Hold" in the serif, or "hld" in the heavy sans.
+- Decide whether to push `design/bright-olive` to GitHub.
+- Decide whether chart gridlines in the below-zero band can stay nearly invisible (about 1.1:1), with the axis labels carrying the scale.
 
 ---
 

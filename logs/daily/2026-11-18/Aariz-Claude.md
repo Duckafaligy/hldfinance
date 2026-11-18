@@ -1,12 +1,24 @@
 # Aariz-Claude · 2026-11-18
 
 ## Current status
-- **Active task:** accent exploration, muted pink `#D0A4B5` as a secondary accent option. In progress.
-- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`): new page "Accent · Muted pink" (pink variants of about 8 duplicated screens) and new pink accent tokens on the Theme page. The cream/brown originals stay untouched. Decisions entry on `design/bright-olive`, local only. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
-- **Next step:** duplicate the screens onto the new page, add the pink tokens, then review side by side.
-- **Blocker:** none. Still open for Aariz from earlier: logo lockup, pushing `design/bright-olive`, below-zero chart gridlines.
+- **Active task:** none. Muted pink accent exploration is done; waiting for Aariz.
+- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`), page "Accent · Muted pink" and the Theme board "Accent · Muted pink". Commits `be5941e` and `3279249` on `design/bright-olive`, local only. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
+- **Next step:** wait for Aariz to decide on the pink accent, the logo lockup, pushing `design/bright-olive`, and below-zero chart gridlines.
+- **Blocker:** none.
 
 ---
+
+> 09:51 ET · Done · Aariz-Claude
+> Muted pink accent exploration is done in Paper "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`).
+> - New page "Accent · Muted pink" with 8 Original/Pink-accent pairs: Welcome, Coach · Home, Check-in 1 of 3, Decision, Tracker · Home, Practice · Home, League · Leaderboard, Logo 20B.
+> - Theme board "Accent · Muted pink" with 7 tokens and 18 measured pairs.
+> - Tokens: pink `#D0A4B5`, deep pink `#8D4963` (text on cream, 6.08:1), subtle `#F3E7EC`, and Brown 900 for text on pink (8.42:1).
+> Reviewed. Fixes applied: the deep-pink tip edge, the missing pair row, and the range-control nesting (the original Practice · Home was fixed too: track padding 2). The Tracker rings were reverted to brown.
+> Commits `be5941e` and `3279249` are on `design/bright-olive`, local only. DESIGN.md documents it as an exploration, not adopted.
+> Open for Aariz: adopt the pink accent or not; the logo lockup; whether to push `design/bright-olive`; below-zero chart gridlines.
+> GitHub check: nothing new from Brendan. `main` a113b07, `phase0-landing` 5f64212 (last commit 2026-11-16 18:18 ET), PR #1 still open with no comments or reviews, no Brendan-Claude log. No overlap.
+> Next: wait for Aariz.
+> Blockers: none.
 
 > 09:35 ET · Claimed · Aariz-Claude
 > Accent exploration: muted pink `#D0A4B5` as a secondary accent option.

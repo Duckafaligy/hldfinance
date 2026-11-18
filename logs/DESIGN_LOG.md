@@ -4,9 +4,10 @@ App redesign source of truth: Paper file **"hldfinanc redoo"** (fileId `01M7ND94
 Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Theme UI"** (boards: 00 Contents · Foundations 01–08 · Motion 08 · Components 09 · Patterns 10–12 · Logo 13 · Gradients 14). It is owned by Brendan's `phase0-landing` work, and its token values are mirrored in `design/tokens.md` on that branch.
 
 ## Latest summary
-**2026-11-18 09:35 ET** · written by Aariz-Claude
+**2026-11-18 09:51 ET** · written by Aariz-Claude
 
 **Recent changes** (all in Paper "hldfinanc redoo", fileId `01M7ND942KK1P3EG7FGKWPZ962`; commits on `design/bright-olive`, local only)
+- Muted pink accent exploration done (`be5941e`, `3279249`). New page "Accent · Muted pink" with 8 Original/Pink-accent pairs: Welcome, Coach · Home, Check-in 1 of 3, Decision, Tracker · Home, Practice · Home, League · Leaderboard, Logo 20B. Theme board "Accent · Muted pink" with 7 tokens and 18 measured pairs. Tokens: pink `#D0A4B5`, deep pink `#8D4963` (text on cream, 6.08:1), subtle `#F3E7EC`, Brown 900 for text on pink (8.42:1). Review fixes applied: deep-pink tip edge, the missing pair row, range-control nesting (original Practice · Home fixed too: track padding 2), Tracker rings reverted to brown. DESIGN.md documents it as an exploration, not adopted.
 - UI/UX Pro Max pass part 2 done (`4eff513`).
 - Logo: Aariz chose concept 20 "Leaning h", drop position B. Hand-tuned 16/32/60px versions are on "20 · Small sizes".
 - New screens: Tracker (10 artboards), You (5), Practice (21).
@@ -16,12 +17,13 @@ Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Them
 - The landing page Theme UI (Paper "hldfinance.ca") is unchanged and stays with Brendan's `phase0-landing` work.
 
 **Active work**
-- Aariz-Claude · In progress (claimed 09:35 ET): accent exploration, muted pink `#D0A4B5` as a secondary accent option. Paper "hldfinanc redoo": new page "Accent · Muted pink" (pink variants of about 8 duplicated screens; cream/brown originals untouched) and new pink accent tokens on the Theme page. Decisions entry on `design/bright-olive`, local only. Not touched: "hldfinance.ca", `phase0-landing`, app code.
+- Aariz-Claude · Done (09:51 ET): muted pink accent exploration, page "Accent · Muted pink" and Theme board "Accent · Muted pink". Not adopted; waiting for Aariz's decision. Not touched: "hldfinance.ca", `phase0-landing`, app code.
 
 **Blockers**
 - None.
 
 **Next steps** (for Aariz)
+- Decide whether to adopt the muted pink accent.
 - Choose the logo lockup: "Hold" in the serif, or "hld" in the heavy sans.
 - Decide whether to push `design/bright-olive` to GitHub.
 - Decide whether chart gridlines in the below-zero band can stay nearly invisible (about 1.1:1), with the axis labels carrying the scale.

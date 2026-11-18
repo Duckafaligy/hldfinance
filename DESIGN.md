@@ -153,6 +153,14 @@ typography:
     fontWeight: 400
     lineHeight: "20px"
     letterSpacing: "0em"
+  # The hld wordmark beside the 32 tile (horizontal lockup). Stacked uses 36 (serif-title leading).
+  wordmark:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontStyle: italic
+    fontSize: "44px"
+    fontWeight: 400
+    lineHeight: "32px"
+    letterSpacing: "-0.01em"
 rounded:
   none: "0px"
   sm: "2px"
@@ -406,19 +414,19 @@ Gain and loss share a value on purpose: the ▲ + / ▼ − glyphs carry directi
 
 ## Accent: Muted pink (active, faint, 2026-11-18)
 
-Muted pink `#D0A4B5` is the accent, kept faint until a full design pass. Cream 75 and Brown 900 still carry every surface, line and word; pink is a quiet wayfinding and brand cue. It reaches screens by binding nodes to the `--color-accent-pink*` tokens below. No existing token value changed (token hash `93aa7a0a` at adoption; Paper's hash also covers descriptions, so it reads `df994ab5` after the pink descriptions were updated to "Active accent, faint", with all 136 values identical to the restore snapshot), so the restore point still renders as it was: Paper page "Restore point · Pre-pink · 2026-11-18", git tag `restore/pre-pink-2026-11-18`, and `design/restore/` (token snapshot and revert steps). Boards: Theme › Colour roles ("Accent: muted pink (active, faint)" and the faint-use rules) and Components & states.
+Muted pink `#D0A4B5` is the accent, kept faint until a full design pass. Cream 75 and Brown 900 still carry every surface, line and word; pink is a quiet wayfinding and brand cue. It reaches screens by binding nodes to the `--color-accent-pink*` tokens below. No existing token value changed (token hash `93aa7a0a` at adoption; Paper's hash also covers descriptions, so it reads `df994ab5` after the pink descriptions were updated to "Active accent, faint", with all 136 values identical to the restore snapshot; the 2026-11-18 review pass rewrote four descriptions and added `--leading-wordmark`, and the SHA-256 of the 136 original name=value pairs is still `580cff25e80f`), so the restore point still renders as it was: Paper page "Restore point · Pre-pink · 2026-11-18", git tag `restore/pre-pink-2026-11-18`, and `design/restore/` (token snapshot and revert steps). Boards: Theme › Colour roles ("Accent: muted pink (active, faint)" and the faint-use rules) and Components & states.
 
 ### Tokens
 
 | Token | Value | Role |
 |---|---|---|
-| `--color-accent-pink` | `#D0A4B5` | Solid pink, only for the small logo tile option and as the value behind the two inverse tokens. Never a large area, button, chart datum or tab block |
+| `--color-accent-pink` | `#D0A4B5` | Solid pink only for the small logo tile and as the value behind `--color-text-pink-inverse`. Never large areas, buttons, tab blocks, segments, chart data or text on cream (2.05) |
 | `--color-accent-pink-deep` | `#8D4963` | Text, icons and edges on cream: the step counter, the 1px callout edge, your row's edge. Never on the Coach card |
-| `--color-accent-pink-subtle` | `#F3E7EC` | Tint for selected tabs, segments and chips, one callout, your own row. Always with a second cue |
+| `--color-accent-pink-subtle` | `#F3E7EC` | Tint for selected tabs, segments and chips, one callout, your own row. Never the only cue (1.18 / 1.14 / 1.05 on Cream 50 / 75 / 100): always pair with a Pink deep edge or the 600 label and Brown 900 icon/outline |
 | `--color-on-accent-pink` | Brown 900 | The h on a pink tile, text on a pink fill |
-| `--color-text-pink-inverse` | Pink | Pink text on the Brown 900 Coach card: the item and price |
+| `--color-text-pink-inverse` | Pink | Pink text on the Brown 900 Coach card: the item name only. The price and its "·" stay `--color-text-inverse` (17.30) |
 | `--color-focus-ring-pink` | Pink deep | 2px focus ring on light surfaces, and the 1.5 border of a focused field |
-| `--color-focus-ring-pink-inverse` | Pink | Not used on screens: the Coach-card ring stays Cream 75 (`--color-focus-ring-inverse`). Kept for the exploration reference |
+| `--color-focus-ring-pink-inverse` | Pink | Not used on screens; the Coach-card ring stays `--color-focus-ring-inverse` (17.30). Kept for the exploration reference |
 
 ### Pairs
 
@@ -432,7 +440,8 @@ Every pair was read from the bound tokens with `get_computed_styles` and compute
 | Pink deep on Pink subtle | 5.34 | AA; the callout's 1px edge and your row's 1.5 edge |
 | Pink deep border inside the Cream 200 halo | 4.54 | Passes 3:1 UI on a focused field |
 | Brown 900 on Pink | 8.42 | AAA: the h on a pink tile |
-| Pink on Brown 900 | 8.42 | AAA text: the item and price on the Coach card |
+| Pink on Brown 900 | 8.42 | AAA text: the item name on the Coach card |
+| Cream 75 on Brown 900 | 17.30 | AAA text: the "· $129.99" price beside the pink item name |
 | Pink subtle on Cream 50 (tab bar) | 1.18 | Not the only cue: the 600 label and Brown 900 icon are required |
 | Pink subtle on Cream 75 | 1.14 | Not the only cue: a Brown 900 outline (chip) or a Pink deep edge (callout, row) |
 | Pink subtle on Cream 100 (segment track) | 1.05 | Not the only cue: the lift and the 600 label |
@@ -449,7 +458,7 @@ At most one or two touches a screen, and some screens get none. The Pink subtle 
 - **Selected tab, segment and chip:** a Pink subtle fill (1.18 against the Cream 50 bar). The 600 label and the Brown 900 icon are the required second cue; a chip also keeps its Brown 900 outline and check. A segment stays Cream 50 when the screen already has two touches (Practice, League).
 - **Your own leaderboard row:** Pink subtle with a 1.5 inset Pink deep edge, and "· you" kept.
 - **Focus:** a 2px Pink deep ring on light surfaces and a 1.5 Pink deep border on a focused field. On the Coach card the ring stays Cream 75 on both doors.
-- **On the Coach card:** the item and price in Pink (8.42) on Check-in · Decision. Never the question, which stays Cream 75 in the serif.
+- **On the Coach card:** only the item name in Pink (8.42) on Check-in · Decision ("Wireless earbuds"). The price and its "·" separator stay `--color-text-inverse` (Cream 75, 17.30), so pink names the thing and never colours a money figure. Never the question, which stays Cream 75 in the serif.
 - **Brand and wayfinding:** "Hold off" and "Hold on" on Start · Welcome in Pink deep (6.08), that screen's one touch; the wordmark's optional pink tile.
 
 ### Where pink never goes
@@ -471,13 +480,13 @@ Lowercase "hld" in Instrument Serif Italic beside the Drop B 20B icon (Leaning h
 |---|---|
 | Icon | The Drop B 32 tile, 32 × 32, the hand-tuned 32 drawing used as is. Corner `--radius-lg` (6), so the tile stays on the 0/2/4/6 scale |
 | Word | "hld", `--font-serif` italic 400 |
-| Size | 44px (`--text-serif-display`), line height 32px (the tile's height) |
+| Size | 44px (`--text-serif-display`), line height 32px (`--leading-wordmark`, the tile's height). Bound on Start · Welcome and on every 32 horizontal lockup on Logo concepts › "Wordmark · hld (chosen)" (default, reverse, pink option) |
 | Tracking | −0.01em (`--tracking-serif`) |
 | Alignment | The row is `align-items: baseline`. The tile has no text, so its baseline is its bottom edge and the word's baseline lands on it. The ascenders of h, l and d are 0.735em (ink from 0.10em to 0.835em, measured), 32.3px at 44, so they reach the tile's top edge with a 0.6px overshoot. Centring the boxes instead leaves the ink 1.4px high |
 | Gap | 8 (`--spacing-8`), a quarter of the tile, from the tile edge to the text box. The italic lean makes it read 8.4 at the foot and 12 at the flag |
-| Stacked | The tile above, the word centred under it, gap 8, the word's line height 36 (`--leading-serif-title`) so the ascenders sit 8.4 under the tile |
+| Stacked | The tile above, the word centred under it, gap 8, the word's line height 36 (`--leading-serif-title`) so the ascenders sit 8.4 under the tile. Ratio: line height = 1.125 × tile = 0.818 × word (36 / 44 at a 32 tile, 67.5 / 82.5 at 60), against 1 × tile = 0.727 × word (32 / 44, 60 / 82.5) in the horizontal lockup. The stacked 32 binds `--text-serif-display` / `--leading-serif-title`; the 60 sizes are derived from the ratio and have no token |
 | Colour | Brown 900 (`--color-text-primary`) on Cream 75 with the Brown 900 tile; Cream 75 (`--color-text-inverse`) on Brown 900 with the Cream 75 tile. Both 17.30 |
-| Scaling | One unit: word = 1.375 × tile, gap = 0.25 × tile, line height = tile. At a 60 tile: gap 15, word 82.5. The corner does not scale: it is `--radius-lg` at every live size (24, 32, 60) and on the 20 image. The 4× construction drawing on Logo concepts shows it at 24 (4 × 6) |
+| Scaling | One unit: word = 1.375 × tile, gap = 0.25 × tile, line height = tile (horizontal) or 1.125 × tile (stacked). At a 60 tile: gap 15, word 82.5. The corner does not scale: it is `--radius-lg` at every live size (24, 32, 60) and on the 20 image. The 4× construction drawing on Logo concepts shows it at 24 (4 × 6) |
 | Clear space | Half the tile on every side (16 at the reference size), measured from the ink, with the d's italic overhang counted as part of the lockup |
 | Minimum size | 24 tile with the word as live text at 33 (above the 28 serif floor). From 20 to 23 the lockup is an exported image of this drawing (word 27.5 at 20). Below 20, the hand-tuned icon alone |
 | Pink | One faint option: the tile in `--color-accent-pink` with the h in `--color-on-accent-pink` (8.42) and the word in Brown 900. The word is never pink, and brown and cream stay the default |
@@ -516,7 +525,7 @@ Two families, each with one job.
 | Table | Archivo at width 87.5 | 14 / 20 | 400, 600 for symbols | 0 | Dense rows, check-in records, notes on the Theme boards |
 | Caption | Archivo | 13 / 18 | 400 | 0.01em | Timestamps, tab labels, "Quotes delayed 15 minutes", fine print |
 
-Tokens: `--font-sans`, `--font-serif`; sizes `--text-serif-hero`, `--text-serif-display`, `--text-serif-title`, `--text-display`, `--text-figure-xl`, `--text-title-1/2/3`, `--text-body-lg`, `--text-body`, `--text-button`, `--text-label`, `--text-table`, `--text-caption`, each with a matching `--leading-*`; weights `--font-weight-regular` 400, `-medium` 500, `-semibold` 600, `-bold` 700, `-extrabold` 800; tracking `--tracking-display` −0.04em (Display, Title 1), `--tracking-headline` −0.03em (Title 2, Figure XL), `--tracking-title` −0.01em (Title 3), `--tracking-serif` −0.01em, `--tracking-normal` 0, `--tracking-small` 0.01em. There are no other sizes on screens. Theme board headers use `--text-board-title` / `--leading-board-title` (64/64, Archivo 800), which never appear on a screen.
+Tokens: `--font-sans`, `--font-serif`; sizes `--text-serif-hero`, `--text-serif-display`, `--text-serif-title`, `--text-display`, `--text-figure-xl`, `--text-title-1/2/3`, `--text-body-lg`, `--text-body`, `--text-button`, `--text-label`, `--text-table`, `--text-caption`, each with a matching `--leading-*`; weights `--font-weight-regular` 400, `-medium` 500, `-semibold` 600, `-bold` 700, `-extrabold` 800; tracking `--tracking-display` −0.04em (Display, Title 1), `--tracking-headline` −0.03em (Title 2, Figure XL), `--tracking-title` −0.01em (Title 3), `--tracking-serif` −0.01em, `--tracking-normal` 0, `--tracking-small` 0.01em. There are no other sizes on screens. Theme board headers use `--text-board-title` / `--leading-board-title` (64/64, Archivo 800), which never appear on a screen. The hld wordmark has its own `--leading-wordmark` (32, the tile's height) with `--text-serif-display`; it is a logo setting, not a text style.
 
 ### Named Rules
 

@@ -597,12 +597,12 @@
 ## 2026-11-18 · The wordmark is lowercase "hld" in Instrument Serif Italic at 44 beside the Drop B 32 tile, baseline on the tile's bottom edge
 - Decided by: Aariz (lowercase hld, Instrument Serif Italic, paired with the 20B icon); size, alignment, clear space and minimum size are adoption subagent P1 defaults
 - Why: Measured at 100px, the word's ink runs from 0.10em to 0.835em, so at 44px (`--text-serif-display`) the ascenders of h, l and d are 32.3 tall: the word and the 32 tile share one band, ascenders at the tile's top and baseline on its bottom. Baseline alignment does this exactly because the tile's baseline is its bottom edge; centring the boxes leaves the ink 1.4px high. Gap 8 (`--spacing-8`), a quarter of the tile, reads 8.4 at the h's foot and 12 at its flag. Tracking stays `--tracking-serif`. The lockup scales as one unit (word 1.375 × tile). Clear space is half the tile. A 24 tile is the smallest live-text lockup (word 33, above the 28 serif floor); 20 to 23 ships as an image; below 20 the icon stands alone. The one pink option is a Pink tile with a Brown 900 h (8.42) and a Brown 900 word. The icon is the Drop B 32 drawing as is, corner 7.
-- Rejected: 32/36 centred, as first built on Start · Welcome (the word is 74% of the tile and its ink sits 1.3px high, so it reads as a caption beside the icon). 40px (no shared edge with the tile). `--radius-lg` 6 on the tile (the icon keeps its own 0.22 corner ratio, 7 at 32). A pink word.
+- Rejected: 32/36 centred, as first built on Start · Welcome (the word is 74% of the tile and its ink sits 1.3px high, so it reads as a caption beside the icon). 40px (no shared edge with the tile). `--radius-lg` 6 on the tile (the icon keeps its own 0.22 corner ratio, 7 at 32; superseded below: the tile is now `--radius-lg`). A pink word.
 - Rests on: Logo concepts › "20 · Small sizes" (Drop B chosen) and "Wordmark · hld (chosen)"; pixel measurements of a 100px render and a 4× lockup; DESIGN.md, Typography (serif floor 28)
 
 ## 2026-11-18 · Faint pink on Start and Coach, and the "hld" lockup on Welcome
 - Decided by: Aariz-Claude (coordinator), applied by adoption subagent P2
-- Why: Pink is used only for step counters; deep-pink focus borders; pink-subtle fills on the selected tab, the selected chip and the daily tip; and the item and price on Check-in · Decision. There is no pink on Sign up, Follow-up, Budget check-in, Error offline (pink next to an alert could read as a warning) or Coach · Motion.
+- Why: Pink is used only for step counters; deep-pink focus borders; pink-subtle fills on the selected tab, the selected chip and the daily tip; and the item and price on Check-in · Decision. There is no pink on Sign up, Follow-up, Budget check-in, Error offline (pink next to an alert could read as a warning) or Coach · Motion. On Start · Welcome the one pink touch is "Hold off" and "Hold on" in Pink deep (`--color-accent-pink-deep`, 6.08 on Cream 75); the wordmark tile stays Brown 900.
 - Rejected: Solid pink tab blocks. A pink tile on Welcome. Pink answers on Check-in · Decision.
 - Rests on: pink-adoption.md; WCAG 2.2 1.4.3 and 1.4.11
 
@@ -611,3 +611,15 @@
 - Why: Pink stays a quiet wayfinding cue, never data or a warning. The selected tab (pink-subtle) is the one constant touch. At most one more is added per screen: your leaderboard row (pink-subtle with a 1.5 inset deep-pink edge, "· you" kept), the TFSA "fake money" notice (pink-subtle with a deep-pink edge), the selected "Savings" chip, and "Step n of 5" in deep pink. Selected segments stay cream. Nodes were rebound; no token value changed (hash 93aa7a0a).
 - Rejected: Pink segments (3 touches on the leaderboard). Pink on the over-room warning, rings, chart, ▲/▼, Buy/Sell or Delete. A solid pink focus ring on the Coach card.
 - Rests on: pink-adoption.md; WCAG 2.2 1.4.3 and 1.4.11
+
+## 2026-11-18 · Wordmark tile corner is `--radius-lg` (6), not 7
+- Decided by: Aariz-Claude (coordinator), to stay on the radius scale; applied by design subagent P4
+- Why: Every corner in the system sits on 0/2/4/6, and a 7 was the only exception. The tile binds `--radius-lg` on Logo concepts › "Wordmark · hld (chosen)" (32, 60, 24 and the 20 image preview, horizontal, stacked, reverse, pink option and clear space), on Theme › Principles › "The mark" (both 32 lockups), and on Start · Welcome. The corner is a token, so it does not scale with the tile; the 4× construction drawing shows it at 24 (4 × 6). The 16 "icon alone" keeps the hand-tuned icon's 4 (`--radius-md` value), as it is the icon, not the lockup. Start · Welcome now matches the spec: "hld" at 44 (`--text-serif-display`) on a 32 line, `align-items: baseline`, gap 8, colours unchanged; it still fits 390 × 844.
+- Rejected: Keeping 7 as the icon's own 0.22 ratio (off the scale). Scaling the corner with the tile (11.25 at 60, off the scale).
+- Rests on: DESIGN.md, Spacing & radii (0/2/4/6); DESIGN.md › Accent: Muted pink › Wordmark
+
+## 2026-11-18 · Pink token descriptions say "Active accent, faint (2026-11-18)"
+- Decided by: Aariz-Claude (coordinator), applied by design subagent P4
+- Why: The seven `--color-accent-pink*` tokens still said "Exploration, not adopted" after adoption. Only the description prefix changed. Values are unchanged: a SHA-256 of all 136 name=value pairs is `580cff25e80f` both in the restore snapshot and after the edit. Paper's token hash also covers descriptions, so it moved from `93aa7a0a` to `df994ab5`; `design/restore/pre-pink-tokens.json` keeps the old descriptions for a full revert.
+- Rejected: Leaving the descriptions as they were (the earlier adoption entry kept them to protect the snapshot, but the snapshot file already preserves them).
+- Rests on: `design/restore/pre-pink-tokens.json`; Paper get_tokens

@@ -406,7 +406,7 @@ Gain and loss share a value on purpose: the ▲ + / ▼ − glyphs carry directi
 
 ## Accent: Muted pink (active, faint, 2026-11-18)
 
-Muted pink `#D0A4B5` is the accent, kept faint until a full design pass. Cream 75 and Brown 900 still carry every surface, line and word; pink is a quiet wayfinding and brand cue. It reaches screens by binding nodes to the `--color-accent-pink*` tokens below. No existing token value changed (token hash `93aa7a0a`), so the restore point still renders as it was: Paper page "Restore point · Pre-pink · 2026-11-18", git tag `restore/pre-pink-2026-11-18`, and `design/restore/` (token snapshot and revert steps). Boards: Theme › Colour roles ("Accent: muted pink (active, faint)" and the faint-use rules) and Components & states.
+Muted pink `#D0A4B5` is the accent, kept faint until a full design pass. Cream 75 and Brown 900 still carry every surface, line and word; pink is a quiet wayfinding and brand cue. It reaches screens by binding nodes to the `--color-accent-pink*` tokens below. No existing token value changed (token hash `93aa7a0a` at adoption; Paper's hash also covers descriptions, so it reads `df994ab5` after the pink descriptions were updated to "Active accent, faint", with all 136 values identical to the restore snapshot), so the restore point still renders as it was: Paper page "Restore point · Pre-pink · 2026-11-18", git tag `restore/pre-pink-2026-11-18`, and `design/restore/` (token snapshot and revert steps). Boards: Theme › Colour roles ("Accent: muted pink (active, faint)" and the faint-use rules) and Components & states.
 
 ### Tokens
 
@@ -469,7 +469,7 @@ Lowercase "hld" in Instrument Serif Italic beside the Drop B 20B icon (Leaning h
 
 | Part | Spec at the reference size |
 |---|---|
-| Icon | The Drop B 32 tile, 32 × 32, corner 7, the hand-tuned 32 drawing used as is. The corner is the icon's own 0.22 ratio, not a radius token |
+| Icon | The Drop B 32 tile, 32 × 32, the hand-tuned 32 drawing used as is. Corner `--radius-lg` (6), so the tile stays on the 0/2/4/6 scale |
 | Word | "hld", `--font-serif` italic 400 |
 | Size | 44px (`--text-serif-display`), line height 32px (the tile's height) |
 | Tracking | −0.01em (`--tracking-serif`) |
@@ -477,7 +477,7 @@ Lowercase "hld" in Instrument Serif Italic beside the Drop B 20B icon (Leaning h
 | Gap | 8 (`--spacing-8`), a quarter of the tile, from the tile edge to the text box. The italic lean makes it read 8.4 at the foot and 12 at the flag |
 | Stacked | The tile above, the word centred under it, gap 8, the word's line height 36 (`--leading-serif-title`) so the ascenders sit 8.4 under the tile |
 | Colour | Brown 900 (`--color-text-primary`) on Cream 75 with the Brown 900 tile; Cream 75 (`--color-text-inverse`) on Brown 900 with the Cream 75 tile. Both 17.30 |
-| Scaling | One unit: word = 1.375 × tile, gap = 0.25 × tile, line height = tile. At a 60 tile: gap 15, word 82.5 |
+| Scaling | One unit: word = 1.375 × tile, gap = 0.25 × tile, line height = tile. At a 60 tile: gap 15, word 82.5. The corner does not scale: it is `--radius-lg` at every live size (24, 32, 60) and on the 20 image. The 4× construction drawing on Logo concepts shows it at 24 (4 × 6) |
 | Clear space | Half the tile on every side (16 at the reference size), measured from the ink, with the d's italic overhang counted as part of the lockup |
 | Minimum size | 24 tile with the word as live text at 33 (above the 28 serif floor). From 20 to 23 the lockup is an exported image of this drawing (word 27.5 at 20). Below 20, the hand-tuned icon alone |
 | Pink | One faint option: the tile in `--color-accent-pink` with the h in `--color-on-accent-pink` (8.42) and the word in Brown 900. The word is never pink, and brown and cream stay the default |

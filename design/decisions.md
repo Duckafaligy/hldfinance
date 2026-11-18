@@ -473,3 +473,81 @@
 - Why: The queued Theme follow-ups from batches 2 and 3. Paper has no size token type, so `--icon-sm` 16, `--icon-md` 20 and `--icon-lg` 24 are file tokens of type spacing, and every 16, 20 and 24 icon on Theme, Start, Coach, Tracker, Practice and You (270 SVGs: 24 at 16, 79 at 20, 167 at 24, counted by get_jsx after the change, none left raw) has its width and height bound to them. Components: product gains "Ring · 72, Tracker home grid", copied from Tracker · Home (72, 8 stroke, whole dollars), and "Text area · inverse", copied from Trade · Coach 1 of 3 (Cream 50 field at `--radius-sm` on a Brown 900 sample card, focus a 2 Brown 900 gap plus a 2 `--color-focus-ring-inverse` ring, helper and counter in `--color-text-inverse-secondary`). The TFSA bar fill was 268 of 358 (74.9%); it is now 82.29% of the track (about 295), matching $5,760 of $7,000. Chart Y labels were 18 high in a 178 lane with the plot 9 down, so labels centred on gridlines at a 9 offset; labels are now Caption on a 16 line in a 176 lane (156 for the three-label Stock chart) with the plot 8 down, so each label still centres on its gridline and on the zero line. The net-worth month row had 18 gaps between 32 wide labels under points 50 apart; labels are now 34 wide with 16 gaps, still 50 apart, and the points moved 1 right (17 to 267) to stay centred over them. Applied to the Theme charts, Tracker · Net worth, Practice · Home, Stock · Plain English and the Practice · Loading Y lane, then re-screenshotted. Pages now run Theme, Start, Coach, Tracker, Practice, You, Logo concepts.
 - Rejected: Keeping 32 wide month labels with points 48 apart (leaves 26 on the right of a 282 plot against 16 on the left). Shrinking the plot to 272 (would also change the Practice charts, outside this pass). Binding the 48 specimens on the Icons board (they are enlargements, not a fourth size).
 - Rests on: the Theme follow-ups queued by design subagents (b) and (c) in batches 2 and 3; coordinator brief to design subagent (e), 2026-11-18; Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Tracker and Practice
+
+## 2026-11-18 · The Practice range control stays in its card, with smaller corners
+- Decided by: fix subagent F3, default
+- Why: It filters the chart beside it. Inside a card with 16px padding, the track takes radius 2 and its segments take 0.
+- Rejected: Moving the control out of the card, which separates it from the chart.
+- Rests on: review-fixes R3.4; DESIGN.md, Shapes
+
+## 2026-11-18 · Journal: the two Practice TFSA buys are dated, and the FX-fee status sits on two lines
+- Decided by: fix subagent F3, default
+- Why: VFV.TO was bought Nov 6, the same day as the ZEB.TO sale that cites it. XEQT was bought Oct 16, a payday. "Open · down by the FX fee" can't fit on one line, so it's set as "Open" over "down by the FX fee" in the 120 lane.
+- Rejected: One line, which leaves "fee" alone on its own line. Widening the lane, which pushes the trade line onto a second line.
+- Rests on: review-fixes R3.1 and R3.6
+
+## 2026-11-18 · The check-in shows the step counter in the top bar only; the question counter appears only where the counts differ
+- Decided by: Aariz-Claude (coordinator), under Aariz's "no redundant labels" rule
+- Why: The check-in has 3 steps and 3 questions, so "Step 1 of 3" plus "Question 1 of 3" says the same thing twice. Practice has 5 steps and 3 questions, so both counters carry information there. The Coach card component makes the question counter optional, and the card keeps Skip in that row.
+- Rejected: Both counters on the check-in (F1's version, which repeats the label); no counter on the Practice card (it would hide the question count).
+- Rests on: review-fixes R1.2; Aariz's checklist; decision "The trade flow shows both a step counter and a question counter"
+
+## 2026-11-18 · 16px icons use a 1.5 stroke
+- Decided by: fix subagent F1, under R1.3
+- Why: One stroke for every icon size.
+- Rejected: 1.75 at 16px.
+- Rests on: review-fixes.md R1.3
+
+## 2026-11-18 · Category chips on the check-in entry are 44 high and 108 wide
+- Decided by: fix subagent F1, under R1.4
+- Why: Three per row, so "Not sure" never ends up alone on a line.
+- Rejected: Chips sized to their labels.
+- Rests on: review-fixes.md R1.4
+
+## 2026-11-18 · Focus halo and shadow colour get their own tokens
+- Decided by: fix subagent F1, default
+- Why: The input focus halo and the elevation shadows get role names, like every other colour, so a palette change reaches them without touching the ramp. `--color-focus-halo` points to Cream 200. `--color-shadow` points to Brown 900 and is always used through color-mix at the level's opacity (6%, 8%, 14%), never as a solid fill.
+- Rejected: Pointing the halo and shadows straight at ramp steps.
+- Rests on: pending-decisions.md, "New tokens from F1"; DESIGN.md, Elevation & Depth
+
+## 2026-11-18 · Budget rings show money left, not money spent
+- Decided by: R2 review, applied by fix subagent F2
+- Why: The figure beside each ring is the amount left, so an arc showing money spent contradicted it. Arc = left ÷ budget × circumference. Butt caps keep short arcs from looking bigger than they are.
+- Rejected: Keeping "fills as money is spent". Round caps, which add about 4 to each end of the arc.
+- Rests on: review-fixes.md R2.1
+
+## 2026-11-18 · Subscriptions compare Monthly and Yearly in columns, with one totals row
+- Decided by: R2 review, applied by fix subagent F2
+- Why: Mixed /mo and /yr prices couldn't be compared. Amazon converts to $8.25 a month. The renewal date moves to a caption.
+- Rejected: Two split totals above the table.
+- Rests on: review-fixes.md R2.2
+
+## 2026-11-18 · Net worth month labels keep a 16 gap token instead of space-between
+- Decided by: fix subagent F2, default
+- Why: Each label stays centred under its data point.
+- Rejected: space-between, as the review suggested, which shifts the labels off their points.
+- Rests on: review-fixes.md R2.7
+
+## 2026-11-18 · Check-in · What and how much keeps "Check-in" as its top-bar title
+- Decided by: Aariz-Claude (coordinator), recorded by design subagent V1
+- Why: It is a single-screen entry step before the questions, not one of the three counted steps, so it takes a title rather than "Step n of 3". Its Back goes to Coach.
+- Rejected: "Step 1 of 4", which would count a form as a question step and shift every counter after it.
+- Rests on: F1 verify-pass follow-ups; DESIGN.md, Navigation (Back and Close in a flow)
+
+## 2026-11-18 · Over budget, the ring draws no arc; the words carry it
+- Decided by: Aariz-Claude (coordinator), applied by design subagent V1
+- Why: With rings showing money left, a negative amount has no arc to draw. The track stays alone and the figure reads "▼ −$18 over" in Title 2, with "spent $318 of $300 · payday in 6 days" under it, so colour and shape never carry the meaning alone. $0 left is also the bare track, told apart from over budget by its words. The old full ring with a Cream 50 notch is gone.
+- Rejected: A full ring with a notch (reads as "full", the opposite of "nothing left"). A second arc or an alarm colour for the overspend.
+- Rests on: F2 verify-pass follow-ups; DESIGN.md, Principle 5 and Budget ring
+
+## 2026-11-18 · Verify pass V1: counters, rings, date picker, 16px strokes, chip token and the stock-chart baseline applied in Paper
+- Decided by: Aariz-Claude (coordinator), applied by design subagent V1
+- Why: The open follow-ups from fix rounds F1, F2 and F3.
+  - Counters: "Question n of 3" removed from Check-in 1, 2 and 3 of 3 and Check-in · Loading; their 44 rows now justify Skip to the end. Coach · Motion's two cards had a bare counter row; it became a 44 Skip row, and its note now says only the top bar's Step n of 3 changes. On Theme "Components & states", the five Coach card examples lost the counter and the anatomy row is now "Skip row", documenting the optional counter. Practice keeps "Question n of 3".
+  - Rings on "Components: product": 96 ring 127.9 of 270.2 ($142 of $300), 72 ring 95.2 of 201.1, both butt caps; $0 left and over budget are track only.
+  - Theme date picker: card wrapper removed (no fill, edge, radius or padding), 8 between columns and between week rows, 12 between sections, width fit-content (7 × 44 + 6 × 8 = 356), matching Start · Pay dates.
+  - 16px icons: of 24, 17 were at 1.75 and one check at 2; all 18 are now 1.5. Alert dots stay 2-unit round dots (one moved from 2.25 to 2).
+  - Chip width: new token `--size-chip-category` 108 (type spacing), bound to the five category chips on Check-in · What and how much.
+  - Stock · Plain English: the chart's bottom gridline moved from `--color-border-default` to `--color-border-subtle`, like the other two.
+- Rejected: Documenting 108 as a raw exception instead of tokenising it.
+- Rests on: pending-decisions.md, F1/F2/F3 follow-ups; Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Coach and Practice

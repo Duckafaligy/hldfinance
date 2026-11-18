@@ -17,16 +17,16 @@ Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Them
 - The landing page Theme UI (Paper "hldfinance.ca") is unchanged and stays with Brendan's `phase0-landing` work.
 
 **Active work**
-- Aariz-Claude · Claimed (09:58 ET): (1) restore point. New page "Restore point · Pre-pink · 2026-11-18" duplicating every primary screen and Theme board; `design/restore/pre-pink-tokens.json` and local tag `restore/pre-pink-2026-11-18` on `design/bright-olive` (tag not pushed without Aariz's approval). The restore page is not touched once verified.
-- Aariz-Claude · Claimed (09:58 ET): (2) adopt muted pink `#D0A4B5` as the active accent on Theme, Start, Coach, Tracker, Practice, You, Logo concepts and DESIGN.md. Cream and brown stay the base. Not touched: "hldfinance.ca", `phase0-landing`, app code.
+- Aariz-Claude · Claimed (09:57 ET): (1) restore point. New page "Restore point · Pre-pink · 2026-11-18" duplicating every primary screen and Theme board; `design/restore/pre-pink-tokens.json` and local tag `restore/pre-pink-2026-11-18` on `design/bright-olive` (tag not pushed without Aariz's approval). The restore page is not touched once verified.
+- Aariz-Claude · Claimed (09:57 ET, updated 09:58 ET): (2) adopt muted pink `#D0A4B5` as the active accent, kept faint for now (minimal, subtle touches; another design pass comes later), on Theme, Start, Coach, Tracker, Practice, You, Logo concepts and DESIGN.md. Cream and brown stay the base.
+- Aariz-Claude · Claimed (09:58 ET): (3) wordmark lockup: lowercase "hld" in Instrument Serif Italic with the logo 20B icon, on Logo concepts, Theme, and every screen that shows the wordmark (for example Start · Welcome). Not touched: "hldfinance.ca", `phase0-landing`, app code.
 - Aariz-Claude · Done (09:51 ET): muted pink accent exploration, page "Accent · Muted pink" and Theme board "Accent · Muted pink". Aariz chose to adopt it (claim (2) above). Not touched: "hldfinance.ca", `phase0-landing`, app code.
 
 **Blockers**
 - None.
 
 **Next steps** (for Aariz)
-- Choose the logo lockup: "Hold" in the serif, or "hld" in the heavy sans.
-- Decide whether to push `design/bright-olive` to GitHub.
+- Decide whether to push the tag `restore/pre-pink-2026-11-18`. (Aariz approved pushing `design/bright-olive`; a separate subagent is doing that push.)
 - Decide whether chart gridlines in the below-zero band can stay nearly invisible (about 1.1:1), with the axis labels carrying the scale.
 
 ---

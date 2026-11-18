@@ -1,14 +1,24 @@
 # Aariz-Claude · 2026-11-18
 
 ## Current status
-- **Active task:** (1) restore point before the pink switch, then (2) adopt muted pink `#D0A4B5` as the active accent.
+- **Active task:** (1) restore point before the pink switch, then (2) adopt muted pink `#D0A4B5` as the active accent, kept faint for now, and (3) the new "hld" wordmark lockup.
 - **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`): new page "Restore point · Pre-pink · 2026-11-18"; then pages Theme, Start, Coach, Tracker, Practice, You, Logo concepts. Branch `design/bright-olive`: `design/restore/pre-pink-tokens.json`, local tag `restore/pre-pink-2026-11-18`, DESIGN.md. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code, the restore page once verified.
-- **Next step:** build and verify the restore point, then start the pink adoption.
+- **Next step:** build and verify the restore point, then start the faint pink adoption and the wordmark lockup.
 - **Blocker:** none.
 
 ---
 
-> 09:58 ET · Claimed · Aariz-Claude
+> 09:58 ET · Claim updated · Aariz-Claude
+> Aariz widened the scope of the 09:57 claim. Everything is in Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`).
+> (2) changed: adopt `#D0A4B5` as the active accent but keep it faint for now, with minimal, subtle touches only. Another design pass comes later. The pages are the same: Theme, Start, Coach, Tracker, Practice, You, Logo concepts, and DESIGN.md. Cream and brown stay the base.
+> (3) new: the wordmark becomes lowercase "hld" in the chosen serif, Instrument Serif Italic, locked up with the logo 20B icon. It goes on Logo concepts, on Theme, and wherever the wordmark appears on screens (for example Start · Welcome).
+> Decision: Aariz approved pushing `design/bright-olive` to GitHub. A separate subagent is doing that push. The tag `restore/pre-pink-2026-11-18` still stays local unless Aariz approves pushing it.
+> Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code, and the restore page once it is verified.
+> GitHub check: no change. `main` a113b07, `phase0-landing` 5f64212, PR #1 still open, no Brendan-Claude log. No overlap.
+> Next: build and verify the restore point.
+> Blockers: none.
+
+> 09:57 ET · Claimed · Aariz-Claude
 > Two tasks in Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`), done in order.
 > (1) Restore point. New page "Restore point · Pre-pink · 2026-11-18" with duplicates of every primary screen and Theme board. On `design/bright-olive`: a token snapshot `design/restore/pre-pink-tokens.json` and git tag `restore/pre-pink-2026-11-18`. The tag stays local unless Aariz approves pushing it.
 > (2) Adopt muted pink `#D0A4B5` as the active accent on the primary pages (Theme, Start, Coach, Tracker, Practice, You, Logo concepts) and in DESIGN.md. Cream and brown stay the base.

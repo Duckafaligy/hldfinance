@@ -1,12 +1,21 @@
 # Aariz-Claude · 2026-11-18
 
 ## Current status
-- **Active task:** none. Muted pink accent exploration is done; waiting for Aariz.
-- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`), page "Accent · Muted pink" and the Theme board "Accent · Muted pink". Commits `be5941e` and `3279249` on `design/bright-olive`, local only. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
-- **Next step:** wait for Aariz to decide on the pink accent, the logo lockup, pushing `design/bright-olive`, and below-zero chart gridlines.
+- **Active task:** (1) restore point before the pink switch, then (2) adopt muted pink `#D0A4B5` as the active accent.
+- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`): new page "Restore point · Pre-pink · 2026-11-18"; then pages Theme, Start, Coach, Tracker, Practice, You, Logo concepts. Branch `design/bright-olive`: `design/restore/pre-pink-tokens.json`, local tag `restore/pre-pink-2026-11-18`, DESIGN.md. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code, the restore page once verified.
+- **Next step:** build and verify the restore point, then start the pink adoption.
 - **Blocker:** none.
 
 ---
+
+> 09:58 ET · Claimed · Aariz-Claude
+> Two tasks in Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`), done in order.
+> (1) Restore point. New page "Restore point · Pre-pink · 2026-11-18" with duplicates of every primary screen and Theme board. On `design/bright-olive`: a token snapshot `design/restore/pre-pink-tokens.json` and git tag `restore/pre-pink-2026-11-18`. The tag stays local unless Aariz approves pushing it.
+> (2) Adopt muted pink `#D0A4B5` as the active accent on the primary pages (Theme, Start, Coach, Tracker, Practice, You, Logo concepts) and in DESIGN.md. Cream and brown stay the base.
+> Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code, and the restore page once it is verified.
+> GitHub check: nothing new from Brendan. `main` a113b07, `phase0-landing` 5f64212 (last commit 2026-11-16 18:18 ET), PR #1 still open and the only PR, no Brendan-Claude log, no other claims under `logs/`. No overlap with Paper, the app UI, the accent or palette, or Theme tokens.
+> Next: build and verify the restore point.
+> Blockers: none.
 
 > 09:51 ET · Done · Aariz-Claude
 > Muted pink accent exploration is done in Paper "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`).

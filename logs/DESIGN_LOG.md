@@ -4,7 +4,7 @@ App redesign source of truth: Paper file **"hldfinanc redoo"** (fileId `01M7ND94
 Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Theme UI"** (boards: 00 Contents · Foundations 01–08 · Motion 08 · Components 09 · Patterns 10–12 · Logo 13 · Gradients 14). It is owned by Brendan's `phase0-landing` work, and its token values are mirrored in `design/tokens.md` on that branch.
 
 ## Latest summary
-**2026-11-18 09:15 ET** · written by Aariz-Claude
+**2026-11-18 09:35 ET** · written by Aariz-Claude
 
 **Recent changes** (all in Paper "hldfinanc redoo", fileId `01M7ND942KK1P3EG7FGKWPZ962`; commits on `design/bright-olive`, local only)
 - UI/UX Pro Max pass part 2 done (`4eff513`).
@@ -16,7 +16,7 @@ Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Them
 - The landing page Theme UI (Paper "hldfinance.ca") is unchanged and stays with Brendan's `phase0-landing` work.
 
 **Active work**
-- None. Aariz-Claude's 2026-11-18 claims are complete; waiting for Aariz's decisions.
+- Aariz-Claude · In progress (claimed 09:35 ET): accent exploration, muted pink `#D0A4B5` as a secondary accent option. Paper "hldfinanc redoo": new page "Accent · Muted pink" (pink variants of about 8 duplicated screens; cream/brown originals untouched) and new pink accent tokens on the Theme page. Decisions entry on `design/bright-olive`, local only. Not touched: "hldfinance.ca", `phase0-landing`, app code.
 
 **Blockers**
 - None.

@@ -1,12 +1,23 @@
 # Aariz-Claude · 2026-11-18
 
 ## Current status
-- **Active task:** none. All four 2026-11-18 claims (a)–(d) are done, reviewed and verified. Waiting for Aariz.
-- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`). Docs on `design/bright-olive` (head `efd587b`, local only). Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
-- **Next step:** Aariz decides the logo lockup, whether to push `design/bright-olive`, and the below-zero chart gridlines.
-- **Blocker:** none.
+- **Active task:** accent exploration, muted pink `#D0A4B5` as a secondary accent option. In progress.
+- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`): new page "Accent · Muted pink" (pink variants of about 8 duplicated screens) and new pink accent tokens on the Theme page. The cream/brown originals stay untouched. Decisions entry on `design/bright-olive`, local only. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
+- **Next step:** duplicate the screens onto the new page, add the pink tokens, then review side by side.
+- **Blocker:** none. Still open for Aariz from earlier: logo lockup, pushing `design/bright-olive`, below-zero chart gridlines.
 
 ---
+
+> 09:35 ET · Claimed · Aariz-Claude
+> Accent exploration: muted pink `#D0A4B5` as a secondary accent option.
+> Where: Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`).
+> - New page "Accent · Muted pink" with pink variants of about 8 duplicated screens. The cream/brown originals stay untouched for side-by-side comparison.
+> - New pink accent tokens on the Theme page.
+> Docs: a decisions entry on `design/bright-olive`, local only.
+> Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code.
+> GitHub check: nothing new from Brendan. `main` a113b07, `phase0-landing` 5f64212 (last commit 2026-11-16 18:18 ET), PR #1 still open with no comments or reviews, no Brendan-Claude log, no other claims under `logs/`. No overlap.
+> Next: build the pink variants and tokens.
+> Blockers: none.
 
 > 09:15 ET · Done · Aariz-Claude
 > All four claims are finished in Paper "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`). Commits are on `design/bright-olive`, local only.

@@ -382,7 +382,7 @@
 - Rests on: Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Start and Coach
 
 ## 2026-11-17 · Two standard paddings: screen content is 40 top and 16 sides; every box is 16 inside
-- Decided by: Aariz (Paper comment on Start · Email sign-up: "All boxes padding should resemble this box, make sure you standardise it"), applied by the design subagent through the coordinator
+- Decided by: Brendan Lau (Paper comment c-tii8f0), applied by Aariz-Claude
 - Why: One rule per level makes the screens read as one system. Every screen's content frame on Start and Coach is now `--spacing-40` top and `--spacing-16` left and right; it was 8, 16 or 24 on Welcome, Pay dates, Coach home, Settings and every check-in. Every box (cards, the Coach card, tip cards, sheets, dialogs, on screens and on the Theme boards) is `--spacing-16` on all sides; the Coach card, sheet and dialog were 24. Row groups stay a 4 tight nest, so their rows take 12 and the content still lands 16 in. Footers keep 16 sides and the 34 home-indicator inset, now `--spacing-safe-bottom`. The Coach card's question offset went from 64 to 40 below the progress row, so the question stays where it was on screen and the loading card still fits 844.
 - Rejected: Padding row groups at 16 (breaks the pressed-row tight nest). Keeping 24 inside the Coach card (one box would differ from the rest). Applying the 40/16 screen padding to the 1440 Coach · Motion board, which is documentation, not a screen.
 - Supersedes: the Coach card's "24 padding (12 at the top)" and "80 above the coach question" in earlier DESIGN.md text
@@ -419,3 +419,57 @@
 - Why: Theme had 36 gaps at 6 (headings, state frames, the invite Copy button, error rows) now 8, and selected-chip icon gaps at 6 now 4 as on the screens; 39 doc-table rows at 10 padding now 12; 42 gaps at 10 now 8; record and consent rows, the text area and segment and notice padding at 14 now 12 or 16; type-scale rows 6 now 8; the light skeleton card gap 14 now 16. Coach: Coach · Motion spec rows 10 now 12, the loading card's question skeleton gap 14 now 12 (still fits 844). The Coach card on Theme put the item 20 below the progress row while the screens and DESIGN.md say 40; the four state cards, the anatomy row and the Motion board excerpts are now 40. Theme had no pressed or focus state for Remind me, Buy anyway, chips or Skip on the dark card; a "Pressed and focus" card now shows both doors treated the same. Spinners on Theme buttons, the loading toast, the Opening Google button and the Saving button were 18 or 20 with 2 to 2.5 strokes; all are now 20 with 1.5. The secondary-button sample read "Buy anyway" in a disabled state, which contradicts the Buy anyway rules, so the sample label is now "Edit amount". Pay dates said "Tracker counts down to each payday"; Principle 7 rules out countdowns, so it says "Tracker shows what's left until each payday." The Sign in heading still said "one-colour mark"; it now says official mark. Checked and passing with no change: tab bar labels and active state (600 label, Cream 150 block, Brown 700 at rest, 8.07:1), Back and Close slots 96 × 44, chip gaps 12, toast action 44 on screens, field labels above fields with helper text 8 under, the disabled Create account with its reason, icon sizes 16/20/24 only, body measure at most about 50 characters at 358.
 - Rejected: ui-ux-pro-max `destructive-emphasis` red and `confirmation-dialogs` (no red anywhere; Buy anyway is not destructive and has no confirm step). `disabled-states` 0.38 to 0.5 opacity (disabled uses token colours plus a written reason). `spring-physics` (motion stays on the cubic-bezier tokens). A Close button in onboarding (no "leave without deciding" there; the birth year is required and Pay dates has Skip for now). A chevron on check-in record rows (the 358 row has no room for it without wrapping the item name; the whole row is the target).
 - Rests on: ui-ux-pro-max Quick Reference §1 `focus-states`, §2 `press-feedback`, §5 `spacing-scale`, `line-length-control`, §8 `disabled-states`, `error-placement`, `input-labels`, §9 `nav-label-icon`, `nav-state-active`, Common Rules "Consistent Icon Sizing"; Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Start and Coach
+
+## 2026-11-18 · Subscription renewal reminders are off by default
+- Decided by: design subagent (b), default
+- Why: A reminder sends a message, and DESIGN.md makes off the default for anything that sends one. The switch sits beside the renewal date, and the list says how to turn it on.
+- Rejected: On by default (opt-out messaging).
+- Rests on: DESIGN.md, Switch; Intent, "Opt-in over opt-out"
+
+## 2026-11-18 · Tracker · Home rings show whole dollars, rounded down
+- Decided by: design subagent (b), default
+- Why: Four rings fit at 390 wide, and rounding down never overstates what's left. Detail screens show cents.
+- Rejected: Cents on Home (wraps at 22px).
+- Rests on: Tracker · Home
+
+## 2026-11-18 · Net worth lists accounts and debts with a running-total column
+- Decided by: design subagent (b), default
+- Why: It shows how each line moves the total. Debts are marked with "debt" and −, not colour.
+- Rejected: Separate subtotal boxes.
+- Rests on: brief, "running total"
+
+## 2026-11-18 · Ethical review of Tracker and You: no anti-patterns found
+- Decided by: design subagent (b), default
+- Why: Consent is four separate switches, all off. Deleting the account takes one confirmation, with no guilt wording and no red. Nothing is preselected in the category or type pickers. No streaks or badges.
+- Rejected: Nothing.
+- Rests on: Paper pages Tracker and You
+
+## 2026-11-18 · Buy and Sell are equal outlined buttons with no primary
+- Decided by: design subagent (c), default
+- Why: Neither button is primary, so the screen never nudges anyone toward trading. That fits "not primarily a trading app" and "the coach never suggests trades".
+- Rejected: Buy as the filled primary.
+- Rests on: brief, Practice; Intent, Visual Misdirection
+
+## 2026-11-18 · Journal tags are set by the user only
+- Decided by: design subagent (c), default
+- Why: A Planned/FOMO tag from the coach would be a judgement. The label reads "Your tag: Planned", and the filter offers All / Planned / FOMO / No tag.
+- Rejected: Tags the coach sets.
+- Rests on: brief, trade journal; coach rules (never shames)
+
+## 2026-11-18 · Practice TFSA is a second account; orders over the room are stopped
+- Decided by: design subagent (c), default
+- Why: Buying in the TFSA uses up room. An order over the room shows a notice with "Place it in my regular account" and "Change amount". Place order is aria-disabled, with the reason written out.
+- Rejected: A penalty mechanic.
+- Rests on: brief, Practice TFSA ($7,000 room)
+
+## 2026-11-18 · The trade flow shows both a step counter and a question counter
+- Decided by: design subagent (c), default
+- Why: The flow has 5 steps, so the top bar shows "Step n of 5". The coach card shows "Question n of 3".
+- Rejected: Dropping either counter.
+- Rests on: DESIGN.md, step counter rule
+
+## 2026-11-18 · Theme follow-ups: icon size tokens, the 72 ring and inverse text area on the board, the TFSA bar at its true share, and chart offsets on the 4/8 scale
+- Decided by: Aariz-Claude (coordinator), applied by design subagent (e)
+- Why: The queued Theme follow-ups from batches 2 and 3. Paper has no size token type, so `--icon-sm` 16, `--icon-md` 20 and `--icon-lg` 24 are file tokens of type spacing, and every 16, 20 and 24 icon on Theme, Start, Coach, Tracker, Practice and You (270 SVGs: 24 at 16, 79 at 20, 167 at 24, counted by get_jsx after the change, none left raw) has its width and height bound to them. Components: product gains "Ring · 72, Tracker home grid", copied from Tracker · Home (72, 8 stroke, whole dollars), and "Text area · inverse", copied from Trade · Coach 1 of 3 (Cream 50 field at `--radius-sm` on a Brown 900 sample card, focus a 2 Brown 900 gap plus a 2 `--color-focus-ring-inverse` ring, helper and counter in `--color-text-inverse-secondary`). The TFSA bar fill was 268 of 358 (74.9%); it is now 82.29% of the track (about 295), matching $5,760 of $7,000. Chart Y labels were 18 high in a 178 lane with the plot 9 down, so labels centred on gridlines at a 9 offset; labels are now Caption on a 16 line in a 176 lane (156 for the three-label Stock chart) with the plot 8 down, so each label still centres on its gridline and on the zero line. The net-worth month row had 18 gaps between 32 wide labels under points 50 apart; labels are now 34 wide with 16 gaps, still 50 apart, and the points moved 1 right (17 to 267) to stay centred over them. Applied to the Theme charts, Tracker · Net worth, Practice · Home, Stock · Plain English and the Practice · Loading Y lane, then re-screenshotted. Pages now run Theme, Start, Coach, Tracker, Practice, You, Logo concepts.
+- Rejected: Keeping 32 wide month labels with points 48 apart (leaves 26 on the right of a 282 plot against 16 on the left). Shrinking the plot to 272 (would also change the Practice charts, outside this pass). Binding the 48 specimens on the Icons board (they are enlargements, not a fourth size).
+- Rests on: the Theme follow-ups queued by design subagents (b) and (c) in batches 2 and 3; coordinator brief to design subagent (e), 2026-11-18; Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Tracker and Practice

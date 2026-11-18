@@ -283,7 +283,7 @@ components:
 
 # Design System: HLD Finance
 
-The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with eight artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent.
+The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with eight artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent. Pages run Theme, Start, Coach, Tracker, Practice, You, Logo concepts; the screens on each are listed under Screen inventory.
 
 ## Overview
 
@@ -486,7 +486,7 @@ Cap outer, square inner: small, consistent corners, 6 at most.
 
 The padding is measured from the outer edge. A track or row group draws its 1px edge as an inset shadow (`inset 0 0 0 1px var(--color-border-subtle)`), so the 4 inset is exactly 4. A dashed edge cannot be a shadow, so the disabled segmented track keeps a 1px dashed border with 3px padding: still 4 from the outer edge.
 
-Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes are three tokens, implemented as CSS custom properties beside the motion tokens: `--icon-lg` 24 (tab bar, top bar chevron, list rows), `--icon-md` 20 (buttons, toasts, inline notices, sign-in marks, spinners), `--icon-sm` 16 (inline with 13 and 14px text: chip checks, the record row's clock). No other sizes. Spinners follow the icon stroke: 1.5 at 20. Strokes are tokens, never hex: `--color-text-primary` when active, `--color-text-secondary` at rest, `--color-text-inverse` on the Coach card. **Brand marks are exempt:** the solid Apple logo and Google's G on the sign-in buttons follow their owners' rules, not the 1.5 outline rule, and the build uses each official mark unaltered. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
+Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes are three tokens: `--icon-lg` 24 (tab bar, top bar chevron, list rows), `--icon-md` 20 (buttons, toasts, inline notices, sign-in marks, spinners), `--icon-sm` 16 (inline with 13 and 14px text: chip checks, the record row's clock). No other sizes. In Paper they are file tokens of type spacing (Paper has no size type), and every icon on Theme, Start, Coach, Tracker, Practice and You binds both width and height to one of them, never a raw 16, 20 or 24; in code they are CSS custom properties. The 48 icons on the Icons board are enlarged specimens, not a fourth size. Spinners follow the icon stroke: 1.5 at 20. Strokes are tokens, never hex: `--color-text-primary` when active, `--color-text-secondary` at rest, `--color-text-inverse` on the Coach card. **Brand marks are exempt:** the solid Apple logo and Google's G on the sign-in buttons follow their owners' rules, not the 1.5 outline rule, and the build uses each official mark unaltered. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
 
 ## Components
 
@@ -501,17 +501,18 @@ Controls are drawn in all their states on the Paper board "Components & states";
 - **Focus:** 2px ring in `--color-focus-ring` with a 2px gap in the surface colour.
 - **Disabled:** Cream 150 fill or Cream 200 outline with disabled text, always with a written reason next to it (for example, "Add 2 more characters to your password first."). It is marked disabled for assistive tech (`aria-disabled="true"`), stays in the focus order so the reason, tied with `aria-describedby`, is read out, and ignores taps. Colour is never the only sign: the reason is there in words. Buy anyway is never disabled.
 - **Loading:** a spinner and a short verb ("Saving") at the same width; taps are ignored until it finishes.
+- **Buy / Sell (Practice):** two equal outlined buttons side by side, the same width, outline and weight, with no primary. Neither is filled, so the stock screen never nudges toward a trade. "Fake money. No per-trade fee." sits once above them.
 - **Remind me / Buy anyway:** the same size, stacked, both always visible. Remind is primary and Buy anyway is secondary; Buy anyway is never made smaller, fainter or lower-contrast. Principle 4 holds the four rules.
 
 ### Chips (if used)
 
-Coach answers and journal tags (Planned / FOMO). 40 high in a 44 target, `--radius-md` on the page and `--radius-sm` on the Coach card. Default has a 1.5px Brown 500 outline. Selected uses accent-subtle fill, an accent outline and a check icon. Pressed is Cream 150 with a Brown 700 outline. Focus uses the ring. Disabled uses a Cream 200 outline with disabled text.
+Coach answers and journal tags (Planned / FOMO). Journal tags are set by the user only, never by the coach: the entry reads "Your tag: Planned", and the journal filter offers All / Planned / FOMO / No tag. 40 high in a 44 target, `--radius-md` on the page and `--radius-sm` on the Coach card. Default has a 1.5px Brown 500 outline. Selected uses accent-subtle fill, an accent outline and a check icon. Pressed is Cream 150 with a Brown 700 outline. Focus uses the ring. Disabled uses a Cream 200 outline with disabled text.
 
 ### Cards / Containers
 
 - `--radius-lg`, 16 padding, Cream 50 on a Cream 200 edge. A card is tappable only when the whole card leads somewhere: pressed is Cream 150 with a Cream 300 edge, and focus uses the ring.
 - **Error** state: an alert icon, a sentence saying what failed and that nothing was lost, and a Try again secondary button.
-- **Budget ring:** 72px, 8 stroke. The track is Cream 200 and the progress is accent. It fills clockwise from 12 o'clock as money is spent, and the amount left is always shown beside it ("$142 left · of $300 · payday in 6 days").
+- **Budget ring:** two sizes, both on "Components: product". **72** (8 stroke, radius 32) is the Tracker · Home grid: two per row at 171 wide, the ring, 12, then the category in Label, whole dollars left in Title 2, rounded down so it never overstates ("$142"), and "left of $300" in Caption. Detail screens use the **96** standalone ring and show cents. The track is Cream 200 and the progress is accent. It fills clockwise from 12 o'clock as money is spent, and the amount left is always shown beside it.
 - **Coach card:** see below.
 
 ### Coach card
@@ -587,7 +588,7 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 
 - **Daily tip card:** a light card, never a second dark one. Title 3 tip and a Body explanation in Brown 700. It carries no fine print: the line appears once per coach screen, on the Coach card. Loading is a skeleton; after 8 s the card hides itself and leaves no gap or error.
 - **Skipped total:** Label "Skipped total", Figure XL amount, "+ $129.99 today" in Label when it just changed, and "Money not spent, not money saved." in Caption in every state. Empty shows $0.00 in Brown 600 with "When you hold off on something, its price shows up here."
-- **Charts:** a 44 wide Y lane (Caption at width 87.5, tabular, right-aligned, one line) and a 282 wide plot. Zero is a 1.5 Brown 700 line and its label is 600 Brown 900; the band below zero is filled with `--color-state-bg`; gridlines are Cream 200. The line is 2px accent with the latest point filled. Scales are fixed, $2,000 either side of zero for net worth and 10% for practice returns, and widen only when a value passes them. The practice chart plots % return so its zero is the starting $10,000, and carries "Quotes delayed 15 minutes. Past returns are not a forecast." States: one point so far (a sentence explains when the line starts) and couldn't load (the chart pauses at its last date, holdings unchanged, Try again).
+- **Charts:** a 44 wide Y lane (Caption at width 87.5, tabular, right-aligned, on a 16 line) and a 282 wide plot. The lane is 176 high for five labels (156 for three) and the plot starts 8 below its top, so each label centres on its gridline and the zero label on the zero line. Month labels are 34 wide and 16 apart, centred under points 50 apart (first at 17). Zero is a 1.5 Brown 700 line and its label is 600 Brown 900; the band below zero is filled with `--color-state-bg`; gridlines are Cream 200. The line is 2px accent with the latest point filled. Scales are fixed, $2,000 either side of zero for net worth and 10% for practice returns, and widen only when a value passes them. The practice chart plots % return so its zero is the starting $10,000, and carries "Quotes delayed 15 minutes. Past returns are not a forecast." States: one point so far (a sentence explains when the line starts) and couldn't load (the chart pauses at its last date, holdings unchanged, Try again).
 - **Budget ring, standalone:** 96, 10 stroke, Cream 200 track and accent fill from 12 o'clock as money is spent. Beside it: the category in Label, the amount in Title 2 ("$142 left", "$0 left", "$18 over") and "of $300 · payday in 6 days" in Caption. Over budget is a full ring with a short Cream 50 notch marking the overlap, stated in words, never in an alarm colour. Loading is a Cream 150 ring and bars.
 - **Date and pay-date picker:** month header with 44 chevron targets, Sun-first weekday row in Caption, 44 day cells in Table. Pay dates are a 36 accent circle with Cream 75 figures; today is a 1.5 Brown 900 ring; focus is the 2px ring with a gap. A legend and a sentence sit under the grid: "Every other Friday · next payday Nov 27".
 - **Category picker:** single-choice chips that wrap, plus a dashed "New category" chip. Nothing is preselected.
@@ -595,7 +596,9 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 - **Share quantity:** the input pattern with a "shares" suffix and four decimals. Focus shows the CAD estimate including the FX fee under the field. Error: "Enter at least 0.0001 shares." Disabled while the quote loads, with that reason.
 - **Order summary:** Title 3 "Buy 0.4200 AAPL", one plain sentence on what the company does, then rows at width 87.5: price per share (15 min delayed), exchange rate, cost in CAD, FX fee with its rate, Total in CAD (600, above a Cream 300 rule), share of the portfolio after. Closes with "Fake money. No per-trade fee."
 - **Text area:** the input pattern at 112 high for the trade plan. Optional, saved with the trade, with a tabular counter to 280. At the limit typing stops and nothing is cut.
-- **TFSA room:** Label and year, the amount left in Title 3, an 8px bar at `--radius-sm` (Cream 200 track, accent fill as room is used) and "$5,760 used of $7,000 · fake money". All used: "$7,000 used · new room on January 1, 2027".
+- **Text area, inverse (on the Coach card):** the trade questions ask on the dark card, so the field is Cream 50 (`--color-surface-raised`) at `--radius-sm` with no outline, 12 top and bottom and 16 at the sides. Focus is a 2 Brown 900 gap plus a 2 `--color-focus-ring-inverse` ring (Cream 75). "Optional" and the counter sit 8 under it in Caption, `--color-text-inverse-secondary`. Drawn on "Components: product" beside the light text area.
+- **TFSA room:** Label and year, the amount left in Title 3, an 8px bar at `--radius-sm` (Cream 200 track, accent fill as room is used, its width the share used: 82.3% at $5,760 of $7,000) and "$5,760 used of $7,000 · fake money". All used: "$7,000 used · new room on January 1, 2027".
+- **Practice TFSA, two accounts:** Practice has a regular account and a Practice TFSA with $7,000 of room a year. Buying in the TFSA uses room. An order larger than the room left is stopped, never penalised: the warning notice states the order and the room ("This order is $1,580. You have $1,240 of TFSA room left.") and offers "Place it in my regular account" and "Change amount". Place order stays visible, `aria-disabled`, with the reason written under it. Copy says "place it", never "buy it", for anything but the person's own order. Holdings name their account ("Practice TFSA" or "Regular").
 - **Inline notice:** `--color-state-bg` tint, `--radius-md`, a 20 icon and Table text in Brown 900. Information ("Practice uses fake money. Nothing here touches a real account.") has no edge; a warning adds a 1.5 `--color-state-warning` inset edge and a bold first sentence ("This order is $1,580. You have $1,240 of TFSA room left.") followed by the way out.
 - **Leaderboard rows:** 48 high at width 87.5 with fixed lanes: a 24 right-aligned rank, the display name, and a 96 right-aligned tabular % return with ▲ + / ▼ −. Your row is Cream 150 at `--radius-md` and 600. No trophies, medals, crowns or colour for first place. Footer: "Fake money · free to join · the prize is bragging rights."
 - **Invite link:** a read-only field showing the end of the link and a 104 wide Copy primary. Copied keeps the width, adds a check and returns after 2 s. Error: "Your browser blocked copying. Press and hold the link to copy it yourself."
@@ -635,6 +638,18 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 
 Paper has no token type for shadows, durations or easing, so these values live here and on the Motion and Spacing & radii boards. Implement them as CSS custom properties alongside the Paper tokens.
 
+## Screen inventory
+
+Phone screens are 390 wide, 844 high or fit-content where they run longer. Coach, Tracker and Practice each end with a "<Page> · Motion" board (1440).
+
+- **Theme:** Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product.
+- **Start (7):** Welcome, Sign up, Email sign-up, Birth year, Consent, Pay dates, First Coach screen.
+- **Coach (13 + Motion):** Coach · Home; Check-in · What and how much; Check-in 1 of 3, 2 of 3, 3 of 3; Check-in · Decision; Reminder set; Bought; Follow-up, 3 days later; Coach · Budget check-in; Check-in · Loading; Error, offline; Coach · Check-in settings.
+- **Tracker (9 + Motion):** Tracker · Home (four 72 rings, Log a purchase, Subscriptions and Net worth rows); Log a purchase; Budget · Fun; Subscriptions; Subscription · Netflix (renewal reminder, off by default); Net worth (chart, then accounts and debts with a running-total column); Add account or debt; Tracker · Loading; Tracker · Empty.
+- **Practice (20 + Motion):** Practice · Home; Search · Recent, Results, No results; Stock · Plain English (equal Buy and Sell); Trade · Amount; Trade · Coach 1 of 3, 2 of 3, 3 of 3; Trade · Review; Trade · Placed; Holdings; Journal; Leagues; League · Leaderboard; Create league + invite link; Practice TFSA; Trade · Over TFSA room; Practice · Loading; Practice · Empty. The trade flow is five steps ("Step n of 5" in the top bar: Amount, the three coach questions, Review); the Coach card inside it also counts "Question n of 3".
+- **You (5):** You · Home (plan Free, Tracking: manual, Bank sync: coming later); Privacy & consent (one switch per purpose, all off); Your data (download, delete); Delete account · Dialog (one confirmation, no red); Account deleted.
+- **Logo concepts:** concept sheet and refinements; not app screens.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -648,6 +663,7 @@ Paper has no token type for shadows, durations or easing, so these values live h
 ### Don't:
 
 - Don't make Buy anyway smaller, fainter or further away than Remind me, add a confirmation after it, or lock it while Remind me saves.
+- Don't make Buy or Sell the primary on a stock screen, and don't let the coach set a Planned or FOMO tag.
 - Don't draw Buy anyway's Coach-card outline in Brown 500; it is `--color-border-control-inverse`.
 - Don't mark first place in a league with a trophy, medal, crown or colour, and don't style one check-in outcome as the better one.
 - Don't set a colour or a radius as a raw value in Paper or code, SVG strokes included; bind it to a token.

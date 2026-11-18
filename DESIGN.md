@@ -412,7 +412,7 @@ A secondary look at Muted pink `#D0A4B5` as the accent. Nothing above changes: t
 | Token | Value | Role |
 |---|---|---|
 | `--color-accent-pink` | `#D0A4B5` | Fills and small brand marks: the selected tab block, the selected segment, the app-icon tile |
-| `--color-accent-pink-deep` | `#8D4963` | Text, icons, outlines and ring arcs on cream |
+| `--color-accent-pink-deep` | `#8D4963` | Text, icons and outlines on cream; the edge on Pink subtle |
 | `--color-accent-pink-subtle` | `#F3E7EC` | Tint surface for one callout or your own row; always with an edge |
 | `--color-on-accent-pink` | Brown 900 | Text and icons on a pink fill |
 | `--color-text-pink-inverse` | Pink | Pink text on the Brown 900 Coach card |
@@ -426,14 +426,14 @@ A secondary look at Muted pink `#D0A4B5` as the accent. Nothing above changes: t
 | Brown 900 on Pink | 8.42 | AAA text |
 | Pink on Brown 900 | 8.42 | AAA text |
 | Pink deep on Cream 50 / 75 / 100 / 150 | 6.29 / 6.08 / 5.63 / 5.15 | AA text |
-| Pink deep on Pink subtle | 5.34 | AA text |
+| Pink deep on Pink subtle | 5.34 | AA text; the daily tip's 1px edge and your row's 1.5 edge |
 | Brown 900 / Brown 700 on Pink subtle | 15.22 / 7.10 | AAA text |
-| Pink deep arc on Cream 200 track | 4.54 | Passes 3:1 UI |
 | Pink deep ring on Cream 75 | 6.08 | Passes 3:1 UI |
 | Pink ring on Brown 900 | 8.42 | Passes 3:1 UI |
 | Pink on Cream 75 | 2.05 | Fails; a fill only, never text or a lone edge |
 | Pink block on the Cream 50 tab bar | 2.13 | Below 3:1; the 600 label and Brown 900 icon also mark the tab, as they do today on Cream 150 (1.18) |
-| Pink arc on Cream 200 track | 1.53 | Fails 3:1 UI; rings use Pink deep |
+| Pink segment on Cream 100 track | 1.90 | Below 3:1; the 600 Brown 900 label and the segment's lift also mark it (League Weekly, Practice range) |
+| Pink arc on Cream 200 track | 1.53 | Fails 3:1 UI; not used, rings stay accent brown |
 | Pink subtle on Cream 75 | 1.14 | Never alone; always paired with a Pink or Pink deep edge |
 | Pink deep on Brown 900 | 2.85 | Fails; never on the Coach card |
 
@@ -442,15 +442,14 @@ A secondary look at Muted pink `#D0A4B5` as the accent. Nothing above changes: t
 One to three touches a screen, and never the primary button.
 
 - **Selected states:** the tab block, the selected segment and a selected chip, in Pink with a Brown 900 label at 600.
-- **One callout a screen:** the daily tip on Pink subtle with a 1px Pink edge.
+- **One callout a screen:** the daily tip on Pink subtle with a 1px Pink deep edge (6.08 on Cream 75, 5.34 on the fill).
 - **Brand and wayfinding:** the app icon, the HLD mark on Welcome, the step counter in Pink deep, and "Hold off" / "Hold on" on Welcome.
 - **Your own row on a leaderboard:** Pink subtle with a 1.5 inset Pink deep edge, and the word "you" kept.
 - **On the Coach card:** the item and price, and the answers already given on Your call, in Pink (8.42). Never the question, which stays Cream 75 in the serif.
-- **Budget ring arcs** in Pink deep, always beside the amount left in words.
 
 ### Where pink never goes
 
-- Gain and loss. They stay ▲ + / ▼ − in brown on every chart, row and total. The practice return line stays accent brown.
+- Gain and loss, and data. ▲ + / ▼ − stay brown on every chart, row and total; budget ring arcs and the practice return line stay accent brown, so pink is never a data colour.
 - Warnings, errors, over-budget or TFSA limits. Pink is never an alarm.
 - One of two doors. Remind me and Buy anyway, Buy and Sell, Worth it and Not really never get pink unless both get the same treatment. The pink focus ring applies to both doors alike.
 - Body text, the serif, or any text on cream in light Pink (2.05).
@@ -463,10 +462,10 @@ Each pair sits side by side: "<Screen> · Original" on the left, "<Screen> · Pi
 | Screen | Pink touches |
 |---|---|
 | Start · Welcome | 32 Pink app-icon tile beside HLD (Brown 900 h, 8.42); "Hold off" and "Hold on" in Pink deep (6.08) |
-| Coach · Home | Daily tip on Pink subtle with a Pink edge (Brown 900 15.22, Brown 700 7.10); Coach tab block in Pink (icon and label 8.42) |
+| Coach · Home | Daily tip on Pink subtle with a 1px Pink deep edge (6.08 / 5.34; text 15.22 and 7.10); Coach tab block in Pink (icon and label 8.42) |
 | Check-in 1 of 3 | "Step 1 of 3" in Pink deep (6.08); item and price on the Coach card in Pink (8.42). Answer chips and both doors unchanged |
 | Check-in · Decision | Item and price, and the three recorded answers, in Pink (8.42). Remind me and Buy anyway unchanged and equal |
-| Tracker · Home | Ring arcs in Pink deep (4.54 on the Cream 200 track, 6.08 on Cream 75); Tracker tab block in Pink |
+| Tracker · Home | Tracker tab block in Pink (icon and label 8.42) only. Rings stay accent brown |
 | Practice · Home | Selected "All" segment in Pink (label 8.42); Practice tab block in Pink. Chart, ▲/▼ and holdings unchanged |
 | League · Leaderboard | Selected "Weekly" segment in Pink; your row on Pink subtle with a 1.5 Pink deep edge (5.34; text 15.22); Practice tab block in Pink |
 | Logo 20B | 180 and 60: Pink tile with a Brown 900 h (8.42), and a Pink h on a Brown 900 tile (8.42) |
@@ -689,7 +688,7 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 - **Leaderboard rows:** 48 high at width 87.5 with fixed lanes: a 24 right-aligned rank, the display name, and a 96 right-aligned tabular % return with ▲ + / ▼ −. Your row is Cream 150 at `--radius-md` and 600. No trophies, medals, crowns or colour for first place. Footer: "Fake money · free to join · the prize is bragging rights."
 - **Subscriptions table:** at width 87.5, columns Name | Monthly | Yearly, with the money lanes right-aligned and tabular (Monthly 80, Yearly 88). Every price shows in both columns, so yearly bills compare with monthly ones (Amazon Prime $99.00 a year is $8.25 a month). The renewal date is a Caption under the name ("Renews Mon, Nov 30"). One Total row closes the table ($71.51 monthly, $858.12 yearly) above a note that renewal reminders start off.
 - **Journal rows:** Date, Symbol, Side, Shares, Price CAD, Return, Tag, with a 120 status lane. A status too long for the lane breaks by hand between phrases ("Open" over "down by the FX fee") rather than wrapping a lone word. Practice TFSA buys carry their own dates like any other trade, and a sale that cites a buy dates both.
-- **Range control (Practice charts):** a segmented control (1W / 1M / 1Y) inside the chart's card, next to the chart it filters. In a 16-padded card the nest caps the radius: track `--radius-sm` (2), segments `--radius-none` (0).
+- **Range control (Practice charts):** a segmented control (1W / 1M / 1Y) inside the chart's card, next to the chart it filters. In a 16-padded card the nest caps the radius: track `--radius-sm` (2) with `--spacing-2` padding around `--radius-none` (0) segments, so 2 = 0 + 2. The track is 40 high around 36 segments and sits centred in a 44 high hit area (`--spacing-touch`), so each segment's target is 44.
 - **Invite link:** a read-only field showing the end of the link and a 104 wide Copy primary. Copied keeps the width, adds a check and returns after 2 s. Error: "Your browser blocked copying. Press and hold the link to copy it yourself."
 - **Bottom sheet:** `--radius-lg` top corners, 16 padding, level-2 elevation over the scrim, a 36 × 4 Cream 300 handle, Title 2 heading, radio rows, a primary and an underlined Cancel.
 - **Dialog (deletion only):** `--radius-lg`, 16 padding, buttons inside at `--radius-sm`, level 2 over the scrim. "Delete your account?", a list of exactly what goes, "It's gone from our servers within 30 days and can't be undone.", then Delete my account (primary, `--color-state-error`), Keep my account (secondary) and an underlined "Download my data first".

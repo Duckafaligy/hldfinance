@@ -57,6 +57,14 @@ colors:
   brand-google-red: "#EA4335"
   brand-google-yellow: "#FBBC05"
   brand-google-green: "#34A853"
+  # Exploration only (Accent option: Muted pink, not adopted)
+  accent-pink: "#D0A4B5"
+  accent-pink-deep: "#8D4963"
+  accent-pink-subtle: "#F3E7EC"
+  on-accent-pink: "#1E120C"
+  text-pink-inverse: "#D0A4B5"
+  focus-ring-pink: "#8D4963"
+  focus-ring-pink-inverse: "#D0A4B5"
 typography:
   serif-hero:
     fontFamily: "Instrument Serif, Georgia, serif"
@@ -285,7 +293,7 @@ components:
 
 # Design System: HLD Finance
 
-The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with eight artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent. Pages run Theme, Start, Coach, Tracker, Practice, You, Logo concepts; the screens on each are listed under Screen inventory.
+The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with nine artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product, Accent · Muted pink. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent. Pages run Theme, Start, Coach, Tracker, Practice, You, Logo concepts, Accent · Muted pink; the screens on each are listed under Screen inventory.
 
 ## Overview
 
@@ -394,6 +402,74 @@ Gain and loss share a value on purpose: the ▲ + / ▼ − glyphs carry directi
 - **Restricted pairs.** Brown 500 is never text (4.09:1 fails 4.5:1); it is the control outline only. Cream 200 and darker are never a text surface (Brown 600 on Cream 200 is 4.27:1).
 - **One dark card.** Brown 900 as a surface belongs to the Coach card and transient toasts.
 - **Brand-only tokens.** `--color-brand-apple` (#000000) and `--color-brand-google-blue` / `-red` / `-yellow` / `-green` sit outside the cream and brown ramp and colour only the official Apple logo, its "Continue with Apple" label and Google's G on the sign-in buttons. They never colour UI, state, charts or text elsewhere, so Google red never stands in for an error or a destructive action.
+
+## Accent option: Muted pink (exploration, not adopted)
+
+A secondary look at Muted pink `#D0A4B5` as the accent. Nothing above changes: the accent and state slots still point into the ramp, Cream 75 and Brown 900 still carry every surface and word, and the screens on Start, Coach, Tracker, Practice, You and Logo concepts are the comparison. The pink tokens live in Paper and in the frontmatter so the option can be adopted by remapping, never by editing screens one at a time. Board: Theme › "Accent · Muted pink". Variants: page "Accent · Muted pink".
+
+### Tokens
+
+| Token | Value | Role |
+|---|---|---|
+| `--color-accent-pink` | `#D0A4B5` | Fills and small brand marks: the selected tab block, the selected segment, the app-icon tile |
+| `--color-accent-pink-deep` | `#8D4963` | Text, icons, outlines and ring arcs on cream |
+| `--color-accent-pink-subtle` | `#F3E7EC` | Tint surface for one callout or your own row; always with an edge |
+| `--color-on-accent-pink` | Brown 900 | Text and icons on a pink fill |
+| `--color-text-pink-inverse` | Pink | Pink text on the Brown 900 Coach card |
+| `--color-focus-ring-pink` | Pink deep | 2px focus ring on light surfaces |
+| `--color-focus-ring-pink-inverse` | Pink | 2px focus ring on the Coach card, on both doors alike |
+
+### Pairs
+
+| Pair | Ratio | Result |
+|---|---|---|
+| Brown 900 on Pink | 8.42 | AAA text |
+| Pink on Brown 900 | 8.42 | AAA text |
+| Pink deep on Cream 50 / 75 / 100 / 150 | 6.29 / 6.08 / 5.63 / 5.15 | AA text |
+| Pink deep on Pink subtle | 5.34 | AA text |
+| Brown 900 / Brown 700 on Pink subtle | 15.22 / 7.10 | AAA text |
+| Pink deep arc on Cream 200 track | 4.54 | Passes 3:1 UI |
+| Pink deep ring on Cream 75 | 6.08 | Passes 3:1 UI |
+| Pink ring on Brown 900 | 8.42 | Passes 3:1 UI |
+| Pink on Cream 75 | 2.05 | Fails; a fill only, never text or a lone edge |
+| Pink block on the Cream 50 tab bar | 2.13 | Below 3:1; the 600 label and Brown 900 icon also mark the tab, as they do today on Cream 150 (1.18) |
+| Pink arc on Cream 200 track | 1.53 | Fails 3:1 UI; rings use Pink deep |
+| Pink subtle on Cream 75 | 1.14 | Never alone; always paired with a Pink or Pink deep edge |
+| Pink deep on Brown 900 | 2.85 | Fails; never on the Coach card |
+
+### Where pink goes
+
+One to three touches a screen, and never the primary button.
+
+- **Selected states:** the tab block, the selected segment and a selected chip, in Pink with a Brown 900 label at 600.
+- **One callout a screen:** the daily tip on Pink subtle with a 1px Pink edge.
+- **Brand and wayfinding:** the app icon, the HLD mark on Welcome, the step counter in Pink deep, and "Hold off" / "Hold on" on Welcome.
+- **Your own row on a leaderboard:** Pink subtle with a 1.5 inset Pink deep edge, and the word "you" kept.
+- **On the Coach card:** the item and price, and the answers already given on Your call, in Pink (8.42). Never the question, which stays Cream 75 in the serif.
+- **Budget ring arcs** in Pink deep, always beside the amount left in words.
+
+### Where pink never goes
+
+- Gain and loss. They stay ▲ + / ▼ − in brown on every chart, row and total. The practice return line stays accent brown.
+- Warnings, errors, over-budget or TFSA limits. Pink is never an alarm.
+- One of two doors. Remind me and Buy anyway, Buy and Sell, Worth it and Not really never get pink unless both get the same treatment. The pink focus ring applies to both doors alike.
+- Body text, the serif, or any text on cream in light Pink (2.05).
+- First place in a league, or one check-in outcome over another.
+
+### Variants (page "Accent · Muted pink")
+
+Each pair sits side by side: "<Screen> · Original" on the left, "<Screen> · Pink accent" on the right.
+
+| Screen | Pink touches |
+|---|---|
+| Start · Welcome | 32 Pink app-icon tile beside HLD (Brown 900 h, 8.42); "Hold off" and "Hold on" in Pink deep (6.08) |
+| Coach · Home | Daily tip on Pink subtle with a Pink edge (Brown 900 15.22, Brown 700 7.10); Coach tab block in Pink (icon and label 8.42) |
+| Check-in 1 of 3 | "Step 1 of 3" in Pink deep (6.08); item and price on the Coach card in Pink (8.42). Answer chips and both doors unchanged |
+| Check-in · Decision | Item and price, and the three recorded answers, in Pink (8.42). Remind me and Buy anyway unchanged and equal |
+| Tracker · Home | Ring arcs in Pink deep (4.54 on the Cream 200 track, 6.08 on Cream 75); Tracker tab block in Pink |
+| Practice · Home | Selected "All" segment in Pink (label 8.42); Practice tab block in Pink. Chart, ▲/▼ and holdings unchanged |
+| League · Leaderboard | Selected "Weekly" segment in Pink; your row on Pink subtle with a 1.5 Pink deep edge (5.34; text 15.22); Practice tab block in Pink |
+| Logo 20B | 180 and 60: Pink tile with a Brown 900 h (8.42), and a Pink h on a Brown 900 tile (8.42) |
 
 ## Typography
 
@@ -662,6 +738,7 @@ Phone screens are 390 wide, 844 high or fit-content where they run longer. Coach
 - **Practice (20 + Motion):** Practice · Home; Search · Recent, Results, No results; Stock · Plain English (equal Buy and Sell); Trade · Amount; Trade · Coach 1 of 3, 2 of 3, 3 of 3; Trade · Review; Trade · Placed; Holdings; Journal; Leagues; League · Leaderboard; Create league + invite link; Practice TFSA; Trade · Over TFSA room; Practice · Loading; Practice · Empty. The trade flow is five steps ("Step n of 5" in the top bar: Amount, the three coach questions, Review); five steps and three questions differ, so the Coach card inside it also counts "Question n of 3". The check-in (Coach) counts only in its top bar.
 - **You (5):** You · Home (plan Free, Tracking: manual, Bank sync: coming later); Privacy & consent (one switch per purpose, all off); Your data (download, delete); Delete account · Dialog (one confirmation, no red); Account deleted.
 - **Logo concepts:** concept sheet and refinements; not app screens.
+- **Accent · Muted pink (8 pairs):** Start · Welcome, Coach · Home, Check-in 1 of 3, Check-in · Decision, Tracker · Home, Practice · Home, League · Leaderboard and Logo 20B, each as "· Original" beside "· Pink accent". An exploration; see Accent option: Muted pink.
 
 ## Do's and Don'ts
 

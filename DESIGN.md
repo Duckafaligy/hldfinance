@@ -40,36 +40,62 @@ colors:
   accent-inverse-subtle: "#453023"
   on-accent-inverse: "#1E120C"
   border-control-inverse: "#CDBAA6"
+  border-inverse-subtle: "#614734"
+  skeleton: "#EDE5D9"
+  skeleton-shimmer: "#F5EFE7"
+  skeleton-inverse: "#614734"
+  skeleton-inverse-shimmer: "#795D46"
   state-gain: "#453023"
   state-loss: "#453023"
   state-warning: "#614734"
   state-error: "#1E120C"
   state-bg: "#EDE5D9"
 typography:
+  serif-hero:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontStyle: italic
+    fontSize: "64px"
+    fontWeight: 400
+    lineHeight: "62px"
+    letterSpacing: "-0.01em"
+  serif-display:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontStyle: italic
+    fontSize: "44px"
+    fontWeight: 400
+    lineHeight: "46px"
+    letterSpacing: "-0.01em"
+  serif-title:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontStyle: italic
+    fontSize: "32px"
+    fontWeight: 400
+    lineHeight: "36px"
+    letterSpacing: "-0.01em"
   display:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "36px"
-    fontWeight: 600
-    lineHeight: "42px"
-    letterSpacing: "-0.02em"
+    fontWeight: 800
+    lineHeight: "38px"
+    letterSpacing: "-0.04em"
   figure-xl:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "48px"
-    fontWeight: 600
+    fontWeight: 700
     lineHeight: "52px"
-    letterSpacing: "-0.02em"
+    letterSpacing: "-0.03em"
   title-1:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "28px"
-    fontWeight: 600
-    lineHeight: "34px"
-    letterSpacing: "-0.01em"
+    fontWeight: 800
+    lineHeight: "30px"
+    letterSpacing: "-0.04em"
   title-2:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "22px"
-    fontWeight: 600
-    lineHeight: "28px"
-    letterSpacing: "-0.01em"
+    fontWeight: 700
+    lineHeight: "26px"
+    letterSpacing: "-0.03em"
   title-3:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "18px"
@@ -113,13 +139,11 @@ typography:
     lineHeight: "20px"
     letterSpacing: "0em"
 rounded:
-  xs: "4px"
-  sm: "8px"
-  md: "12px"
-  lg: "16px"
-  xl: "20px"
-  2xl: "36px"
-  pill: "999px"
+  none: "0px"
+  sm: "2px"
+  md: "4px"
+  lg: "6px"
+  full: "999px"
 spacing:
   hairline: "1px"
   "2": "2px"
@@ -135,6 +159,7 @@ spacing:
   "48": "48px"
   "64": "64px"
   "80": "80px"
+  safe-bottom: "34px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
@@ -165,14 +190,14 @@ components:
   input:
     backgroundColor: "{colors.surface-sunken}"
     textColor: "{colors.text-primary}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
     height: "52px"
     padding: "0 16px"
   chip:
     backgroundColor: "{colors.surface-page}"
     textColor: "{colors.text-primary}"
     typography: "{typography.label}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.md}"
     height: "40px"
     padding: "0 16px"
   chip-selected:
@@ -180,37 +205,37 @@ components:
     textColor: "{colors.text-primary}"
   card:
     backgroundColor: "{colors.surface-raised}"
-    rounded: "{rounded.xl}"
+    rounded: "{rounded.lg}"
     padding: "16px"
   coach-card:
     backgroundColor: "{colors.surface-inverse}"
     textColor: "{colors.text-inverse}"
-    rounded: "{rounded.2xl}"
-    padding: "24px"
+    rounded: "{rounded.lg}"
+    padding: "16px"
   coach-button-primary:
     backgroundColor: "{colors.accent-inverse}"
     textColor: "{colors.on-accent-inverse}"
     typography: "{typography.button}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     height: "52px"
   coach-button-secondary:
     textColor: "{colors.text-inverse}"
     typography: "{typography.button}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     height: "52px"
   coach-chip-selected:
     backgroundColor: "{colors.accent-inverse-subtle}"
     textColor: "{colors.text-inverse}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.sm}"
     height: "40px"
   switch-off:
     backgroundColor: "{colors.surface-sunken}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.full}"
     height: "28px"
     width: "48px"
   switch-on:
     backgroundColor: "{colors.accent}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.full}"
     height: "28px"
     width: "48px"
   inline-notice:
@@ -222,11 +247,11 @@ components:
   list-row:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.text-primary}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     height: "64px"
   segmented-track:
     backgroundColor: "{colors.surface-sunken}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
     padding: "4px"
   segmented-segment-selected:
     backgroundColor: "{colors.cream-50}"
@@ -243,11 +268,11 @@ components:
 
 # Design System: HLD Finance
 
-The source of truth is the Paper file **Bright olive**, page **Theme**, with eight artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent.
+The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with eight artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent.
 
 ## Overview
 
-HLD is a pause before a purchase or a trade. The coach asks a question, shows the facts, and steps aside; the person decides. The interface is cream and brown, set in one family (Archivo) at two widths: full width and generous spacing where the coach talks, 87.5% width and tight rows where people compare numbers. The Coach check-in is the hero: the most room, the largest type, and the only dark card on any screen.
+HLD is a pause before a purchase or a trade. The coach asks a question, shows the facts, and steps aside; the person decides. The interface is cream and brown, with small, square-shouldered corners. Two voices: Instrument Serif Italic for the coach at a moment (the question on the Coach card, the Welcome tagline, "Your call."), and Archivo for everything else, heavy and tight in titles, regular where people read, and 87.5% wide where they compare numbers. The Coach check-in is the hero: the most room, the largest type, and the only dark card on any screen.
 
 Platform: phone-first at 390×844, scaling up to desktop web. Light mode only for now.
 
@@ -306,6 +331,9 @@ Two pinned colours, Cream 75 `#FCF8F2` and Brown 900 `#1E120C`, with ten steps d
 | Input and chip outline | `--color-border-control` | Brown 500 | on Cream 75 / 100 | 4.09 / 3.79 | Passes 3:1 UI |
 | Focus ring | `--color-focus-ring` | Brown 900 | on Cream 75 | 17.30 | Passes 3:1 UI |
 | Focus ring on Coach | `--color-focus-ring-inverse` | Cream 75 | on Brown 900 | 17.30 | Passes 3:1 UI |
+| Divider on the Coach card | `--color-border-inverse-subtle` | Brown 700 | on Brown 900 | 2.14 | Decorative; never the only cue |
+| Skeleton, light | `--color-skeleton` / `--color-skeleton-shimmer` | Cream 150 / Cream 100 | on Cream 75 | 1.18 / 1.08 | Placeholder shape, not content |
+| Skeleton, Coach card | `--color-skeleton-inverse` / `--color-skeleton-inverse-shimmer` | Brown 700 / Brown 600 | on Brown 900 | 2.14 / 3.02 | Placeholder shape; Brown 800 (1.48) disappeared |
 
 ### Primary (accent, provisional)
 
@@ -349,39 +377,50 @@ Gain and loss share a value on purpose: the ▲ + / ▼ − glyphs carry directi
 
 ## Typography
 
-One family: **Archivo** (Google Fonts, variable weight 100–900 and width 62–125). Weights in use: 400, 500, 600.
+Two families, each with one job.
 
-- **Width 100** for the coach, body copy, titles and buttons.
-- **Width 87.5** (`font-stretch: 87.5%`) for tables: journal, leagues, holdings, subscriptions, ramp captions and token names. This fits five columns across a 390 phone at 14px.
+- **Instrument Serif Italic** (`--font-serif`, Google Fonts, 400 italic only): a condensed, high-contrast italic with hairline serifs. It is the coach's voice at a moment, used selectively: the question on the Coach card (every Coach card headline, including the follow-up and the budget check-in), "Your call." on the decision, "Think before you buy." on Welcome, and the Principles titles on the Theme board.
+- **Archivo** (`--font-sans`, Google Fonts, variable weight 100–900 and width 62–125) for everything else. Display and Title 1 are 800 with −0.04em tracking, Title 2 and Figure XL are 700 with −0.03em, and readable UI text (body, labels, tables, buttons, inputs) stays at 400–600 with normal tracking.
+  - **Width 100** for answers, body copy, titles and buttons.
+  - **Width 87.5** (`font-stretch: 87.5%`) for tables: journal, leagues, holdings, subscriptions, ramp captions and token names. This fits five columns across a 390 phone at 14px.
 - **Tabular figures everywhere numbers meet:** set `font-variant-numeric: tabular-nums` on every figure, not only tables. Right-align columns of money. Amounts keep two decimals; share quantities keep four.
 - **Signs:** ▲ + for gain, ▼ − (U+2212) for loss, `0.00%` with no arrow for flat.
 
 ### Hierarchy
 
-| Style | Size / line | Weight | Tracking | Use |
-|---|---|---|---|---|
-| Display | 36 / 42 | 600 | −0.02em | The coach question, one per screen |
-| Figure XL | 48 / 52 | 600 | −0.02em, tabular | Skipped total, portfolio value |
-| Title 1 | 28 / 34 | 600 | −0.01em | Screen titles |
-| Title 2 | 22 / 28 | 600 | −0.01em | Section titles |
-| Title 3 | 18 / 24 | 600 | −0.01em | Card titles |
-| Body large | 18 / 28 | 400 | 0 | Coach explanations and answers |
-| Body | 16 / 24 | 400 | 0 | Default copy |
-| Button | 16 / 20 | 600 | 0 | Every button label, including Remind me and Buy anyway |
-| Label | 14 / 20 | 500 | 0.01em | Chips, segments, field labels, toast actions |
-| Table | 14 / 20 at width 87.5 | 400, 600 for symbols | 0 | Dense rows, check-in records, notes on the Theme boards |
-| Caption | 13 / 18 | 400 | 0.01em | Timestamps, tab labels, "Quotes delayed 15 minutes", fine print |
+| Style | Family | Size / line | Weight | Tracking | Use |
+|---|---|---|---|---|---|
+| Serif hero | Instrument Serif Italic | 64 / 62 | 400 | −0.01em | The Welcome tagline only |
+| Serif display | Instrument Serif Italic | 44 / 46 | 400 | −0.01em | The Coach card question, one per card; "Your call." |
+| Serif title | Instrument Serif Italic | 32 / 36 | 400 | −0.01em | Principles titles and other key moments on boards |
+| Display | Archivo | 36 / 38 | 800 | −0.04em | Screen display headlines ("What are you thinking of buying?") |
+| Figure XL | Archivo | 48 / 52 | 700 | −0.03em, tabular | Skipped total, portfolio value |
+| Title 1 | Archivo | 28 / 30 | 800 | −0.04em | Screen titles |
+| Title 2 | Archivo | 22 / 26 | 700 | −0.03em | Section titles |
+| Title 3 | Archivo | 18 / 24 | 600 | −0.01em | Card titles |
+| Body large | Archivo | 18 / 28 | 400 | 0 | Coach explanations and answers |
+| Body | Archivo | 16 / 24 | 400 | 0 | Default copy |
+| Button | Archivo | 16 / 20 | 600 | 0 | Every button label, including Remind me and Buy anyway |
+| Label | Archivo | 14 / 20 | 500 | 0.01em | Chips, segments, field labels, toast actions |
+| Table | Archivo at width 87.5 | 14 / 20 | 400, 600 for symbols | 0 | Dense rows, check-in records, notes on the Theme boards |
+| Caption | Archivo | 13 / 18 | 400 | 0.01em | Timestamps, tab labels, "Quotes delayed 15 minutes", fine print |
 
-Tokens: `--text-display`, `--text-figure-xl`, `--text-title-1/2/3`, `--text-body-lg`, `--text-body`, `--text-button`, `--text-label`, `--text-table`, `--text-caption`, each with a matching `--leading-*`. There are no other sizes: nothing is set at 12 or 15.
+Tokens: `--font-sans`, `--font-serif`; sizes `--text-serif-hero`, `--text-serif-display`, `--text-serif-title`, `--text-display`, `--text-figure-xl`, `--text-title-1/2/3`, `--text-body-lg`, `--text-body`, `--text-button`, `--text-label`, `--text-table`, `--text-caption`, each with a matching `--leading-*`; weights `--font-weight-regular` 400, `-medium` 500, `-semibold` 600, `-bold` 700, `-extrabold` 800; tracking `--tracking-display` −0.04em (Display, Title 1), `--tracking-headline` −0.03em (Title 2, Figure XL), `--tracking-title` −0.01em (Title 3), `--tracking-serif` −0.01em, `--tracking-normal` 0, `--tracking-small` 0.01em. There are no other sizes on screens. Theme board headers use `--text-board-title` / `--leading-board-title` (64/64, Archivo 800), which never appear on a screen.
 
 ### Named Rules
 
-- No italics, no small caps, no all-caps labels, no monospace. Headings carry their own weight without a kicker above them.
+- **The serif is selective.** It never sets figures, tables, buttons, inputs, labels, body copy or screen titles. Its hairlines need size: 28px and up, never below 24px (the smallest role is 32). It appears only in full-strength colour: Cream 75 on Brown 900 or Brown 900 on Cream 75, both 17.30:1.
+- **Heavy and tight is for headlines only.** −0.04em is the tracking floor. Body, labels, tables, buttons and inputs keep normal tracking.
+- **Line breaks are set by hand between phrases** on every headline at phone width: "Will you still / want it in 3 days?", "Make an account so / your check-ins are kept.", "Think before / you buy.", "Thinking about / buying something?".
+- No small caps, no all-caps labels, no monospace. Italic belongs to the serif only. Headings carry their own weight without a kicker above them.
 
 ## Layout
 
-- **Spacing:** 4px base. Tokens: 1 (hairline), 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, and 44 (touch).
-- **Phone:** 16 gutter, 32 between sections, 40 above a screen title, 80 above the coach question, 48 between the question and its answers.
+- **Spacing:** 4px base. Tokens: 1 (hairline), 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 44 (touch) and 34 (`--spacing-safe-bottom`, the home-indicator inset; never a gap).
+- **Two standard paddings:**
+  - **Screen content:** every screen's main content frame is 40 top (`--spacing-40`, measured from the top bar or status bar) and 16 left and right (`--spacing-16`). Footers keep 16 sides and `--spacing-safe-bottom` (34) under the last button; a full-height Coach card area also ends 34 above the bottom edge. Content never sits under a fixed footer or tab bar.
+  - **Every box:** cards, the Coach card, tip cards, panels, sheets and dialogs are 16 inside on all four sides (`--spacing-16`). A row group is a tight nest: 4 inset (`--spacing-4`) plus 12 inside each row (`--spacing-12`), so its content also sits 16 in.
+- **Phone:** 16 gutter, 32 between sections, 48 between the coach question and its answers. On the Coach card the question sits 40 below the 44 high progress row.
 - **Groups:** 8 inside a group, 24 between related groups.
 - **Touch targets:** at least 44 × 44, even when the visible control is smaller (chips are 40 high inside a 44 target).
 - **Breakpoints:** phone 390, tablet 768, desktop 1280. Containers: coach content max 560, page content max 1200.
@@ -402,27 +441,32 @@ In Paper and in code the shadow colour is `color-mix(in srgb, var(--color-brown-
 
 ## Shapes
 
+Cap outer, square inner: small, consistent corners, 6 at most.
+
 | Token | Value | Use |
 |---|---|---|
-| `--radius-xs` | 4 | Skeleton bars, images inside cards |
-| `--radius-sm` | 8 | Segments inside a track |
-| `--radius-md` | 12 | Buttons, inputs, segmented track, pressed rows |
-| `--radius-lg` | 16 | Row groups, toasts |
-| `--radius-xl` | 20 | Cards |
-| `--radius-2xl` | 36 | Coach card, bottom sheets |
-| `--radius-pill` | 999 | Choice chips, switches |
+| `--radius-none` | 0 | An element flush with a container's edge; the container clips it |
+| `--radius-sm` | 2 | Inside a container: segments, Coach card chips and buttons, pressed rows, buttons in cards and dialogs, skeleton bars, plots, progress bars |
+| `--radius-md` | 4 | Standalone controls on the page: buttons, choice chips, chip tracks, the tab-bar selection, inline notices, highlighted rows |
+| `--radius-lg` | 6 | Containers, the maximum: cards, the Coach card, sheets (top corners), dialogs, toasts, row groups, inputs, segmented tracks |
+| `--radius-full` | 999 | Circles only: switch tracks and knobs, budget rings, pay-date circles, radio and legend dots |
 
-**Inner radius = outer radius − padding.** Worked examples:
-- Coach card 36, padding 24 → buttons inside at 12.
-- Segmented track 12, inset 4 → segment at 8.
-- Row group 16, inset 4 → pressed row at 12.
-- Card 20, padding 16 → chart or image inside at 4.
+**Outer = inner + padding**, where the padding is the distance between the two edges.
 
-If the result is 4 or less, use `--radius-xs`.
+- **Tight nests (padding 4 or less) follow it exactly:**
+  - Segmented track 6, inset 4, segment 2.
+  - Input 6, inset 4, button inside 2 (the invite link's Copy).
+  - Row group 6, inset 4, pressed row 2.
+  - Chip track 4, inset 2, chip 2.
+  - Switch track full, inset 3, knob full (11 + 3 = 14 = half the 28 height, so the track stays round).
+- **Padded containers (padding more than 4) cap the outer radius at 6.** Everything inside takes 2, or 0 where it meets the container's edge.
+  - Coach card 6, padding 16: chips and buttons 2 (uncapped it would be 18).
+  - Card 6, padding 16: a plot inside 2, a footer band flush with the edge 0, clipped by the card.
+  - Dialog and sheet 6, padding 16: buttons 2.
 
 The padding is measured from the outer edge. A track or row group draws its 1px edge as an inset shadow (`inset 0 0 0 1px var(--color-border-subtle)`), so the 4 inset is exactly 4. A dashed edge cannot be a shadow, so the disabled segmented track keeps a 1px dashed border with 3px padding: still 4 from the outer edge.
 
-Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes 24 (tab bar, rows), 20 (buttons, toasts), 16 (inline with 13px text). Brown 900 when active, Brown 700 at rest, Cream 75 on the Coach card. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
+Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes 24 (tab bar, rows), 20 (buttons, toasts), 16 (inline with 13px text). Strokes are tokens, never hex: `--color-text-primary` when active, `--color-text-secondary` at rest, `--color-text-inverse` on the Coach card. **Brand marks are exempt:** the solid Apple logo and Google's G on the sign-in buttons follow their owners' rules, not the 1.5 outline rule, and the build uses each official mark unaltered. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
 
 ## Components
 
@@ -430,7 +474,7 @@ Controls are drawn in all their states on the Paper board "Components & states";
 
 ### Buttons
 
-- 48 high, `--radius-md`, Button type (16/20/600). One primary per screen. Coach answer buttons are 52 high.
+- 48 high, `--radius-md` on the page and `--radius-sm` inside a card, sheet or dialog, Button type (16/20/600). One primary per screen. Coach answer buttons are 52 high.
 - **Primary:** accent fill, on-accent text. Hover and pressed use accent-pressed; pressed also scales to 0.97.
 - **Secondary:** 1.5px Brown 500 outline. Hover Cream 100, pressed Cream 150 with a Brown 700 outline.
 - **Ghost:** underlined label (offset 4). Hover Cream 100, pressed Cream 150.
@@ -441,42 +485,42 @@ Controls are drawn in all their states on the Paper board "Components & states";
 
 ### Chips (if used)
 
-Coach answers and journal tags (Planned / FOMO). 40 high in a 44 target, pill. Default has a 1.5px Brown 500 outline. Selected uses accent-subtle fill, an accent outline and a check icon. Pressed is Cream 150 with a Brown 700 outline. Focus uses the ring. Disabled uses a Cream 200 outline with disabled text.
+Coach answers and journal tags (Planned / FOMO). 40 high in a 44 target, `--radius-md` on the page and `--radius-sm` on the Coach card. Default has a 1.5px Brown 500 outline. Selected uses accent-subtle fill, an accent outline and a check icon. Pressed is Cream 150 with a Brown 700 outline. Focus uses the ring. Disabled uses a Cream 200 outline with disabled text.
 
 ### Cards / Containers
 
-- `--radius-xl`, 16 padding, Cream 50 on a Cream 200 edge. A card is tappable only when the whole card leads somewhere: pressed is Cream 150 with a Cream 300 edge, and focus uses the ring.
+- `--radius-lg`, 16 padding, Cream 50 on a Cream 200 edge. A card is tappable only when the whole card leads somewhere: pressed is Cream 150 with a Cream 300 edge, and focus uses the ring.
 - **Error** state: an alert icon, a sentence saying what failed and that nothing was lost, and a Try again secondary button.
 - **Budget ring:** 72px, 8 stroke. The track is Cream 200 and the progress is accent. It fills clockwise from 12 o'clock as money is spent, and the amount left is always shown beside it ("$142 left · of $300 · payday in 6 days").
 - **Coach card:** see below.
 
 ### Coach card
 
-The only dark surface. Brown 900, `--radius-2xl`, 24 padding (12 at the top, where the 44 high progress row starts). Drawn at phone width, 358. Top to bottom:
+The only dark surface. Brown 900, `--radius-lg`, 16 padding on all four sides, like every box. Drawn at phone width, 358. Top to bottom:
 
 | Part | Spec |
 |---|---|
 | Progress and Skip | 44 high row. "1 of 3" in Caption, Cream 300, tabular. Skip is an underlined Label in Cream 75 with a 44 target. |
-| Item and price | Caption, Cream 300, 20 below the top row: "Wireless earbuds · $129.99". |
-| Question | Display 36/42, Cream 75, 8 below the item. One question per card. |
-| Fact (optional) | Body large, Cream 300: "You have $142 left for fun until payday on November 28." |
-| Answer chips | 32 below. 40 high pills with a 1.5 Cream 300 outline. Selected: Brown 800 fill, Cream 75 outline and a check. |
-| Remind me / Buy anyway | 40 below. 52 high, 12 apart, `--radius-md`. Remind me: `--color-accent-inverse` with `--color-on-accent-inverse`. Buy anyway: 1.5 `--color-border-control-inverse` outline, Cream 75 label. |
+| Item and price | Caption, Cream 300, 40 below the progress row: "Wireless earbuds · $129.99". |
+| Question | Serif display 44/46, Cream 75, 8 below the item. One question per card, broken by hand between phrases. |
+| Fact (optional) | Body large, Cream 300: "You have $142 left for fun until payday on November 27." |
+| Answer chips | 32 below. 40 high at `--radius-sm` with a 1.5 Cream 300 outline. Selected: Brown 800 fill, Cream 75 outline and a check. |
+| Remind me / Buy anyway | 40 below. 52 high, 12 apart, `--radius-sm`. Remind me: `--color-accent-inverse` with `--color-on-accent-inverse`. Buy anyway: 1.5 `--color-border-control-inverse` outline, Cream 75 label. |
 | Fine print | 16 below. Caption, `--color-text-inverse-tertiary` (6.30:1): "General information, not personalized advice." Every Coach card carries it. |
 
-States: **default**; **next question** (progress advances, the previous answer is recorded, the next question rises in); **loading** (question and chips become Brown 800 skeleton bars, a Cream 300 caption says "Getting the next question. Both buttons below still work.", and both buttons stay live); **error** (alert icon and "The next question didn't load. Your first answer is saved." in Body large, a 40 high Try again outline, both buttons still live). Skip moves on without an answer; after the third question or three skips, only the two buttons remain.
+States: **default**; **next question** (progress advances, the previous answer is recorded, the next question rises in); **loading** (the question, the budget-table lanes and the chips become `--color-skeleton-inverse` bars with the `--color-skeleton-inverse-shimmer` band, a Cream 300 caption says "Getting the next question. Both buttons below still work.", and both buttons stay live); **error** (alert icon and "The next question didn't load. Your first answer is saved." in Body large, a 40 high Try again outline, both buttons still live). Skip moves on without an answer; after the third question or three skips, only the two buttons remain.
 
 ### Inputs / Fields
 
-- The label sits above the field, never inside. The field is 52 high, Cream 100, with a 1.5px Brown 500 outline and `--radius-md`. Money fields show a "$" prefix and tabular figures.
+- The label sits above the field, never inside. The field is 52 high, Cream 100, with a 1.5px Brown 500 outline and `--radius-lg`. Money fields show a "$" prefix and tabular figures.
 - **Focus:** Cream 50 fill, a 1.5px Brown 900 border, and a 3px Cream 200 halo.
 - **Disabled:** dashed Cream 300 outline, disabled text, and a reason underneath.
 - **Error:** a 2px `--color-state-error` border, an alert icon, and a sentence that says how to fix it ("Enter an amount above $0."). It never depends on colour alone and never shakes.
 
 ### Navigation
 
-- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). The selected tab gets a Cream 150 pill (56 × 32) behind its icon and a 600 label. Pressed shows a Cream 100 pill, and focus a 2px ring around the tab. No badges or dots.
-- **Segmented control:** Cream 100 track, `--radius-md`, 4 inset with the edge as an inset shadow. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation. Labels are Label (14). Pressed is Cream 150, focus a 2px ring on the segment, and disabled a dashed track (1 border + 3 padding) with disabled text.
+- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). The selected tab gets a Cream 150 block (56 × 32, `--radius-md`) behind its icon and a 600 label. Pressed shows a Cream 100 block, and focus a 2px ring around the tab. No badges or dots.
+- **Segmented control:** Cream 100 track, `--radius-lg`, 4 inset with the edge as an inset shadow. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation. Labels are Label (14). Pressed is Cream 150, focus a 2px ring on the segment, and disabled a dashed track (1 border + 3 padding) with disabled text.
 - **Top bar:** 56 high on the page colour with a Cream 200 bottom edge. Back is a 96 wide slot (chevron and the previous place's name, Body) with a 44 target; the title is Title 3, centred; the right slot is 96 wide, empty or holding one text action (Button type, for example Save). Focus puts a 2px ring around Back.
 
 ### Switch and consent
@@ -486,7 +530,7 @@ States: **default**; **next question** (progress advances, the previous answer i
 
 ### List row
 
-64 high inside a row group (`--radius-lg`, 4 inset, edge as an inset shadow). Fixed lanes, in order: name with a detail line, a right-aligned tabular amount, and a 20px chevron. Pressed is Cream 150 at `--radius-md`; focus is a 2px inset ring.
+64 high inside a row group (`--radius-lg`, 4 inset, edge as an inset shadow). Fixed lanes, in order: name with a detail line, a right-aligned tabular amount, and a 20px chevron. Pressed is Cream 150 at `--radius-sm`; focus is a 2px inset ring.
 
 ### Check-in record (signature)
 
@@ -498,13 +542,13 @@ Brown 900, `--radius-lg`, level-2 elevation, 16 above the tab bar, with an optio
 
 ### Skeleton loader
 
-The same shapes and lanes as the content it replaces, in Cream 150 at `--radius-xs`. A Cream 100 band sweeps left to right every 1.4 s. After 8 s the skeleton is replaced by a sentence and a retry.
+The same shapes and lanes as the content it replaces, at `--radius-sm`. On light surfaces the shapes are `--color-skeleton` (Cream 150) with a `--color-skeleton-shimmer` (Cream 100) band; on the Coach card they are `--color-skeleton-inverse` (Brown 700, 2.14:1) with a `--color-skeleton-inverse-shimmer` (Brown 600) band. The band sweeps left to right every 1.4 s. After 8 s the skeleton is replaced by a sentence and a retry.
 
 ### Product components (board "Components: product")
 
 All drawn at 358 (390 for the top bar), on the same tokens.
 
-- **Daily tip card:** a light card, never a second dark one. Title 3 tip, Body explanation in Brown 700, the fine print in Caption. Loading is a skeleton; after 8 s the card hides itself and leaves no gap or error.
+- **Daily tip card:** a light card, never a second dark one. Title 3 tip and a Body explanation in Brown 700. It carries no fine print: the line appears once per coach screen, on the Coach card. Loading is a skeleton; after 8 s the card hides itself and leaves no gap or error.
 - **Skipped total:** Label "Skipped total", Figure XL amount, "+ $129.99 today" in Label when it just changed, and "Money not spent, not money saved." in Caption in every state. Empty shows $0.00 in Brown 600 with "When you hold off on something, its price shows up here."
 - **Charts:** a 44 wide Y lane (Caption at width 87.5, tabular, right-aligned, one line) and a 282 wide plot. Zero is a 1.5 Brown 700 line and its label is 600 Brown 900; the band below zero is filled with `--color-state-bg`; gridlines are Cream 200. The line is 2px accent with the latest point filled. Scales are fixed, $2,000 either side of zero for net worth and 10% for practice returns, and widen only when a value passes them. The practice chart plots % return so its zero is the starting $10,000, and carries "Quotes delayed 15 minutes. Past returns are not a forecast." States: one point so far (a sentence explains when the line starts) and couldn't load (the chart pauses at its last date, holdings unchanged, Try again).
 - **Budget ring, standalone:** 96, 10 stroke, Cream 200 track and accent fill from 12 o'clock as money is spent. Beside it: the category in Label, the amount in Title 2 ("$142 left", "$0 left", "$18 over") and "of $300 · payday in 6 days" in Caption. Over budget is a full ring with a short Cream 50 notch marking the overlap, stated in words, never in an alarm colour. Loading is a Cream 150 ring and bars.
@@ -514,12 +558,12 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 - **Share quantity:** the input pattern with a "shares" suffix and four decimals. Focus shows the CAD estimate including the FX fee under the field. Error: "Enter at least 0.0001 shares." Disabled while the quote loads, with that reason.
 - **Order summary:** Title 3 "Buy 0.4200 AAPL", one plain sentence on what the company does, then rows at width 87.5: price per share (15 min delayed), exchange rate, cost in CAD, FX fee with its rate, Total in CAD (600, above a Cream 300 rule), share of the portfolio after. Closes with "Fake money. No per-trade fee."
 - **Text area:** the input pattern at 112 high for the trade plan. Optional, saved with the trade, with a tabular counter to 280. At the limit typing stops and nothing is cut.
-- **TFSA room:** Label and year, the amount left in Title 3, an 8px bar (Cream 200 track, accent fill as room is used) and "$5,760 used of $7,000 · fake money". All used: "$7,000 used · new room on January 1, 2027".
+- **TFSA room:** Label and year, the amount left in Title 3, an 8px bar at `--radius-sm` (Cream 200 track, accent fill as room is used) and "$5,760 used of $7,000 · fake money". All used: "$7,000 used · new room on January 1, 2027".
 - **Inline notice:** `--color-state-bg` tint, `--radius-md`, a 20 icon and Table text in Brown 900. Information ("Practice uses fake money. Nothing here touches a real account.") has no edge; a warning adds a 1.5 `--color-state-warning` inset edge and a bold first sentence ("This order is $1,580. You have $1,240 of TFSA room left.") followed by the way out.
 - **Leaderboard rows:** 48 high at width 87.5 with fixed lanes: a 24 right-aligned rank, the display name, and a 96 right-aligned tabular % return with ▲ + / ▼ −. Your row is Cream 150 at `--radius-md` and 600. No trophies, medals, crowns or colour for first place. Footer: "Fake money · free to join · the prize is bragging rights."
 - **Invite link:** a read-only field showing the end of the link and a 104 wide Copy primary. Copied keeps the width, adds a check and returns after 2 s. Error: "Your browser blocked copying. Press and hold the link to copy it yourself."
-- **Bottom sheet:** `--radius-2xl` top corners, level-2 elevation over the scrim, a 36 × 4 Cream 300 handle, Title 2 heading, radio rows, a primary and an underlined Cancel.
-- **Dialog (deletion only):** `--radius-xl`, 24 padding, level 2 over the scrim. "Delete your account?", a list of exactly what goes, "It's gone from our servers within 30 days and can't be undone.", then Delete my account (primary, `--color-state-error`), Keep my account (secondary) and an underlined "Download my data first".
+- **Bottom sheet:** `--radius-lg` top corners, 16 padding, level-2 elevation over the scrim, a 36 × 4 Cream 300 handle, Title 2 heading, radio rows, a primary and an underlined Cancel.
+- **Dialog (deletion only):** `--radius-lg`, 16 padding, buttons inside at `--radius-sm`, level 2 over the scrim. "Delete your account?", a list of exactly what goes, "It's gone from our servers within 30 days and can't be undone.", then Delete my account (primary, `--color-state-error`), Keep my account (secondary) and an underlined "Download my data first".
 - **Auth buttons:** three 52 high outlined buttons on Cream 50, Apple first, then Google, then email, each with a 20 mark in a fixed lane and a centred Button label "Continue with …". Pressed, focus, loading ("Opening Google", the other two stay usable) and an error line under the group. The marks on the board are drawn placeholders; the build uses each company's official mark, unaltered.
 - **Birth-year gate:** a 140 wide numeric field, "What year were you born?", "Only the year. It decides which features you see." Error: "Enter a four-digit year, like 2004." Under 18 gets an information notice listing what is open to them.
 - **Empty states:** a card with a Title 3 that names the state, one sentence on what will appear and why, and the single primary that makes it appear: "No trades yet" / Find a stock; "Just you in here" / Copy invite link; "No subscriptions logged" / Add a subscription; "$10,000.00 in cash" / Find a stock. No illustration, no mascot.
@@ -557,10 +601,10 @@ Paper has no token type for shadows, durations or easing, so these values live h
 
 ### Do:
 
-- Give the coach question its own screen at Display size with 80 above it.
+- Give the coach question its own card in the serif (Serif display), 40 below the progress row.
 - Put "fake money", "Quotes delayed 15 minutes" and "an assumption, not a promise" next to the number they qualify.
 - Use ▲ + / ▼ − with tabular figures for every gain and loss.
-- Keep the fine print "General information, not personalized advice." on coach screens only, in Caption on the Coach card (`--color-text-inverse-tertiary`).
+- Keep the fine print "General information, not personalized advice." once per coach screen, in Caption on the Coach card (`--color-text-inverse-tertiary`). The daily tip card does not repeat it.
 - Recheck every accent and state pair against AA when the accent is chosen.
 
 ### Don't:
@@ -568,7 +612,9 @@ Paper has no token type for shadows, durations or easing, so these values live h
 - Don't make Buy anyway smaller, fainter or further away than Remind me, add a confirmation after it, or lock it while Remind me saves.
 - Don't draw Buy anyway's Coach-card outline in Brown 500; it is `--color-border-control-inverse`.
 - Don't mark first place in a league with a trophy, medal, crown or colour, and don't style one check-in outcome as the better one.
-- Don't set a colour as a raw value in Paper or code; bind it to a role token.
+- Don't set a colour or a radius as a raw value in Paper or code, SVG strokes included; bind it to a token.
+- Don't round a container past 6, or use `--radius-full` on anything that isn't a circle.
+- Don't set the serif below 28px, or use it for figures, tables, buttons, inputs, labels or body.
 - Don't use streaks, countdowns, badges, red dots, confetti, bounces or shakes.
 - Don't use Brown 500 for text, or put text on Cream 200 or darker light steps.
 - Don't add sports-page ornament (heavy rules, dingbats, all-caps headlines) to the dense tables. Their character comes from column rhythm alone.

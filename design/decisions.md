@@ -293,3 +293,97 @@
 - Why: Checked against the Intent anti-pattern catalogue. Buy anyway is the same size, full contrast, always on screen and never locked on every Coach card, including loading and error. Consent is four separate rows, all off. The follow-up and budget answers are equal. Nothing grades an outcome. There are no streaks, badges or countdowns. The coach copy only asks or states facts. Not covered: Tracker, Practice and You screens beyond Check-in settings, which come in later batches.
 - Rejected: Nothing.
 - Rests on: Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Start and Coach
+
+## 2026-11-17 · The expressive serif is Instrument Serif Italic
+- Decided by: design subagent, default, applying revision 1 (Aariz's reference: a condensed, high-contrast true italic)
+- Why: It is the closest match Paper offers: narrow letterforms, hairline serifs and joins, a tall ascender-to-x-height ratio and a true italic. It keeps its hairlines on the Brown 900 Coach card at 44px. It is free on Google Fonts with no per-user cost.
+- Rejected: Bodoni Moda Italic (its hairlines vanished on Brown 900 in a render test, and it sets wider). Playfair Display Italic (less condensed). DM Serif Display Italic and Gloock (heavier, and Gloock has no italic).
+- Rests on: revision-1.md, "Typography direction"; get_font_family_info on Instrument Serif, Bodoni Moda, Playfair Display, Gloock, DM Serif Display; render test on the Typography board, since deleted
+
+## 2026-11-17 · The heavy tight sans stays Archivo, at 800 with −0.04em tracking
+- Decided by: design subagent, default, under revision 1 ("keep Archivo if it's close enough")
+- Why: In a side-by-side render of "Your onboarding is losing users", Archivo 800 at −0.04em matched Inter Tight 800 closely: large x-height, compact counters, letters nearly touching. Keeping it means one sans family for headlines and UI, and the 87.5 width axis for tables stays. −0.04em is the tracking floor; −0.045 started to merge "rn".
+- Rejected: Inter Tight (a second sans family for a near-identical result). Inter Display (no separate display cut in Paper). −0.05em (letters collide in Archivo).
+- Rests on: revision-1.md; get_font_family_info on Archivo, Inter Tight, Inter; render test on the Typography board, since deleted
+
+## 2026-11-17 · Every Coach card headline is in the serif; screen titles stay in the sans
+- Decided by: design subagent, default
+- Why: The serif is the coach's voice at a moment. The spec names the check-in question, "Your call." and the Welcome tagline; the follow-up ("Still want the wireless earbuds?"), the budget check-in ("Was dinner out worth it?") and the Home card ("Thinking about buying something?") are the same card asking a question, so they match. Screen titles on light pages ("What are you thinking of buying?", "When do you get paid?") are the app talking, so they are Archivo 800.
+- Rejected: The serif on light-page screen titles (it would stop being selective). Leaving the follow-up and budget questions in the sans (two voices on one card type).
+- Rests on: revision-1.md, "Rules"; Coach and Start pages
+
+## 2026-11-17 · Type roles: three serif sizes and a heavier, tighter sans scale
+- Decided by: design subagent, default
+- Why: Serif hero 64/62 (Welcome only), Serif display 44/46 (Coach card), Serif title 32/36 (boards). Display 36/38 and Title 1 28/30 at 800 and −0.04em; Title 2 22/26 and Figure XL 48/52 at 700 and −0.03em; Title 3 and everything readable keep their sizes, weights and normal tracking. Tighter leading suits heavy, tight headlines. The smallest serif role is 32, above the 28 floor.
+- Rejected: A single serif size (the Welcome tagline needs more presence than a card question; board titles need less). Serif under 32 on screens.
+- Rests on: revision-1.md, "Typography direction" and "Rules"
+
+## 2026-11-17 · Principle titles move to Serif title (32); board headers get a board-only token
+- Decided by: design subagent, default, applying the queued Theme cleanup
+- Why: The 26px principle titles were off the scale. As key moments they take Serif title, a scale token. The 64px board headers and the 28/22px section titles were raw values; section titles now use Title 1 and Title 2, and board headers use `--text-board-title` / `--leading-board-title` (64/64), documented as never appearing on a screen.
+- Rejected: A board-only exemption for raw sizes (a second rule to remember).
+- Rests on: revision-1.md, "Queued Theme cleanup"
+
+## 2026-11-17 · Radius scale is none 0 / sm 2 / md 4 / lg 6 / full; xs, xl and 2xl are removed and pill is renamed full
+- Decided by: Aariz chose "Cap outer, square inner" (2/4/6); token names are a design subagent default
+- Why: lg 6 is the container maximum (cards, Coach card, sheets, dialogs, toasts, row groups, inputs, segmented tracks). md 4 is for standalone controls on the page (buttons, chips, chip tracks, tab selection, notices). sm 2 is for anything inside a container. full is for circles only. Renaming pill to full keeps the meaning honest now that chips are square-shouldered.
+- Rejected: Keeping xs/xl/2xl as aliases (three names for two values). Making chips and the tab selection full (a pill reads soft against 2–6 corners).
+- Rests on: revision-1.md, "Shape direction"
+
+## 2026-11-17 · Outer = inner + padding holds for tight nests; padded containers cap at 6 and everything inside takes 2, or 0 when flush
+- Decided by: Aariz (revision 1 rule), worked examples by the design subagent
+- Why: Measured with get_computed_styles. Tight: segmented track 6 / 4 / segment 2; invite input 6 / 4 / Copy 2; row group 6 / 4 / pressed row 2; chip track 4 / 2 / chip 2. Padded (after the padding standard): Coach card 6 / 16 / buttons and chips 2; card 6 / 16 / plot 2 with a flush footer at 0; dialog 6 / 16 / buttons 2; error card 6 / 16 / Try again 2. A button therefore takes 4 on the page and 2 inside a card. Switch tracks stay full because 11 (knob) + 3 (inset) = 14, which is half the 28 height.
+- Rejected: One radius per component regardless of context (the Coach card's 2 buttons and the page's 4 buttons would have to match the larger one). Rounding a container past 6 to satisfy the formula.
+- Supersedes: "Radius 2xl is 36 so the Coach card's 24 padding nests 12 buttons"
+- Rests on: revision-1.md, "Nesting rule"; Spacing & radii board, "Cap outer, square inner"
+
+## 2026-11-17 · Coach-card dividers and skeletons get their own tokens
+- Decided by: design subagent, applying the queued Theme cleanup and batch 1 fix 2
+- Why: `--color-border-inverse-subtle` (Brown 700, 2.14:1) replaces the stand-in `--color-brown-700` on the dark-card dividers. `--color-skeleton-inverse` (Brown 700) with a `--color-skeleton-inverse-shimmer` (Brown 600) band replaces Brown 800 bars, which were 1.48:1 and disappeared. The light skeleton gets matching `--color-skeleton` / `--color-skeleton-shimmer` names (Cream 150 / Cream 100). Paper can't animate, so the shimmer is drawn as a band frozen mid-sweep, aligned across the bars.
+- Rejected: Brown 600 bars (3.02:1 makes a placeholder louder than the Cream 300 caption beside it).
+- Supersedes: the dividers half of "Payday is Friday, Nov 27, and dark-card dividers use Brown 700 until an inverse divider role exists"
+- Rests on: revision-1.md, batch 1 fix 2 and "Queued Theme cleanup"; contrast ratios on the Colour roles table in DESIGN.md
+
+## 2026-11-17 · The loading Coach card mirrors question 2: two serif-line bars, three 24px budget-table rows, then the chips
+- Decided by: batch 1 review, fix 2
+- Why: The skeleton is the shape of what's coming. Question 2 has a two-line question and a three-row table with a label lane and an 88-wide amount lane, so the skeleton has the same lanes.
+- Rejected: Question and chip bars only (the card jumped when the table arrived).
+- Rests on: revision-1.md, batch 1 fix 2
+
+## 2026-11-17 · The fine print appears once per coach screen and never on the tip card
+- Decided by: Aariz-Claude (coordinator), queued Theme cleanup
+- Why: The Coach card always carries it. The tip card on the Theme board was the last place showing it twice; it now shows none, in every context.
+- Rejected: Keeping it on the tip card when it stands alone (a tip never appears without the Coach card on Coach home).
+- Supersedes: "The coach fine print appears once per screen" and the tip-card half of "The daily tip is a light card that carries the fine print and hides itself if it doesn't load in 8 s"
+- Rests on: revision-1.md, "Fine print rule"
+
+## 2026-11-17 · Brand marks are exempt from the 1.5 outline icon rule
+- Decided by: Aariz-Claude (coordinator), queued Theme cleanup
+- Why: The solid Apple logo and Google's G belong to their owners and follow their brand rules. The board placeholders stand in for the official marks, which the build uses unaltered. Every other icon is a 1.5 outline with token strokes; the drawn G placeholder is now 1.5, down from 2.25.
+- Rejected: Redrawing the Apple logo as an outline (alters a trademark).
+- Rests on: revision-1.md, batch 1 fix 7 and "Brand marks"; Icons board, "Brand marks are exempt"
+
+## 2026-11-17 · Budget answers read "$12.01 before tax", and the decision's answer lane fits its content
+- Decided by: batch 1 review, fix 1; lane change a design subagent default
+- Why: About 13% HST puts the $129.99 earbuds near $146.89, which is more than the $142.00 left, so "left" overstated it. The fixed 124 lane wrapped the longer value, so the answer lane is fit-content, right-aligned, and the question label takes the rest.
+- Rejected: Showing a tax-included total (HLD doesn't know the buyer's province).
+- Rests on: revision-1.md, batch 1 fix 1
+
+## 2026-11-17 · Daily tip is on by default in Check-in settings
+- Decided by: batch 1 review, fix 8
+- Why: A tip is general information on the Coach tab, it sends nothing and shares nothing, and it can be switched off on the same row. Off-by-default stays the rule for anything that shares data or sends a message.
+- Rejected: Off by default (hides the feature with no privacy gain).
+- Rests on: revision-1.md, batch 1 fix 8; DESIGN.md, Switch
+
+## 2026-11-17 · Ethical review of revision 1: no anti-patterns found
+- Decided by: design subagent, default
+- Why: Checked against the Intent anti-pattern catalogue. Remind me and Buy anyway changed radius together (2 on the Coach card) and kept their size, order and contrast; Buy anyway's outline is still Cream 300. The serif is used only for questions and "Your call.", never for a verdict. The "before tax" label makes the budget fact more honest. The loading and offline states keep both doors live. Not covered: Tracker, Practice and You screens, which come in later batches.
+- Rejected: Nothing.
+- Rests on: Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Start and Coach
+
+## 2026-11-17 · Two standard paddings: screen content is 40 top and 16 sides; every box is 16 inside
+- Decided by: Aariz (Paper comment on Start · Email sign-up: "All boxes padding should resemble this box, make sure you standardise it"), applied by the design subagent through the coordinator
+- Why: One rule per level makes the screens read as one system. Every screen's content frame on Start and Coach is now `--spacing-40` top and `--spacing-16` left and right; it was 8, 16 or 24 on Welcome, Pay dates, Coach home, Settings and every check-in. Every box (cards, the Coach card, tip cards, sheets, dialogs, on screens and on the Theme boards) is `--spacing-16` on all sides; the Coach card, sheet and dialog were 24. Row groups stay a 4 tight nest, so their rows take 12 and the content still lands 16 in. Footers keep 16 sides and the 34 home-indicator inset, now `--spacing-safe-bottom`. The Coach card's question offset went from 64 to 40 below the progress row, so the question stays where it was on screen and the loading card still fits 844.
+- Rejected: Padding row groups at 16 (breaks the pressed-row tight nest). Keeping 24 inside the Coach card (one box would differ from the rest). Applying the 40/16 screen padding to the 1440 Coach · Motion board, which is documentation, not a screen.
+- Supersedes: the Coach card's "24 padding (12 at the top)" and "80 above the coach question" in earlier DESIGN.md text
+- Rests on: Paper comment thread on Start · Email sign-up, "Content" frame (40 top, 16 sides); coordinator message, 2026-11-17

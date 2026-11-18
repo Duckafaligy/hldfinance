@@ -50,6 +50,11 @@ colors:
   state-warning: "#614734"
   state-error: "#1E120C"
   state-bg: "#EDE5D9"
+  brand-apple: "#000000"
+  brand-google-blue: "#4285F4"
+  brand-google-red: "#EA4335"
+  brand-google-yellow: "#FBBC05"
+  brand-google-green: "#34A853"
 typography:
   serif-hero:
     fontFamily: "Instrument Serif, Georgia, serif"
@@ -243,7 +248,7 @@ components:
     textColor: "{colors.text-primary}"
     typography: "{typography.table}"
     rounded: "{rounded.md}"
-    padding: "12px 14px"
+    padding: "12px 16px"
   list-row:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.text-primary}"
@@ -260,10 +265,20 @@ components:
   toast:
     backgroundColor: "{colors.surface-inverse}"
     textColor: "{colors.text-inverse}"
+    typography: "{typography.table}"
     rounded: "{rounded.lg}"
+    padding: "12px 8px 12px 16px"
   tab-bar:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.text-secondary}"
+    padding: "8px 8px 34px"
+  auth-button:
+    backgroundColor: "{colors.surface-raised}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.button}"
+    rounded: "{rounded.md}"
+    height: "52px"
+    padding: "0 16px"
 ---
 
 # Design System: HLD Finance
@@ -374,6 +389,7 @@ Gain and loss share a value on purpose: the ▲ + / ▼ − glyphs carry directi
 
 - **Restricted pairs.** Brown 500 is never text (4.09:1 fails 4.5:1); it is the control outline only. Cream 200 and darker are never a text surface (Brown 600 on Cream 200 is 4.27:1).
 - **One dark card.** Brown 900 as a surface belongs to the Coach card and transient toasts.
+- **Brand-only tokens.** `--color-brand-apple` (#000000) and `--color-brand-google-blue` / `-red` / `-yellow` / `-green` sit outside the cream and brown ramp and colour only the official Apple logo, its "Continue with Apple" label and Google's G on the sign-in buttons. They never colour UI, state, charts or text elsewhere, so Google red never stands in for an error or a destructive action.
 
 ## Typography
 
@@ -422,7 +438,11 @@ Tokens: `--font-sans`, `--font-serif`; sizes `--text-serif-hero`, `--text-serif-
   - **Every box:** cards, the Coach card, tip cards, panels, sheets and dialogs are 16 inside on all four sides (`--spacing-16`). A row group is a tight nest: 4 inset (`--spacing-4`) plus 12 inside each row (`--spacing-12`), so its content also sits 16 in.
 - **Phone:** 16 gutter, 32 between sections, 48 between the coach question and its answers. On the Coach card the question sits 40 below the 44 high progress row.
 - **Groups:** 8 inside a group, 24 between related groups.
-- **Touch targets:** at least 44 × 44, even when the visible control is smaller (chips are 40 high inside a 44 target).
+- **4/8 rhythm:** every gap and padding is a spacing token, so a multiple of 4 (2 only for a chevron-to-label nudge or a tight-nest inset, 1 for hairlines). No 6, 10 or 14 anywhere, on screens or boards: a label above its control is 8 apart, a heading above its description is 8, a table row is 12 top and bottom, a chip or segment is 16 at the sides.
+- **Touch targets:** at least 44 × 44 (`--spacing-touch`), even when the visible control is smaller: chips are 40 high inside a 44 target, a toast's action is a 44 high slot, Skip is min 44 × 44, the top bar's Back and Close slots are 96 × 44, and the switch sits in a 44 target. Adjacent targets are at least 8 apart, measured between targets, not between visible edges.
+- **Chip collections** (answers, categories, tags) use a 12 gap in both directions, so two 44 targets around 40 high chips keep 8 between them. They wrap before a label shrinks.
+- **Inline links (exception):** links inside a sentence, like Terms and Privacy Policy under the sign-in buttons, keep their text size (Caption, 18 line). Each gets a 44 high tap area, 13 above and 13 below the line, running 4 past each end of the words and never under 44 wide; neighbouring areas stay 8 or more apart and clear of other targets. WCAG 2.5.8 exempts inline links; HLD gives them 44 anyway. The area is a build spec, drawn on the Theme board "Components: product" under Sign in, never on a screen.
+- **Safe area:** a tab bar or a footer ends with `--spacing-safe-bottom` (34) under its last row, so nothing tappable sits on the home indicator. A toast floats 16 above the tab bar (bottom 113 on a 390 × 844 screen) or 16 above a footer.
 - **Breakpoints:** phone 390, tablet 768, desktop 1280. Containers: coach content max 560, page content max 1200.
 - **Repeated rows** use fixed-width lanes for icons, amounts and chevrons, so columns align across rows.
 
@@ -466,7 +486,7 @@ Cap outer, square inner: small, consistent corners, 6 at most.
 
 The padding is measured from the outer edge. A track or row group draws its 1px edge as an inset shadow (`inset 0 0 0 1px var(--color-border-subtle)`), so the 4 inset is exactly 4. A dashed edge cannot be a shadow, so the disabled segmented track keeps a 1px dashed border with 3px padding: still 4 from the outer edge.
 
-Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes 24 (tab bar, rows), 20 (buttons, toasts), 16 (inline with 13px text). Strokes are tokens, never hex: `--color-text-primary` when active, `--color-text-secondary` at rest, `--color-text-inverse` on the Coach card. **Brand marks are exempt:** the solid Apple logo and Google's G on the sign-in buttons follow their owners' rules, not the 1.5 outline rule, and the build uses each official mark unaltered. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
+Icons: outline only, 24 grid with a 20 live area, 1.5 stroke (1.75 at 16px), round caps and joins, 2 radius on corners, no fills or duotone. Sizes are three tokens, implemented as CSS custom properties beside the motion tokens: `--icon-lg` 24 (tab bar, top bar chevron, list rows), `--icon-md` 20 (buttons, toasts, inline notices, sign-in marks, spinners), `--icon-sm` 16 (inline with 13 and 14px text: chip checks, the record row's clock). No other sizes. Spinners follow the icon stroke: 1.5 at 20. Strokes are tokens, never hex: `--color-text-primary` when active, `--color-text-secondary` at rest, `--color-text-inverse` on the Coach card. **Brand marks are exempt:** the solid Apple logo and Google's G on the sign-in buttons follow their owners' rules, not the 1.5 outline rule, and the build uses each official mark unaltered. Core set: Coach (speech bubble with pause bars), Tracker, Practice, You, Journal, Leagues, Search, Add, Remind, Settings, Done, Close. Utility: Chevron, Alert, Held (clock). Every icon has a text label.
 
 ## Components
 
@@ -479,7 +499,7 @@ Controls are drawn in all their states on the Paper board "Components & states";
 - **Secondary:** 1.5px Brown 500 outline. Hover Cream 100, pressed Cream 150 with a Brown 700 outline.
 - **Ghost:** underlined label (offset 4). Hover Cream 100, pressed Cream 150.
 - **Focus:** 2px ring in `--color-focus-ring` with a 2px gap in the surface colour.
-- **Disabled:** Cream 150 fill or Cream 200 outline with disabled text, always with a written reason next to it (for example, "Enter an amount first").
+- **Disabled:** Cream 150 fill or Cream 200 outline with disabled text, always with a written reason next to it (for example, "Add 2 more characters to your password first."). It is marked disabled for assistive tech (`aria-disabled="true"`), stays in the focus order so the reason, tied with `aria-describedby`, is read out, and ignores taps. Colour is never the only sign: the reason is there in words. Buy anyway is never disabled.
 - **Loading:** a spinner and a short verb ("Saving") at the same width; taps are ignored until it finishes.
 - **Remind me / Buy anyway:** the same size, stacked, both always visible. Remind is primary and Buy anyway is secondary; Buy anyway is never made smaller, fainter or lower-contrast. Principle 4 holds the four rules.
 
@@ -508,7 +528,9 @@ The only dark surface. Brown 900, `--radius-lg`, 16 padding on all four sides, l
 | Remind me / Buy anyway | 40 below. 52 high, 12 apart, `--radius-sm`. Remind me: `--color-accent-inverse` with `--color-on-accent-inverse`. Buy anyway: 1.5 `--color-border-control-inverse` outline, Cream 75 label. |
 | Fine print | 16 below. Caption, `--color-text-inverse-tertiary` (6.30:1): "General information, not personalized advice." Every Coach card carries it. |
 
-States: **default**; **next question** (progress advances, the previous answer is recorded, the next question rises in); **loading** (the question, the budget-table lanes and the chips become `--color-skeleton-inverse` bars with the `--color-skeleton-inverse-shimmer` band, a Cream 300 caption says "Getting the next question. Both buttons below still work.", and both buttons stay live); **error** (alert icon and "The next question didn't load. Your first answer is saved." in Body large, a 40 high Try again outline, both buttons still live). Skip moves on without an answer; after the third question or three skips, only the two buttons remain.
+**Pressed and focus** (drawn on "Components & states", Coach card): pressed is scale 0.97 for 100 ms and one step darker; Remind me goes to `--color-accent-inverse-pressed` (Cream 150), while Buy anyway and answer chips fill `--color-accent-inverse-subtle` (Brown 800) and keep the Cream 300 outline. Focus is a 2px `--color-focus-ring-inverse` ring with a 2px gap in Brown 900; Skip takes an inset ring inside its 44 target. Both doors get the same treatment, and Buy anyway is never disabled, dimmed or locked.
+
+States: **default**; **next question** (progress advances, the previous answer is recorded, the next question rises in); **loading** (the question, the budget-table lanes and the chips become `--color-skeleton-inverse` bars with the `--color-skeleton-inverse-shimmer` band, a Cream 300 caption says "Getting the next question. Both buttons below still work.", and both buttons stay live); **error** (alert icon and "The next question didn't load. Your first answer is saved." in Body large, a 44 high Try again outline, both buttons still live). Skip moves on without an answer; after the third question or three skips, only the two buttons remain.
 
 ### Inputs / Fields
 
@@ -516,12 +538,15 @@ States: **default**; **next question** (progress advances, the previous answer i
 - **Focus:** Cream 50 fill, a 1.5px Brown 900 border, and a 3px Cream 200 halo.
 - **Disabled:** dashed Cream 300 outline, disabled text, and a reason underneath.
 - **Error:** a 2px `--color-state-error` border, an alert icon, and a sentence that says how to fix it ("Enter an amount above $0."). It never depends on colour alone and never shakes.
+- **Helper and error placement:** helper text and errors sit 8 under their own field in Caption, never at the top of the form or in a toast, and are tied to the field with `aria-describedby`. Live counts read as a sentence ("At least 10 characters. 8 so far."). When a footer button is disabled by a field, its reason sits under the button and names the field ("Add 2 more characters to your password first.").
 
 ### Navigation
 
-- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). The selected tab gets a Cream 150 block (56 × 32, `--radius-md`) behind its icon and a 600 label. Pressed shows a Cream 100 block, and focus a 2px ring around the tab. No badges or dots.
+- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). Cream 50 with a Cream 200 top edge, 8 top and sides, `--spacing-safe-bottom` (34) under the labels. Each tab is a quarter of the width and 54 high (block 32, 4, label 18). The selected tab gets a Cream 150 block (56 × 32, `--radius-md`) behind its icon, a 600 label and Brown 900 icon and label; the others are 500 labels and icons in Brown 700 (8.07:1 on Cream 50). Pressed shows a Cream 100 block, and focus a 2px ring around the tab. No badges or dots. Pages reached from You (Check-in settings) keep You selected.
 - **Segmented control:** Cream 100 track, `--radius-lg`, 4 inset with the edge as an inset shadow. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation. Labels are Label (14). Pressed is Cream 150, focus a 2px ring on the segment, and disabled a dashed track (1 border + 3 padding) with disabled text.
-- **Top bar:** 56 high on the page colour with a Cream 200 bottom edge. Back is a 96 wide slot (chevron and the previous place's name, Body) with a 44 target; the title is Title 3, centred; the right slot is 96 wide, empty or holding one text action (Button type, for example Save). Focus puts a 2px ring around Back.
+- **Top bar:** 56 high on the page colour with a Cream 200 bottom edge, 4 at the sides. Back is a 96 × 44 slot: a 24 chevron, 2, then the previous place's name in Body ("Coach", "You", "Sign up") or "Back" inside a flow. The middle holds Title 3, centred, or the step counter. The right slot is 96 × 44, empty or holding one text action in Body, right-aligned 12 in so it lands on the 16 content edge (Close, Save). Focus puts a 2px ring around the slot.
+- **Back and Close in a flow:** inside a multi-step flow, Back goes to the previous step and keeps every answer; Close leaves the flow without deciding and returns to where it started, with nothing logged and no confirmation. The check-in (questions 1 to 3, Your call, its loading and error states) has both. A flow's first step, a single-screen task (the check-in entry, the follow-up, the budget check-in) and onboarding keep Back only: onboarding has no "leave without deciding", since the birth year is required and Pay dates carries its own Skip for now.
+- **Step counter:** a flow of three or more screens that aren't questions on the Coach card shows "Step n of N" in Caption 500, `--color-text-tertiary` (Brown 600, 5.72:1), tabular, centred in the top bar in place of a title (onboarding: Birth year, Consent, Pay dates). The Coach card keeps its own "1 of 3" in its progress row, so the check-in's top bar says "Check-in".
 
 ### Switch and consent
 
@@ -536,9 +561,21 @@ States: **default**; **next question** (progress advances, the previous answer i
 
 Every check-in and every trade becomes one line, in Item | Price | Status columns at width 87.5. A held item changes state in place: "Held · ask again Nov 18" becomes "Bought Nov 18" or "Let go Nov 18". It never disappears, and no outcome is styled as the better one: only Held carries an icon (the clock, because it is waiting); Bought and Let go are text only, with an empty 16 icon lane so the status column still aligns. Trades follow the same pattern in the journal: Date, Symbol, Side, Shares, Price CAD, Return, Tag.
 
+The whole row is one target (pressed Cream 150 at `--radius-sm`, focus a 2px inset ring) and opens the check-in again, which carries whatever its toast offered: **Change when we ask** on a held item, **Remove from Tracker** on a bought one. A row that just changed tints Cream 150 and settles over 600.
+
 ### Toast
 
-Brown 900, `--radius-lg`, level-2 elevation, 16 above the tab bar, with an optional underlined action (Undo, Retry). It stays 5 seconds, longer when it has an action, and pauses while touched. Kinds: confirmation, error, loading.
+Brown 900, `--radius-lg`, level-2 elevation, 16 from each side and 16 above the tab bar (or footer). A 20 icon, one line of Table text, and at most one underlined Label 600 action (Undo, Change, Retry) in a 44 high slot, 12 at its sides. Padding 12 top and bottom, 16 left, 8 right, so every toast is 68 high. Kinds: confirmation, error, loading. It is announced politely and never takes focus.
+
+| Phase | Spec |
+|---|---|
+| Enter | Rises 8 and fades in. `--duration-state` (220), `--ease-out` |
+| On screen | 5 s with no action; 8 s with an action. While a finger is on the toast, or its action has keyboard focus, the clock stops; it starts again from the full time on release |
+| Exit | Fades out in place. `--duration-exit` (160), `--ease-in`. A new toast waits for the old one to leave; toasts never stack |
+| Reduced motion | No rise; fades in and out over 120. Time on screen is unchanged |
+| Loading | Stays until the work ends, then becomes a confirmation or an error in place |
+
+**The action is never only in the toast.** Undo, Change and Retry are a shortcut; the same action opens from the check-in's record row (Change when we ask, Remove from Tracker) or from the screen that failed (Try again). Missing a toast loses nothing. Drawn on Theme "Components & states" (Toast, Timing) and on "Coach · Motion" (section 5).
 
 ### Skeleton loader
 
@@ -564,9 +601,10 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 - **Invite link:** a read-only field showing the end of the link and a 104 wide Copy primary. Copied keeps the width, adds a check and returns after 2 s. Error: "Your browser blocked copying. Press and hold the link to copy it yourself."
 - **Bottom sheet:** `--radius-lg` top corners, 16 padding, level-2 elevation over the scrim, a 36 × 4 Cream 300 handle, Title 2 heading, radio rows, a primary and an underlined Cancel.
 - **Dialog (deletion only):** `--radius-lg`, 16 padding, buttons inside at `--radius-sm`, level 2 over the scrim. "Delete your account?", a list of exactly what goes, "It's gone from our servers within 30 days and can't be undone.", then Delete my account (primary, `--color-state-error`), Keep my account (secondary) and an underlined "Download my data first".
-- **Auth buttons:** three 52 high outlined buttons on Cream 50, Apple first, then Google, then email, each with a 20 mark in a fixed lane and a centred Button label "Continue with …". Pressed, focus, loading ("Opening Google", the other two stay usable) and an error line under the group. The marks on the board are drawn placeholders; the build uses each company's official mark, unaltered.
+- **Auth buttons:** three 52 high buttons with a 1.5 Brown 500 outline on Cream 50, `--radius-md`, 12 apart, Apple first, then Google, then email. Each has a 20 mark in a fixed left lane, a centred Button label "Continue with …", and an empty 20 lane on the right so the label centres on the button. The marks are the official ones, unaltered: Apple's logo and its label in `--color-brand-apple`, Google's four-colour G in the `--color-brand-google-*` tokens, and the email envelope as an ordinary 1.5 outline icon. Pressed (Cream 150), focus (the 2px ring with a gap), loading ("Opening Google" with a 1.5 spinner; the other two stay usable) and an error line under the group. Under the buttons, the legal line follows the inline-link exception in Layout.
 - **Birth-year gate:** a 140 wide numeric field, "What year were you born?", "Only the year. It decides which features you see." Error: "Enter a four-digit year, like 2004." Under 18 gets an information notice listing what is open to them.
 - **Empty states:** a card with a Title 3 that names the state, one sentence on what will appear and why, and the single primary that makes it appear: "No trades yet" / Find a stock; "Just you in here" / Copy invite link; "No subscriptions logged" / Add a subscription; "$10,000.00 in cash" / Find a stock. No illustration, no mascot.
+- **Empty states name the action.** Every empty state says what to do to fill it, in its own words, even where its button lives elsewhere on the screen. A screen still has one primary: when the action is already on screen, the empty state points to it instead of repeating it. First-run "Your check-ins" on Coach: "Start a check-in above and it becomes one line here: what it was, the price, and what you decided." First-run Skipped total: $0.00 in Brown 600 and "When you hold off on something, its price shows up here."
 
 ### Motion
 
@@ -591,7 +629,7 @@ All drawn at 358 (390 for the top bar), on the same tokens.
 | Press | Scale 0.97 and darken one step; returns with no overshoot | 100 ease-out | The tap registered | Colour only |
 | Chip or segment selected | Pill slides to the new segment; the check draws in | 160 ease-in-out | Answer recorded; the other option is still there | Instant |
 | Sheet | Slides up; scrim fades to 40%; closes downward | 320 ease-out, close 160 ease-in | A focused task on top; your place is kept | Fade 120 |
-| Toast | Rises 8 and fades in; leaves by fading | 220 ease-out, exit 160 ease-in | Saved or not; undo is still possible | Fade only |
+| Toast | Rises 8 and fades in; holds; leaves by fading | 220 ease-out; holds 5 s, 8 s with an action, paused while touched; exit 160 ease-in | Saved or not; the action stays on the record row | Fade 120, no rise; same hold |
 | Field error | Border thickens to 2; the message fades in. No shake | 160 ease-out | What's wrong and where | Instant |
 | Skeleton | Cream 100 band sweeps across Cream 150 shapes | 1400 linear loop | Still loading; this is the shape of what's coming | Static, no sweep |
 

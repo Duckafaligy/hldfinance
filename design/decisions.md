@@ -551,3 +551,15 @@
   - Stock · Plain English: the chart's bottom gridline moved from `--color-border-default` to `--color-border-subtle`, like the other two.
 - Rejected: Documenting 108 as a raw exception instead of tokenising it.
 - Rests on: pending-decisions.md, F1/F2/F3 follow-ups; Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Coach and Practice
+
+## 2026-11-18 · Verify pass V2: 48 primaries, the Card ring, token binding, and the padding comment resolved
+- Decided by: Aariz-Claude (coordinator), applied by design subagent V2
+- Why: The last four verification findings, plus closing Brendan Lau's padding comment once the standard was confirmed file-wide.
+  - Primary buttons 52 → `--spacing-48`, per DESIGN.md Buttons. Start: Get started, Continue on Birth year and Consent, Save pay dates, Create account (disabled). Coach: Next on Check-in · What and how much, plus Start a check-in on Coach · Home, Reminder set and Bought. The fourth Start a check-in sits on Start · First Coach screen and changed too. Kept at 52: the Coach card answers (Remind me, Buy anyway, Worth it, Not really, I'm getting it, Let it go, Keep holding), the Apple, Google and email auth buttons, and the 52 inputs. Every 844 frame still fits.
+  - Theme "Components & states", Card: the three 72 rings (Default, Pressed, Focus; r=30) used round caps with a 99/189 dasharray. They now use butt caps with `89.2 188.5`, which is $142 left of $300. The spec line now reads "shows money left; shrinks as money is spent".
+  - Tokens: every raw gap, padding and weight on Practice · Home, Stock · Plain English, Practice TFSA, Journal and Check-in · What and how much is now bound to `--spacing-*` / `--font-weight-*`, along with the 1W / 1M / All range controls on Practice · Loading and Practice · Motion. That covers card gaps 16/12/8/4/2, content gaps 32 and 24, the Stock Y-lane right padding 8, top bars 4/2/8, and weights 400/500/600/700. The status bar stays raw (allowed exception).
+  - Theme charts: the two gridlines inside the below-zero band on the Net worth and Portfolio examples moved from `--color-border-default` to `--color-border-subtle`, matching "gridlines are Cream 200". The date picker was already 8 between rows with no card.
+  - Comment c-tii8f0 (Start, "All boxes padding should resemble this box"): resolved. Final verification found screen content at 40 top / 16 sides on Start 7/7, Coach 13/13, Tracker 9/9, You 5/5 and Practice 20/20, and 16 inner padding on every box. Paper's MCP has no reply tool, so no reply was posted.
+- Rejected: Changing the Coach card answer buttons to 48. DESIGN.md keeps them at 52 for the decision moment.
+- Open: On the Cream 150 below-zero band, Cream 200 gridlines are almost invisible (about 1.1:1). The labels still carry the scale. If the lines need to show, the rule needs a band-specific exception rather than a raw value.
+- Rests on: V1 final verification; DESIGN.md, Buttons, Layout and Charts; Paper file 01M7ND942KK1P3EG7FGKWPZ962, pages Theme, Start, Coach and Practice

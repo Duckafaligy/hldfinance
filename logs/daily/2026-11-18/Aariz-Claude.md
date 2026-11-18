@@ -1,12 +1,35 @@
 # Aariz-Claude · 2026-11-18
 
 ## Current status
-- **Active task:** (1) restore point before the pink switch, then (2) adopt muted pink `#D0A4B5` as the active accent, kept faint for now, and (3) the new "hld" wordmark lockup.
-- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`): new page "Restore point · Pre-pink · 2026-11-18"; then pages Theme, Start, Coach, Tracker, Practice, You, Logo concepts. Branch `design/bright-olive`: `design/restore/pre-pink-tokens.json`, local tag `restore/pre-pink-2026-11-18`, DESIGN.md. Not touched: Paper file "hldfinance.ca", `phase0-landing`, app code, the restore page once verified.
-- **Next step:** build and verify the restore point, then start the faint pink adoption and the wordmark lockup.
+- **Active task:** none. Restore point, faint pink accent and "hld" wordmark are done and pushed.
+- **Area:** Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`); branch `design/bright-olive` (remote at `a19672a`), tag `restore/pre-pink-2026-11-18`.
+- **Next step:** wait for Aariz on a later design pass, the below-zero gridlines, and the small `--leading-wordmark` leftover.
 - **Blocker:** none.
 
 ---
+
+> 10:39 ET · Done · Aariz-Claude
+> All three claims are done in Paper "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`).
+> **(1) Restore point.** Page "Restore point · Pre-pink · 2026-11-18" (the file's last page).
+> - 70 artboards copied and verified, plus a README board.
+> - Token snapshot `design/restore/pre-pink-tokens.json` (136 tokens) and `design/restore/README.md`.
+> - Tag `restore/pre-pink-2026-11-18` on commit `5885417`. Branch and tag are pushed.
+> - Paper can't lock nodes, so the page is protected by convention only.
+> - To revert: (1) restore token values from the JSON; (2) copy the artboards back from the restore page; (3) `git checkout restore/pre-pink-2026-11-18 -- DESIGN.md design/decisions.md`.
+> **(2) Faint pink adopted.** `#D0A4B5` is now the active accent on Theme, Start, Coach, Tracker, Practice, You and Logo concepts, with cream and brown as the base.
+> - At most 2 pink touches per screen: pink-subtle on selected tabs and chips, the daily tip, your leaderboard row and the TFSA fake-money notice; deep pink `#8D4963` on step counters and focus borders; the pink item name on Decision.
+> - No pink on data, warnings or choices.
+> - No existing token value changed (values hash `580cff25e80f` matches the snapshot). New token `--leading-wordmark`.
+> - Reviewed: the restore point is intact and all contrast pairs pass.
+> **(3) Wordmark.** Lowercase "hld" in Instrument Serif Italic, 44px, baseline-aligned next to the 20B icon tile (`--radius-lg`). Shown on Start · Welcome, the Theme Principles board, and the Logo concepts board "Wordmark · hld (chosen)".
+> Commits pushed on `design/bright-olive`: `5885417`, `e3b2777`, `7832f79`, `a19672a`. Remote is at `a19672a`.
+> Open for Aariz:
+> - Another design pass later (pink is kept faint for now).
+> - The below-zero gridlines.
+> - Small leftover: Theme › Principles "The mark" lockups don't use `--leading-wordmark` yet.
+> GitHub check: nothing new from Brendan. `main` a113b07, `phase0-landing` 5f64212, PR #1 still open and the only PR, no Brendan-Claude log. No overlap.
+> Next: wait for Aariz.
+> Blockers: none.
 
 > 09:58 ET · Claim updated · Aariz-Claude
 > Aariz widened the scope of the 09:57 claim. Everything is in Paper file "hldfinanc redoo" (fileId `01M7ND942KK1P3EG7FGKWPZ962`).

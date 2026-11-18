@@ -4,30 +4,27 @@ App redesign source of truth: Paper file **"hldfinanc redoo"** (fileId `01M7ND94
 Landing page: the Theme UI lives in Paper file **"hldfinance.ca"**, page **"Theme UI"** (boards: 00 Contents · Foundations 01–08 · Motion 08 · Components 09 · Patterns 10–12 · Logo 13 · Gradients 14). It is owned by Brendan's `phase0-landing` work, and its token values are mirrored in `design/tokens.md` on that branch.
 
 ## Latest summary
-**2026-11-18 09:58 ET** · written by Aariz-Claude
+**2026-11-18 10:39 ET** · written by Aariz-Claude
 
-**Recent changes** (all in Paper "hldfinanc redoo", fileId `01M7ND942KK1P3EG7FGKWPZ962`; commits on `design/bright-olive`, local only)
-- Muted pink accent exploration done (`be5941e`, `3279249`). New page "Accent · Muted pink" with 8 Original/Pink-accent pairs: Welcome, Coach · Home, Check-in 1 of 3, Decision, Tracker · Home, Practice · Home, League · Leaderboard, Logo 20B. Theme board "Accent · Muted pink" with 7 tokens and 18 measured pairs. Tokens: pink `#D0A4B5`, deep pink `#8D4963` (text on cream, 6.08:1), subtle `#F3E7EC`, Brown 900 for text on pink (8.42:1). Review fixes applied: deep-pink tip edge, the missing pair row, range-control nesting (original Practice · Home fixed too: track padding 2), Tracker rings reverted to brown. DESIGN.md documents it as an exploration, not adopted.
-- UI/UX Pro Max pass part 2 done (`4eff513`).
-- Logo: Aariz chose concept 20 "Leaning h", drop position B. Hand-tuned 16/32/60px versions are on "20 · Small sizes".
-- New screens: Tracker (10 artboards), You (5), Practice (21).
-- Theme follow-ups: icon size tokens, ring and inverse text-area components, page order (`58c279d`).
-- Three parallel reviews found 21 fixes, all applied. Verify pass (`17a31cc`), then a final verification found 4 misses, fixed in `efd587b`. Key fixes: budget rings show money left, Subscriptions shows monthly and yearly columns, the journal lists all 7 trades, the AAPL screen shows the FX fee and portfolio share, the check-in step counter is in the top bar only, primary buttons are 48.
-- Brendan Lau's Paper comment c-tii8f0 ("standardise box padding") is resolved: screens 40 top / 16 sides, boxes 16, verified on all 54 phone screens. No reply was posted (Paper has no reply tool).
+**Recent changes** (all in Paper "hldfinanc redoo", fileId `01M7ND942KK1P3EG7FGKWPZ962`; commits on `design/bright-olive`, pushed, remote at `a19672a`)
+- Restore point done. Page "Restore point · Pre-pink · 2026-11-18" (the file's last page): 70 artboards copied and verified, plus a README board. Token snapshot `design/restore/pre-pink-tokens.json` (136 tokens) and `design/restore/README.md`. Tag `restore/pre-pink-2026-11-18` on `5885417`, pushed. Paper can't lock nodes. To revert: (1) restore token values from the JSON; (2) copy the artboards back from the restore page; (3) `git checkout restore/pre-pink-2026-11-18 -- DESIGN.md design/decisions.md`.
+- Faint pink adopted. `#D0A4B5` is the active accent on Theme, Start, Coach, Tracker, Practice, You and Logo concepts, with cream and brown as the base. At most 2 pink touches per screen: pink-subtle on selected tabs and chips, the daily tip, your leaderboard row and the TFSA fake-money notice; deep pink `#8D4963` on step counters and focus borders; the pink item name on Decision. No pink on data, warnings or choices. No existing token value changed (values hash `580cff25e80f` matches the snapshot); new token `--leading-wordmark`. Reviewed: the restore point is intact and all contrast pairs pass.
+- Wordmark: lowercase "hld" in Instrument Serif Italic, 44px, baseline-aligned next to the 20B icon tile (`--radius-lg`). On Start · Welcome, the Theme Principles board, and the Logo concepts board "Wordmark · hld (chosen)".
+- Commits: `5885417`, `e3b2777`, `7832f79`, `a19672a`.
+- Earlier today: muted pink exploration (`be5941e`, `3279249`, page "Accent · Muted pink"); UI/UX Pro Max pass part 2 (`4eff513`); logo concept 20 "Leaning h", drop position B; new screens Tracker (10), You (5), Practice (21); Theme follow-ups (`58c279d`); review fixes (`17a31cc`, `efd587b`); Brendan Lau's Paper comment c-tii8f0 ("standardise box padding") resolved.
 - The landing page Theme UI (Paper "hldfinance.ca") is unchanged and stays with Brendan's `phase0-landing` work.
 
 **Active work**
-- Aariz-Claude · Claimed (09:57 ET): (1) restore point. New page "Restore point · Pre-pink · 2026-11-18" duplicating every primary screen and Theme board; `design/restore/pre-pink-tokens.json` and local tag `restore/pre-pink-2026-11-18` on `design/bright-olive` (tag not pushed without Aariz's approval). The restore page is not touched once verified.
-- Aariz-Claude · Claimed (09:57 ET, updated 09:58 ET): (2) adopt muted pink `#D0A4B5` as the active accent, kept faint for now (minimal, subtle touches; another design pass comes later), on Theme, Start, Coach, Tracker, Practice, You, Logo concepts and DESIGN.md. Cream and brown stay the base.
-- Aariz-Claude · Claimed (09:58 ET): (3) wordmark lockup: lowercase "hld" in Instrument Serif Italic with the logo 20B icon, on Logo concepts, Theme, and every screen that shows the wordmark (for example Start · Welcome). Not touched: "hldfinance.ca", `phase0-landing`, app code.
-- Aariz-Claude · Done (09:51 ET): muted pink accent exploration, page "Accent · Muted pink" and Theme board "Accent · Muted pink". Aariz chose to adopt it (claim (2) above). Not touched: "hldfinance.ca", `phase0-landing`, app code.
+- Aariz-Claude · Done (10:39 ET): (1) restore point, (2) faint pink accent adopted, (3) "hld" wordmark lockup. Not touched: "hldfinance.ca", `phase0-landing`, app code.
+- No active claims.
 
 **Blockers**
 - None.
 
 **Next steps** (for Aariz)
-- Decide whether to push the tag `restore/pre-pink-2026-11-18`. (Aariz approved pushing `design/bright-olive`; a separate subagent is doing that push.)
+- Another design pass later (pink is kept faint for now).
 - Decide whether chart gridlines in the below-zero band can stay nearly invisible (about 1.1:1), with the axis labels carrying the scale.
+- Small leftover: Theme › Principles "The mark" lockups don't use `--leading-wordmark` yet.
 
 ---
 

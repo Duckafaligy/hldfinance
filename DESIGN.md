@@ -57,7 +57,7 @@ colors:
   brand-google-red: "#EA4335"
   brand-google-yellow: "#FBBC05"
   brand-google-green: "#34A853"
-  # Exploration only (Accent option: Muted pink, not adopted)
+  # Accent: Muted pink (active, faint, 2026-11-18). Values unchanged since the exploration.
   accent-pink: "#D0A4B5"
   accent-pink-deep: "#8D4963"
   accent-pink-subtle: "#F3E7EC"
@@ -216,7 +216,7 @@ components:
     height: "40px"
     padding: "0 16px"
   chip-selected:
-    backgroundColor: "{colors.accent-subtle}"
+    backgroundColor: "{colors.accent-pink-subtle}"
     textColor: "{colors.text-primary}"
   card:
     backgroundColor: "{colors.surface-raised}"
@@ -270,6 +270,7 @@ components:
     padding: "4px"
   segmented-segment-selected:
     backgroundColor: "{colors.cream-50}"
+    # Pink subtle ({colors.accent-pink-subtle}) where the screen has a pink touch to spare; see Accent: Muted pink
     rounded: "{rounded.sm}"
     height: "36px"
   toast:
@@ -293,7 +294,7 @@ components:
 
 # Design System: HLD Finance
 
-The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with nine artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product, Accent · Muted pink. Tokens in that file match the frontmatter above. Accent and state values are provisional and point into the cream and brown ramp until Aariz chooses the accent. Pages run Theme, Start, Coach, Tracker, Practice, You, Logo concepts, Accent · Muted pink; the screens on each are listed under Screen inventory.
+The source of truth is the Paper file **hldfinanc redoo** (fileId 01M7ND942KK1P3EG7FGKWPZ962, formerly "Bright olive"), page **Theme**, with nine artboards: Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product, and Accent · Muted pink (exploration reference). Tokens in that file match the frontmatter above. Muted pink is the active accent since 2026-11-18, kept faint and bound through its own `--color-accent-pink*` tokens; the accent and state slots still point into the cream and brown ramp. Pages run Theme, Accent · Muted pink, Start, Coach, Tracker, Practice, You, Logo concepts, and last the locked "Restore point · Pre-pink · 2026-11-18"; the screens on each are listed under Screen inventory.
 
 ## Overview
 
@@ -354,9 +355,9 @@ Two pinned colours, Cream 75 `#FCF8F2` and Brown 900 `#1E120C`, with ten steps d
 | Card edge, row divider | `--color-border-subtle` | Cream 200 | on Cream 75 | 1.34 | Decorative; never the only cue |
 | Section divider, gridline | `--color-border-default` | Cream 300 | | | |
 | Input and chip outline | `--color-border-control` | Brown 500 | on Cream 75 / 100 | 4.09 / 3.79 | Passes 3:1 UI |
-| Focus ring | `--color-focus-ring` | Brown 900 | on Cream 75 | 17.30 | Passes 3:1 UI |
-| Focus ring on Coach | `--color-focus-ring-inverse` | Cream 75 | on Brown 900 | 17.30 | Passes 3:1 UI |
-| Input focus halo | `--color-focus-halo` | Cream 200 | around a focused field | | Decorative; the 1.5 Brown 900 border carries focus |
+| Focus ring (pre-pink; screens bind `--color-focus-ring-pink`) | `--color-focus-ring` | Brown 900 | on Cream 75 | 17.30 | Passes 3:1 UI |
+| Focus ring on Coach (unchanged; pink stays off the doors) | `--color-focus-ring-inverse` | Cream 75 | on Brown 900 | 17.30 | Passes 3:1 UI |
+| Input focus halo | `--color-focus-halo` | Cream 200 | around a focused field | | Decorative; the 1.5 Pink deep border carries focus (6.29 on the Cream 50 field) |
 | Shadow colour | `--color-shadow` | Brown 900 | | | Only through color-mix at 6%, 8% or 14%; never a solid fill |
 | Divider on the Coach card | `--color-border-inverse-subtle` | Brown 700 | on Brown 900 | 2.14 | Decorative; never the only cue |
 | Skeleton, light | `--color-skeleton` / `--color-skeleton-shimmer` | Cream 150 / Cream 100 | on Cream 75 | 1.18 / 1.08 | Placeholder shape, not content |
@@ -371,7 +372,7 @@ Two pinned colours, Cream 75 `#FCF8F2` and Brown 900 `#1E120C`, with ten steps d
 | Selected chip or segment | `--color-accent-subtle` | Cream 150 | Brown 900 text on it | 14.66 |
 | Text on accent | `--color-on-accent` | Cream 75 | | |
 
-When the accent arrives, change these four tokens only, and recheck each pair against AA.
+Muted pink was adopted on 2026-11-18 through its own tokens, not by changing these four, so the restore point still renders as it was. Selected tabs, segments and chips now bind `--color-accent-pink-subtle`; `--color-accent-subtle` remains for the restore copies and pressed states.
 
 ### Primary on the Coach card (inverse accent, provisional)
 
@@ -403,78 +404,93 @@ Gain and loss share a value on purpose: the ▲ + / ▼ − glyphs carry directi
 - **One dark card.** Brown 900 as a surface belongs to the Coach card and transient toasts.
 - **Brand-only tokens.** `--color-brand-apple` (#000000) and `--color-brand-google-blue` / `-red` / `-yellow` / `-green` sit outside the cream and brown ramp and colour only the official Apple logo, its "Continue with Apple" label and Google's G on the sign-in buttons. They never colour UI, state, charts or text elsewhere, so Google red never stands in for an error or a destructive action.
 
-## Accent option: Muted pink (exploration, not adopted)
+## Accent: Muted pink (active, faint, 2026-11-18)
 
-A secondary look at Muted pink `#D0A4B5` as the accent. Nothing above changes: the accent and state slots still point into the ramp, Cream 75 and Brown 900 still carry every surface and word, and the screens on Start, Coach, Tracker, Practice, You and Logo concepts are the comparison. The pink tokens live in Paper and in the frontmatter so the option can be adopted by remapping, never by editing screens one at a time. Board: Theme › "Accent · Muted pink". Variants: page "Accent · Muted pink".
+Muted pink `#D0A4B5` is the accent, kept faint until a full design pass. Cream 75 and Brown 900 still carry every surface, line and word; pink is a quiet wayfinding and brand cue. It reaches screens by binding nodes to the `--color-accent-pink*` tokens below. No existing token value changed (token hash `93aa7a0a`), so the restore point still renders as it was: Paper page "Restore point · Pre-pink · 2026-11-18", git tag `restore/pre-pink-2026-11-18`, and `design/restore/` (token snapshot and revert steps). Boards: Theme › Colour roles ("Accent: muted pink (active, faint)" and the faint-use rules) and Components & states.
 
 ### Tokens
 
 | Token | Value | Role |
 |---|---|---|
-| `--color-accent-pink` | `#D0A4B5` | Fills and small brand marks: the selected tab block, the selected segment, the app-icon tile |
-| `--color-accent-pink-deep` | `#8D4963` | Text, icons and outlines on cream; the edge on Pink subtle |
-| `--color-accent-pink-subtle` | `#F3E7EC` | Tint surface for one callout or your own row; always with an edge |
-| `--color-on-accent-pink` | Brown 900 | Text and icons on a pink fill |
-| `--color-text-pink-inverse` | Pink | Pink text on the Brown 900 Coach card |
-| `--color-focus-ring-pink` | Pink deep | 2px focus ring on light surfaces |
-| `--color-focus-ring-pink-inverse` | Pink | 2px focus ring on the Coach card, on both doors alike |
+| `--color-accent-pink` | `#D0A4B5` | Solid pink, only for the small logo tile option and as the value behind the two inverse tokens. Never a large area, button, chart datum or tab block |
+| `--color-accent-pink-deep` | `#8D4963` | Text, icons and edges on cream: the step counter, the 1px callout edge, your row's edge. Never on the Coach card |
+| `--color-accent-pink-subtle` | `#F3E7EC` | Tint for selected tabs, segments and chips, one callout, your own row. Always with a second cue |
+| `--color-on-accent-pink` | Brown 900 | The h on a pink tile, text on a pink fill |
+| `--color-text-pink-inverse` | Pink | Pink text on the Brown 900 Coach card: the item and price |
+| `--color-focus-ring-pink` | Pink deep | 2px focus ring on light surfaces, and the 1.5 border of a focused field |
+| `--color-focus-ring-pink-inverse` | Pink | Not used on screens: the Coach-card ring stays Cream 75 (`--color-focus-ring-inverse`). Kept for the exploration reference |
 
 ### Pairs
 
+Every pair was read from the bound tokens with `get_computed_styles` and computed with the WCAG 2.2 formula.
+
 | Pair | Ratio | Result |
 |---|---|---|
-| Brown 900 on Pink | 8.42 | AAA text |
-| Pink on Brown 900 | 8.42 | AAA text |
-| Pink deep on Cream 50 / 75 / 100 / 150 | 6.29 / 6.08 / 5.63 / 5.15 | AA text |
-| Pink deep on Pink subtle | 5.34 | AA text; the daily tip's 1px edge and your row's 1.5 edge |
-| Brown 900 / Brown 700 on Pink subtle | 15.22 / 7.10 | AAA text |
-| Pink deep ring on Cream 75 | 6.08 | Passes 3:1 UI |
-| Pink ring on Brown 900 | 8.42 | Passes 3:1 UI |
-| Pink on Cream 75 | 2.05 | Fails; a fill only, never text or a lone edge |
-| Pink block on the Cream 50 tab bar | 2.13 | Below 3:1; the 600 label and Brown 900 icon also mark the tab, as they do today on Cream 150 (1.18) |
-| Pink segment on Cream 100 track | 1.90 | Below 3:1; the 600 Brown 900 label and the segment's lift also mark it (League Weekly, Practice range) |
-| Pink arc on Cream 200 track | 1.53 | Fails 3:1 UI; not used, rings stay accent brown |
-| Pink subtle on Cream 75 | 1.14 | Never alone; always paired with a Pink or Pink deep edge |
-| Pink deep on Brown 900 | 2.85 | Fails; never on the Coach card |
+| Brown 900 on Pink subtle | 15.22 | AAA text: selected labels, callout title, your row |
+| Brown 700 on Pink subtle | 7.10 | AAA text: callout explanation |
+| Pink deep on Cream 50 / 75 / 100 / 150 | 6.29 / 6.08 / 5.63 / 5.15 | AA text; passes 3:1 UI as a ring or border |
+| Pink deep on Pink subtle | 5.34 | AA; the callout's 1px edge and your row's 1.5 edge |
+| Pink deep border inside the Cream 200 halo | 4.54 | Passes 3:1 UI on a focused field |
+| Brown 900 on Pink | 8.42 | AAA: the h on a pink tile |
+| Pink on Brown 900 | 8.42 | AAA text: the item and price on the Coach card |
+| Pink subtle on Cream 50 (tab bar) | 1.18 | Not the only cue: the 600 label and Brown 900 icon are required |
+| Pink subtle on Cream 75 | 1.14 | Not the only cue: a Brown 900 outline (chip) or a Pink deep edge (callout, row) |
+| Pink subtle on Cream 100 (segment track) | 1.05 | Not the only cue: the lift and the 600 label |
+| Pink tile on Cream 75 | 2.05 | Logo only; the Brown 900 h (8.42) carries the mark |
+| Pink on Cream 75 | 2.05 | Fails: never text or a lone edge |
+| Pink deep on Brown 900 | 2.85 | Fails: never on the Coach card |
 
-### Where pink goes
+### Where faint pink goes
 
-One to three touches a screen, and never the primary button.
+At most one or two touches a screen, and some screens get none. The Pink subtle tint and small Pink deep details come first; solid pink is only the small logo tile and pink text on the Coach card.
 
-- **Selected states:** the tab block, the selected segment and a selected chip, in Pink with a Brown 900 label at 600.
-- **One callout a screen:** the daily tip on Pink subtle with a 1px Pink deep edge (6.08 on Cream 75, 5.34 on the fill).
-- **Brand and wayfinding:** the app icon, the HLD mark on Welcome, the step counter in Pink deep, and "Hold off" / "Hold on" on Welcome.
-- **Your own row on a leaderboard:** Pink subtle with a 1.5 inset Pink deep edge, and the word "you" kept.
-- **On the Coach card:** the item and price, and the answers already given on Your call, in Pink (8.42). Never the question, which stays Cream 75 in the serif.
+- **Step counter:** "Step n of N" in Pink deep (6.08).
+- **One callout:** the daily tip, the Skipped total or the Practice TFSA "fake money" notice on Pink subtle with a 1px Pink deep edge (5.34).
+- **Selected tab, segment and chip:** a Pink subtle fill (1.18 against the Cream 50 bar). The 600 label and the Brown 900 icon are the required second cue; a chip also keeps its Brown 900 outline and check. A segment stays Cream 50 when the screen already has two touches (Practice, League).
+- **Your own leaderboard row:** Pink subtle with a 1.5 inset Pink deep edge, and "· you" kept.
+- **Focus:** a 2px Pink deep ring on light surfaces and a 1.5 Pink deep border on a focused field. On the Coach card the ring stays Cream 75 on both doors.
+- **On the Coach card:** the item and price in Pink (8.42) on Check-in · Decision. Never the question, which stays Cream 75 in the serif.
+- **Brand and wayfinding:** "Hold off" and "Hold on" on Start · Welcome in Pink deep (6.08), that screen's one touch; the wordmark's optional pink tile.
 
 ### Where pink never goes
 
-- Gain and loss, and data. ▲ + / ▼ − stay brown on every chart, row and total; budget ring arcs and the practice return line stay accent brown, so pink is never a data colour.
-- Warnings, errors, over-budget or TFSA limits. Pink is never an alarm.
-- One of two doors. Remind me and Buy anyway, Buy and Sell, Worth it and Not really never get pink unless both get the same treatment. The pink focus ring applies to both doors alike.
-- Body text, the serif, or any text on cream in light Pink (2.05).
+- It never carries meaning on its own.
+- Gain or loss: ▲ + / ▼ − stay brown on every row, chart and total.
+- Charts, rings or data: ring arcs and the practice return line stay accent brown.
+- Warnings, errors, over-budget, over-room or TFSA limits. Pink is never an alarm, and never sits next to an alert.
+- One door over the other: Remind me and Buy anyway stay unchanged and equal, and so do Buy and Sell, Worth it and Not really.
+- Large areas, buttons, chart data or tab blocks in solid Pink, and any text on cream in light Pink (2.05).
+- Pink deep on the Coach card (2.85).
 - First place in a league, or one check-in outcome over another.
 
-### Variants (page "Accent · Muted pink")
+### Wordmark: hld
 
-Each pair sits side by side: "<Screen> · Original" on the left, "<Screen> · Pink accent" on the right.
+Lowercase "hld" in Instrument Serif Italic beside the Drop B 20B icon (Leaning h). Boards: Logo concepts › "Wordmark · hld (chosen)"; Theme › Principles › "The mark".
 
-| Screen | Pink touches |
+| Part | Spec at the reference size |
 |---|---|
-| Start · Welcome | 32 Pink app-icon tile beside HLD (Brown 900 h, 8.42); "Hold off" and "Hold on" in Pink deep (6.08) |
-| Coach · Home | Daily tip on Pink subtle with a 1px Pink deep edge (6.08 / 5.34; text 15.22 and 7.10); Coach tab block in Pink (icon and label 8.42) |
-| Check-in 1 of 3 | "Step 1 of 3" in Pink deep (6.08); item and price on the Coach card in Pink (8.42). Answer chips and both doors unchanged |
-| Check-in · Decision | Item and price, and the three recorded answers, in Pink (8.42). Remind me and Buy anyway unchanged and equal |
-| Tracker · Home | Tracker tab block in Pink (icon and label 8.42) only. Rings stay accent brown |
-| Practice · Home | Selected "All" segment in Pink (label 8.42); Practice tab block in Pink. Chart, ▲/▼ and holdings unchanged |
-| League · Leaderboard | Selected "Weekly" segment in Pink; your row on Pink subtle with a 1.5 Pink deep edge (5.34; text 15.22); Practice tab block in Pink |
-| Logo 20B | 180 and 60: Pink tile with a Brown 900 h (8.42), and a Pink h on a Brown 900 tile (8.42) |
+| Icon | The Drop B 32 tile, 32 × 32, corner 7, the hand-tuned 32 drawing used as is. The corner is the icon's own 0.22 ratio, not a radius token |
+| Word | "hld", `--font-serif` italic 400 |
+| Size | 44px (`--text-serif-display`), line height 32px (the tile's height) |
+| Tracking | −0.01em (`--tracking-serif`) |
+| Alignment | The row is `align-items: baseline`. The tile has no text, so its baseline is its bottom edge and the word's baseline lands on it. The ascenders of h, l and d are 0.735em (ink from 0.10em to 0.835em, measured), 32.3px at 44, so they reach the tile's top edge with a 0.6px overshoot. Centring the boxes instead leaves the ink 1.4px high |
+| Gap | 8 (`--spacing-8`), a quarter of the tile, from the tile edge to the text box. The italic lean makes it read 8.4 at the foot and 12 at the flag |
+| Stacked | The tile above, the word centred under it, gap 8, the word's line height 36 (`--leading-serif-title`) so the ascenders sit 8.4 under the tile |
+| Colour | Brown 900 (`--color-text-primary`) on Cream 75 with the Brown 900 tile; Cream 75 (`--color-text-inverse`) on Brown 900 with the Cream 75 tile. Both 17.30 |
+| Scaling | One unit: word = 1.375 × tile, gap = 0.25 × tile, line height = tile. At a 60 tile: gap 15, word 82.5 |
+| Clear space | Half the tile on every side (16 at the reference size), measured from the ink, with the d's italic overhang counted as part of the lockup |
+| Minimum size | 24 tile with the word as live text at 33 (above the 28 serif floor). From 20 to 23 the lockup is an exported image of this drawing (word 27.5 at 20). Below 20, the hand-tuned icon alone |
+| Pink | One faint option: the tile in `--color-accent-pink` with the h in `--color-on-accent-pink` (8.42) and the word in Brown 900. The word is never pink, and brown and cream stay the default |
+
+### Exploration reference
+
+The page "Accent · Muted pink" (eight "· Original" / "· Pink accent" pairs) and the Theme board "Accent · Muted pink (exploration reference)" stay as they were drawn on 2026-11-18. They are louder than the adopted rules (solid pink tab blocks and segments, a pink app-icon tile on Welcome, pink recorded answers on Check-in · Decision); where they differ, this section wins.
 
 ## Typography
 
 Two families, each with one job.
 
-- **Instrument Serif Italic** (`--font-serif`, Google Fonts, 400 italic only): a condensed, high-contrast italic with hairline serifs. It is the coach's voice at a moment, used selectively: the question on the Coach card (every Coach card headline, including the follow-up and the budget check-in), "Your call." on the decision, "Think before you buy." on Welcome, and the Principles titles on the Theme board.
+- **Instrument Serif Italic** (`--font-serif`, Google Fonts, 400 italic only): a condensed, high-contrast italic with hairline serifs. It is the coach's voice at a moment, used selectively: the question on the Coach card (every Coach card headline, including the follow-up and the budget check-in), "Your call." on the decision, "Think before you buy." on Welcome, the Principles titles on the Theme board, and the lowercase "hld" wordmark (see Accent: Muted pink › Wordmark).
 - **Archivo** (`--font-sans`, Google Fonts, variable weight 100–900 and width 62–125) for everything else. Display and Title 1 are 800 with −0.04em tracking, Title 2 and Figure XL are 700 with −0.03em, and readable UI text (body, labels, tables, buttons, inputs) stays at 400–600 with normal tracking.
   - **Width 100** for answers, body copy, titles and buttons.
   - **Width 87.5** (`font-stretch: 87.5%`) for tables: journal, leagues, holdings, subscriptions, ramp captions and token names. This fits five columns across a 390 phone at 14px.
@@ -582,7 +598,7 @@ Controls are drawn in all their states on the Paper board "Components & states";
 - **Primary:** accent fill, on-accent text. Hover and pressed use accent-pressed; pressed also scales to 0.97.
 - **Secondary:** 1.5px Brown 500 outline. Hover Cream 100, pressed Cream 150 with a Brown 700 outline.
 - **Ghost:** underlined label (offset 4). Hover Cream 100, pressed Cream 150.
-- **Focus:** 2px ring in `--color-focus-ring` with a 2px gap in the surface colour.
+- **Focus:** 2px ring in `--color-focus-ring-pink` (Pink deep: 6.08 on Cream 75, 6.29 on Cream 50) with a 2px gap in the surface colour. On the Coach card the ring stays `--color-focus-ring-inverse` (Cream 75, 17.30), the same on both doors.
 - **Disabled:** Cream 150 fill or Cream 200 outline with disabled text, always with a written reason next to it (for example, "Add 2 more characters to your password first."). It is marked disabled for assistive tech (`aria-disabled="true"`), stays in the focus order so the reason, tied with `aria-describedby`, is read out, and ignores taps. Colour is never the only sign: the reason is there in words. Buy anyway is never disabled.
 - **Loading:** a spinner and a short verb ("Saving") at the same width; taps are ignored until it finishes.
 - **Buy / Sell (Practice):** two equal outlined buttons side by side, the same width, outline and weight, with no primary. Neither is filled, so the stock screen never nudges toward a trade. "Fake money. No per-trade fee." sits once above them.
@@ -590,7 +606,7 @@ Controls are drawn in all their states on the Paper board "Components & states";
 
 ### Chips (if used)
 
-Coach answers and journal tags (Planned / FOMO). Journal tags are set by the user only, never by the coach: the entry reads "Your tag: Planned", and the journal filter offers All / Planned / FOMO / No tag. Two sizes. **Standard:** 40 high in a 44 target, sized to the label with 16 sides. **Category picker on the check-in entry:** 44 high and 108 wide (`--size-chip-category`), three to a row with 12 gaps, so no chip ("Not sure") is left alone on a line; the 44 height is the target. `--radius-md` on the page and `--radius-sm` on the Coach card. Default has a 1.5px Brown 500 outline. Selected uses accent-subtle fill, an accent outline and a check icon. Pressed is Cream 150 with a Brown 700 outline. Focus uses the ring. Disabled uses a Cream 200 outline with disabled text.
+Coach answers and journal tags (Planned / FOMO). Journal tags are set by the user only, never by the coach: the entry reads "Your tag: Planned", and the journal filter offers All / Planned / FOMO / No tag. Two sizes. **Standard:** 40 high in a 44 target, sized to the label with 16 sides. **Category picker on the check-in entry:** 44 high and 108 wide (`--size-chip-category`), three to a row with 12 gaps, so no chip ("Not sure") is left alone on a line; the 44 height is the target. `--radius-md` on the page and `--radius-sm` on the Coach card. Default has a 1.5px Brown 500 outline. Selected uses a Pink subtle fill (`--color-accent-pink-subtle`), a 1.5 Brown 900 accent outline, a 600 label and a check icon; the outline, weight and check carry the state. Pressed is Cream 150 with a Brown 700 outline. Focus uses the ring. Disabled uses a Cream 200 outline with disabled text.
 
 ### Cards / Containers
 
@@ -620,15 +636,15 @@ States: **default**; **next question** (the top bar's step counter advances, and
 ### Inputs / Fields
 
 - The label sits above the field, never inside. The field is 52 high, Cream 100, with a 1.5px Brown 500 outline and `--radius-lg`. Money fields show a "$" prefix and tabular figures.
-- **Focus:** Cream 50 fill, a 1.5px Brown 900 border, and a 3px `--color-focus-halo` (Cream 200) halo.
+- **Focus:** Cream 50 fill, a 1.5px Pink deep border (`--color-focus-ring-pink`, 6.29 on Cream 50), and a 3px `--color-focus-halo` (Cream 200) halo.
 - **Disabled:** dashed Cream 300 outline, disabled text, and a reason underneath.
 - **Error:** a 2px `--color-state-error` border, an alert icon, and a sentence that says how to fix it ("Enter an amount above $0."). It never depends on colour alone and never shakes.
 - **Helper and error placement:** helper text and errors sit 8 under their own field in Caption, never at the top of the form or in a toast, and are tied to the field with `aria-describedby`. Live counts read as a sentence ("At least 10 characters. 8 so far."). When a footer button is disabled by a field, its reason sits under the button and names the field ("Add 2 more characters to your password first.").
 
 ### Navigation
 
-- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). Cream 50 with a Cream 200 top edge, 8 top and sides, `--spacing-safe-bottom` (34) under the labels. Each tab is a quarter of the width and 54 high (block 32, 4, label 18). The selected tab gets a Cream 150 block (56 × 32, `--radius-md`) behind its icon, a 600 label and Brown 900 icon and label; the others are 500 labels and icons in Brown 700 (8.07:1 on Cream 50). Pressed shows a Cream 100 block, and focus a 2px ring around the tab. No badges or dots. Pages reached from You (Check-in settings) keep You selected.
-- **Segmented control:** Cream 100 track, `--radius-lg`, 4 inset with the edge as an inset shadow. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation. Labels are Label (14). Pressed is Cream 150, focus a 2px ring on the segment, and disabled a dashed track (1 border + 3 padding) with disabled text.
+- **Tab bar:** Coach, Tracker, Practice, You. Always labelled, 24 icons, Caption labels (13/18). Cream 50 with a Cream 200 top edge, 8 top and sides, `--spacing-safe-bottom` (34) under the labels. Each tab is a quarter of the width and 54 high (block 32, 4, label 18). The selected tab gets a Pink subtle block (`--color-accent-pink-subtle`, 56 × 32, `--radius-md`) behind its icon, a 600 label and Brown 900 icon and label; the block is 1.18 on Cream 50, so the 600 label and Brown 900 icon are the required second cue; the others are 500 labels and icons in Brown 700 (8.07:1 on Cream 50). Pressed shows a Cream 100 block, and focus a 2px Pink deep ring around the tab. No badges or dots. Pages reached from You (Check-in settings) keep You selected.
+- **Segmented control:** Cream 100 track, `--radius-lg`, 4 inset with the edge as an inset shadow. The selected segment is Cream 50 at `--radius-sm` with level-1 elevation and a 600 label; where the screen has a pink touch to spare it takes Pink subtle instead (1.05 on the track, so the lift and the 600 label carry it). Practice and League keep Cream 50. Labels are Label (14). Pressed is Cream 150, focus a 2px Pink deep ring on the segment, and disabled a dashed track (1 border + 3 padding) with disabled text.
 - **Top bar:** 56 high on the page colour with a Cream 200 bottom edge, 4 at the sides. Back is a 96 × 44 slot: a 24 chevron, 2, then the previous place's name in Body ("Coach", "You", "Sign up") or "Back" inside a flow. The middle holds Title 3, centred, or the step counter. The right slot is 96 × 44, empty or holding one text action in Body, right-aligned 12 in so it lands on the 16 content edge (Close, Save). Focus puts a 2px ring around the slot.
 - **Back and Close in a flow:** inside a multi-step flow, Back goes to the previous step and keeps every answer; Close leaves the flow without deciding and returns to where it started, with nothing logged and no confirmation. The check-in (questions 1 to 3, Your call, its loading and error states) has both. A flow's first step, a single-screen task (the check-in entry, the follow-up, the budget check-in) and onboarding keep Back only: onboarding has no "leave without deciding", since the birth year is required and Pay dates carries its own Skip for now.
 - **Step counter:** a flow of three or more steps shows "Step n of N" in Caption 500, `--color-text-tertiary` (Brown 600, 5.72:1), tabular, centred in the top bar in place of a title: onboarding (Birth year, Consent, Pay dates), the check-in questions (Step 1 to 3 of 3) and the Practice trade (Step 1 to 5 of 5).
@@ -730,14 +746,15 @@ Paper has no token type for shadows, durations or easing, so these values live h
 
 Phone screens are 390 wide, 844 high or fit-content where they run longer. Coach, Tracker and Practice each end with a "<Page> · Motion" board (1440).
 
-- **Theme:** Principles, Colour roles, Typography, Spacing & radii, Components & states, Icons, Motion, Components: product.
+- **Theme:** Principles (with "The mark" under the eight rules), Colour roles (with "Accent: muted pink (active, faint)" and the faint-use rules), Typography, Spacing & radii, Components & states, Icons, Motion, Components: product, Accent · Muted pink (exploration reference).
 - **Start (7):** Welcome, Sign up, Email sign-up, Birth year, Consent, Pay dates, First Coach screen.
 - **Coach (13 + Motion):** Coach · Home; Check-in · What and how much; Check-in 1 of 3, 2 of 3, 3 of 3; Check-in · Decision; Reminder set; Bought; Follow-up, 3 days later; Coach · Budget check-in; Check-in · Loading; Error, offline; Coach · Check-in settings.
 - **Tracker (9 + Motion):** Tracker · Home (four 72 rings, Log a purchase, Subscriptions and Net worth rows); Log a purchase; Budget · Fun; Subscriptions (Monthly and Yearly columns, one Total row); Subscription · Netflix (renewal reminder, off by default); Net worth (chart, then accounts and debts with a running-total column); Add account or debt; Tracker · Loading; Tracker · Empty.
 - **Practice (20 + Motion):** Practice · Home; Search · Recent, Results, No results; Stock · Plain English (equal Buy and Sell); Trade · Amount; Trade · Coach 1 of 3, 2 of 3, 3 of 3; Trade · Review; Trade · Placed; Holdings; Journal; Leagues; League · Leaderboard; Create league + invite link; Practice TFSA; Trade · Over TFSA room; Practice · Loading; Practice · Empty. The trade flow is five steps ("Step n of 5" in the top bar: Amount, the three coach questions, Review); five steps and three questions differ, so the Coach card inside it also counts "Question n of 3". The check-in (Coach) counts only in its top bar.
 - **You (5):** You · Home (plan Free, Tracking: manual, Bank sync: coming later); Privacy & consent (one switch per purpose, all off); Your data (download, delete); Delete account · Dialog (one confirmation, no red); Account deleted.
-- **Logo concepts:** concept sheet and refinements; not app screens.
-- **Accent · Muted pink (8 pairs):** Start · Welcome, Coach · Home, Check-in 1 of 3, Check-in · Decision, Tracker · Home, Practice · Home, League · Leaderboard and Logo 20B, each as "· Original" beside "· Pink accent". An exploration; see Accent option: Muted pink.
+- **Logo concepts:** concept sheet, strongest directions, 20 · Leaning h refined, 20 · Small sizes (Drop B chosen), and Wordmark · hld (chosen); not app screens.
+- **Accent · Muted pink (8 pairs):** Start · Welcome, Coach · Home, Check-in 1 of 3, Check-in · Decision, Tracker · Home, Practice · Home, League · Leaderboard and Logo 20B, each as "· Original" beside "· Pink accent". The exploration, kept unchanged as reference; see Accent: Muted pink.
+- **Restore point · Pre-pink · 2026-11-18:** locked copies of all 70 primary artboards from before pink was adopted. Never edited; see `design/restore/README.md`.
 
 ## Do's and Don'ts
 
@@ -747,7 +764,7 @@ Phone screens are 390 wide, 844 high or fit-content where they run longer. Coach
 - Put "fake money", "Quotes delayed 15 minutes" and "an assumption, not a promise" next to the number they qualify.
 - Use ▲ + / ▼ − with tabular figures for every gain and loss.
 - Keep the fine print "General information, not personalized advice." once per coach screen, in Caption on the Coach card (`--color-text-inverse-tertiary`). The daily tip card does not repeat it.
-- Recheck every accent and state pair against AA when the accent is chosen.
+- Measure every pink pair against AA when a pink touch is added, and keep pink to one or two touches a screen.
 
 ### Don't:
 
@@ -757,7 +774,8 @@ Phone screens are 390 wide, 844 high or fit-content where they run longer. Coach
 - Don't mark first place in a league with a trophy, medal, crown or colour, and don't style one check-in outcome as the better one.
 - Don't set a colour or a radius as a raw value in Paper or code, SVG strokes included; bind it to a token. The four allowed raw values are listed under Layout, Raw-value exceptions.
 - Don't round a container past 6, or use `--radius-full` on anything that isn't a circle.
-- Don't set the serif below 28px, or use it for figures, tables, buttons, inputs, labels or body.
+- Don't set the serif below 28px, or use it for figures, tables, buttons, inputs, labels or body. The hld wordmark below a 24 tile is an image, not text.
+- Don't let pink carry meaning on its own, mark gain or loss, warn, sit in a chart or ring, or favour one door over the other.
 - Don't use streaks, countdowns, badges, red dots, confetti, bounces or shakes.
 - Don't use Brown 500 for text, or put text on Cream 200 or darker light steps.
 - Don't add sports-page ornament (heavy rules, dingbats, all-caps headlines) to the dense tables. Their character comes from column rhythm alone.
